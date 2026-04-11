@@ -1,0 +1,239 @@
+﻿@using Microsoft.Extensions.Localization
+@inject IStringLocalizer<VelourEssence.Web.Views.Reseña.Index> L
+@model IEnumerable<VelourEssence.Application.DTOs.ReseñaDto>
+
+@{
+    ViewData["Title"] = L["ReviewsTitle"];
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/reviews-index.css" />
+}
+
+<div class="reviews-page">
+    <!-- Hero Section Premium para Reseñas -->
+    <div class="reviews-hero-section">
+        <div class="reviews-hero-background"></div>
+        <div class="reviews-hero-content">
+            <div class="reviews-hero-title">
+                <h1 class="reviews-hero-main">@L["ReviewsHeroMain"]</h1>
+                <span class="reviews-hero-subtitle">@L["ReviewsHeroSubtitle"]</span>
+            </div>
+            <p class="reviews-hero-description">
+                @L["ReviewsHeroDescription"]
+            </p>
+            <div class="reviews-hero-stats">
+                <div class="reviews-stat-item">
+                    <span class="reviews-stat-number">@(Model?.Count() ?? 0)</span>
+                    <span class="reviews-stat-label">@L["ReviewsStatTotal"]</span>
+                </div>
+                <div class="reviews-stat-item">
+                    <span class="reviews-stat-number">@(Model?.Any() == true ? Model.Average(r => r.Valoracion ?? 0).ToString("0.0") : "0.0")</span>
+                    <span class="reviews-stat-label">@L["ReviewsStatAverage"]</span>
+                </div>
+                <div class="reviews-stat-item">
+                    <span class="reviews-stat-number">98%</span>
+                    <span class="reviews-stat-label">@L["ReviewsStatSatisfaction"]</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Filtros y Búsqueda -->
+    <div class="reviews-filters-section">
+        <div class="reviews-container">
+            <div class="reviews-filters-header">
+                <h2 class="reviews-filters-title">@L["ReviewsFiltersTitle"]</h2>
+            </div>
+            <div class="reviews-filters-controls">
+                <div class="reviews-search-box">
+                    <i class="bi bi-search"></i>
+                    <input type="text" id="reviewsSearch" placeholder="@L["ReviewsSearchPlaceholder"]" />
+                </div>
+                <div class="reviews-filter-dropdown">
+                    <select id="reviewsFilter">
+                        <option value="all">@L["ReviewsFilterAll"]</option>
+                        <option value="5">@L["ReviewsFilter5"]</option>
+                        <option value="4">@L["ReviewsFilter4"]</option>
+                        <option value="3">@L["ReviewsFilter3"]</option>
+                        <option value="2">@L["ReviewsFilter2"]</option>
+                        <option value="1">@L["ReviewsFilter1"]</option>
+                    </select>
+                </div>
+                <div class="reviews-filter-dropdown">
+                    <select id="reviewsSort">
+                        <option value="newest">@L["ReviewsSortNewest"]</option>
+                        <option value="oldest">@L["ReviewsSortOldest"]</option>
+                        <option value="highest">@L["ReviewsSortHighest"]</option>
+                        <option value="lowest">@L["ReviewsSortLowest"]</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sección Principal de Reseñas -->
+    <div class="reviews-main-section">
+        <div class="reviews-container">
+            <div class="reviews-content-header">
+                <div class="reviews-results-info">
+                    <span class="reviews-count">@(Model?.Count() ?? 0) @L["ReviewsFound"]</span>
+                    @if (Model?.Any() == true)
+                    {
+                        <div class="reviews-stats-mini">
+                            <div class="reviews-avg-rating">
+                                <i class="bi bi-star-fill"></i>
+                                <span>@Model.Average(r => r.Valoracion ?? 0).ToString("0.0")</span>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+
+            @if (Model != null && Model.Any())
+            {
+                <div class="reviews-grid" id="reviewsGrid">
+                    @foreach (var reseña in Model)
+                    {
+                        <div class="reviews-card" onclick="window.location.href='@Url.Action("Details", "Reseña", new { id = reseña.IdReseña })'">
+                            <!-- Header de la reseña -->
+                            <div class="reviews-card-header">
+                                <div class="reviews-user-info">
+                                    <div class="reviews-user-avatar">
+                                        @(reseña.NombreUsuario?.Substring(0, 1).ToUpper() ?? "?")
+                                    </div>
+                                    <div class="reviews-user-details">
+                                        <span class="reviews-user-name">@reseña.NombreUsuario</span>
+                                        <span class="reviews-user-date">@(reseña.Fecha?.ToString("dd MMM yyyy") ?? L["ReviewsNoDate"])</span>
+                                    </div>
+                                </div>
+                                <div class="reviews-rating-display">
+                                    <div class="reviews-stars">
+                                        @for (int i = 1; i <= 5; i++)
+                                        {
+                                            <i class="bi bi-star@(i <= (reseña.Valoracion ?? 0) ? "-fill" : "") reviews-star @(i <= (reseña.Valoracion ?? 0) ? "filled" : "")"></i>
+                                        }
+                                    </div>
+                                    <span class="reviews-rating-value">@(reseña.Valoracion ?? 0)/5</span>
+                                </div>
+                            </div>
+
+                            <!-- Contenido de la reseña -->
+                            <div class="reviews-card-content">
+                                <p class="reviews-comment">@reseña.Comentario</p>
+                            </div>
+
+                            <!-- Footer de la reseña -->
+                            <div class="reviews-card-footer">
+                                <div class="reviews-product-info">
+                                    <div class="reviews-product-icon">
+                                        <i class="bi bi-box-seam"></i>
+                                    </div>
+                                    <span class="reviews-product-name">@reseña.NombreProducto</span>
+                                </div>
+                                <div class="reviews-card-arrow">
+                                    <i class="bi bi-chevron-right"></i>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            }
+            else
+            {
+                <div class="reviews-empty-state">
+                    <div class="reviews-empty-content">
+                        <div class="reviews-empty-icon">
+                            <i class="bi bi-chat-square-dots"></i>
+                        </div>
+                        <h2 class="reviews-empty-title">@L["ReviewsEmptyTitle"]</h2>
+                        <p class="reviews-empty-description">
+                            @L["ReviewsEmptyDescription"]
+                        </p>
+                        <a href="@Url.Action("Index", "Producto")" class="reviews-empty-btn">
+                            <i class="bi bi-arrow-right"></i>
+                            @L["ReviewsBtnProducts"]
+                        </a>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+<script>
+    // Textos internacionalizados para JS
+    const txtReviewsFound = @Html.Raw(System.Text.Json.JsonSerializer.Serialize(L["ReviewsFound"]));
+
+    document.addEventListener('DOMContentLoaded', function() {
+        const searchInput = document.getElementById('reviewsSearch');
+        const filterSelect = document.getElementById('reviewsFilter');
+        const sortSelect = document.getElementById('reviewsSort');
+        const reviewsGrid = document.getElementById('reviewsGrid');
+        const reviewCards = document.querySelectorAll('.reviews-card');
+
+        function filterReviews() {
+            const searchTerm = searchInput.value.toLowerCase();
+            const ratingFilter = filterSelect.value;
+            const sortOrder = sortSelect.value;
+
+            let visibleCards = Array.from(reviewCards).filter(card => {
+                const comment = card.querySelector('.reviews-comment').textContent.toLowerCase();
+                const productName = card.querySelector('.reviews-product-name').textContent.toLowerCase();
+                const userName = card.querySelector('.reviews-user-name').textContent.toLowerCase();
+                const rating = card.querySelectorAll('.reviews-star.filled').length;
+
+                const matchesSearch = comment.includes(searchTerm) ||
+                                    productName.includes(searchTerm) ||
+                                    userName.includes(searchTerm);
+                const matchesRating = ratingFilter === 'all' || rating == ratingFilter;
+                return matchesSearch && matchesRating;
+            });
+
+            reviewCards.forEach(card => {
+                card.style.display = 'none';
+                card.style.animation = 'none';
+            });
+
+            visibleCards.forEach((card, index) => {
+                setTimeout(() => {
+                    card.style.display = 'block';
+                    card.style.animation = 'reviews-slideInFromBottom 0.6s ease-out';
+                }, index * 100);
+            });
+
+            const countElement = document.querySelector('.reviews-count');
+            if (countElement) {
+                countElement.textContent = `${visibleCards.length} ${txtReviewsFound}`;
+            }
+        }
+
+        searchInput.addEventListener('input', filterReviews);
+        filterSelect.addEventListener('change', filterReviews);
+        sortSelect.addEventListener('change', filterReviews);
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animation = 'reviews-slideInFromBottom 0.6s ease-out';
+                }
+            });
+        }, {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        });
+
+        reviewCards.forEach(card => {
+            observer.observe(card);
+        });
+
+        reviewCards.forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-8px) scale(1.02)';
+            });
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1)';
+            });
+        });
+    });
+</script>

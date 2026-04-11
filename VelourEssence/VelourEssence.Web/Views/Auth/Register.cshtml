@@ -1,0 +1,185 @@
+@using Microsoft.Extensions.Localization
+@inject IStringLocalizer<VelourEssence.Web.Views.Auth.Register> L
+@model VelourEssence.Application.DTOs.RegisterDto
+
+@{
+    ViewData["Title"] = L["RegisterTitle"];
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/auth-register.css" />
+}
+
+<div class="register-page">
+    <div class="register-background-decoration"></div>
+    <div class="register-container">
+        <div class="register-wrapper">
+            <!-- Header del registro -->
+            <div class="register-header">
+                <div class="register-logo">
+                    <i class="bi bi-person-plus"></i>
+                </div>
+                <h1 class="register-title">@L["RegisterHeader"]</h1>
+                <p class="register-subtitle">@L["RegisterSubtitle"]</p>
+            </div>
+
+            <!-- Formulario de registro -->
+            <div class="register-form-container">
+                <form asp-action="Register" asp-controller="Auth" method="post" class="register-form" id="registerForm">
+                    @Html.AntiForgeryToken()
+
+                    <!-- Campo de nombre de usuario -->
+                    <div class="register-form-group">
+                        <label asp-for="NombreUsuario" class="register-form-label">
+                            <i class="bi bi-person"></i>
+                            <span>@L["RegisterUsernameLabel"]</span>
+                            <span class="register-required">*</span>
+                        </label>
+                        <div class="register-input-wrapper">
+                            <input asp-for="NombreUsuario" 
+                                   class="register-form-input" 
+                                   placeholder="@L["RegisterUsernamePlaceholder"]"
+                                   autocomplete="username"
+                                   data-validate="username" />
+                            <span asp-validation-for="NombreUsuario" class="register-form-error"></span>
+                            <div class="register-validation-message" id="username-validation"></div>
+                        </div>
+                    </div>
+
+                    <!-- Campo de correo electrónico -->
+                    <div class="register-form-group">
+                        <label asp-for="Correo" class="register-form-label">
+                            <i class="bi bi-envelope"></i>
+                            <span>@L["RegisterEmailLabel"]</span>
+                            <span class="register-required">*</span>
+                        </label>
+                        <div class="register-input-wrapper">
+                            <input asp-for="Correo" 
+                                   type="email"
+                                   class="register-form-input" 
+                                   placeholder="@L["RegisterEmailPlaceholder"]"
+                                   autocomplete="email"
+                                   data-validate="email" />
+                            <span asp-validation-for="Correo" class="register-form-error"></span>
+                            <div class="register-validation-message" id="email-validation"></div>
+                        </div>
+                    </div>
+
+                    <!-- Campo de contraseña -->
+                    <div class="register-form-group">
+                        <label asp-for="Contraseña" class="register-form-label">
+                            <i class="bi bi-lock"></i>
+                            <span>@L["RegisterPasswordLabel"]</span>
+                            <span class="register-required">*</span>
+                        </label>
+                        <div class="register-input-wrapper">
+                            <input asp-for="Contraseña" 
+                                   type="password" 
+                                   class="register-form-input register-password-input" 
+                                   placeholder="@L["RegisterPasswordPlaceholder"]"
+                                   autocomplete="new-password"
+                                   id="passwordInput" />
+                            <button type="button" class="register-password-toggle" id="togglePassword">
+                                <i class="bi bi-eye"></i>
+                            </button>
+                            <span asp-validation-for="Contraseña" class="register-form-error"></span>
+                        </div>
+                        <div class="register-password-strength" id="passwordStrength">
+                            <div class="strength-bar">
+                                <div class="strength-fill"></div>
+                            </div>
+                            <span class="strength-text">@L["RegisterPasswordStrength"]</span>
+                        </div>
+                    </div>
+
+                    <!-- Campo de confirmar contraseña -->
+                    <div class="register-form-group">
+                        <label asp-for="ConfirmarContraseña" class="register-form-label">
+                            <i class="bi bi-lock-fill"></i>
+                            <span>@L["RegisterConfirmPasswordLabel"]</span>
+                            <span class="register-required">*</span>
+                        </label>
+                        <div class="register-input-wrapper">
+                            <input asp-for="ConfirmarContraseña" 
+                                   type="password" 
+                                   class="register-form-input register-password-input" 
+                                   placeholder="@L["RegisterConfirmPasswordPlaceholder"]"
+                                   autocomplete="new-password"
+                                   id="confirmPasswordInput" />
+                            <button type="button" class="register-password-toggle" id="toggleConfirmPassword">
+                                <i class="bi bi-eye"></i>
+                            </button>
+                            <span asp-validation-for="ConfirmarContraseña" class="register-form-error"></span>
+                        </div>
+                    </div>
+
+                    <!-- Checkbox de términos -->
+                    <div class="register-form-group">
+                        <label class="register-checkbox-label">
+                            <input asp-for="AceptarTerminos" type="checkbox" class="register-checkbox" />
+                            <span class="register-checkbox-custom"></span>
+                            <span class="register-checkbox-text">
+                                @Html.Raw(L["RegisterTermsText"])
+                                <span class="register-required">*</span>
+                            </span>
+                        </label>
+                        <span asp-validation-for="AceptarTerminos" class="register-form-error"></span>
+                    </div>
+
+                    <!-- Errores generales -->
+                    <div asp-validation-summary="ModelOnly" class="register-validation-summary"></div>
+
+                    <!-- Botón de registro -->
+                    <button type="submit" class="register-btn-submit" id="submitBtn">
+                        <i class="bi bi-person-plus"></i>
+                        <span>@L["RegisterBtn"]</span>
+                    </button>
+                </form>
+
+                <!-- Divider -->
+                <div class="register-divider">
+                    <span>@L["RegisterDividerText"]</span>
+                </div>
+
+                <!-- Link para login -->
+                <div class="register-login-section">
+                    <p class="register-login-text">@L["RegisterLoginText"]</p>
+                    <a asp-action="Login" asp-controller="Auth" class="register-login-link">
+                        <i class="bi bi-box-arrow-in-right"></i>
+                        <span>@L["RegisterLoginBtn"]</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Footer del registro -->
+            <div class="register-footer">
+                <p class="register-footer-text">
+                    @L["RegisterFooterText"]
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    
+    <!-- Variables de localización para JavaScript -->
+    <script>
+        window.registerTexts = {
+            usernameAvailable: "@Html.Raw(L["RegisterUsernameAvailable"]?.ToString()?.Replace("\"", "\\\"") ?? "Username available")",
+            usernameTaken: "@Html.Raw(L["RegisterUsernameTaken"]?.ToString()?.Replace("\"", "\\\"") ?? "Username not available")",
+            validationError: "@Html.Raw(L["RegisterValidationError"]?.ToString()?.Replace("\"", "\\\"") ?? "Validation error")",
+            emailAvailable: "@Html.Raw(L["RegisterEmailAvailable"]?.ToString()?.Replace("\"", "\\\"") ?? "Email available")",
+            emailTaken: "@Html.Raw(L["RegisterEmailTaken"]?.ToString()?.Replace("\"", "\\\"") ?? "Email not available")",
+            passwordStrengthWeak: "@Html.Raw(L["RegisterPasswordStrengthWeak"]?.ToString()?.Replace("\"", "\\\"") ?? "Weak")",
+            passwordStrengthMedium: "@Html.Raw(L["RegisterPasswordStrengthMedium"]?.ToString()?.Replace("\"", "\\\"") ?? "Medium")",
+            passwordStrengthGood: "@Html.Raw(L["RegisterPasswordStrengthGood"]?.ToString()?.Replace("\"", "\\\"") ?? "Good")",
+            passwordStrengthStrong: "@Html.Raw(L["RegisterPasswordStrengthStrong"]?.ToString()?.Replace("\"", "\\\"") ?? "Strong")",
+            btnLoading: "@Html.Raw(L["RegisterBtnLoading"]?.ToString()?.Replace("\"", "\\\"") ?? "Loading...")"
+        };
+    </script>
+    
+    <script src="~/js/register.js" asp-append-version="true"></script>
+}

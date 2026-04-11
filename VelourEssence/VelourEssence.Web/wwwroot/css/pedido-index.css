@@ -1,0 +1,540 @@
+/* ===== PEDIDO INDEX CSS - VISTA PREMIUM INDEPENDIENTE ===== */
+
+/* Variables CSS específicas para vista de índice de pedidos */
+:root {
+    /* Colores principales claros - Paleta consistente */
+    --pedido-index-primary: #1F3A5F;
+    --pedido-index-primary-light: #2C5F7F;
+    --pedido-index-primary-dark: #16304A;
+    --pedido-index-accent: #A8E6CF;
+    --pedido-index-accent-coral: #FF8C94;
+    
+    /* Gradientes premium claros */
+    --pedido-index-gradient: linear-gradient(135deg, 
+        rgba(31, 58, 95, 0.1) 0%, 
+        rgba(168, 230, 207, 0.05) 100%);
+    --pedido-index-card-gradient: linear-gradient(180deg, 
+        rgba(255, 255, 255, 1) 0%, 
+        rgba(244, 237, 228, 0.9) 100%);
+    
+    /* Colores de background claros */
+    --pedido-index-bg: #F9F9F9;
+    --pedido-index-card-bg: rgba(255, 255, 255, 0.95);
+    --pedido-index-header-bg: rgba(255, 255, 255, 0.9);
+    
+    /* Colores de texto */
+    --pedido-index-text: #333333;
+    --pedido-index-text-light: #666666;
+    --pedido-index-text-dark: #1F3A5F;
+    
+    /* Estados del pedido */
+    --pedido-index-pendiente: #ffc107;
+    --pedido-index-enviado: #17a2b8;
+    --pedido-index-entregado: #28a745;
+    --pedido-index-cancelado: #dc3545;
+    
+    /* Sombras claras */
+    --pedido-index-shadow-light: 0 1px 3px rgba(31, 58, 95, 0.1);
+    --pedido-index-shadow-medium: 0 4px 6px rgba(31, 58, 95, 0.1);
+    --pedido-index-shadow-heavy: 0 10px 25px rgba(31, 58, 95, 0.15);
+    
+    /* Espaciado y sizing */
+    --pedido-index-radius: 16px;
+    --pedido-index-padding: 2rem;
+    --pedido-index-margin: 1.5rem;
+}
+
+/* Contenedor principal de la página */
+.pedido-index-page {
+    min-height: 100vh;
+    background: var(--pedido-index-bg);
+    padding: var(--pedido-index-margin);
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+.pedido-index-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    position: relative;
+}
+
+.pedido-index-wrapper {
+    background: var(--pedido-index-gradient);
+    border-radius: calc(var(--pedido-index-radius) + 8px);
+    padding: var(--pedido-index-padding);
+    box-shadow: var(--pedido-index-shadow-heavy);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(168, 230, 207, 0.2);
+}
+
+/* ===== HEADER PREMIUM ===== */
+.pedido-index-header {
+    background: var(--pedido-index-header-bg);
+    border-radius: var(--pedido-index-radius);
+    padding: var(--pedido-index-padding);
+    margin-bottom: var(--pedido-index-margin);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(31, 58, 95, 0.1);
+    box-shadow: var(--pedido-index-shadow-medium);
+}
+
+.pedido-index-header-content {
+    text-align: center;
+}
+
+.pedido-index-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--pedido-index-text-dark);
+    margin: 0 0 0.75rem 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    letter-spacing: -0.02em;
+}
+
+.pedido-index-title i {
+    color: var(--pedido-index-primary);
+    font-size: 2.2rem;
+}
+
+.pedido-index-subtitle {
+    font-size: 1.2rem;
+    color: var(--pedido-index-text-light);
+    margin: 0;
+    font-weight: 500;
+}
+
+/* ===== CONTENIDO PRINCIPAL ===== */
+.pedido-index-content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--pedido-index-margin);
+}
+
+/* ===== BARRA DE ESTADÍSTICAS ===== */
+.pedido-stats-bar {
+    background: var(--pedido-index-card-bg);
+    border-radius: var(--pedido-index-radius);
+    padding: 1.5rem var(--pedido-index-padding);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(31, 58, 95, 0.1);
+    box-shadow: var(--pedido-index-shadow-medium);
+    margin-bottom: var(--pedido-index-margin);
+}
+
+.pedido-stats {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+}
+
+.pedido-stat-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    color: var(--pedido-index-text);
+    font-size: 1.1rem;
+    font-weight: 500;
+    padding: 1rem 1.5rem;
+    background: rgba(31, 58, 95, 0.05);
+    border-radius: 50px;
+    border: 1px solid rgba(31, 58, 95, 0.1);
+    transition: all 0.3s ease;
+}
+
+.pedido-stat-item:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--pedido-index-shadow-medium);
+    background: rgba(31, 58, 95, 0.1);
+}
+
+.pedido-stat-item i {
+    color: var(--pedido-index-primary);
+    font-size: 1.3rem;
+}
+
+.pedido-stat-item strong {
+    color: var(--pedido-index-primary-dark);
+    font-weight: 700;
+}
+
+.pedido-stat-item.pendiente strong {
+    color: var(--pedido-index-pendiente);
+}
+
+.pedido-stat-item.ventas strong {
+    color: var(--pedido-index-entregado);
+}
+
+/* ===== GRID DE PEDIDOS ===== */
+.pedidos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+    gap: var(--pedido-index-margin);
+    animation: fadeInUp 0.6s ease;
+}
+
+.pedido-card {
+    background: var(--pedido-index-card-gradient);
+    border-radius: var(--pedido-index-radius);
+    overflow: hidden;
+    border: 1px solid rgba(31, 58, 95, 0.1);
+    box-shadow: var(--pedido-index-shadow-medium);
+    transition: all 0.3s ease;
+    backdrop-filter: blur(20px);
+}
+
+.pedido-card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--pedido-index-shadow-heavy);
+    border-color: rgba(31, 58, 95, 0.2);
+}
+
+/* ===== HEADER DE LA TARJETA ===== */
+.pedido-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem;
+    background: linear-gradient(135deg, var(--pedido-index-primary) 0%, var(--pedido-index-primary-light) 100%);
+    color: white;
+    position: relative;
+    overflow: hidden;
+}
+
+.pedido-card-header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 60px;
+    height: 60px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    transform: translate(20px, -20px);
+}
+
+.pedido-icon {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 12px;
+    padding: 0.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(10px);
+    position: relative;
+    z-index: 2;
+}
+
+.pedido-icon i {
+    font-size: 1.5rem;
+    color: white;
+}
+
+.pedido-estado-badge {
+    padding: 0.5rem 1rem;
+    border-radius: 50px;
+    font-weight: 600;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    position: relative;
+    z-index: 2;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(10px);
+}
+
+.pedido-estado-badge.pendiente {
+    background: rgba(245, 158, 11, 0.9);
+    color: white;
+}
+
+.pedido-estado-badge.enviado {
+    background: rgba(59, 130, 246, 0.9);
+    color: white;
+}
+
+.pedido-estado-badge.entregado {
+    background: rgba(16, 185, 129, 0.9);
+    color: white;
+}
+
+.pedido-estado-badge.cancelado {
+    background: rgba(239, 68, 68, 0.9);
+    color: white;
+}
+
+/* ===== CUERPO DE LA TARJETA ===== */
+.pedido-card-body {
+    padding: 1.5rem;
+}
+
+.pedido-numero {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--pedido-index-text-dark);
+    margin: 0 0 1.5rem 0;
+    letter-spacing: -0.01em;
+}
+
+.pedido-info-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.25rem;
+    margin-bottom: 1.5rem;
+}
+
+.pedido-info-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.pedido-info-item.full-width {
+    grid-column: 1 / -1;
+}
+
+.pedido-info-label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.9rem;
+    color: var(--pedido-index-text-light);
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.pedido-info-label i {
+    color: var(--pedido-index-primary);
+    font-size: 1rem;
+}
+
+.pedido-info-valor {
+    font-size: 1rem;
+    color: var(--pedido-index-text-dark);
+    font-weight: 600;
+}
+
+.pedido-total {
+    font-size: 1.3rem !important;
+    color: var(--pedido-index-primary) !important;
+    font-weight: 700 !important;
+    font-family: 'JetBrains Mono', monospace;
+}
+
+/* ===== ACCIONES DE LA TARJETA ===== */
+.pedido-card-actions {
+    padding: 1.5rem;
+    background: rgba(248, 250, 252, 0.8);
+    border-top: 1px solid rgba(31, 58, 95, 0.1);
+}
+
+.pedido-action-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    padding: 1rem 1.5rem;
+    background: linear-gradient(135deg, var(--pedido-index-primary) 0%, var(--pedido-index-primary-light) 100%);
+    color: white;
+    text-decoration: none;
+    border-radius: 50px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    box-shadow: var(--pedido-index-shadow-light);
+}
+
+.pedido-action-btn:hover {
+    background: linear-gradient(135deg, var(--pedido-index-primary-dark) 0%, var(--pedido-index-primary) 100%);
+    transform: translateY(-2px);
+    box-shadow: var(--pedido-index-shadow-medium);
+    color: white;
+    text-decoration: none;
+}
+
+.pedido-action-btn i {
+    font-size: 1.1rem;
+}
+
+/* ===== ESTADO VACÍO ===== */
+.pedidos-empty {
+    background: var(--pedido-index-card-bg);
+    border-radius: var(--pedido-index-radius);
+    padding: 4rem 2rem;
+    text-align: center;
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(31, 58, 95, 0.1);
+    box-shadow: var(--pedido-index-shadow-medium);
+}
+
+.empty-content {
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.empty-icon {
+    width: 100px;
+    height: 100px;
+    background: linear-gradient(135deg, rgba(31, 58, 95, 0.1) 0%, rgba(168, 230, 207, 0.05) 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 2rem auto;
+    border: 1px solid rgba(31, 58, 95, 0.2);
+}
+
+.empty-icon i {
+    font-size: 3rem;
+    color: var(--pedido-index-primary);
+}
+
+.empty-title {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--pedido-index-text-dark);
+    margin: 0 0 1rem 0;
+}
+
+.empty-text {
+    font-size: 1.1rem;
+    color: var(--pedido-index-text-light);
+    margin: 0;
+    line-height: 1.6;
+}
+
+/* ===== ANIMACIONES ===== */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+}
+
+.pedido-card:hover .pedido-icon {
+    animation: pulse 2s infinite;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 1200px) {
+    .pedidos-grid {
+        grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    }
+}
+
+@media (max-width: 768px) {
+    .pedido-index-page {
+        padding: 1rem;
+    }
+    
+    .pedido-index-wrapper {
+        padding: 1.5rem;
+    }
+    
+    .pedido-index-header {
+        padding: 1.5rem;
+    }
+    
+    .pedido-index-title {
+        font-size: 2rem;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    
+    .pedido-index-subtitle {
+        font-size: 1rem;
+    }
+    
+    .pedidos-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .pedido-stats {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    .pedido-stat-item {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .pedido-info-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    
+    .pedido-card-header {
+        flex-direction: column;
+        gap: 1rem;
+        text-align: center;
+    }
+    
+    .pedido-numero {
+        font-size: 1.2rem;
+    }
+    
+    .pedido-total {
+        font-size: 1.1rem !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .pedido-index-title {
+        font-size: 1.8rem;
+    }
+    
+    .pedido-card-body {
+        padding: 1rem;
+    }
+    
+    .pedido-card-actions {
+        padding: 1rem;
+    }
+    
+    .pedido-action-btn {
+        padding: 0.875rem 1.25rem;
+        font-size: 0.9rem;
+    }
+    
+    .empty-icon {
+        width: 80px;
+        height: 80px;
+    }
+    
+    .empty-icon i {
+        font-size: 2.5rem;
+    }
+    
+    .empty-title {
+        font-size: 1.5rem;
+    }
+    
+    .empty-text {
+        font-size: 1rem;
+    }
+}

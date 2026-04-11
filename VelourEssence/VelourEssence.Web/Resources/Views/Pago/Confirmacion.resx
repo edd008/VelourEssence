@@ -1,0 +1,96 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+	<data name="PaymentConfirmedTitle">
+		<value>Pago Confirmado</value>
+	</data>
+	<data name="PaymentSuccess">
+		<value>¡Pago Exitoso!</value>
+	</data>
+	<data name="PaymentProcessed">
+		<value>Tu pago ha sido procesado correctamente</value>
+	</data>
+	<data name="PaymentSummary">
+		<value>Resumen del Pago</value>
+	</data>
+	<data name="OrderNumberLabel">
+		<value>Número de Pedido:</value>
+	</data>
+	<data name="PaymentMethodLabel">
+		<value>Método de Pago:</value>
+	</data>
+	<data name="DateTimeLabel">
+		<value>Fecha y Hora:</value>
+	</data>
+	<data name="TotalPaidLabel">
+		<value>Total Pagado:</value>
+	</data>
+	<data name="ChangeLabel">
+		<value>Vuelto:</value>
+	</data>
+	<data name="CardEndingLabel">
+		<value>Tarjeta terminada en {0}</value>
+	</data>
+	<data name="OrderStatusTitle">
+		<value>Estado del Pedido</value>
+	</data>
+	<data name="StatusPaid">
+		<value>Pago Confirmado</value>
+	</data>
+	<data name="StatusPaidDesc">
+		<value>Tu pago ha sido procesado exitosamente</value>
+	</data>
+	<data name="StatusPreparing">
+		<value>Preparando Pedido</value>
+	</data>
+	<data name="StatusPreparingDesc">
+		<value>Estamos preparando tu pedido para el envío</value>
+	</data>
+	<data name="StatusOnWay">
+		<value>En Camino</value>
+	</data>
+	<data name="StatusOnWayDesc">
+		<value>Tu pedido será enviado pronto</value>
+	</data>
+	<data name="StatusDelivered">
+		<value>Entregado</value>
+	</data>
+	<data name="StatusDeliveredDesc">
+		<value>Pedido entregado en tu dirección</value>
+	</data>
+	<data name="NextStepsTitle">
+		<value>¿Qué sigue?</value>
+	</data>
+	<data name="StepEmailTitle">
+		<value>Confirmación por Email</value>
+	</data>
+	<data name="StepEmailDesc">
+		<value>Recibirás un email con los detalles de tu pedido y el código de seguimiento</value>
+	</data>
+	<data name="StepSmsTitle">
+		<value>Notificaciones SMS</value>
+	</data>
+	<data name="StepSmsDesc">
+		<value>Te mantendremos informado sobre el estado de tu pedido vía SMS</value>
+	</data>
+	<data name="StepSupportTitle">
+		<value>Soporte al Cliente</value>
+	</data>
+	<data name="StepSupportDesc">
+		<value>Nuestro equipo está disponible 24/7 para cualquier consulta</value>
+	</data>
+	<data name="ViewPaymentHistoryBtn">
+		<value>Ver Historial de Pagos</value>
+	</data>
+	<data name="ContinueShoppingBtn">
+		<value>Seguir Comprando</value>
+	</data>
+	<data name="SharePurchaseTitle">
+		<value>Compartir tu compra:</value>
+	</data>
+	<data name="ShareWhatsappMsg">
+		<value>¡Acabo de realizar una compra en VelourEssence! Pedido #{0} por ₡{1}</value>
+	</data>
+	<data name="ShareTwitterMsg">
+		<value>¡Acabo de realizar una compra en VelourEssence! 🛍️ #VelourEssence #Shopping</value>
+	</data>
+</root>

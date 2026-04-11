@@ -1,0 +1,54 @@
+﻿<root>
+	<data name="DeletePromotionTitle">
+		<value>Eliminar Promoción</value>
+	</data>
+	<data name="DeletePromotionSubtitle">
+		<value>¿Está seguro de que desea eliminar esta promoción?</value>
+	</data>
+	<data name="TypeLabel">
+		<value>Tipo:</value>
+	</data>
+	<data name="ProductLabel">
+		<value>Producto:</value>
+	</data>
+	<data name="CategoryLabel">
+		<value>Categoría:</value>
+	</data>
+	<data name="CategoryIdLabel">
+		<value>Categoría ID:</value>
+	</data>
+	<data name="DiscountLabel">
+		<value>Descuento:</value>
+	</data>
+	<data name="PercentSymbol">
+		<value>%</value>
+	</data>
+	<data name="ValidityLabel">
+		<value>Vigencia:</value>
+	</data>
+	<data name="AttentionLabel">
+		<value>¡Atención!</value>
+	</data>
+	<data name="DeleteWarningMsg">
+		<value>Esta acción no se puede deshacer. Al eliminar esta promoción:</value>
+	</data>
+	<data name="DeleteWarningLoseInfo">
+		<value>Se perderá toda la información de la promoción</value>
+	</data>
+	<data name="DeleteWarningSoldProducts">
+		<value>Los productos ya vendidos con esta promoción mantendrán sus precios</value>
+	</data>
+	<data name="DeleteWarningNotAvailable">
+		<value>La promoción ya no estará disponible para futuras compras</value>
+	</data>
+	<data name="ConfirmDeleteBtn">
+		<value>Sí, Eliminar Promoción</value>
+	</data>
+	<data name="CancelBtn">
+		<value>Cancelar</value>
+	</data>
+	<data name="ViewDetailsBtn">
+		<value>Ver Detalles</value>
+	</data>
+</root>
+

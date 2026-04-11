@@ -1,0 +1,95 @@
+﻿<root>
+	<data name="OrderDetailTitle">
+		<value>Order Detail</value>
+	</data>
+	<data name="OrderInvoiceLabel">
+		<value>Order Invoice</value>
+	</data>
+	<data name="OrderLabel">
+		<value>Order</value>
+	</data>
+	<data name="CustomerInfoTitle">
+		<value>Customer Information</value>
+	</data>
+	<data name="CustomerLabel">
+		<value>Customer:</value>
+	</data>
+	<data name="AddressLabel">
+		<value>Address:</value>
+	</data>
+	<data name="DateLabel">
+		<value>Date:</value>
+	</data>
+	<data name="OrderStatusTitle">
+		<value>Order Status</value>
+	</data>
+	<data name="OrderStatusLabel">
+		<value>Order Status</value>
+	</data>
+	<data name="StatusCancelled">
+		<value>Cancelled</value>
+	</data>
+	<data name="StatusDelivered">
+		<value>Delivered</value>
+	</data>
+	<data name="StatusPending">
+		<value>Pending</value>
+	</data>
+	<data name="StatusShipped">
+		<value>Shipped</value>
+	</data>
+	<data name="PaymentMethodLabel">
+		<value>Payment Method</value>
+	</data>
+	<data name="OrderProductsTitle">
+		<value>Order Products</value>
+	</data>
+	<data name="ProductLabel">
+		<value>Product</value>
+	</data>
+	<data name="QuantityLabel">
+		<value>Quantity</value>
+	</data>
+	<data name="UnitPriceLabel">
+		<value>Unit Price</value>
+	</data>
+	<data name="SubtotalLabel">
+		<value>Subtotal</value>
+	</data>
+	<data name="TaxLabel">
+		<value>Tax</value>
+	</data>
+	<data name="TotalLabel">
+		<value>Total</value>
+	</data>
+	<data name="PayOrderBtn">
+		<value>Pay Order</value>
+	</data>
+	<data name="CancelOrderBtn">
+		<value>Cancel Order</value>
+	</data>
+	<data name="CancelOrderConfirm">
+		<value>Are you sure you want to cancel this order?</value>
+	</data>
+	<data name="CompletePaymentBtn">
+		<value>Complete Payment</value>
+	</data>
+	<data name="CannotCancelLabel">
+		<value>Cannot cancel</value>
+	</data>
+	<data name="OrderCompletedLabel">
+		<value>Order Completed and Delivered</value>
+	</data>
+	<data name="OrderCancelledLabel">
+		<value>Order Cancelled</value>
+	</data>
+	<data name="BackToOrdersBtn">
+		<value>Back to Orders</value>
+	</data>
+	<data name="ThankYouMsg">
+		<value>Thank you for your purchase at Velour Essence</value>
+	</data>
+	<data name="ContactUsMsg">
+		<value>For any questions, contact us</value>
+	</data>
+</root>

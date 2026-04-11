@@ -1,0 +1,205 @@
+@using Microsoft.Extensions.Localization
+@inject IStringLocalizer<VelourEssence.Web.Views.Promocion.Edit> L
+@model VelourEssence.Application.DTOs.CrearPromocionDto
+
+@{
+    ViewData["Title"] = L["PromotionEditTitle"];
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/forms.css" />
+}
+
+<div class="form-container">
+    <div class="form-wrapper">
+        <div class="form-header">
+            <h1 class="form-title">
+                <i class="bi bi-pencil-square"></i>
+                @L["PromotionEditTitle"]
+            </h1>
+            <p class="form-subtitle">@L["PromotionEditSubtitle"]</p>
+        </div>
+
+        <form asp-action="Edit" method="post" class="premium-form promocion-form">
+            <input asp-for="IdPromocion" type="hidden" />
+            <div asp-validation-summary="ModelOnly" class="validation-summary"></div>
+
+            <!-- Información básica -->
+            <div class="form-section">
+                <h3 class="section-title">
+                    <i class="bi bi-info-circle"></i>
+                    @L["PromotionEditBasicInfo"]
+                </h3>
+
+                <div class="form-group">
+                    <label asp-for="Nombre" class="form-label">
+                        <i class="bi bi-tag"></i>
+                        @L["PromotionEditNameLabel"]
+                    </label>
+                    <input asp-for="Nombre" class="form-control" placeholder="@L["PromotionEditNamePlaceholder"]" />
+                    <span asp-validation-for="Nombre" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Tipo" class="form-label">
+                        <i class="bi bi-gear"></i>
+                        @L["PromotionEditTypeLabel"]
+                    </label>
+                    <select asp-for="Tipo" asp-items="ViewBag.TiposPromocion" class="form-control" id="tipoPromocion">
+                        <option value="">@L["PromotionEditTypePlaceholder"]</option>
+                    </select>
+                    <span asp-validation-for="Tipo" class="text-danger"></span>
+                </div>
+
+                <div class="form-group" id="productoGroup" style="display: @(Model.Tipo == "Producto" ? "block" : "none");">
+                    <label asp-for="IdProducto" class="form-label">
+                        <i class="bi bi-box"></i>
+                        @L["PromotionEditProductLabel"]
+                    </label>
+                    <select asp-for="IdProducto" asp-items="ViewBag.Productos" class="form-control">
+                        <option value="">@L["PromotionEditProductPlaceholder"]</option>
+                    </select>
+                    <span asp-validation-for="IdProducto" class="text-danger"></span>
+                    @if (!string.IsNullOrEmpty(Model.NombreProducto))
+                    {
+                        <small class="form-help-text">
+                            <i class="bi bi-info-circle-fill"></i>
+                            @L["PromotionEditCurrentProduct"]: @Model.NombreProducto
+                        </small>
+                    }
+                </div>
+
+                <div class="form-group" id="categoriaGroup" style="display: @(Model.Tipo == "Categoria" ? "block" : "none");">
+                    <label asp-for="IdCategoria" class="form-label">
+                        <i class="bi bi-collection"></i>
+                        @L["PromotionEditCategoryLabel"]
+                    </label>
+                    <select asp-for="IdCategoria" asp-items="ViewBag.Categorias" class="form-control">
+                        <option value="">@L["PromotionEditCategoryPlaceholder"]</option>
+                    </select>
+                    <span asp-validation-for="IdCategoria" class="text-danger"></span>
+                    @if (!string.IsNullOrEmpty(Model.NombreCategoria))
+                    {
+                        <small class="form-help-text">
+                            <i class="bi bi-info-circle-fill"></i>
+                            @L["PromotionEditCurrentCategory"]: @Model.NombreCategoria
+                        </small>
+                    }
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="PorcentajeDescuento" class="form-label">
+                        <i class="bi bi-percent"></i>
+                        @L["PromotionEditDiscountLabel"]
+                    </label>
+                    <div class="input-with-suffix">
+                        <input asp-for="PorcentajeDescuento" class="form-control" type="number" step="0.01" min="0.01" max="100" placeholder="0.00" />
+                        <span class="input-suffix">%</span>
+                    </div>
+                    <span asp-validation-for="PorcentajeDescuento" class="text-danger"></span>
+                    <small class="form-help-text">
+                        <i class="bi bi-info-circle-fill"></i>
+                        @L["PromotionEditDiscountHelp"]
+                    </small>
+                </div>
+            </div>
+
+            <!-- Fechas de vigencia -->
+            <div class="form-section">
+                <h3 class="section-title">
+                    <i class="bi bi-calendar-range"></i>
+                    @L["PromotionEditPeriodTitle"]
+                </h3>
+
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label asp-for="FechaInicio" class="form-label">
+                            <i class="bi bi-calendar-check"></i>
+                            @L["PromotionEditStartDateLabel"]
+                        </label>
+                        <input asp-for="FechaInicio" class="form-control" type="date" />
+                        <span asp-validation-for="FechaInicio" class="text-danger"></span>
+                        <small class="form-help-text">
+                            <i class="bi bi-info-circle-fill"></i>
+                            @L["PromotionEditStartDateHelp"]
+                        </small>
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label asp-for="FechaFin" class="form-label">
+                            <i class="bi bi-calendar-x"></i>
+                            @L["PromotionEditEndDateLabel"]
+                        </label>
+                        <input asp-for="FechaFin" class="form-control" type="date" />
+                        <span asp-validation-for="FechaFin" class="text-danger"></span>
+                        <small class="form-help-text">
+                            <i class="bi bi-info-circle-fill"></i>
+                            @L["PromotionEditEndDateHelp"]
+                        </small>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Botones de acción -->
+            <div class="form-actions">
+                <button type="submit" class="btn btn-primary">
+                    <i class="bi bi-check-circle"></i>
+                    @L["PromotionEditUpdateBtn"]
+                </button>
+                <a asp-action="Index" class="btn btn-secondary">
+                    <i class="bi bi-arrow-left"></i>
+                    @L["PromotionEditBackBtn"]
+                </a>
+                <a asp-action="Details" asp-route-id="@Model.IdPromocion" class="btn btn-info">
+                    <i class="bi bi-eye"></i>
+                    @L["PromotionEditDetailsBtn"]
+                </a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const tipoSelect = document.getElementById('tipoPromocion');
+            const productoGroup = document.getElementById('productoGroup');
+            const categoriaGroup = document.getElementById('categoriaGroup');
+            const productoSelect = document.querySelector('[name="IdProducto"]');
+            const categoriaSelect = document.querySelector('[name="IdCategoria"]');
+
+            tipoSelect.addEventListener('change', function() {
+                const selectedValue = this.value;
+
+                if (selectedValue === 'Producto') {
+                    productoGroup.style.display = 'block';
+                    categoriaGroup.style.display = 'none';
+                    categoriaSelect.value = '';
+                } else if (selectedValue === 'Categoria') {
+                    categoriaGroup.style.display = 'block';
+                    productoGroup.style.display = 'none';
+                    productoSelect.value = '';
+                } else {
+                    productoGroup.style.display = 'none';
+                    categoriaGroup.style.display = 'none';
+                    productoSelect.value = '';
+                    categoriaSelect.value = '';
+                }
+            });
+
+            // Configurar fecha mínima en fecha de inicio (hoy)
+            const fechaInicio = document.querySelector('[name="FechaInicio"]');
+            const fechaFin = document.querySelector('[name="FechaFin"]');
+            const today = new Date().toISOString().split('T')[0];
+
+            fechaInicio.min = today;
+
+            fechaInicio.addEventListener('change', function() {
+                fechaFin.min = this.value;
+                if (fechaFin.value && fechaFin.value <= this.value) {
+                    fechaFin.value = '';
+                }
+            });
+        });
+    </script>
+}

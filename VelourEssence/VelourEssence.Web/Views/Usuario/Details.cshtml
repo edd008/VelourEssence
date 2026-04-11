@@ -1,0 +1,147 @@
+﻿@using Microsoft.Extensions.Localization
+@inject IStringLocalizer<VelourEssence.Web.Views.Usuario.Details> L
+@model VelourEssence.Application.DTOs.UsuarioDto
+
+@{
+    ViewData["Title"] = L["UserDetailTitle"];
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/user-details.css" />
+}
+
+<div class="usuario-detalle-page">
+    <div class="usuario-detalle-container">
+        <div class="usuario-detalle-wrapper">
+            <div class="usuario-card">
+                <!-- Encabezado con información básica del usuario -->
+                <div class="usuario-header">
+                    <div class="usuario-header-content">
+                        <!-- Avatar con icono según el rol -->
+                        <div class="usuario-avatar">
+                            @if (Model.NombreRol == L["AdminRole"])
+                            {
+                                <i class="bi bi-shield-fill admin"></i>
+                            }
+                            else
+                            {
+                                <i class="bi bi-person-fill cliente"></i>
+                            }
+                        </div>
+                        <!-- Información principal del usuario -->
+                        <div class="usuario-info">
+                            <h1 class="usuario-nombre">@Model.NombreUsuario</h1>
+                            <span class="usuario-rol @Model.NombreRol?.ToLower()">@Model.NombreRol</span>
+                        </div>
+                        <!-- Estado de actividad basado en último inicio de sesión -->
+                        <div class="usuario-estado">
+                            @if (Model.UltimoInicioSesion.HasValue && Model.UltimoInicioSesion.Value > DateTime.Now.AddDays(-30))
+                            {
+                                <span class="estado-badge activo">
+                                    <i class="bi bi-circle-fill"></i>
+                                    @L["ActiveLabel"]
+                                </span>
+                            }
+                            else
+                            {
+                                <span class="estado-badge inactivo">
+                                    <i class="bi bi-circle-fill"></i>
+                                    @L["InactiveLabel"]
+                                </span>
+                            }
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contenido principal con información detallada -->
+                <div class="usuario-contenido">
+                    <h3 class="seccion-titulo">
+                        <i class="bi bi-info-circle"></i>
+                        @L["UserInfoTitle"]
+                    </h3>
+
+                    <div class="info-grid">
+                        <!-- ID único del usuario -->
+                        <div class="info-item">
+                            <span class="info-label">@L["UserIdLabel"]</span>
+                            <span class="info-valor">#@Model.IdUsuario</span>
+                        </div>
+
+                        <!-- Correo electrónico -->
+                        <div class="info-item">
+                            <span class="info-label">@L["EmailLabel"]</span>
+                            <span class="info-valor">@Model.Correo</span>
+                        </div>
+
+                        <!-- Rol o tipo de cuenta -->
+                        <div class="info-item">
+                            <span class="info-label">@L["AccountTypeLabel"]</span>
+                            <span class="info-valor">@Model.NombreRol</span>
+                        </div>
+
+                        <!-- Información de último acceso -->
+                        <div class="info-item">
+                            <span class="info-label">@L["LastAccessLabel"]</span>
+                            <span class="info-valor">
+                                @if (Model.UltimoInicioSesion.HasValue)
+                                {
+                                    @Model.UltimoInicioSesion.Value.ToString("dd/MM/yyyy HH:mm")
+                                    <small>@L["DaysAgoLabel", (DateTime.Now - Model.UltimoInicioSesion.Value).Days]</small>
+                                }
+                                else
+                                {
+                                    <span class="text-muted">@L["NeverLoggedInLabel"]</span>
+                                }
+                            </span>
+                        </div>
+
+                        <!-- Nivel de actividad calculado según frecuencia de acceso -->
+                        <div class="info-item">
+                            <span class="info-label">@L["ActivityLevelLabel"]</span>
+                            <span class="info-valor">
+                                @if (Model.UltimoInicioSesion.HasValue && Model.UltimoInicioSesion.Value > DateTime.Now.AddDays(-7))
+                                {
+                                    <span class="actividad alta">@L["ActivityHighLabel"]</span>
+                                }
+                                else if (Model.UltimoInicioSesion.HasValue && Model.UltimoInicioSesion.Value > DateTime.Now.AddDays(-30))
+                                {
+                                    <span class="actividad media">@L["ActivityMediumLabel"]</span>
+                                }
+                                else
+                                {
+                                    <span class="actividad baja">@L["ActivityLowLabel"]</span>
+                                }
+                            </span>
+                        </div>
+
+                        <!-- Estado de verificación de seguridad -->
+                        <div class="info-item">
+                            <span class="info-label">@L["SecurityStatusLabel"]</span>
+                            <span class="info-valor">
+                                <span class="seguridad verificado">
+                                    <i class="bi bi-shield-check"></i>
+                                    @L["VerifiedLabel"]
+                                </span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Botones de acción disponibles -->
+                <div class="usuario-acciones">
+                    <div class="acciones-grupo">
+                        <a asp-action="Index" class="accion-btn volver">
+                            <i class="bi bi-arrow-left"></i>
+                            <span>@L["BackToListBtn"]</span>
+                        </a>
+                        <a asp-action="Edit" asp-route-id="@Model.IdUsuario" class="accion-btn editar">
+                            <i class="bi bi-pencil"></i>
+                            <span>@L["EditUserBtn"]</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

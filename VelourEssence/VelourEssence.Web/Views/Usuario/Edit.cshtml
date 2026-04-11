@@ -1,0 +1,208 @@
+@using Microsoft.Extensions.Localization
+@inject IStringLocalizer<VelourEssence.Web.Views.Usuario.Edit> L
+@model VelourEssence.Application.DTOs.EditarUsuarioDto
+
+@{
+    ViewData["Title"] = L["EditUserTitle"];
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/user-edit.css" />
+}
+
+<div class="user-edit-page">
+    <div class="user-edit-container">
+        <div class="user-edit-wrapper">
+            <!-- Encabezado -->
+            <div class="user-edit-header">
+                <div class="user-edit-header-content">
+                    <h1 class="user-edit-title">
+                        <i class="bi bi-pencil"></i>
+                        @L["EditUserHeader"]
+                    </h1>
+                    <p class="user-edit-subtitle">@L["EditUserSubtitle", Model.IdUsuario]</p>
+                </div>
+            </div>
+
+            <!-- Formulario -->
+            <div class="user-edit-content">
+                <form asp-action="Edit" method="post" class="user-edit-form">
+                    <input asp-for="IdUsuario" type="hidden" />
+                    <input asp-for="UltimoInicioSesion" type="hidden" />
+
+                    <div asp-validation-summary="ModelOnly" class="validation-summary"></div>
+
+                    <!-- Información básica -->
+                    <div class="form-section">
+                        <h3 class="form-section-title">
+                            <i class="bi bi-person"></i>
+                            @L["PersonalInfoTitle"]
+                        </h3>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label asp-for="NombreUsuario" class="form-label">@L["UsernameLabel"]</label>
+                                <input asp-for="NombreUsuario" class="form-control" placeholder="@L["UsernamePlaceholder"]"
+                                       data-validate-url="@Url.Action("ValidarNombreUsuario")" data-validate-type="username"
+                                       data-user-id="@Model.IdUsuario" />
+                                <span asp-validation-for="NombreUsuario" class="form-error"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="Correo" class="form-label">@L["EmailLabel"]</label>
+                                <input asp-for="Correo" type="email" class="form-control" placeholder="@L["EmailPlaceholder"]"
+                                       data-validate-url="@Url.Action("ValidarCorreo")" data-validate-type="email"
+                                       data-user-id="@Model.IdUsuario" />
+                                <span asp-validation-for="Correo" class="form-error"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Seguridad -->
+                    <div class="form-section">
+                        <h3 class="form-section-title">
+                            <i class="bi bi-shield-lock"></i>
+                            @L["SecurityTitle"]
+                        </h3>
+
+                        <div class="form-info">
+                            <i class="bi bi-info-circle"></i>
+                            <span>@L["PasswordOptionalInfo"]</span>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label asp-for="Contraseña" class="form-label">@L["NewPasswordLabel"]</label>
+                                <div class="password-input">
+                                    <input asp-for="Contraseña" type="password" class="form-control"
+                                           placeholder="@L["NewPasswordPlaceholder"]" id="password" />
+                                    <button type="button" class="password-toggle" onclick="togglePassword('password')">
+                                        <i class="bi bi-eye" id="password-icon"></i>
+                                    </button>
+                                </div>
+                                <span asp-validation-for="Contraseña" class="form-error"></span>
+                                <div class="password-requirements">
+                                    <small>@L["PasswordRequirements"]</small>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="ConfirmarContraseña" class="form-label">@L["ConfirmNewPasswordLabel"]</label>
+                                <div class="password-input">
+                                    <input asp-for="ConfirmarContraseña" type="password" class="form-control"
+                                           placeholder="@L["ConfirmNewPasswordPlaceholder"]" id="confirmPassword" />
+                                    <button type="button" class="password-toggle" onclick="togglePassword('confirmPassword')">
+                                        <i class="bi bi-eye" id="confirmPassword-icon"></i>
+                                    </button>
+                                </div>
+                                <span asp-validation-for="ConfirmarContraseña" class="form-error"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Rol -->
+                    <div class="form-section">
+                        <h3 class="form-section-title">
+                            <i class="bi bi-person-badge"></i>
+                            @L["PermissionsTitle"]
+                        </h3>
+
+                        <div class="form-group">
+                            <label asp-for="IdRol" class="form-label">@L["RoleLabel"]</label>
+                            <select asp-for="IdRol" asp-items="ViewBag.Roles" class="form-control">
+                                <option value="">@L["SelectRoleOption"]</option>
+                            </select>
+                            <span asp-validation-for="IdRol" class="form-error"></span>
+                        </div>
+                    </div>
+
+                    @if (Model.UltimoInicioSesion.HasValue)
+                    {
+                        <!-- Información adicional -->
+                        <div class="form-section">
+                            <h3 class="form-section-title">
+                                <i class="bi bi-clock-history"></i>
+                                @L["AdditionalInfoTitle"]
+                            </h3>
+
+                            <div class="info-display">
+                                <div class="info-item">
+                                    <label>@L["LastLoginLabel"]</label>
+                                    <span>@Model.UltimoInicioSesion.Value.ToString("dd/MM/yyyy HH:mm")</span>
+                                </div>
+                            </div>
+                        </div>
+                    }
+
+                    <!-- Botones de acción -->
+                    <div class="form-actions">
+                        <button type="submit" class="user-edit-btn-primary">
+                            <i class="bi bi-check"></i>
+                            @L["SaveChangesBtn"]
+                        </button>
+                        <a asp-action="Index" class="user-edit-btn-secondary">
+                            <i class="bi bi-arrow-left"></i>
+                            @L["CancelBtn"]
+                        </a>
+                        <a asp-action="Details" asp-route-id="@Model.IdUsuario" class="user-edit-btn-info">
+                            <i class="bi bi-eye"></i>
+                            @L["ViewDetailsBtn"]
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script>
+        // Función para mostrar/ocultar contraseñas
+        function togglePassword(inputId) {
+            const input = document.getElementById(inputId);
+            const icon = document.getElementById(inputId + '-icon');
+
+            if (input.type === 'password') {
+                input.type = 'text';
+                icon.className = 'bi bi-eye-slash';
+            } else {
+                input.type = 'password';
+                icon.className = 'bi bi-eye';
+            }
+        }
+
+        // Validación en tiempo real
+        $(document).ready(function() {
+            $('[data-validate-url]').on('blur', function() {
+                const input = $(this);
+                const url = input.data('validate-url');
+                const type = input.data('validate-type');
+                const value = input.val();
+                const userId = input.data('user-id');
+
+                if (value) {
+                    const params = { idUsuario: userId };
+                    if (type === 'username') {
+                        params.nombreUsuario = value;
+                    } else if (type === 'email') {
+                        params.correo = value;
+                    }
+
+                    $.get(url, params, function(isValid) {
+                        if (!isValid) {
+                            const message = type === 'username' ? '@L["UsernameExistsMsg"]' : '@L["EmailExistsMsg"]';
+                            input.addClass('is-invalid');
+                            input.next('.form-error').text(message);
+                        } else {
+                            input.removeClass('is-invalid');
+                            input.next('.form-error').text('');
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+}
+
+

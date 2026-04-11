@@ -1,0 +1,45 @@
+@using Microsoft.Extensions.Localization
+@inject IStringLocalizer<VelourEssence.Web.Views.Auth.AccessDenied> L
+
+@{
+    ViewData["Title"] = L["AccessDeniedTitle"];
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/auth-access-denied.css" />
+}
+
+<div class="access-denied-page">
+    <div class="access-denied-container">
+        <div class="access-denied-wrapper">
+            <!-- Icono de error -->
+            <div class="access-denied-icon">
+                <i class="bi bi-shield-exclamation"></i>
+            </div>
+
+            <!-- Contenido principal -->
+            <div class="access-denied-content">
+                <h1 class="access-denied-title">@L["AccessDeniedTitle"]</h1>
+                <p class="access-denied-message">
+                    @L["AccessDeniedMessage"]
+                </p>
+                <p class="access-denied-submessage">
+                    @L["AccessDeniedSubMessage"]
+                </p>
+            </div>
+
+            <!-- Acciones -->
+            <div class="access-denied-actions">
+                <a href="javascript:history.back()" class="access-denied-btn back">
+                    <i class="bi bi-arrow-left"></i>
+                    <span>@L["AccessDeniedBackBtn"]</span>
+                </a>
+                <a asp-action="Index" asp-controller="Home" class="access-denied-btn home">
+                    <i class="bi bi-house"></i>
+                    <span>@L["AccessDeniedHomeBtn"]</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

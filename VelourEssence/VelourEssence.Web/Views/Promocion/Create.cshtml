@@ -1,0 +1,187 @@
+@using Microsoft.Extensions.Localization
+@inject IStringLocalizer<VelourEssence.Web.Views.Promocion.Create> L
+@model VelourEssence.Application.DTOs.CrearPromocionDto
+
+@{
+    ViewData["Title"] = L["PromotionCreateTitle"];
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/forms.css" />
+}
+
+<div class="form-container">
+    <div class="form-wrapper">
+        <div class="form-header">
+            <h1 class="form-title">
+                <i class="bi bi-plus-circle"></i>
+                @L["PromotionCreateTitle"]
+            </h1>
+            <p class="form-subtitle">@L["PromotionCreateSubtitle"]</p>
+        </div>
+
+        <form asp-action="Create" method="post" class="premium-form promocion-form">
+            <div asp-validation-summary="ModelOnly" class="validation-summary"></div>
+
+            <!-- Información básica -->
+            <div class="form-section">
+                <h3 class="section-title">
+                    <i class="bi bi-info-circle"></i>
+                    @L["PromotionCreateBasicInfo"]
+                </h3>
+
+                <div class="form-group">
+                    <label asp-for="Nombre" class="form-label">
+                        <i class="bi bi-tag"></i>
+                        @L["PromotionCreateNameLabel"]
+                    </label>
+                    <input asp-for="Nombre" class="form-control" placeholder="@L["PromotionCreateNamePlaceholder"]" />
+                    <span asp-validation-for="Nombre" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Tipo" class="form-label">
+                        <i class="bi bi-gear"></i>
+                        @L["PromotionCreateTypeLabel"]
+                    </label>
+                    <select asp-for="Tipo" asp-items="ViewBag.TiposPromocion" class="form-control" id="tipoPromocion">
+                        <option value="">@L["PromotionCreateTypePlaceholder"]</option>
+                    </select>
+                    <span asp-validation-for="Tipo" class="text-danger"></span>
+                </div>
+
+                <div class="form-group" id="productoGroup" style="display: none;">
+                    <label asp-for="IdProducto" class="form-label">
+                        <i class="bi bi-box"></i>
+                        @L["PromotionCreateProductLabel"]
+                    </label>
+                    <select asp-for="IdProducto" asp-items="ViewBag.Productos" class="form-control">
+                        <option value="">@L["PromotionCreateProductPlaceholder"]</option>
+                    </select>
+                    <span asp-validation-for="IdProducto" class="text-danger"></span>
+                </div>
+
+                <div class="form-group" id="categoriaGroup" style="display: none;">
+                    <label asp-for="IdCategoria" class="form-label">
+                        <i class="bi bi-collection"></i>
+                        @L["PromotionCreateCategoryLabel"]
+                    </label>
+                    <select asp-for="IdCategoria" asp-items="ViewBag.Categorias" class="form-control">
+                        <option value="">@L["PromotionCreateCategoryPlaceholder"]</option>
+                    </select>
+                    <span asp-validation-for="IdCategoria" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="PorcentajeDescuento" class="form-label">
+                        <i class="bi bi-percent"></i>
+                        @L["PromotionCreateDiscountLabel"]
+                    </label>
+                    <div class="input-with-suffix">
+                        <input asp-for="PorcentajeDescuento" class="form-control" type="number" step="0.01" min="0.01" max="100" placeholder="0.00" />
+                        <span class="input-suffix">%</span>
+                    </div>
+                    <span asp-validation-for="PorcentajeDescuento" class="text-danger"></span>
+                    <small class="form-help-text">
+                        <i class="bi bi-info-circle-fill"></i>
+                        @L["PromotionCreateDiscountHelp"]
+                    </small>
+                </div>
+            </div>
+
+            <!-- Fechas de vigencia -->
+            <div class="form-section">
+                <h3 class="section-title">
+                    <i class="bi bi-calendar-range"></i>
+                    @L["PromotionCreatePeriodTitle"]
+                </h3>
+
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label asp-for="FechaInicio" class="form-label">
+                            <i class="bi bi-calendar-check"></i>
+                            @L["PromotionCreateStartDateLabel"]
+                        </label>
+                        <input asp-for="FechaInicio" class="form-control" type="date" />
+                        <span asp-validation-for="FechaInicio" class="text-danger"></span>
+                        <small class="form-help-text">
+                            <i class="bi bi-info-circle-fill"></i>
+                            @L["PromotionCreateStartDateHelp"]
+                        </small>
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label asp-for="FechaFin" class="form-label">
+                            <i class="bi bi-calendar-x"></i>
+                            @L["PromotionCreateEndDateLabel"]
+                        </label>
+                        <input asp-for="FechaFin" class="form-control" type="date" />
+                        <span asp-validation-for="FechaFin" class="text-danger"></span>
+                        <small class="form-help-text">
+                            <i class="bi bi-info-circle-fill"></i>
+                            @L["PromotionCreateEndDateHelp"]
+                        </small>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Botones de acción -->
+            <div class="form-actions">
+                <button type="submit" class="btn btn-primary">
+                    <i class="bi bi-check-circle"></i>
+                    @L["PromotionCreateBtn"]
+                </button>
+                <a asp-action="Index" class="btn btn-secondary">
+                    <i class="bi bi-arrow-left"></i>
+                    @L["PromotionCreateBackBtn"]
+                </a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const tipoSelect = document.getElementById('tipoPromocion');
+            const productoGroup = document.getElementById('productoGroup');
+            const categoriaGroup = document.getElementById('categoriaGroup');
+            const productoSelect = document.querySelector('[name="IdProducto"]');
+            const categoriaSelect = document.querySelector('[name="IdCategoria"]');
+
+            tipoSelect.addEventListener('change', function() {
+                const selectedValue = this.value;
+                
+                if (selectedValue === 'Producto') {
+                    productoGroup.style.display = 'block';
+                    categoriaGroup.style.display = 'none';
+                    categoriaSelect.value = '';
+                } else if (selectedValue === 'Categoria') {
+                    categoriaGroup.style.display = 'block';
+                    productoGroup.style.display = 'none';
+                    productoSelect.value = '';
+                } else {
+                    productoGroup.style.display = 'none';
+                    categoriaGroup.style.display = 'none';
+                    productoSelect.value = '';
+                    categoriaSelect.value = '';
+                }
+            });
+
+            // Configurar fecha mínima en fecha de inicio (hoy)
+            const fechaInicio = document.querySelector('[name="FechaInicio"]');
+            const fechaFin = document.querySelector('[name="FechaFin"]');
+            const today = new Date().toISOString().split('T')[0];
+            
+            fechaInicio.min = today;
+            
+            fechaInicio.addEventListener('change', function() {
+                fechaFin.min = this.value;
+                if (fechaFin.value && fechaFin.value <= this.value) {
+                    fechaFin.value = '';
+                }
+            });
+        });
+    </script>
+}
+

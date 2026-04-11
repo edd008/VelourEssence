@@ -1,0 +1,78 @@
+﻿<root>
+	<data name="UsersTitle">
+		<value>Usuarios</value>
+	</data>
+	<data name="UsersManagementHeader">
+		<value>Gestión de Usuarios</value>
+	</data>
+	<data name="UsersManagementSubtitle">
+		<value>Administra y gestiona todos los usuarios del sistema de manera eficiente</value>
+	</data>
+	<data name="RegisteredUsersStat">
+		<value>Usuarios Registrados</value>
+	</data>
+	<data name="RecentActiveStat">
+		<value>Activos Recientes</value>
+	</data>
+	<data name="DifferentRolesStat">
+		<value>Roles Diferentes</value>
+	</data>
+	<data name="UsersPanelHeader">
+		<value>Panel de Usuarios</value>
+	</data>
+	<data name="UsersPanelSubtitle">
+		<value>Administra los usuarios del sistema de forma segura y eficiente</value>
+	</data>
+	<data name="RegisteredUsersCount">
+		<value>usuarios registrados en el sistema</value>
+	</data>
+	<data name="NewUserBtn">
+		<value>Nuevo Usuario</value>
+	</data>
+	<data name="IdColumn">
+		<value>ID</value>
+	</data>
+	<data name="UserColumn">
+		<value>Usuario</value>
+	</data>
+	<data name="EmailColumn">
+		<value>Correo</value>
+	</data>
+	<data name="LastAccessColumn">
+		<value>Último Acceso</value>
+	</data>
+	<data name="RoleColumn">
+		<value>Rol</value>
+	</data>
+	<data name="ActionsColumn">
+		<value>Acciones</value>
+	</data>
+	<data name="NeverLabel">
+		<value>Nunca</value>
+	</data>
+	<data name="ViewDetailsBtn">
+		<value>Ver detalles</value>
+	</data>
+	<data name="EditUserBtn">
+		<value>Editar usuario</value>
+	</data>
+	<data name="DeleteUserBtn">
+		<value>Eliminar usuario</value>
+	</data>
+	<data name="DeleteUserConfirmJs">
+		<value>¿Estás seguro de que deseas eliminar este usuario? Esta acción no se puede deshacer.</value>
+	</data>
+	<data name="DeleteUserConfirmJsFull">
+		<value>¿Estás seguro de que deseas eliminar al usuario "{0}"?\n\nEsta acción no se puede deshacer y eliminará permanentemente:\n- Todos los datos del usuario\n- Su historial de actividad\n- Sus reseñas y comentarios</value>
+	</data>
+	<data name="NoUsersTitle">
+		<value>No hay usuarios registrados</value>
+	</data>
+	<data name="NoUsersText">
+		<value>Comienza agregando el primer usuario al sistema para empezar a gestionar los accesos.</value>
+	</data>
+	<data name="CreateFirstUserBtn">
+		<value>Crear Primer Usuario</value>
+	</data>
+</root>
+

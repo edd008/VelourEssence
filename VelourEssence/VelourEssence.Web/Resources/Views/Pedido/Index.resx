@@ -1,0 +1,42 @@
+﻿<root>
+	<data name="OrdersTitle">
+		<value>Pedidos</value>
+	</data>
+	<data name="OrdersHeader">
+		<value>Gestión de Pedidos</value>
+	</data>
+	<data name="OrdersSubtitle">
+		<value>Administra todos los pedidos del sistema</value>
+	</data>
+	<data name="OrdersStat">
+		<value>pedidos</value>
+	</data>
+	<data name="PendingStat">
+		<value>pendientes</value>
+	</data>
+	<data name="TotalSalesStat">
+		<value>total ventas</value>
+	</data>
+	<data name="OrderLabel">
+		<value>Pedido</value>
+	</data>
+	<data name="CustomerLabel">
+		<value>Cliente</value>
+	</data>
+	<data name="DateLabel">
+		<value>Fecha</value>
+	</data>
+	<data name="TotalLabel">
+		<value>Total</value>
+	</data>
+	<data name="ViewDetailBtn">
+		<value>Ver detalle</value>
+	</data>
+	<data name="NoOrdersTitle">
+		<value>No hay pedidos</value>
+	</data>
+	<data name="NoOrdersText">
+		<value>Los pedidos aparecerán aquí cuando los clientes hagan compras</value>
+	</data>
+</root>
+

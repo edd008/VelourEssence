@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+	<data name="PromotionDetailTitle" xml:space="preserve">
+    <value>Detalle de Promoción</value>
+  </data>
+	<data name="PromotionDetailDiscountNA" xml:space="preserve">
+    <value>N/A</value>
+  </data>
+	<data name="PromotionDetailStatusPending" xml:space="preserve">
+    <value>Pendiente</value>
+  </data>
+	<data name="PromotionDetailStatusFinished" xml:space="preserve">
+    <value>Finalizada</value>
+  </data>
+	<data name="PromotionDetailStatusActive" xml:space="preserve">
+    <value>Vigente</value>
+  </data>
+	<data name="PromotionDetailInfoTitle" xml:space="preserve">
+    <value>Información de la Promoción</value>
+  </data>
+	<data name="PromotionDetailDiscountLabel" xml:space="preserve">
+    <value>Descuento</value>
+  </data>
+	<data name="PromotionDetailProductLabel" xml:space="preserve">
+    <value>Producto</value>
+  </data>
+	<data name="PromotionDetailAllProducts" xml:space="preserve">
+    <value>Todos los productos</value>
+  </data>
+	<data name="PromotionDetailTypeLabel" xml:space="preserve">
+    <value>Tipo</value>
+  </data>
+	<data name="PromotionDetailStartDateLabel" xml:space="preserve">
+    <value>Fecha de Inicio</value>
+  </data>
+	<data name="PromotionDetailEndDateLabel" xml:space="preserve">
+    <value>Fecha de Finalización</value>
+  </data>
+	<data name="PromotionDetailDateUndefined" xml:space="preserve">
+    <value>Sin definir</value>
+  </data>
+	<data name="PromotionDetailStartsIn" xml:space="preserve">
+    <value>En</value>
+  </data>
+	<data name="PromotionDetailDays" xml:space="preserve">
+    <value>días</value>
+  </data>
+	<data name="PromotionDetailStarted" xml:space="preserve">
+    <value>Iniciada</value>
+  </data>
+	<data name="PromotionDetailDaysLeft" xml:space="preserve">
+    <value>días restantes</value>
+  </data>
+	<data name="PromotionDetailFinished" xml:space="preserve">
+    <value>Finalizada</value>
+  </data>
+	<data name="PromotionDetailDurationLabel" xml:space="preserve">
+    <value>Duración Total</value>
+  </data>
+	<data name="PromotionDetailFullPeriod" xml:space="preserve">
+    <value>Período completo</value>
+  </data>
+	<data name="PromotionDetailBackBtn" xml:space="preserve">
+    <value>Volver a la lista</value>
+  </data>
+	<data name="PromotionDetailEditBtn" xml:space="preserve">
+    <value>Editar Promoción</value>
+  </data>
+</root>

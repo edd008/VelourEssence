@@ -1,0 +1,42 @@
+﻿<root>
+	<data name="OrdersTitle">
+		<value>Orders</value>
+	</data>
+	<data name="OrdersHeader">
+		<value>Order Management</value>
+	</data>
+	<data name="OrdersSubtitle">
+		<value>Manage all system orders</value>
+	</data>
+	<data name="OrdersStat">
+		<value>orders</value>
+	</data>
+	<data name="PendingStat">
+		<value>pending</value>
+	</data>
+	<data name="TotalSalesStat">
+		<value>total sales</value>
+	</data>
+	<data name="OrderLabel">
+		<value>Order</value>
+	</data>
+	<data name="CustomerLabel">
+		<value>Customer</value>
+	</data>
+	<data name="DateLabel">
+		<value>Date</value>
+	</data>
+	<data name="TotalLabel">
+		<value>Total</value>
+	</data>
+	<data name="ViewDetailBtn">
+		<value>View detail</value>
+	</data>
+	<data name="NoOrdersTitle">
+		<value>No orders</value>
+	</data>
+	<data name="NoOrdersText">
+		<value>Orders will appear here when customers make purchases</value>
+	</data>
+</root>
+

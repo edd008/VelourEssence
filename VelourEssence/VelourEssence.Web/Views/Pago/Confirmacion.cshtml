@@ -1,0 +1,243 @@
+@using Microsoft.Extensions.Localization
+@inject IStringLocalizer<VelourEssence.Web.Views.Pago.Confirmacion> L
+@model VelourEssence.Application.DTOs.ConfirmacionPagoDto
+
+@{
+    ViewData["Title"] = L["PaymentConfirmedTitle"];
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/payment-confirmation.css" />
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+}
+
+<div class="payment-confirmation-page">
+    <div class="confirmation-hero-section">
+        <div class="confirmation-hero-background"></div>
+        <div class="confirmation-hero-content">
+            <div class="confirmation-hero-text" data-aos="zoom-in">
+                <div class="success-icon-container">
+                    <div class="success-icon">
+                        <i class="bi bi-check-circle-fill"></i>
+                    </div>
+                    <div class="success-ripple"></div>
+                </div>
+                <h1 class="confirmation-hero-title">
+                    <span class="confirmation-hero-brand">@L["PaymentSuccess"]</span>
+                </h1>
+                <p class="confirmation-hero-subtitle">
+                    @L["PaymentProcessed"]
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="confirmation-main-section">
+        <div class="page-container">
+            <div class="confirmation-content-wrapper">
+                <div class="confirmation-summary-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="confirmation-summary-header">
+                        <h3 class="confirmation-summary-title">
+                            <i class="bi bi-receipt-cutoff"></i>
+                            @L["PaymentSummary"]
+                        </h3>
+                    </div>
+                    <div class="confirmation-summary-body">
+                        <div class="payment-details">
+                            <div class="payment-detail-row">
+                                <span class="detail-label">@L["OrderNumberLabel"]</span>
+                                <span class="detail-value order-number">#@Model.Pago.IdPedido</span>
+                            </div>
+                            <div class="payment-detail-row">
+                                <span class="detail-label">@L["PaymentMethodLabel"]</span>
+                                <span class="detail-value">
+                                    @if (Model.Pago.TipoPago.Contains("tarjeta"))
+                                    {
+                                        <i class="bi bi-credit-card"></i>
+                                    }
+                                    else
+                                    {
+                                        <i class="bi bi-cash-stack"></i>
+                                    }
+                                    @Model.Pago.TipoPago
+                                </span>
+                            </div>
+                            <div class="payment-detail-row">
+                                <span class="detail-label">@L["DateTimeLabel"]</span>
+                                <span class="detail-value">@Model.Pago.FechaPago.ToString("dd/MM/yyyy HH:mm")</span>
+                            </div>
+                            <div class="payment-detail-row total-row">
+                                <span class="detail-label">@L["TotalPaidLabel"]</span>
+                                <span class="detail-value total-amount">₡@Model.Pago.MontoTotal.ToString("N0")</span>
+                            </div>
+                            @if (Model.Vuelto.HasValue && Model.Vuelto > 0)
+                            {
+                                <div class="payment-detail-row change-row">
+                                    <span class="detail-label">@L["ChangeLabel"]</span>
+                                    <span class="detail-value change-amount">₡@Model.Vuelto.Value.ToString("N0")</span>
+                                </div>
+                            }
+                        </div>
+
+                        @if (!string.IsNullOrEmpty(Model.Pago.NumeroTarjetaEnmascarado))
+                        {
+                            <div class="card-info">
+                                <div class="card-detail">
+                                    <i class="bi bi-credit-card-2-front"></i>
+                                    <span>@L["CardEndingLabel", Model.Pago.NumeroTarjetaEnmascarado.Substring(Model.Pago.NumeroTarjetaEnmascarado.Length - 4)]</span>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+
+                <div class="order-status-card" data-aos="fade-up" data-aos-delay="300">
+                    <div class="order-status-header">
+                        <h3 class="order-status-title">
+                            <i class="bi bi-truck"></i>
+                            @L["OrderStatusTitle"]
+                        </h3>
+                    </div>
+                    <div class="order-status-body">
+                        <div class="status-timeline">
+                            <div class="status-step active completed">
+                                <div class="status-icon">
+                                    <i class="bi bi-check-circle-fill"></i>
+                                </div>
+                                <div class="status-content">
+                                    <h4>@L["StatusPaid"]</h4>
+                                    <p>@L["StatusPaidDesc"]</p>
+                                </div>
+                            </div>
+                            <div class="status-step active">
+                                <div class="status-icon">
+                                    <i class="bi bi-box-seam"></i>
+                                </div>
+                                <div class="status-content">
+                                    <h4>@L["StatusPreparing"]</h4>
+                                    <p>@L["StatusPreparingDesc"]</p>
+                                </div>
+                            </div>
+                            <div class="status-step">
+                                <div class="status-icon">
+                                    <i class="bi bi-truck"></i>
+                                </div>
+                                <div class="status-content">
+                                    <h4>@L["StatusOnWay"]</h4>
+                                    <p>@L["StatusOnWayDesc"]</p>
+                                </div>
+                            </div>
+                            <div class="status-step">
+                                <div class="status-icon">
+                                    <i class="bi bi-house-door"></i>
+                                </div>
+                                <div class="status-content">
+                                    <h4>@L["StatusDelivered"]</h4>
+                                    <p>@L["StatusDeliveredDesc"]</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="next-steps-card" data-aos="fade-up" data-aos-delay="400">
+                    <div class="next-steps-header">
+                        <h3 class="next-steps-title">
+                            <i class="bi bi-list-check"></i>
+                            @L["NextStepsTitle"]
+                        </h3>
+                    </div>
+                    <div class="next-steps-body">
+                        <div class="next-step">
+                            <div class="step-icon">
+                                <i class="bi bi-envelope"></i>
+                            </div>
+                            <div class="step-content">
+                                <h4>@L["StepEmailTitle"]</h4>
+                                <p>@L["StepEmailDesc"]</p>
+                            </div>
+                        </div>
+                        <div class="next-step">
+                            <div class="step-icon">
+                                <i class="bi bi-phone"></i>
+                            </div>
+                            <div class="step-content">
+                                <h4>@L["StepSmsTitle"]</h4>
+                                <p>@L["StepSmsDesc"]</p>
+                            </div>
+                        </div>
+                        <div class="next-step">
+                            <div class="step-icon">
+                                <i class="bi bi-headset"></i>
+                            </div>
+                            <div class="step-content">
+                                <h4>@L["StepSupportTitle"]</h4>
+                                <p>@L["StepSupportDesc"]</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="confirmation-actions" data-aos="fade-up" data-aos-delay="500">
+                    <div class="action-buttons">
+                        <a href="@Url.Action("HistorialPagos")" class="btn-primary-custom">
+                            <i class="bi bi-clock-history"></i>
+                            @L["ViewPaymentHistoryBtn"]
+                        </a>
+                        <a href="@Url.Action("Index", "Producto")" class="btn-secondary-custom">
+                            <i class="bi bi-arrow-left"></i>
+                            @L["ContinueShoppingBtn"]
+                        </a>
+                    </div>
+
+                    <div class="share-options">
+                        <h4>@L["SharePurchaseTitle"]</h4>
+                        <div class="share-buttons">
+                            <button class="share-btn whatsapp" onclick="shareOnWhatsApp()">
+                                <i class="bi bi-whatsapp"></i>
+                                WhatsApp
+                            </button>
+                            <button class="share-btn facebook" onclick="shareOnFacebook()">
+                                <i class="bi bi-facebook"></i>
+                                Facebook
+                            </button>
+                            <button class="share-btn twitter" onclick="shareOnTwitter()">
+                                <i class="bi bi-twitter"></i>
+                                Twitter
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="~/js/payment-confirmation.js"></script>
+    <script>
+        AOS.init({
+            duration: 800,
+            once: true
+        });
+
+        // Funciones para compartir
+        function shareOnWhatsApp() {
+            const message = '@L["ShareWhatsappMsg", Model.Pago.IdPedido, Model.Pago.MontoTotal.ToString("F2")]';
+            const url = `https://wa.me/?text=${encodeURIComponent(message)}`;
+            window.open(url, '_blank');
+        }
+
+        function shareOnFacebook() {
+            const url = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(window.location.href)}`;
+            window.open(url, '_blank');
+        }
+
+        function shareOnTwitter() {
+            const message = '@L["ShareTwitterMsg"]';
+            const url = `https://twitter.com/intent/tweet?text=${encodeURIComponent(message)}`;
+            window.open(url, '_blank');
+        }
+    </script>
+}

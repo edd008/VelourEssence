@@ -1,0 +1,27 @@
+@model VelourEssence.Application.DTOs.EtiquetaDto
+@{
+    ViewData["Title"] = "Crear Etiqueta";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="etiqueta-create-page">
+    <div class="etiqueta-create-container">
+        <h2 class="etiqueta-title">Crear Etiqueta</h2>
+        <form asp-action="Create" method="post">
+            @Html.AntiForgeryToken()
+            <div class="form-group">
+                <label for="Nombre">Nombre de la etiqueta</label>
+                <input asp-for="Nombre" class="form-control" placeholder="Ej: Electrónica, Oferta, Verano" />
+                @Html.ValidationMessageFor(m => m.Nombre, "", new { @class = "text-danger" })
+            </div>
+            <button type="submit" class="btn btn-primary">Guardar</button>
+            <a asp-action="Index" class="btn btn-link etiqueta-back">Volver</a>
+        </form>
+    </div>
+</div>
+@section Styles {
+    <link rel="stylesheet" href="~/css/etiqueta-create.css" />
+}
+
+@section Scripts {
+    <script src="~/js/etiqueta-create.js"></script>
+}

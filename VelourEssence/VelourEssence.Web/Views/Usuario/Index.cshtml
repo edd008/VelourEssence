@@ -1,0 +1,256 @@
+﻿@using Microsoft.Extensions.Localization
+@inject IStringLocalizer<VelourEssence.Web.Views.Usuario.Index> L
+@model IEnumerable<VelourEssence.Application.DTOs.UsuarioDto>
+
+@{
+    ViewData["Title"] = L["UsersTitle"];
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/users-index.css" />
+}
+
+<div class="users-page">
+    <!-- Hero Section Premium para Usuarios -->
+    <div class="users-hero-section">
+        <div class="users-hero-background"></div>
+        <div class="users-hero-content">
+            <h1 class="users-hero-title">
+                <i class="bi bi-people"></i>
+                @L["UsersManagementHeader"]
+            </h1>
+            <p class="users-hero-subtitle">
+                @L["UsersManagementSubtitle"]
+            </p>
+            <div class="users-hero-stats">
+                <div class="users-stat-item">
+                    <span class="users-stat-number">@(Model?.Count() ?? 0)</span>
+                    <span class="users-stat-label">@L["RegisteredUsersStat"]</span>
+                </div>
+                <div class="users-stat-item">
+                    <span class="users-stat-number">@(Model?.Count(u => u.UltimoInicioSesion.HasValue && (DateTime.Now - u.UltimoInicioSesion.Value).Days <= 7) ?? 0)</span>
+                    <span class="users-stat-label">@L["RecentActiveStat"]</span>
+                </div>
+                <div class="users-stat-item">
+                    <span class="users-stat-number">@(Model?.GroupBy(u => u.NombreRol).Count() ?? 0)</span>
+                    <span class="users-stat-label">@L["DifferentRolesStat"]</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sección Principal -->
+    <div class="users-main-section">
+        <div class="users-container">
+            <!-- Mensajes de notificación -->
+            @if (TempData["SuccessMessage"] != null)
+            {
+                <div class="users-alert success">
+                    <i class="bi bi-check-circle"></i>
+                    @TempData["SuccessMessage"]
+                    <button type="button" class="users-alert-close" onclick="this.parentElement.style.display='none'">
+                        <i class="bi bi-x"></i>
+                    </button>
+                </div>
+            }
+
+            @if (TempData["ErrorMessage"] != null)
+            {
+                <div class="users-alert error">
+                    <i class="bi bi-exclamation-triangle"></i>
+                    @TempData["ErrorMessage"]
+                    <button type="button" class="users-alert-close" onclick="this.parentElement.style.display='none'">
+                        <i class="bi bi-x"></i>
+                    </button>
+                </div>
+            }
+
+            <!-- Encabezado con título y botón de acción -->
+            <div class="users-content-header">
+                <div class="users-title-section">
+                    <h1>
+                        <i class="bi bi-person-gear"></i>
+                        @L["UsersPanelHeader"]
+                    </h1>
+                    <p>@L["UsersPanelSubtitle"]</p>
+                    @if (Model != null && Model.Any())
+                    {
+                        <div class="users-count">
+                            <i class="bi bi-people-fill"></i>
+                            @Model.Count() @L["RegisteredUsersCount"]
+                        </div>
+                    }
+                </div>
+
+                <!-- Botón para agregar nuevo usuario -->
+                <div class="users-actions">
+                    <a asp-controller="Usuario" asp-action="Create" class="users-add-btn">
+                        <i class="bi bi-person-plus"></i>
+                        @L["NewUserBtn"]
+                    </a>
+                </div>
+            </div>
+
+            <!-- Contenido principal -->
+            <div class="users-content">
+                @if (Model != null && Model.Any())
+                {
+                    <div class="users-table-container">
+                        <table class="users-table">
+                            <thead>
+                                <tr>
+                                    <th><i class="bi bi-hash"></i> @L["IdColumn"]</th>
+                                    <th><i class="bi bi-person"></i> @L["UserColumn"]</th>
+                                    <th><i class="bi bi-envelope"></i> @L["EmailColumn"]</th>
+                                    <th><i class="bi bi-clock"></i> @L["LastAccessColumn"]</th>
+                                    <th><i class="bi bi-shield"></i> @L["RoleColumn"]</th>
+                                    <th><i class="bi bi-gear"></i> @L["ActionsColumn"]</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var usuario in Model)
+                                {
+                                    <tr class="users-row">
+                                        <!-- ID del usuario -->
+                                        <td>
+                                            <span class="users-id">#@usuario.IdUsuario</span>
+                                        </td>
+
+                                        <!-- Información del usuario con avatar -->
+                                        <td>
+                                            <div class="users-user">
+                                                <div class="users-avatar">
+                                                    <i class="bi bi-person-circle"></i>
+                                                </div>
+                                                <span class="users-name">@usuario.NombreUsuario</span>
+                                            </div>
+                                        </td>
+
+                                        <!-- Correo electrónico -->
+                                        <td>
+                                            <span class="users-email">@usuario.Correo</span>
+                                        </td>
+
+                                        <!-- Último acceso con indicador visual -->
+                                        <td>
+                                            @if (usuario.UltimoInicioSesion.HasValue)
+                                            {
+                                                var dias = (DateTime.Now - usuario.UltimoInicioSesion.Value).Days;
+                                                var estado = dias <= 7 ? "reciente" : dias <= 30 ? "normal" : "antiguo";
+
+                                                <div class="users-access @estado">
+                                                    <span class="users-date">@usuario.UltimoInicioSesion.Value.ToString("dd/MM/yyyy")</span>
+                                                    <span class="users-time">@usuario.UltimoInicioSesion.Value.ToString("HH:mm")</span>
+                                                </div>
+                                            }
+                                            else
+                                            {
+                                                <span class="users-never">@L["NeverLabel"]</span>
+                                            }
+                                        </td>
+
+                                        <!-- Rol del usuario con estilo específico -->
+                                        <td>
+                                            <span class="users-role @(usuario.NombreRol?.ToLower())">
+                                                @usuario.NombreRol
+                                            </span>
+                                        </td>
+
+                                        <!-- Botones de acción -->
+                                        <td>
+                                            <div class="users-actions-group">
+                                                <a asp-action="Details" asp-route-id="@usuario.IdUsuario"
+                                                   class="users-btn ver" title="@L["ViewDetailsBtn"]">
+                                                    <i class="bi bi-eye"></i>
+                                                </a>
+                                                <a asp-action="Edit" asp-route-id="@usuario.IdUsuario"
+                                                   class="users-btn editar" title="@L["EditUserBtn"]">
+                                                    <i class="bi bi-pencil"></i>
+                                                </a>
+                                                <form asp-action="Delete" asp-route-id="@usuario.IdUsuario" method="post" style="display: inline;">
+                                                    <button type="submit" class="users-btn eliminar" title="@L["DeleteUserBtn"]"
+                                                            onclick="return confirm('@L["DeleteUserConfirmJs"]')">
+                                                        <i class="bi bi-trash"></i>
+                                                    </button>
+                                                </form>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                }
+                else
+                {
+                    <!-- Estado vacío cuando no hay usuarios -->
+                    <div class="users-empty-state">
+                        <i class="bi bi-people users-empty-icon"></i>
+                        <h3>@L["NoUsersTitle"]</h3>
+                        <p>@L["NoUsersText"]</p>
+                        <a asp-controller="Usuario" asp-action="Create" class="users-empty-btn">
+                            <i class="bi bi-person-plus"></i>
+                            @L["CreateFirstUserBtn"]
+                        </a>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Auto-cerrar alertas después de 5 segundos
+        const alerts = document.querySelectorAll('.users-alert');
+        alerts.forEach(alert => {
+            setTimeout(() => {
+                alert.style.animation = 'users-slideInFromTop 0.3s ease-out reverse';
+                setTimeout(() => {
+                    alert.style.display = 'none';
+                }, 300);
+            }, 5000);
+        });
+
+        // Efectos de hover mejorados para las filas de la tabla
+        const tableRows = document.querySelectorAll('.users-table tbody tr');
+        tableRows.forEach((row, index) => {
+            row.style.animationDelay = `${index * 0.1}s`;
+
+            row.addEventListener('mouseenter', function() {
+                this.style.transform = 'scale(1.02)';
+                this.style.zIndex = '10';
+            });
+
+            row.addEventListener('mouseleave', function() {
+                this.style.transform = 'scale(1)';
+                this.style.zIndex = '1';
+            });
+        });
+
+        // Confirmación mejorada para eliminación
+        const deleteButtons = document.querySelectorAll('.users-btn.eliminar');
+        deleteButtons.forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.preventDefault();
+
+                const userName = this.closest('tr').querySelector('.users-name').textContent;
+                const confirmation = confirm(`@L["DeleteUserConfirmJsFull"]`.replace('{0}', userName));
+
+                if (confirmation) {
+                    this.closest('form').submit();
+                }
+            });
+        });
+
+        // Efectos de paralaje para el hero
+        window.addEventListener('scroll', function() {
+            const scrolled = window.pageYOffset;
+            const heroBackground = document.querySelector('.users-hero-background');
+            if (heroBackground) {
+                heroBackground.style.transform = `translateY(${scrolled * 0.3}px)`;
+            }
+        });
+    });
+</script>
+

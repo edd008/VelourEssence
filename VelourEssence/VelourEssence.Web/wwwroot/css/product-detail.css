@@ -1,0 +1,867 @@
+/* ===================================================================
+   PRODUCT DETAIL - CSS INDEPENDIENTE CON DISEÑO PREMIUM
+   Paleta: Azul petróleo, Beige claro, Verde menta, Coral, Gris claro
+   ================================================================== */
+
+/* Variables CSS para la paleta profesional específica de detalle */
+.detail-page {
+    --detail-primary: #1F3A5F;        /* Azul petróleo */
+    --detail-primary-dark: #162c47;    
+    --detail-primary-light: #2d4a6b;  
+    --detail-secondary: #F4EDE4;      /* Beige claro */
+    --detail-accent: #A8E6CF;         /* Verde menta */
+    --detail-accent-coral: #FF8C94;   /* Coral */
+    --detail-light: #F9F9F9;          /* Gris muy claro */
+    --detail-white: #ffffff;
+    --detail-success: #A8E6CF;        
+    --detail-warning: #FF8C94;        
+    --detail-text: #333333;
+    --detail-text-muted: #666666;
+    --detail-text-light: #999999;
+    --detail-border: #e0e0e0;
+    --detail-shadow: 0 8px 25px rgba(31, 58, 95, 0.15);
+    --detail-shadow-hover: 0 15px 35px rgba(168, 230, 207, 0.25);
+    --detail-radius: 16px;
+    --detail-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Reset y base específico para detalle */
+.detail-page * {
+    box-sizing: border-box;
+}
+
+.detail-page {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: var(--detail-text);
+    background: linear-gradient(135deg, var(--detail-light) 0%, var(--detail-white) 100%);
+    min-height: 100vh;
+}
+
+/* Container principal */
+.detail-product-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem;
+}
+
+/* ===================================================================
+   HERO SECTION PREMIUM PARA DETALLE
+   ================================================================== */
+
+.detail-hero-section {
+    background: linear-gradient(135deg, var(--detail-primary) 0%, var(--detail-accent) 100%);
+    color: var(--detail-white);
+    text-align: center;
+    padding: 4rem 0 2rem;
+    margin-bottom: 3rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.detail-hero-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+        radial-gradient(circle at 20% 80%, rgba(168, 230, 207, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(255, 140, 148, 0.1) 0%, transparent 50%);
+    animation: detail-heroFloat 20s ease-in-out infinite;
+}
+
+@keyframes detail-heroFloat {
+    0%, 100% { transform: translateY(0px) scale(1); }
+    50% { transform: translateY(-10px) scale(1.01); }
+}
+
+.detail-hero-content {
+    position: relative;
+    z-index: 2;
+}
+
+.detail-hero-title {
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    animation: detail-fadeInUp 1s ease-out;
+}
+
+.detail-hero-subtitle {
+    font-size: 1.2rem;
+    opacity: 0.9;
+    animation: detail-fadeInUp 1s ease-out 0.3s both;
+}
+
+@keyframes detail-fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ===================================================================
+   LAYOUT PRINCIPAL DE DETALLE
+   ================================================================== */
+
+.detail-product-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    margin-bottom: 4rem;
+    animation: detail-fadeIn 0.8s ease-out;
+}
+
+@keyframes detail-fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* ===================================================================
+   CARRUSEL DE IMÁGENES PREMIUM
+   ================================================================== */
+
+.detail-carousel-container {
+    position: relative;
+    width: 100%;
+    height: 500px;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: var(--detail-shadow);
+    border: 1px solid rgba(168, 230, 207, 0.2);
+    transition: var(--detail-transition);
+}
+
+.detail-carousel-container:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--detail-shadow-hover);
+    border-color: var(--detail-accent);
+}
+
+.detail-carousel-wrapper {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+.detail-slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+}
+
+.detail-slide.active {
+    opacity: 1;
+}
+
+.detail-slide img {
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    object-position: center;
+    border-radius: 12px;
+    transition: var(--detail-transition);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+}
+
+.detail-carousel-container:hover .detail-slide img {
+    transform: scale(1.05);
+}
+
+/* Controles del carrusel */
+.detail-control-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 50px;
+    height: 50px;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 2px solid var(--detail-accent);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: var(--detail-transition);
+    z-index: 10;
+    color: var(--detail-primary);
+    font-size: 1.2rem;
+    opacity: 0;
+}
+
+.detail-carousel-container:hover .detail-control-btn {
+    opacity: 1;
+}
+
+.detail-control-btn:hover {
+    background: var(--detail-accent);
+    color: var(--detail-white);
+    transform: translateY(-50%) scale(1.1);
+    box-shadow: 0 8px 25px rgba(168, 230, 207, 0.4);
+}
+
+.detail-control-prev {
+    left: 1rem;
+}
+
+.detail-control-next {
+    right: 1rem;
+}
+
+/* Indicadores del carrusel */
+.detail-indicators {
+    position: absolute;
+    bottom: 1rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 0.5rem;
+    z-index: 10;
+}
+
+.detail-indicator {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.5);
+    cursor: pointer;
+    transition: var(--detail-transition);
+    border: 2px solid transparent;
+}
+
+.detail-indicator.active,
+.detail-indicator:hover {
+    background: var(--detail-white);
+    border-color: var(--detail-accent);
+    transform: scale(1.2);
+}
+
+/* Estado sin imagen */
+.detail-no-image {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: var(--detail-light);
+    color: var(--detail-text-muted);
+    gap: 1rem;
+}
+
+.detail-no-image i {
+    font-size: 4rem;
+    opacity: 0.5;
+}
+
+/* ===================================================================
+   TARJETA DE INFORMACIÓN PREMIUM
+   ================================================================== */
+
+.detail-info-card {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-radius: 20px;
+    padding: 2.5rem;
+    box-shadow: var(--detail-shadow);
+    border: 1px solid rgba(168, 230, 207, 0.2);
+    position: relative;
+    overflow: hidden;
+}
+
+.detail-info-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, 
+        rgba(168, 230, 207, 0.05) 0%, 
+        rgba(255, 140, 148, 0.03) 50%,
+        rgba(31, 58, 95, 0.02) 100%);
+    pointer-events: none;
+    z-index: 1;
+}
+
+.detail-info-card > * {
+    position: relative;
+    z-index: 2;
+}
+
+.detail-card-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--detail-primary);
+    margin-bottom: 1.5rem;
+    line-height: 1.2;
+}
+
+/* ===================================================================
+   SECCIÓN DE PRECIOS PREMIUM
+   ================================================================== */
+
+.detail-promotion-info {
+    margin-bottom: 2rem;
+}
+
+.detail-discount-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: linear-gradient(135deg, var(--detail-accent-coral), #ff6b78);
+    color: var(--detail-white);
+    padding: 0.75rem 1.5rem;
+    border-radius: 25px;
+    font-weight: 700;
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+    box-shadow: 0 4px 15px rgba(255, 140, 148, 0.3);
+}
+
+.detail-price-container {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.detail-price-original {
+    font-size: 1.2rem;
+    color: var(--detail-text-muted);
+    text-decoration: line-through;
+}
+
+.detail-price-discount {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--detail-primary);
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+}
+
+/* ===================================================================
+   CATEGORÍA Y ETIQUETAS
+   ================================================================== */
+
+.detail-category {
+    margin-bottom: 2rem;
+}
+
+.detail-category-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: linear-gradient(135deg, var(--detail-accent), #7ed8b8);
+    color: var(--detail-white);
+    padding: 0.75rem 1.5rem;
+    border-radius: 15px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    box-shadow: 0 4px 15px rgba(168, 230, 207, 0.3);
+}
+
+.detail-description {
+    margin-bottom: 2rem;
+}
+
+.detail-subtitle {
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: var(--detail-primary);
+    margin-bottom: 1rem;
+    position: relative;
+}
+
+.detail-subtitle::after {
+    content: '';
+    position: absolute;
+    bottom: -0.5rem;
+    left: 0;
+    width: 3rem;
+    height: 3px;
+    background: linear-gradient(135deg, var(--detail-accent), var(--detail-accent-coral));
+    border-radius: 2px;
+}
+
+.detail-description p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: var(--detail-text-muted);
+}
+
+/* Etiquetas */
+.detail-tags-container {
+    margin-bottom: 2rem;
+}
+
+.detail-tags-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 1rem;
+}
+
+.detail-tag-badge {
+    background: rgba(168, 230, 207, 0.15);
+    color: var(--detail-primary);
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    border: 1px solid rgba(168, 230, 207, 0.3);
+    transition: var(--detail-transition);
+}
+
+.detail-tag-badge:hover {
+    background: var(--detail-accent);
+    color: var(--detail-white);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(168, 230, 207, 0.3);
+}
+
+/* ===================================================================
+   VALORACIÓN
+   ================================================================== */
+
+.detail-rating-container {
+    margin-bottom: 2rem;
+}
+
+.detail-rating-stars {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 1rem;
+}
+
+.detail-rating-stars i {
+    color: #ffc107;
+    font-size: 1.3rem;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+}
+
+.detail-rating-value {
+    color: var(--detail-text-muted);
+    font-weight: 600;
+    margin-left: 0.5rem;
+}
+
+/* ===================================================================
+   BOTONES DE ACCIÓN PREMIUM
+   ================================================================== */
+
+.detail-action-container {
+    display: flex;
+    gap: 1rem;
+    margin-top: 3rem;
+}
+
+.detail-btn {
+    flex: 1;
+    padding: 1rem 2rem;
+    border: 2px solid;
+    border-radius: 15px;
+    font-weight: 600;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    transition: var(--detail-transition);
+    cursor: pointer;
+    font-size: 1rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.detail-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    transition: left 0.5s;
+}
+
+.detail-btn:hover::before {
+    left: 100%;
+}
+
+.detail-btn-primary {
+    background: linear-gradient(135deg, var(--detail-primary), var(--detail-primary-light));
+    border-color: var(--detail-primary);
+    color: var(--detail-white);
+    position: relative;
+    overflow: hidden;
+}
+
+.detail-btn-primary::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.6s ease, height 0.6s ease;
+}
+
+.detail-btn-primary:hover {
+    background: linear-gradient(135deg, var(--detail-primary-dark), var(--detail-primary));
+    transform: translateY(-3px);
+    box-shadow: 
+        0 15px 35px rgba(31, 58, 95, 0.4),
+        0 0 0 1px rgba(255, 255, 255, 0.1);
+}
+
+.detail-btn-primary:hover::after {
+    width: 300px;
+    height: 300px;
+}
+
+.detail-btn-secondary {
+    background: rgba(168, 230, 207, 0.1);
+    border-color: var(--detail-accent);
+    color: var(--detail-accent);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+.detail-btn-secondary:hover {
+    background: var(--detail-accent);
+    color: var(--detail-white);
+    transform: translateY(-3px);
+    box-shadow: 
+        0 15px 35px rgba(168, 230, 207, 0.4),
+        0 0 0 1px rgba(255, 255, 255, 0.2);
+}
+
+.detail-btn-customize {
+    background: linear-gradient(135deg, #C9A96E, #B8956B);
+    border-color: #C9A96E;
+    color: var(--detail-white);
+    position: relative;
+    overflow: hidden;
+}
+
+.detail-btn-customize:hover {
+    background: linear-gradient(135deg, #B8956B, #8B4513);
+    transform: translateY(-3px);
+    color: var(--detail-white);
+    box-shadow: 
+        0 15px 35px rgba(201, 169, 110, 0.4),
+        0 0 0 1px rgba(255, 255, 255, 0.2);
+}
+
+.detail-btn-customize i {
+    color: #F5F3F0;
+}
+
+.detail-btn-customize:hover i {
+    color: #F5F3F0;
+}
+
+/* Estados de botón especiales */
+.detail-btn.loading {
+    background: var(--detail-text-muted) !important;
+    border-color: var(--detail-text-muted) !important;
+    color: var(--detail-white) !important;
+    cursor: not-allowed;
+}
+
+.detail-btn.success {
+    background: var(--detail-success) !important;
+    border-color: var(--detail-success) !important;
+    color: var(--detail-white) !important;
+}
+
+/* ===================================================================
+   SECCIÓN DE RESEÑAS PREMIUM
+   ================================================================== */
+
+.detail-reviews-section {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-radius: 20px;
+    padding: 3rem;
+    box-shadow: var(--detail-shadow);
+    border: 1px solid rgba(168, 230, 207, 0.2);
+    margin-top: 3rem;
+}
+
+.detail-section-title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--detail-primary);
+    margin-bottom: 2rem;
+    text-align: center;
+    position: relative;
+}
+
+.detail-section-title::after {
+    content: '';
+    position: absolute;
+    bottom: -0.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 4rem;
+    height: 3px;
+    background: linear-gradient(135deg, var(--detail-accent), var(--detail-accent-coral));
+    border-radius: 2px;
+}
+
+/* Grid de reseñas */
+.detail-reviews-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.detail-review-card {
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 15px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    border: 1px solid rgba(168, 230, 207, 0.1);
+    transition: var(--detail-transition);
+}
+
+.detail-review-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+    border-color: var(--detail-accent);
+}
+
+.detail-review-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+}
+
+.detail-review-user-info {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.detail-review-user-info i {
+    font-size: 1.5rem;
+    color: var(--detail-accent);
+}
+
+.detail-review-user-details {
+    display: flex;
+    flex-direction: column;
+}
+
+.detail-review-user {
+    font-weight: 600;
+    color: var(--detail-primary);
+}
+
+.detail-review-date {
+    font-size: 0.85rem;
+    color: var(--detail-text-muted);
+}
+
+.detail-review-rating {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.detail-review-stars {
+    display: flex;
+    gap: 0.1rem;
+}
+
+.detail-review-stars i {
+    color: #ffc107;
+    font-size: 0.9rem;
+}
+
+.detail-review-score {
+    font-size: 0.85rem;
+    color: var(--detail-text-muted);
+    font-weight: 500;
+}
+
+.detail-review-text {
+    color: var(--detail-text-muted);
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* Estado vacío de reseñas */
+.detail-reviews-empty {
+    text-align: center;
+    padding: 3rem 2rem;
+    background: linear-gradient(135deg, var(--detail-light), var(--detail-white));
+    border-radius: 15px;
+    border: 2px dashed var(--detail-border);
+}
+
+.detail-empty-content {
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.detail-empty-icon {
+    font-size: 4rem;
+    color: var(--detail-text-muted);
+    margin-bottom: 1.5rem;
+    opacity: 0.6;
+}
+
+.detail-empty-title {
+    font-size: 1.5rem;
+    color: var(--detail-primary);
+    margin-bottom: 1rem;
+    font-weight: 600;
+}
+
+.detail-empty-text {
+    color: var(--detail-text-muted);
+    font-size: 1rem;
+}
+
+/* ===================================================================
+   RESPONSIVE DESIGN
+   ================================================================== */
+
+@media (max-width: 768px) {
+    .detail-product-layout {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    
+    .detail-carousel-container {
+        height: 350px;
+    }
+    
+    .detail-hero-title {
+        font-size: 2rem;
+    }
+    
+    .detail-card-title {
+        font-size: 2rem;
+    }
+    
+    .detail-price-discount {
+        font-size: 2rem;
+    }
+    
+    .detail-action-container {
+        flex-direction: column;
+    }
+    
+    .detail-reviews-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    .detail-product-container {
+        padding: 1rem;
+    }
+    
+    .detail-info-card,
+    .detail-reviews-section {
+        padding: 2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .detail-hero-section {
+        padding: 2rem 0 1rem;
+    }
+    
+    .detail-hero-title {
+        font-size: 1.5rem;
+    }
+    
+    .detail-carousel-container {
+        height: 280px;
+    }
+    
+    .detail-card-title {
+        font-size: 1.5rem;
+    }
+    
+    .detail-price-discount {
+        font-size: 1.8rem;
+    }
+    
+    .detail-info-card,
+    .detail-reviews-section {
+        padding: 1.5rem;
+    }
+}
+
+/* Animaciones adicionales */
+@keyframes detail-slideInFromBottom {
+    from {
+        opacity: 0;
+        transform: translateY(50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.detail-review-card {
+    animation: detail-slideInFromBottom 0.6s ease-out;
+}
+
+.detail-review-card:nth-child(even) {
+    animation-delay: 0.1s;
+}
+
+.detail-review-card:nth-child(odd) {
+    animation-delay: 0.2s;
+}
+
+/* Efecto de pulso para elementos interactivos */
+@keyframes detail-pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+.detail-control-btn:active,
+.detail-indicator:active {
+    animation: detail-pulse 0.3s ease;
+}

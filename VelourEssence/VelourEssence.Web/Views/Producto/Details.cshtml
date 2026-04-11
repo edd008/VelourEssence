@@ -1,0 +1,365 @@
+﻿@using Microsoft.Extensions.Localization
+@inject IStringLocalizer<VelourEssence.Web.Views.Producto.Details> L
+@model VelourEssence.Application.DTOs.ProductoDetalleDto
+
+@{
+    ViewData["Title"] = Model.Nombre;
+}
+
+@* Token CSRF para las llamadas AJAX *@
+<form>
+    @Html.AntiForgeryToken()
+</form>
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/product-detail.css" />
+    <link rel="stylesheet" href="~/css/review-form.css" />
+}
+
+<div class="detail-page">
+    <!-- Hero Section Premium para Detalle -->
+    <div class="detail-hero-section">
+        <div class="detail-hero-content">
+            <h1 class="detail-hero-title">@Model.Nombre</h1>
+            <p class="detail-hero-subtitle">@L["DetailHeroSubtitle"]</p>
+        </div>
+    </div>
+
+    <!-- Container principal del detalle -->
+    <div class="detail-product-container">
+        <!-- Layout principal del producto -->
+        <div class="detail-product-layout">
+            <!-- Carrusel de imágenes premium -->
+            <div class="detail-carousel-container">
+                @if (Model.Imagenes?.Any() == true)
+                {
+                    <div class="detail-carousel-wrapper">
+                        @for (int i = 0; i < Model.Imagenes.Count; i++)
+                        {
+                            <div class="detail-slide @(i == 0 ? "active" : "")" data-slide="@i">
+                                <img src="@Url.Content("~/" + Model.Imagenes[i].Url)"
+                                     alt="@Model.Nombre"
+                                     loading="lazy"
+                                     onerror="this.parentElement.innerHTML='<div class=&quot;detail-no-image&quot;><i class=&quot;bi bi-image&quot;></i><span>@L["DetailNoImage"]</span></div>';" />
+                            </div>
+                        }
+
+                        @if (Model.Imagenes.Count > 1)
+                        {
+                            <button class="detail-control-btn detail-control-prev" onclick="changeDetailSlide(-1)" aria-label="@L["DetailPrevImage"]">
+                                <i class="bi bi-chevron-left"></i>
+                            </button>
+                            <button class="detail-control-btn detail-control-next" onclick="changeDetailSlide(1)" aria-label="@L["DetailNextImage"]">
+                                <i class="bi bi-chevron-right"></i>
+                            </button>
+
+                            <div class="detail-indicators">
+                                @for (int i = 0; i < Model.Imagenes.Count; i++)
+                                {
+                                    <span class="detail-indicator @(i == 0 ? "active" : "")"
+                                          onclick="goToDetailSlide(@i)"
+                                          data-slide="@i"
+                                          aria-label="@string.Format(L["DetailGoToImage"], i + 1)"></span>
+                                }
+                            </div>
+                        }
+                    </div>
+                }
+                else
+                {
+                    <div class="detail-no-image">
+                        <i class="bi bi-image"></i>
+                        <p>@L["DetailNoImageAvailable"]</p>
+                    </div>
+                }
+            </div>
+
+            <!-- Información detallada del producto -->
+            <div class="detail-info-card">
+                <h2 class="detail-card-title">@Model.Nombre</h2>
+
+                @if (Model.TienePromocion && Model.PrecioConDescuento.HasValue)
+                {
+                    <div class="detail-promotion-info">
+                        <span class="detail-discount-badge">
+                            <i class="bi bi-percent"></i>
+                            -@Model.PorcentajeDescuentoAplicado?.ToString("0")% @L["DetailOff"]
+                        </span>
+                        <div class="detail-price-container">
+                            <span class="detail-price-original">
+                                @Model.Precio?.ToString("C", new System.Globalization.CultureInfo("es-CR"))
+                            </span>
+                            <span class="detail-price-discount">
+                                @Model.PrecioConDescuento?.ToString("C", new System.Globalization.CultureInfo("es-CR"))
+                            </span>
+                        </div>
+                    </div>
+                }
+                else
+                {
+                    <div class="detail-price-container">
+                        <span class="detail-price-discount">
+                            @Model.Precio?.ToString("C", new System.Globalization.CultureInfo("es-CR"))
+                        </span>
+                    </div>
+                }
+
+                <!-- Categoría del producto -->
+                <div class="detail-category">
+                    <span class="detail-category-badge">
+                        <i class="bi bi-tag-fill"></i>@Model.Categoria
+                    </span>
+                </div>
+
+                <!-- Descripción del producto -->
+                <div class="detail-description">
+                    <h3 class="detail-subtitle">@L["DetailDescriptionTitle"]</h3>
+                    <p>@Model.Descripcion</p>
+                </div>
+
+                @if (Model.Etiquetas?.Any() == true)
+                {
+                    <div class="detail-tags-container">
+                        <h3 class="detail-subtitle">@L["DetailFeaturesTitle"]</h3>
+                        <div class="detail-tags-wrapper">
+                            @foreach (var etiqueta in Model.Etiquetas)
+                            {
+                                <span class="detail-tag-badge">@etiqueta</span>
+                            }
+                        </div>
+                    </div>
+                }
+
+                <!-- Valoración promedio del producto -->
+                <div class="detail-rating-container">
+                    <h3 class="detail-subtitle">@L["DetailRatingTitle"]</h3>
+                    <div class="detail-rating-stars">
+                        @for (int i = 1; i <= 5; i++)
+                        {
+                            if (i <= Math.Round(Model.PromedioValoracion))
+                            {
+                                <i class="bi bi-star-fill"></i>
+                            }
+                            else
+                            {
+                                <i class="bi bi-star"></i>
+                            }
+                        }
+                        <span class="detail-rating-value">(@Model.PromedioValoracion.ToString("0.0"))</span>
+                    </div>
+                </div>
+
+                <!-- Botones de acción -->
+                <div class="detail-action-container">
+                    <button type="button" class="detail-btn detail-btn-primary detail-btn-add-cart" onclick="addToDetailCart(@Model.IdProducto)">
+                        <i class="bi bi-cart-plus"></i>
+                        <span>@L["DetailAddToCart"]</span>
+                    </button>
+                    <a asp-controller="Producto" asp-action="Personalizar" asp-route-id="@Model.IdProducto" class="detail-btn detail-btn-customize">
+                        <i class="fas fa-magic"></i>
+                        <span>@L["DetailCustomize"]</span>
+                    </a>
+                    <a asp-controller="Producto" asp-action="Index" class="detail-btn detail-btn-secondary">
+                        <i class="bi bi-arrow-left"></i>
+                        <span>@L["DetailBackToProducts"]</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sección de reseñas de clientes -->
+        <div class="detail-reviews-section">
+            <h2 class="detail-section-title">@L["DetailReviewsTitle"]</h2>
+
+            @await Html.PartialAsync("_FormularioReseña", Model.IdProducto)
+            <div id="reviewsContainer">
+                @if (Model.Resenas?.Any() == true)
+                {
+                    <div class="detail-reviews-grid">
+                        @foreach (var resena in Model.Resenas)
+                        {
+                            <div class="detail-review-card">
+                                <div class="detail-review-header">
+                                    <div class="detail-review-user-info">
+                                        <i class="bi bi-person-circle"></i>
+                                        <div class="detail-review-user-details">
+                                            <span class="detail-review-user">@resena.Usuario</span>
+                                            <span class="detail-review-date">
+                                                @resena.Fecha?.ToString("dd/MM/yyyy")
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="detail-review-rating">
+                                        <div class="detail-review-stars">
+                                            @for (int i = 1; i <= 5; i++)
+                                            {
+                                                if (i <= (resena.Valoracion ?? 0))
+                                                {
+                                                    <i class="bi bi-star-fill"></i>
+                                                }
+                                                else
+                                                {
+                                                    <i class="bi bi-star"></i>
+                                                }
+                                            }
+                                        </div>
+                                        <span class="detail-review-score">@(resena.Valoracion ?? 0)/5</span>
+                                    </div>
+                                </div>
+                                <p class="detail-review-text">@resena.Comentario</p>
+                            </div>
+                        }
+                    </div>
+                }
+                else
+                {
+                    <div class="detail-reviews-empty" id="emptyState">
+                        <div class="detail-empty-content">
+                            <div class="detail-empty-icon">
+                                <i class="bi bi-chat-square-text"></i>
+                            </div>
+                            <h3 class="detail-empty-title">@L["DetailNoReviewsTitle"]</h3>
+                            <p class="detail-empty-text">@L["DetailNoReviewsText"]</p>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Cierre del contenedor .detail-page -->
+@section Scripts {
+    <script>
+        let currentDetailSlide = 0;
+        const detailSlides = document.querySelectorAll('.detail-slide');
+        const detailIndicators = document.querySelectorAll('.detail-indicator');
+
+        function showDetailSlide(index) {
+            if (detailSlides.length === 0) return;
+
+            detailSlides.forEach(slide => slide.classList.remove('active'));
+            detailIndicators.forEach(indicator => indicator.classList.remove('active'));
+
+            detailSlides[index].classList.add('active');
+            if (detailIndicators.length > 0) {
+                detailIndicators[index].classList.add('active');
+            }
+        }
+
+        function changeDetailSlide(direction) {
+            if (detailSlides.length === 0) return;
+
+            currentDetailSlide += direction;
+
+            if (currentDetailSlide >= detailSlides.length) {
+                currentDetailSlide = 0;
+            } else if (currentDetailSlide < 0) {
+                currentDetailSlide = detailSlides.length - 1;
+            }
+
+            showDetailSlide(currentDetailSlide);
+        }
+
+        function goToDetailSlide(index) {
+            currentDetailSlide = index;
+            showDetailSlide(currentDetailSlide);
+        }
+
+        function addToDetailCart(productId) {
+            @if (User.Identity?.IsAuthenticated == true)
+            {
+                <text>
+                const button = document.querySelector('.detail-btn-add-cart');
+                const originalContent = button.innerHTML;
+
+                button.classList.add('loading');
+                button.innerHTML = '<i class="bi bi-arrow-repeat"></i><span>' + '@L["DetailAdding"]' + '</span>';
+                button.disabled = true;
+
+                // Obtener cantidad seleccionada (o 1 por defecto)
+                const cantidadInput = document.querySelector('#cantidad-producto');
+                const cantidad = cantidadInput ? parseInt(cantidadInput.value) || 1 : 1;
+
+                // Obtener token CSRF
+                const token = document.querySelector('input[name="__RequestVerificationToken"]').value;
+
+                fetch('@Url.Action("AgregarProducto", "Carrito")', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded'
+                    },
+                    body: `idProducto=${productId}&cantidad=${cantidad}&__RequestVerificationToken=${encodeURIComponent(token)}`
+                })
+                .then(response => response.json())
+                .then(result => {
+                    if (result.success) {
+                        button.classList.remove('loading');
+                        button.classList.add('success');
+                        button.innerHTML = '<i class="bi bi-check-circle"></i><span>' + '@L["DetailAdded"]' + '</span>';
+
+                        // Actualizar contador del carrito
+                        if (typeof actualizarContadorCarrito === 'function') {
+                            actualizarContadorCarrito();
+                        }
+
+                        setTimeout(() => {
+                            button.classList.remove('success');
+                            button.innerHTML = originalContent;
+                            button.disabled = false;
+                        }, 2000);
+                    } else {
+                        button.classList.remove('loading');
+                        button.innerHTML = originalContent;
+                        button.disabled = false;
+                        alert(result.message || 'Error al agregar el producto al carrito');
+                    }
+                })
+                .catch(error => {
+                    button.classList.remove('loading');
+                    button.innerHTML = originalContent;
+                    button.disabled = false;
+                    alert('Error al agregar el producto al carrito');
+                });
+                </text>
+            }
+            else
+            {
+                <text>
+                // Redirigir al login si no está autenticado
+                window.location.href = '@Url.Action("Login", "Auth")';
+                </text>
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            if (detailSlides.length > 0) {
+                showDetailSlide(0);
+            }
+
+            window.addEventListener('scroll', function() {
+                const scrolled = window.pageYOffset;
+                const heroBackground = document.querySelector('.detail-hero-section::before');
+                if (heroBackground) {
+                    heroBackground.style.transform = `translateY(${scrolled * 0.5}px)`;
+                }
+            });
+
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animate-in');
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('.detail-review-card, .detail-info-card, .detail-carousel-container').forEach(el => {
+                observer.observe(el);
+            });
+        });
+    </script>
+}

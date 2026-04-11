@@ -1,0 +1,127 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+	<resheader name="resmimetype">
+		<value>text/microsoft-resx</value>
+	</resheader>
+	<resheader name="version">
+		<value>1.3</value>
+	</resheader>
+	<resheader name="reader">
+		<value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+	</resheader>
+	<resheader name="writer">
+		<value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+	</resheader>
+
+	<data name="CreateProductTitle" xml:space="preserve">
+    <value>Crear Producto</value>
+  </data>
+	<data name="CreateProductHeader" xml:space="preserve">
+    <value>Crear Nuevo Producto</value>
+  </data>
+	<data name="CreateProductSubtitle" xml:space="preserve">
+    <value>Añade un nuevo producto al catálogo de VelourEssence</value>
+  </data>
+	<data name="CreateBasicInfo" xml:space="preserve">
+    <value>Información Básica</value>
+  </data>
+	<data name="CreateProductNameLabel" xml:space="preserve">
+    <value>Nombre del Producto</value>
+  </data>
+	<data name="CreateProductNamePlaceholder" xml:space="preserve">
+    <value>Ingresa el nombre del producto</value>
+  </data>
+	<data name="CreateProductPriceLabel" xml:space="preserve">
+    <value>Precio ₡</value>
+  </data>
+	<data name="CreateProductDescriptionLabel" xml:space="preserve">
+    <value>Descripción</value>
+  </data>
+	<data name="CreateProductDescriptionPlaceholder" xml:space="preserve">
+    <value>Describe el producto detalladamente...</value>
+  </data>
+	<data name="CreateProductStockLabel" xml:space="preserve">
+    <value>Stock Disponible</value>
+  </data>
+	<data name="CreateProductBrandLabel" xml:space="preserve">
+    <value>Marca</value>
+  </data>
+	<data name="CreateProductBrandPlaceholder" xml:space="preserve">
+    <value>Marca del producto</value>
+  </data>
+	<data name="CreateProductGenderLabel" xml:space="preserve">
+    <value>Género</value>
+  </data>
+	<data name="CreateProductGenderSelect" xml:space="preserve">
+    <value>Seleccionar género</value>
+  </data>
+	<data name="CreateProductGenderMasculino" xml:space="preserve">
+    <value>Masculino</value>
+  </data>
+	<data name="CreateProductGenderFemenino" xml:space="preserve">
+    <value>Femenino</value>
+  </data>
+	<data name="CreateProductGenderUnisex" xml:space="preserve">
+    <value>Unisex</value>
+  </data>
+	<data name="CreateProductConcentrationLabel" xml:space="preserve">
+    <value>Concentración</value>
+  </data>
+	<data name="CreateProductConcentrationPlaceholder" xml:space="preserve">
+    <value>Ej: Eau de Parfum, Eau de Toilette</value>
+  </data>
+	<data name="CreateClassification" xml:space="preserve">
+    <value>Clasificación</value>
+  </data>
+	<data name="CreateProductCategoryLabel" xml:space="preserve">
+    <value>Categoría</value>
+  </data>
+	<data name="CreateProductCategorySelect" xml:space="preserve">
+    <value>Seleccionar categoría</value>
+  </data>
+	<data name="CreateProductTagsLabel" xml:space="preserve">
+    <value>Etiquetas</value>
+  </data>
+	<data name="CreateProductImagesTitle" xml:space="preserve">
+    <value>Imágenes del Producto</value>
+  </data>
+	<data name="CreateProductImagesDropText" xml:space="preserve">
+    <value>Arrastra las imágenes aquí o haz clic para seleccionar</value>
+  </data>
+	<data name="CreateProductImagesHint" xml:space="preserve">
+    <value>Formatos permitidos: JPG, PNG, GIF (máx. 5MB cada una)</value>
+  </data>
+	<data name="CreateProductImagesInfo" xml:space="preserve">
+    <value>Las imágenes se guardarán como archivos optimizados</value>
+  </data>
+	<data name="CreateTipsTitle" xml:space="preserve">
+    <value>Consejos para un Producto Exitoso</value>
+  </data>
+	<data name="CreateTipsName" xml:space="preserve">
+    <value>Usa nombres descriptivos y únicos</value>
+  </data>
+	<data name="CreateTipsDescription" xml:space="preserve">
+    <value>Proporciona una descripción detallada</value>
+  </data>
+	<data name="CreateTipsTags" xml:space="preserve">
+    <value>Selecciona las etiquetas apropiadas</value>
+  </data>
+	<data name="CreateTipsImages" xml:space="preserve">
+    <value>Sube imágenes de alta calidad</value>
+  </data>
+	<data name="CreateTipsStock" xml:space="preserve">
+    <value>Especifica el stock disponible</value>
+  </data>
+	<data name="CreateTipsBrandConcentration" xml:space="preserve">
+    <value>Incluye la marca y concentración</value>
+  </data>
+	<data name="CreateCancelBtn" xml:space="preserve">
+    <value>Cancelar</value>
+  </data>
+	<data name="CreateSubmitBtn" xml:space="preserve">
+    <value>Crear Producto</value>
+  </data>
+	<data name="CreateRequiredFieldsAlert" xml:space="preserve">
+    <value>Por favor, completa todos los campos requeridos.</value>
+  </data>
+</root>

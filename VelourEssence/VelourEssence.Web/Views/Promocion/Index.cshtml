@@ -1,0 +1,201 @@
+﻿@using Microsoft.Extensions.Localization
+@inject IStringLocalizer<VelourEssence.Web.Views.Promocion.Index> L
+@model IEnumerable<VelourEssence.Application.DTOs.PromocionDto>
+
+@{
+    ViewData["Title"] = L["PromotionsTitle"];
+
+    // Determina el estado de una promoción basado en sus fechas
+    string GetEstado(DateOnly? inicio, DateOnly? fin)
+    {
+        var hoy = DateOnly.FromDateTime(DateTime.Today);
+        if (inicio.HasValue && fin.HasValue)
+        {
+            if (hoy < inicio.Value)
+                return L["PromotionsStatusPending"];
+            if (hoy > fin.Value)
+                return L["PromotionsStatusFinished"];
+            return L["PromotionsStatusActive"];
+        }
+        return L["PromotionsStatusPending"];
+    }
+
+    // Obtiene la clase CSS según el estado
+    string GetEstadoColor(string estado)
+    {
+        if (estado == L["PromotionsStatusActive"]) return "vigente";
+        if (estado == L["PromotionsStatusPending"]) return "pendiente";
+        if (estado == L["PromotionsStatusFinished"]) return "finalizada";
+        return "pendiente";
+    }
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/promocion-index.css" />
+}
+
+<div class="promocion-index-page">
+    <div class="promocion-index-container">
+        <div class="promocion-index-wrapper">
+            <!-- Header Premium -->
+            <div class="promocion-index-header">
+                <div class="promocion-index-header-content">
+                    <h1 class="promocion-index-title">
+                        <i class="bi bi-percent"></i>
+                        @L["PromotionsHeader"]
+                    </h1>
+                    <p class="promocion-index-subtitle">@L["PromotionsSubtitle"]</p>
+                </div>
+            </div>
+
+            <!-- Contenido principal -->
+            <div class="promocion-index-content">
+                <!-- Barra de estadísticas -->
+                @if (Model != null && Model.Any())
+                {
+                    <div class="promocion-stats-bar">
+                        <div class="promocion-stats">
+                            <div class="promocion-stat-item">
+                                <i class="bi bi-collection"></i>
+                                <strong>@Model.Count()</strong> @L["PromotionsStatsTotal"]
+                            </div>
+                            <div class="promocion-stat-item vigente">
+                                <i class="bi bi-check-circle"></i>
+                                <strong>@Model.Count(p => GetEstado(p.FechaInicio, p.FechaFin) == L["PromotionsStatusActive"])</strong> @L["PromotionsStatsActive"]
+                            </div>
+                            <div class="promocion-stat-item pendiente">
+                                <i class="bi bi-clock"></i>
+                                <strong>@Model.Count(p => GetEstado(p.FechaInicio, p.FechaFin) == L["PromotionsStatusPending"])</strong> @L["PromotionsStatsPending"]
+                            </div>
+                        </div>
+                        <a asp-action="Create" class="promocion-btn promocion-btn-primary">
+                            <i class="bi bi-plus-circle"></i>
+                            @L["PromotionsAddBtn"]
+                        </a>
+                    </div>
+                }
+
+                <!-- Grid de promociones -->
+                @if (Model != null && Model.Any())
+                {
+                    <div class="promociones-grid">
+                        @foreach (var promo in Model)
+                        {
+                            var estado = GetEstado(promo.FechaInicio, promo.FechaFin);
+                            <div class="promocion-card">
+                                <div class="promocion-card-header">
+                                    <div class="promocion-icon">
+                                        <i class="bi bi-tag-fill"></i>
+                                    </div>
+                                    <div class="promocion-estado-badge @GetEstadoColor(estado)">
+                                        @estado
+                                    </div>
+                                </div>
+
+                                <div class="promocion-card-body">
+                                    <h3 class="promocion-nombre">@promo.Nombre</h3>
+
+                                    <div class="promocion-info-grid">
+                                        <div class="promocion-info-item">
+                                            @if (promo.Tipo == "Producto" && !string.IsNullOrEmpty(promo.NombreProducto))
+                                            {
+                                                <span class="promocion-info-label">
+                                                    <i class="bi bi-box"></i>
+                                                    @L["PromotionsProductLabel"]
+                                                </span>
+                                                <span class="promocion-info-valor">@promo.NombreProducto</span>
+                                            }
+                                            else if (promo.Tipo == "Categoria" && !string.IsNullOrEmpty(promo.NombreCategoria))
+                                            {
+                                                <span class="promocion-info-label">
+                                                    <i class="bi bi-tags"></i>
+                                                    @L["PromotionsCategoryLabel"]
+                                                </span>
+                                                <span class="promocion-info-valor">@promo.NombreCategoria</span>
+                                            }
+                                            else
+                                            {
+                                                <span class="promocion-info-label">
+                                                    <i class="bi bi-star"></i>
+                                                    @L["PromotionsTypeLabel"]
+                                                </span>
+                                                <span class="promocion-info-valor">@promo.Tipo</span>
+                                            }
+                                        </div>
+
+                                        <div class="promocion-info-item">
+                                            <span class="promocion-info-label">
+                                                <i class="bi bi-percent"></i>
+                                                @L["PromotionsDiscountLabel"]
+                                            </span>
+                                            <span class="promocion-info-valor promocion-descuento">
+                                                @promo.PorcentajeDescuento?.ToString("0.##")%
+                                            </span>
+                                        </div>
+
+                                        <div class="promocion-info-item full-width">
+                                            <span class="promocion-info-label">
+                                                <i class="bi bi-calendar-range"></i>
+                                                @L["PromotionsValidityLabel"]
+                                            </span>
+                                            <span class="promocion-info-valor">
+                                                @promo.FechaInicio?.ToString("dd/MM/yyyy") - @promo.FechaFin?.ToString("dd/MM/yyyy")
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="promocion-card-actions">
+                                    <a asp-action="Details" asp-route-id="@promo.IdPromocion"
+                                       class="promocion-action-btn promocion-action-details" title="@L["PromotionsDetailsTitle"]">
+                                        <i class="bi bi-eye"></i>
+                                    </a>
+                                    @{
+                                        var estadoPromo = GetEstado(promo.FechaInicio, promo.FechaFin);
+                                        var puedeEditar = estadoPromo != L["PromotionsStatusFinished"];
+                                    }
+                                    @if (puedeEditar)
+                                    {
+                                        <a asp-action="Edit" asp-route-id="@promo.IdPromocion"
+                                           class="promocion-action-btn promocion-action-edit" title="@L["PromotionsEditTitle"]">
+                                            <i class="bi bi-pencil-square"></i>
+                                        </a>
+                                    }
+                                    else
+                                    {
+                                        <span class="promocion-action-btn promocion-action-disabled"
+                                              title="@L["PromotionsEditDisabledTitle"]">
+                                            <i class="bi bi-pencil-square"></i>
+                                        </span>
+                                    }
+                                    <a asp-action="Delete" asp-route-id="@promo.IdPromocion"
+                                       class="promocion-action-btn promocion-action-delete" title="@L["PromotionsDeleteTitle"]"
+                                       onclick="return confirm('@L["PromotionsDeleteConfirm"]');">
+                                        <i class="bi bi-trash"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                }
+                else
+                {
+                    <!-- Estado vacío -->
+                    <div class="promociones-empty">
+                        <div class="empty-content">
+                            <div class="empty-icon">
+                                <i class="bi bi-percent"></i>
+                            </div>
+                            <h3 class="empty-title">@L["PromotionsEmptyTitle"]</h3>
+                            <p class="empty-text">@L["PromotionsEmptyText"]</p>
+                            <a asp-action="Create" class="promocion-btn promocion-btn-primary">
+                                <i class="bi bi-plus-circle"></i>
+                                @L["PromotionsCreateFirstBtn"]
+                            </a>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>

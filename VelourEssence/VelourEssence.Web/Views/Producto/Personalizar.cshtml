@@ -1,0 +1,160 @@
+@using Microsoft.Extensions.Localization
+@inject IStringLocalizer<VelourEssence.Web.Views.Producto.Personalizar> L
+@model VelourEssence.Application.DTOs.ProductoDto
+
+@{
+    ViewData["Title"] = L["CustomizeTitle", Model.Nombre];
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@* Token CSRF para las llamadas AJAX *@
+<form>
+    @Html.AntiForgeryToken()
+</form>
+
+<!-- CSS específico para personalización -->
+<link rel="stylesheet" href="~/css/personalizacion-perfumes.css" asp-append-version="true" />
+
+<div class="personalizacion-page">
+    <!-- Hero section profesional -->
+    <div class="detail-hero">
+        <div class="container">
+            <h1>
+                <i class="fas fa-magic"></i>
+                @L["CustomizeProductHeader"]
+            </h1>
+            <p>@L["CustomizeProductSubtitle"]</p>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <!-- Panel de Vista Previa -->
+            <div class="col-lg-4">
+                <div class="preview-section">
+                    <div class="detail-card">
+                        <h3><i class="fas fa-box"></i> @L["BaseProductTitle"]</h3>
+
+                        <div class="product-preview-card">
+                            @if (Model.Imagenes?.Any() == true)
+                            {
+                                <img src="@Url.Content("~/" + Model.Imagenes.First().Url)"
+                                     alt="@Model.Nombre"
+                                     class="preview-image"
+                                     loading="lazy"
+                                     onerror="this.parentElement.innerHTML='<div class=&quot;preview-placeholder&quot;><i class=&quot;fas fa-image&quot;></i></div>';" />
+                            }
+                            else
+                            {
+                                <div class="preview-placeholder">
+                                    <i class="fas fa-image"></i>
+                                </div>
+                            }
+
+                            <h4>@Model.Nombre</h4>
+                            <p class="text-muted">@Model.Descripcion</p>
+
+                            <div class="product-details">
+                                <div class="detail-item">
+                                    <i class="fas fa-tag"></i>
+                                    <span>@L["BasePriceLabel"] <strong>₡@Model.Precio</strong></span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-layer-group"></i>
+                                    <span>@L["CustomizableProductLabel"]</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Vista Previa de Personalización -->
+                    <div class="detail-card">
+                        <h3><i class="fas fa-eye"></i> @L["PreviewTitle"]</h3>
+                        <div class="bottle-container" id="previewContainer">
+                            <div class="perfume-bottle bottle-animate" id="perfumeBottle">
+                                <div class="bottle-label" id="bottleLabel">50ml</div>
+                            </div>
+                            <div class="concentration-badge" id="concentrationBadge">
+                                <i class="fas fa-tint" id="concentrationIcon"></i>
+                                <span class="concentration-text" id="concentrationText">@L["SelectConcentrationLabel"]</span>
+                                <div class="concentration-desc" id="concentrationDesc">
+                                    @L["ChooseConcentrationDesc"]
+                                </div>
+                            </div>
+                        </div>
+                        <div class="preview-details" id="previewDetails">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Panel de Configuración -->
+            <div class="col-lg-8">
+                <div class="detail-card">
+                    <h3><i class="fas fa-cogs"></i> @L["ConfigurationTitle"]</h3>
+                    <form id="personalizacionForm">
+                        <input type="hidden" id="baseProductoId" value="@Model.IdProducto" />
+
+                        <!-- Criterios de Personalización -->
+                        <div id="criteriosContainer" class="config-section">
+                            <!-- Se llenarán via JavaScript -->
+                        </div>
+
+                        <!-- Resumen de Precio -->
+                        <div class="price-summary">
+                            <h4><i class="fas fa-calculator"></i> @L["PriceSummaryTitle"]</h4>
+                            <div class="price-breakdown">
+                                <div class="price-line">
+                                    <span>@L["BasePriceLabel"]</span>
+                                    <span class="price-value" id="precioBase">₡@Model.Precio?.ToString("N0")</span>
+                                </div>
+                                <div class="price-line">
+                                    <span>@L["CustomizationsLabel"]</span>
+                                    <span class="price-value" id="precioPersonalizaciones">₡0</span>
+                                </div>
+                                <div class="price-line total">
+                                    <span>@L["TotalPriceLabel"]</span>
+                                    <span class="price-value" id="precioTotal">₡@Model.Precio?.ToString("N0")</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Validaciones -->
+                        <div id="validationMessages" class="validation-messages"></div>
+
+                        <!-- Botones de Acción -->
+                        <div class="action-buttons">
+                            <button type="button" class="btn btn-secondary" onclick="window.history.back()">
+                                <i class="fas fa-arrow-left"></i>
+                                @L["BackBtn"]
+                            </button>
+                            <button type="button" id="agregarCarritoBtn" class="btn btn-primary" disabled>
+                                <i class="fas fa-shopping-cart"></i>
+                                @L["AddToCartBtn"]
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <!-- Variables de localización para JavaScript -->
+    <script>
+        window.personalizacionTexts = {
+            concentracion: "@L["ConcentrationJs"]",
+            tamano: "@L["SizeJs"]",
+            validacionRequerido: "@L["ValidationRequiredJs"]",
+            calculandoPrecio: "@L["CalculatingPriceJs"]",
+            errorCalculo: "@L["ErrorCalculatingJs"]",
+            seleccioneCompletas: "@L["SelectionsCompleteJs"]",
+            agregandoCarrito: "@L["AddingToCartJs"]"
+        };
+
+        window.baseProductoId = @Model.IdProducto;
+        window.basePrice = @(Model.Precio ?? 0);
+    </script>
+    <script src="~/js/personalizacion-perfumes.js" asp-append-version="true"></script>
+}

@@ -1,0 +1,1090 @@
+/* ===================================================================
+   FORMS CSS - DISEÑO CONSISTENTE CON LA PALETA DEL PROYECTO
+   Paleta: Azul petróleo, Beige claro, Verde menta, Coral, Gris claro
+   ================================================================== */
+
+/* Variables CSS para la paleta profesional consistente */
+:root {
+    --form-primary: #1F3A5F;        /* Azul petróleo */
+    --form-primary-dark: #162c47;    
+    --form-primary-light: #2d4a6b;  
+    --form-secondary: #F4EDE4;      /* Beige claro */
+    --form-accent: #A8E6CF;         /* Verde menta */
+    --form-accent-coral: #FF8C94;   /* Coral */
+    --form-light: #F9F9F9;          /* Gris muy claro */
+    --form-white: #ffffff;
+    --form-success: #A8E6CF;        
+    --form-warning: #FF8C94;        
+    --form-text: #333333;
+    --form-text-muted: #666666;
+    --form-text-light: #999999;
+    --form-border: #e0e0e0;
+    --form-shadow: 0 8px 25px rgba(31, 58, 95, 0.15);
+    --form-shadow-hover: 0 15px 35px rgba(168, 230, 207, 0.25);
+    --form-radius: 16px;
+    --form-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ===== ESTILOS GENERALES DEL FORMULARIO ===== */
+.form-container {
+    min-height: 100vh;
+    background: linear-gradient(135deg, var(--form-primary) 0%, var(--form-accent) 100%);
+    padding: 2rem 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.form-wrapper {
+    background: var(--form-white);
+    border-radius: var(--form-radius);
+    box-shadow: var(--form-shadow);
+    overflow: hidden;
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    backdrop-filter: blur(20px);
+}
+
+.form-header {
+    background: linear-gradient(135deg, var(--form-primary) 0%, var(--form-accent) 100%);
+    color: var(--form-white);
+    padding: 2rem;
+    text-align: center;
+    position: relative;
+}
+
+.form-header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+        radial-gradient(circle at 20% 80%, rgba(168, 230, 207, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(255, 140, 148, 0.1) 0%, transparent 50%);
+    pointer-events: none;
+}
+
+.form-title {
+    font-size: 2rem;
+    margin: 0 0 0.5rem 0;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    position: relative;
+    z-index: 1;
+}
+
+.form-title i {
+    font-size: 2.5rem;
+}
+
+.form-subtitle {
+    margin: 0;
+    opacity: 0.9;
+    font-size: 1.1rem;
+    font-weight: 300;
+    position: relative;
+    z-index: 1;
+}
+
+/* ===== FORMULARIO PREMIUM ===== */
+.premium-form {
+    padding: 2.5rem;
+    background: var(--form-light);
+}
+
+.form-section {
+    margin-bottom: 2.5rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid var(--form-border);
+    background: var(--form-white);
+    border-radius: var(--form-radius);
+    padding: 2rem;
+    box-shadow: 0 2px 10px rgba(31, 58, 95, 0.05);
+}
+
+.form-section:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+}
+
+.section-title {
+    color: var(--form-primary);
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--form-accent);
+}
+
+.section-title i {
+    color: var(--form-primary);
+    font-size: 1.5rem;
+}
+
+/* ===== GRUPOS DE FORMULARIO ===== */
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-label {
+    display: block;
+    font-weight: 600;
+    color: var(--form-primary);
+    margin-bottom: 0.5rem;
+    font-size: 0.95rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.form-label i {
+    color: var(--form-accent);
+    font-size: 1.1rem;
+}
+
+.form-control {
+    width: 100%;
+    padding: 0.875rem 1rem;
+    border: 2px solid var(--form-border);
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: var(--form-transition);
+    background-color: var(--form-white) !important;
+    color: var(--form-text) !important;
+    font-family: inherit;
+}
+
+.form-control:focus {
+    border-color: var(--form-accent) !important;
+    box-shadow: 0 0 0 0.2rem rgba(168, 230, 207, 0.25) !important;
+    outline: none !important;
+    background-color: var(--form-white) !important;
+    color: var(--form-text) !important;
+}
+
+.form-control:hover {
+    border-color: var(--form-primary-light);
+    background-color: var(--form-white) !important;
+    color: var(--form-text) !important;
+}
+
+/* Estilos específicos para inputs de texto y número */
+input[type="text"].form-control,
+input[type="number"].form-control,
+input[type="email"].form-control,
+input[type="password"].form-control,
+input[type="tel"].form-control,
+input[type="url"].form-control {
+    background-color: var(--form-white) !important;
+    color: var(--form-text) !important;
+    border: 2px solid var(--form-border) !important;
+}
+
+input[type="text"].form-control:focus,
+input[type="number"].form-control:focus,
+input[type="email"].form-control:focus,
+input[type="password"].form-control:focus,
+input[type="tel"].form-control:focus,
+input[type="url"].form-control:focus {
+    background-color: var(--form-white) !important;
+    color: var(--form-text) !important;
+    border-color: var(--form-accent) !important;
+    box-shadow: 0 0 0 0.2rem rgba(168, 230, 207, 0.25) !important;
+    outline: none !important;
+}
+
+input[type="text"].form-control:hover,
+input[type="number"].form-control:hover,
+input[type="email"].form-control:hover,
+input[type="password"].form-control:hover,
+input[type="tel"].form-control:hover,
+input[type="url"].form-control:hover {
+    background-color: var(--form-white) !important;
+    color: var(--form-text) !important;
+    border-color: var(--form-primary-light) !important;
+}
+
+/* ===== ESTILOS ESPECÍFICOS PARA SELECT (COMBOBOX) ===== */
+select.form-control {
+    appearance: none !important;
+    -webkit-appearance: none !important;
+    -moz-appearance: none !important;
+    background-color: var(--form-white) !important;
+    background-image: url("data:image/svg+xml;charset=UTF-8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23666666' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><polyline points='6,9 12,15 18,9'></polyline></svg>");
+    background-repeat: no-repeat;
+    background-position: right 0.75rem center;
+    background-size: 16px 12px;
+    padding-right: 3rem;
+    cursor: pointer;
+    color: var(--form-text) !important;
+    border: 2px solid var(--form-border) !important;
+}
+
+select.form-control:focus {
+    border-color: var(--form-accent) !important;
+    box-shadow: 0 0 0 0.2rem rgba(168, 230, 207, 0.25) !important;
+    outline: none !important;
+    background-color: var(--form-white) !important;
+    color: var(--form-text) !important;
+}
+
+select.form-control:hover {
+    border-color: var(--form-primary-light) !important;
+    background-color: var(--form-white) !important;
+    color: var(--form-text) !important;
+}
+
+/* Estilos para las opciones del select con máxima especificidad */
+.form-container select.form-control option,
+.form-wrapper select.form-control option,
+.premium-form select.form-control option,
+select.form-control option {
+    background-color: var(--form-white) !important;
+    color: var(--form-text) !important;
+    padding: 0.5rem !important;
+    border: none !important;
+    font-family: inherit !important;
+}
+
+.form-container select.form-control option:hover,
+.form-wrapper select.form-control option:hover,
+.premium-form select.form-control option:hover,
+select.form-control option:hover,
+.form-container select.form-control option:focus,
+.form-wrapper select.form-control option:focus,
+.premium-form select.form-control option:focus,
+select.form-control option:focus {
+    background-color: var(--form-accent) !important;
+    color: var(--form-primary) !important;
+}
+
+.form-container select.form-control option:checked,
+.form-wrapper select.form-control option:checked,
+.premium-form select.form-control option:checked,
+select.form-control option:checked {
+    background-color: var(--form-primary) !important;
+    color: var(--form-white) !important;
+}
+
+/* Estados deshabilitados para select */
+select.form-control:disabled {
+    background-color: var(--form-light) !important;
+    color: var(--form-text-muted) !important;
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+select.form-control:disabled option {
+    background-color: var(--form-light) !important;
+    color: var(--form-text-muted) !important;
+}
+
+/* Estilos para placeholder de select con máxima especificidad */
+.form-container select.form-control option[value=""],
+.form-wrapper select.form-control option[value=""],
+.premium-form select.form-control option[value=""],
+select.form-control option[value=""],
+.form-container select.form-control option:first-child,
+.form-wrapper select.form-control option:first-child,
+.premium-form select.form-control option:first-child,
+select.form-control option:first-child {
+    color: var(--form-text-light) !important;
+    font-style: italic;
+}
+
+/* Mejoras para accesibilidad y responsive */
+@media (max-width: 768px) {
+    select.form-control {
+        font-size: 16px; /* Evita zoom en iOS */
+        background-size: 14px 10px;
+        background-position: right 0.5rem center;
+        padding-right: 2.5rem;
+    }
+}
+
+/* Efectos de transición suaves */
+select.form-control {
+    transition: all 0.3s ease;
+}
+
+select.form-control:focus {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(168, 230, 207, 0.3), 0 0 0 0.2rem rgba(168, 230, 207, 0.25);
+}
+
+/* ===== INPUT CON SUFIJO ===== */
+.input-with-suffix {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.input-with-suffix .form-control {
+    padding-right: 3rem;
+}
+
+.input-suffix {
+    position: absolute;
+    right: 1rem;
+    color: var(--form-text-muted);
+    font-weight: 600;
+    pointer-events: none;
+}
+
+/* ===== FILAS DE FORMULARIO ===== */
+.form-row {
+    display: flex;
+    gap: 1.5rem;
+    margin: 0;
+}
+
+.form-row .form-group {
+    flex: 1;
+}
+
+.col-md-6 {
+    flex: 0 0 48%;
+}
+
+/* ===== TEXTOS DE AYUDA ===== */
+.form-help-text {
+    display: block;
+    margin-top: 0.5rem;
+    color: var(--form-text-muted);
+    font-size: 0.875rem;
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+.form-help-text i {
+    color: var(--form-primary);
+    font-size: 0.8rem;
+}
+
+/* ===== MENSAJES DE VALIDACIÓN ===== */
+.text-danger {
+    color: var(--form-warning);
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
+    display: block;
+}
+
+.validation-summary {
+    background: rgba(255, 140, 148, 0.1);
+    border: 1px solid var(--form-warning);
+    border-radius: 8px;
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+    color: var(--form-primary);
+}
+
+/* ===== BOTONES DE ACCIÓN ===== */
+.form-actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 2rem;
+    border-top: 1px solid var(--form-border);
+    margin-top: 2rem;
+}
+
+.btn {
+    padding: 0.875rem 2rem;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+    transition: var(--form-transition);
+    font-size: 1rem;
+    text-align: center;
+    justify-content: center;
+    min-width: 160px;
+}
+
+.btn i {
+    font-size: 1.1rem;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, var(--form-primary) 0%, var(--form-accent) 100%);
+    color: var(--form-white);
+}
+
+.btn-primary:hover {
+    background: linear-gradient(135deg, var(--form-primary-dark) 0%, var(--form-accent) 100%);
+    transform: translateY(-2px);
+    box-shadow: var(--form-shadow-hover);
+}
+
+.btn-secondary {
+    background: var(--form-text-muted);
+    color: var(--form-white);
+}
+
+.btn-secondary:hover {
+    background: var(--form-text);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(102, 102, 102, 0.3);
+}
+
+.btn-info {
+    background: var(--form-primary);
+    color: var(--form-white);
+}
+
+.btn-info:hover {
+    background: var(--form-primary-dark);
+    transform: translateY(-2px);
+    box-shadow: var(--form-shadow-hover);
+}
+
+.btn-danger {
+    background: var(--form-warning);
+    color: var(--form-white);
+}
+
+.btn-danger:hover {
+    background: #e67e85;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(255, 140, 148, 0.3);
+}
+
+/* ===== GRUPO DE BOTONES ===== */
+.btn-group {
+    display: flex;
+    gap: 0.75rem;
+    justify-content: flex-end;
+}
+
+/* ===== ESTADOS ESPECÍFICOS ===== */
+.form-control:disabled {
+    background-color: var(--form-light);
+    border-color: var(--form-border);
+    color: var(--form-text-muted);
+}
+
+.form-control.is-invalid {
+    border-color: var(--form-warning);
+}
+
+.form-control.is-invalid:focus {
+    border-color: var(--form-warning);
+    box-shadow: 0 0 0 0.2rem rgba(255, 140, 148, 0.25);
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+    .form-container {
+        padding: 1rem;
+    }
+    
+    .form-wrapper {
+        margin: 0;
+        border-radius: 0;
+    }
+    
+    .premium-form {
+        padding: 1.5rem;
+    }
+    
+    .form-row {
+        flex-direction: column;
+        gap: 0;
+    }
+    
+    .col-md-6 {
+        flex: 1;
+    }
+    
+    .form-actions {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    .btn {
+        width: 100%;
+        min-width: auto;
+    }
+    
+    .form-title {
+        font-size: 1.5rem;
+    }
+    
+    .form-title i {
+        font-size: 2rem;
+    }
+}
+
+/* ===== ANIMACIONES ===== */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.form-wrapper {
+    animation: fadeInUp 0.6s ease-out;
+}
+
+.form-section {
+    animation: fadeInUp 0.8s ease-out;
+}
+
+/* ===== LOADING STATES ===== */
+.btn.loading {
+    position: relative;
+    color: transparent !important;
+}
+
+.btn.loading::after {
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border: 2px solid transparent;
+    border-top: 2px solid currentColor;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: var(--form-white);
+}
+
+@keyframes spin {
+    0% { transform: translate(-50%, -50%) rotate(0deg); }
+    100% { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+.btn-danger:hover {
+    background: #c82333;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(220, 53, 69, 0.3);
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+    .form-container {
+        padding: 1rem;
+    }
+    
+    .form-wrapper {
+        margin: 0;
+        border-radius: 0;
+    }
+    
+    .premium-form {
+        padding: 1.5rem;
+    }
+    
+    .form-row {
+        flex-direction: column;
+        gap: 0;
+    }
+    
+    .col-md-6 {
+        flex: 1;
+    }
+    
+    .form-actions {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    .btn {
+        width: 100%;
+        min-width: auto;
+    }
+    
+    .form-title {
+        font-size: 1.5rem;
+    }
+    
+    .form-title i {
+        font-size: 2rem;
+    }
+}
+
+/* ===== ESTILOS ESPECÍFICOS PARA FORMULARIOS DE PROMOCIONES ===== */
+/* Garantizar estilos consistentes para promociones */
+.promocion-form .form-control,
+.promocion-form input[type="text"],
+.promocion-form input[type="number"],
+.promocion-form select {
+    background-color: var(--form-white) !important;
+    color: var(--form-text) !important;
+    border: 2px solid var(--form-border) !important;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
+}
+
+.promocion-form .form-control:focus,
+.promocion-form input[type="text"]:focus,
+.promocion-form input[type="number"]:focus,
+.promocion-form select:focus {
+    background-color: var(--form-white) !important;
+    color: var(--form-text) !important;
+    border-color: var(--form-accent) !important;
+    box-shadow: 0 0 0 0.2rem rgba(168, 230, 207, 0.25) !important;
+    outline: none !important;
+}
+
+.promocion-form .form-control:hover,
+.promocion-form input[type="text"]:hover,
+.promocion-form input[type="number"]:hover,
+.promocion-form select:hover {
+    background-color: var(--form-white) !important;
+    color: var(--form-text) !important;
+    border-color: var(--form-primary-light) !important;
+}
+
+/* Asegurar que las opciones del select de categorías sean legibles */
+.promocion-form select option {
+    background-color: var(--form-white) !important;
+    color: var(--form-text) !important;
+    padding: 0.5rem !important;
+}
+
+.promocion-form select option:hover,
+.promocion-form select option:focus {
+    background-color: var(--form-accent) !important;
+    color: var(--form-primary) !important;
+}
+
+.promocion-form select option:checked {
+    background-color: var(--form-primary) !important;
+    color: var(--form-white) !important;
+}
+
+/* Estilos específicos para el campo de porcentaje */
+.promocion-form .input-with-suffix .form-control {
+    background-color: var(--form-white) !important;
+    color: var(--form-text) !important;
+    border: 2px solid var(--form-border) !important;
+}
+
+.promocion-form .input-with-suffix .form-control:focus {
+    background-color: var(--form-white) !important;
+    color: var(--form-text) !important;
+    border-color: var(--form-accent) !important;
+    box-shadow: 0 0 0 0.2rem rgba(168, 230, 207, 0.25) !important;
+}
+
+/* Forzar estilos para formularios dentro de contenedores específicos */
+.form-container .promocion-form .form-control,
+.form-wrapper .promocion-form .form-control,
+.premium-form .promocion-form .form-control {
+    background-color: var(--form-white) !important;
+    color: var(--form-text) !important;
+    border: 2px solid var(--form-border) !important;
+}
+
+/* Mejorar contraste en modo focus */
+.promocion-form .form-control:focus::placeholder {
+    color: var(--form-text-light) !important;
+    opacity: 0.7;
+}
+
+.promocion-form .form-control::placeholder {
+    color: var(--form-text-light) !important;
+    opacity: 0.8;
+}
+
+/* ===== SOBRESCRIBIR ESTILOS DE BOOTSTRAP Y OTROS FRAMEWORKS ===== */
+/* Forzar estilos para inputs con máxima especificidad */
+.form-container .promocion-form input[type="text"],
+.form-container .promocion-form input[type="number"],
+.form-container .promocion-form input[type="email"],
+.form-container .promocion-form input[type="password"],
+.form-container .promocion-form select,
+.form-wrapper .promocion-form input[type="text"],
+.form-wrapper .promocion-form input[type="number"],
+.form-wrapper .promocion-form input[type="email"],
+.form-wrapper .promocion-form input[type="password"],
+.form-wrapper .promocion-form select,
+.premium-form.promocion-form input[type="text"],
+.premium-form.promocion-form input[type="number"],
+.premium-form.promocion-form input[type="email"],
+.premium-form.promocion-form input[type="password"],
+.premium-form.promocion-form select {
+    background-color: #ffffff !important;
+    color: #333333 !important;
+    border: 2px solid #e0e0e0 !important;
+    box-shadow: none !important;
+    appearance: none !important;
+    -webkit-appearance: none !important;
+    -moz-appearance: none !important;
+}
+
+/* Estados de focus con máxima especificidad */
+.form-container .promocion-form input[type="text"]:focus,
+.form-container .promocion-form input[type="number"]:focus,
+.form-container .promocion-form input[type="email"]:focus,
+.form-container .promocion-form input[type="password"]:focus,
+.form-container .promocion-form select:focus,
+.form-wrapper .promocion-form input[type="text"]:focus,
+.form-wrapper .promocion-form input[type="number"]:focus,
+.form-wrapper .promocion-form input[type="email"]:focus,
+.form-wrapper .promocion-form input[type="password"]:focus,
+.form-wrapper .promocion-form select:focus,
+.premium-form.promocion-form input[type="text"]:focus,
+.premium-form.promocion-form input[type="number"]:focus,
+.premium-form.promocion-form input[type="email"]:focus,
+.premium-form.promocion-form input[type="password"]:focus,
+.premium-form.promocion-form select:focus {
+    background-color: #ffffff !important;
+    color: #333333 !important;
+    border-color: #A8E6CF !important;
+    box-shadow: 0 0 0 0.2rem rgba(168, 230, 207, 0.25) !important;
+    outline: none !important;
+}
+
+/* Estados de hover con máxima especificidad */
+.form-container .promocion-form input[type="text"]:hover,
+.form-container .promocion-form input[type="number"]:hover,
+.form-container .promocion-form input[type="email"]:hover,
+.form-container .promocion-form input[type="password"]:hover,
+.form-container .promocion-form select:hover,
+.form-wrapper .promocion-form input[type="text"]:hover,
+.form-wrapper .promocion-form input[type="number"]:hover,
+.form-wrapper .promocion-form input[type="email"]:hover,
+.form-wrapper .promocion-form input[type="password"]:hover,
+.form-wrapper .promocion-form select:hover,
+.premium-form.promocion-form input[type="text"]:hover,
+.premium-form.promocion-form input[type="number"]:hover,
+.premium-form.promocion-form input[type="email"]:hover,
+.premium-form.promocion-form input[type="password"]:hover,
+.premium-form.promocion-form select:hover {
+    background-color: #ffffff !important;
+    color: #333333 !important;
+    border-color: #2d4a6b !important;
+}
+
+/* Sobrescribir estilos de validación que puedan interferir */
+.promocion-form .form-control.is-valid,
+.promocion-form .form-control.is-invalid {
+    background-color: #ffffff !important;
+    color: #333333 !important;
+}
+
+.promocion-form .form-control.is-valid:focus,
+.promocion-form .form-control.is-invalid:focus {
+    background-color: #ffffff !important;
+    color: #333333 !important;
+}
+
+/* Asegurar que los placeholders sean legibles */
+.promocion-form input::placeholder,
+.promocion-form select::placeholder {
+    color: #999999 !important;
+    opacity: 0.8 !important;
+}
+
+.promocion-form input:focus::placeholder,
+.promocion-form select:focus::placeholder {
+    color: #cccccc !important;
+    opacity: 0.6 !important;
+}
+
+/* ===== SOBRESCRIBIR ESTILOS GLOBALES DE SITE.CSS ===== */
+/* Sobrescribir el estilo global de site.css que afecta a form-control:focus */
+.form-container .promocion-form .form-control:focus,
+.form-wrapper .promocion-form .form-control:focus,
+.premium-form.promocion-form .form-control:focus {
+    box-shadow: 0 0 0 0.2rem rgba(168, 230, 207, 0.25) !important;
+    border-color: #A8E6CF !important;
+    background-color: #ffffff !important;
+    color: #333333 !important;
+}
+
+/* Asegurar que no se apliquen estilos de focus no deseados */
+.promocion-form input:focus,
+.promocion-form select:focus,
+.promocion-form .form-control:focus {
+    box-shadow: 0 0 0 0.2rem rgba(168, 230, 207, 0.25) !important;
+}
+
+/* ===== ESTILOS ESPECÍFICOS PARA VISTA DELETE DE PRODUCTOS ===== */
+.form-header.danger {
+    background: linear-gradient(135deg, #dc3545, #c82333) !important;
+    color: white;
+}
+
+.delete-confirmation {
+    padding: 2rem 0;
+}
+
+.producto-details-card {
+    background: white;
+    border-radius: 12px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border: 1px solid var(--form-border);
+}
+
+.producto-header {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid #e9ecef;
+}
+
+.producto-image {
+    width: 80px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f8f9fa;
+    border-radius: 12px;
+    border: 2px solid #dee2e6;
+    overflow: hidden;
+}
+
+.producto-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.producto-image i {
+    font-size: 2rem;
+    color: #6c757d;
+}
+
+.producto-name {
+    margin: 0;
+    color: #333;
+    font-size: 1.25rem;
+    font-weight: 600;
+}
+
+.producto-badge {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    margin-top: 0.5rem;
+}
+
+.producto-badge.promocion {
+    background: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+.producto-badge.normal {
+    background: #f8f9fa;
+    color: #6c757d;
+    border: 1px solid #dee2e6;
+}
+
+.producto-info {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.info-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid #f8f9fa;
+}
+
+.info-label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 500;
+    color: #495057;
+}
+
+.info-value {
+    font-weight: 600;
+    color: #212529;
+    text-align: right;
+}
+
+.price-original {
+    text-decoration: line-through;
+    color: #6c757d;
+    margin-right: 0.5rem;
+}
+
+.price-discount {
+    color: #dc3545;
+    font-weight: 700;
+}
+
+.price-current {
+    color: #28a745;
+    font-weight: 700;
+}
+
+.producto-description {
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid #e9ecef;
+}
+
+.producto-description h4 {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.75rem;
+    color: #495057;
+    font-size: 1rem;
+}
+
+.producto-description p {
+    margin: 0;
+    color: #6c757d;
+    line-height: 1.6;
+}
+
+.warning-message {
+    background: #fff3cd;
+    border: 1px solid #ffeaa7;
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    display: flex;
+    gap: 1rem;
+}
+
+.warning-icon {
+    color: #856404;
+    font-size: 1.5rem;
+    flex-shrink: 0;
+}
+
+.warning-content h4 {
+    color: #856404;
+    margin: 0 0 0.5rem 0;
+    font-size: 1.1rem;
+}
+
+.warning-content p {
+    color: #856404;
+    margin: 0 0 0.75rem 0;
+}
+
+.warning-content ul {
+    margin: 0;
+    padding-left: 1.5rem;
+    color: #856404;
+}
+
+.warning-content li {
+    margin-bottom: 0.25rem;
+}
+
+.delete-form {
+    margin-top: 2rem;
+}
+
+.form-actions {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.btn {
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    font-weight: 500;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.2s;
+    font-family: inherit;
+}
+
+.btn-danger {
+    background: #dc3545;
+    color: white;
+}
+
+.btn-danger:hover {
+    background: #c82333;
+    color: white;
+    text-decoration: none;
+}
+
+.btn-secondary {
+    background: #6c757d;
+    color: white;
+}
+
+.btn-secondary:hover {
+    background: #5a6268;
+    color: white;
+    text-decoration: none;
+}
+
+.btn-info {
+    background: #17a2b8;
+    color: white;
+}
+
+.btn-info:hover {
+    background: #138496;
+    color: white;
+    text-decoration: none;
+}
+
+/* Responsive para vista delete */
+@media (max-width: 768px) {
+    .producto-header {
+        flex-direction: column;
+        text-align: center;
+        gap: 1rem;
+    }
+    
+    .info-row {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+    
+    .info-value {
+        text-align: left;
+    }
+    
+    .form-actions {
+        flex-direction: column;
+    }
+    
+    .btn {
+        justify-content: center;
+    }
+}

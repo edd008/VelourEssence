@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+	<data name="PromotionEditTitle" xml:space="preserve">
+    <value>Editar Promoción</value>
+  </data>
+	<data name="PromotionEditSubtitle" xml:space="preserve">
+    <value>Modifique la información de la promoción</value>
+  </data>
+	<data name="PromotionEditBasicInfo" xml:space="preserve">
+    <value>Información Básica</value>
+  </data>
+	<data name="PromotionEditNameLabel" xml:space="preserve">
+    <value>Nombre de la Promoción</value>
+  </data>
+	<data name="PromotionEditNamePlaceholder" xml:space="preserve">
+    <value>Ingrese el nombre de la promoción</value>
+  </data>
+	<data name="PromotionEditTypeLabel" xml:space="preserve">
+    <value>Tipo de Promoción</value>
+  </data>
+	<data name="PromotionEditTypePlaceholder" xml:space="preserve">
+    <value>Seleccione el tipo de promoción</value>
+  </data>
+	<data name="PromotionEditProductLabel" xml:space="preserve">
+    <value>Producto</value>
+  </data>
+	<data name="PromotionEditProductPlaceholder" xml:space="preserve">
+    <value>Seleccione un producto</value>
+  </data>
+	<data name="PromotionEditCurrentProduct" xml:space="preserve">
+    <value>Actualmente</value>
+  </data>
+	<data name="PromotionEditCategoryLabel" xml:space="preserve">
+    <value>Categoría</value>
+  </data>
+	<data name="PromotionEditCategoryPlaceholder" xml:space="preserve">
+    <value>Seleccione una categoría</value>
+  </data>
+	<data name="PromotionEditCurrentCategory" xml:space="preserve">
+    <value>Actualmente</value>
+  </data>
+	<data name="PromotionEditDiscountLabel" xml:space="preserve">
+    <value>Porcentaje de Descuento</value>
+  </data>
+	<data name="PromotionEditDiscountHelp" xml:space="preserve">
+    <value>Ingrese un valor entre 0.01% y 100%</value>
+  </data>
+	<data name="PromotionEditPeriodTitle" xml:space="preserve">
+    <value>Período de Vigencia</value>
+  </data>
+	<data name="PromotionEditStartDateLabel" xml:space="preserve">
+    <value>Fecha de Inicio</value>
+  </data>
+	<data name="PromotionEditStartDateHelp" xml:space="preserve">
+    <value>No puede ser anterior a hoy</value>
+  </data>
+	<data name="PromotionEditEndDateLabel" xml:space="preserve">
+    <value>Fecha de Fin</value>
+  </data>
+	<data name="PromotionEditEndDateHelp" xml:space="preserve">
+    <value>Debe ser posterior a la fecha de inicio</value>
+  </data>
+	<data name="PromotionEditUpdateBtn" xml:space="preserve">
+    <value>Actualizar Promoción</value>
+  </data>
+	<data name="PromotionEditBackBtn" xml:space="preserve">
+    <value>Volver al Listado</value>
+  </data>
+	<data name="PromotionEditDetailsBtn" xml:space="preserve">
+    <value>Ver Detalles</value>
+  </data>
+</root>

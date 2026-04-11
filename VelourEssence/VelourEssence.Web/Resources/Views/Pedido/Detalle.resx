@@ -1,0 +1,95 @@
+﻿<root>
+	<data name="OrderDetailTitle">
+		<value>Detalle del Pedido</value>
+	</data>
+	<data name="OrderInvoiceLabel">
+		<value>Factura de Pedido</value>
+	</data>
+	<data name="OrderLabel">
+		<value>Pedido</value>
+	</data>
+	<data name="CustomerInfoTitle">
+		<value>Información del Cliente</value>
+	</data>
+	<data name="CustomerLabel">
+		<value>Cliente:</value>
+	</data>
+	<data name="AddressLabel">
+		<value>Dirección:</value>
+	</data>
+	<data name="DateLabel">
+		<value>Fecha:</value>
+	</data>
+	<data name="OrderStatusTitle">
+		<value>Estado del Pedido</value>
+	</data>
+	<data name="OrderStatusLabel">
+		<value>Estado del Pedido</value>
+	</data>
+	<data name="StatusCancelled">
+		<value>Cancelado</value>
+	</data>
+	<data name="StatusDelivered">
+		<value>Entregado</value>
+	</data>
+	<data name="StatusPending">
+		<value>Pendiente</value>
+	</data>
+	<data name="StatusShipped">
+		<value>Enviado</value>
+	</data>
+	<data name="PaymentMethodLabel">
+		<value>Método de Pago</value>
+	</data>
+	<data name="OrderProductsTitle">
+		<value>Productos del Pedido</value>
+	</data>
+	<data name="ProductLabel">
+		<value>Producto</value>
+	</data>
+	<data name="QuantityLabel">
+		<value>Cantidad</value>
+	</data>
+	<data name="UnitPriceLabel">
+		<value>Precio Unitario</value>
+	</data>
+	<data name="SubtotalLabel">
+		<value>Subtotal</value>
+	</data>
+	<data name="TaxLabel">
+		<value>Impuesto</value>
+	</data>
+	<data name="TotalLabel">
+		<value>Total</value>
+	</data>
+	<data name="PayOrderBtn">
+		<value>Pagar Pedido</value>
+	</data>
+	<data name="CancelOrderBtn">
+		<value>Cancelar Pedido</value>
+	</data>
+	<data name="CancelOrderConfirm">
+		<value>¿Está seguro de cancelar este pedido?</value>
+	</data>
+	<data name="CompletePaymentBtn">
+		<value>Completar Pago</value>
+	</data>
+	<data name="CannotCancelLabel">
+		<value>No se puede cancelar</value>
+	</data>
+	<data name="OrderCompletedLabel">
+		<value>Pedido Completado y Entregado</value>
+	</data>
+	<data name="OrderCancelledLabel">
+		<value>Pedido Cancelado</value>
+	</data>
+	<data name="BackToOrdersBtn">
+		<value>Volver a Pedidos</value>
+	</data>
+	<data name="ThankYouMsg">
+		<value>Gracias por su compra en Velour Essence</value>
+	</data>
+	<data name="ContactUsMsg">
+		<value>Para cualquier consulta, contáctenos</value>
+	</data>
+</root>

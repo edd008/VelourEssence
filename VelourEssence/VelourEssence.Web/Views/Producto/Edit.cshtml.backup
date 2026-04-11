@@ -1,0 +1,302 @@
+@model VelourEssence.Application.DTOs.ProductoMantenimientoDto
+
+@{
+    ViewData["Title"] = "Editar Producto";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/forms.css" />
+    <link rel="stylesheet" href="~/css/producto-edit.css" />
+}
+
+<div class="edit-product-container">
+    <div class="edit-product-wrapper">
+        <div class="edit-product-header">
+            <h1 class="edit-product-title">
+                <i class="bi bi-pencil-square"></i>
+                Editar Producto
+            </h1>
+            <p class="edit-product-subtitle">Modifica la información del producto seleccionado</p>
+        </div>
+
+        <div class="edit-product-content">
+            <form asp-action="Edit" method="post" enctype="multipart/form-data" class="edit-product-form">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input asp-for="EditarProducto.IdProducto" type="hidden" />
+
+                <div class="row">
+                    <!-- Columna principal -->
+                    <div class="col-md-8">
+                        <!-- Información básica -->
+                        <div class="edit-form-section">
+                            <h3 class="edit-section-title">
+                                <i class="bi bi-info-circle"></i>
+                                Información Básica
+                            </h3>
+
+                            <div class="edit-form-row">
+                                <div class="edit-form-group">
+                                    <label asp-for="EditarProducto.Nombre" class="edit-form-label">Nombre del Producto</label>
+                                    <input asp-for="EditarProducto.Nombre" class="edit-form-input" placeholder="Ingresa el nombre del producto">
+                                    <span asp-validation-for="EditarProducto.Nombre" class="edit-field-validation-error"></span>
+                                </div>
+                                <div class="edit-form-group">
+                                    <label asp-for="EditarProducto.Precio" class="edit-form-label">Precio</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text">$</span>
+                                        <input asp-for="EditarProducto.Precio" class="edit-form-input" placeholder="0.00" step="0.01">
+                                    </div>
+                                    <span asp-validation-for="EditarProducto.Precio" class="edit-field-validation-error"></span>
+                                </div>
+                            </div>
+
+                            <div class="edit-form-group full-width">
+                                <label asp-for="EditarProducto.Descripcion" class="edit-form-label">Descripción</label>
+                                <textarea asp-for="EditarProducto.Descripcion" class="edit-form-textarea" placeholder="Describe el producto detalladamente"></textarea>
+                                <span asp-validation-for="EditarProducto.Descripcion" class="edit-field-validation-error"></span>
+                            </div>
+
+                            <div class="edit-form-row">
+                                <div class="edit-form-group">
+                                    <label asp-for="EditarProducto.Stock" class="edit-form-label">Stock</label>
+                                    <input asp-for="EditarProducto.Stock" class="edit-form-input" type="number" min="0" placeholder="0">
+                                    <span asp-validation-for="EditarProducto.Stock" class="edit-field-validation-error"></span>
+                                </div>
+                                <div class="edit-form-group">
+                                    <label asp-for="EditarProducto.Marca" class="edit-form-label">Marca</label>
+                                    <input asp-for="EditarProducto.Marca" class="edit-form-input" placeholder="Marca del producto">
+                                    <span asp-validation-for="EditarProducto.Marca" class="edit-field-validation-error"></span>
+                                </div>
+                                <div class="edit-form-group">
+                                    <label asp-for="EditarProducto.Genero" class="edit-form-label">Género</label>
+                                    <select asp-for="EditarProducto.Genero" class="edit-form-select">
+                                        <option value="">Seleccionar género</option>
+                                        <option value="Masculino">Masculino</option>
+                                        <option value="Femenino">Femenino</option>
+                                        <option value="Unisex">Unisex</option>
+                                    </select>
+                                    <span asp-validation-for="EditarProducto.Genero" class="edit-field-validation-error"></span>
+                                </div>
+                                </div>
+                            </div>
+
+                            <div class="edit-form-group full-width">
+                                <label asp-for="EditarProducto.Concentracion" class="edit-form-label">Concentración</label>
+                                <input asp-for="EditarProducto.Concentracion" class="edit-form-input" placeholder="Ej: Eau de Parfum, Eau de Toilette">
+                                <span asp-validation-for="EditarProducto.Concentracion" class="edit-field-validation-error"></span>
+                            </div>
+                        </div>
+
+                        <!-- Clasificación -->
+                        <div class="edit-form-section">
+                            <h3 class="edit-section-title">
+                                <i class="bi bi-tags"></i>
+                                Clasificación
+                            </h3>
+
+                            <div class="edit-form-row">
+                                <div class="edit-form-group">
+                                    <label asp-for="EditarProducto.IdCategoria" class="edit-form-label">Categoría</label>
+                                    <select asp-for="EditarProducto.IdCategoria" class="edit-form-select">
+                                        <option value="">Seleccionar categoría</option>
+                                        @foreach (var categoria in Model.Categorias)
+                                        {
+                                            <option value="@categoria.IdCategoria">@categoria.Nombre</option>
+                                        }
+                                    </select>
+                                    <span asp-validation-for="EditarProducto.IdCategoria" class="edit-field-validation-error"></span>
+                                </div>
+                            </div>
+
+                            <div class="edit-form-group full-width">
+                                <label class="edit-form-label">Etiquetas</label>
+                                <div class="checkbox-group">
+                                    @for (int i = 0; i < Model.Etiquetas.Count; i++)
+                                    {                        <div class="edit-checkbox-group">
+                            <input class="edit-checkbox-input" type="checkbox" 
+                                   name="EditarProducto.EtiquetasIds" 
+                                   value="@Model.Etiquetas[i].IdEtiqueta"
+                                   id="etiqueta_@Model.Etiquetas[i].IdEtiqueta"
+                                   @(Model.EditarProducto?.EtiquetasIds?.Contains(Model.Etiquetas[i].IdEtiqueta) == true ? "checked" : "")>
+                                            <label class="edit-checkbox-label" for="etiqueta_@Model.Etiquetas[i].IdEtiqueta">
+                                                @Model.Etiquetas[i].Nombre
+                                            </label>
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Columna lateral -->
+                    <div class="col-md-4">
+                        <!-- Valoración -->
+                        <div class="edit-form-section">
+                            <h3 class="edit-section-title">
+                                <i class="bi bi-star"></i>
+                                Valoración Actual
+                            </h3>
+                            <div class="rating-display">
+                                <div class="rating-stars">
+                                    @for (int i = 1; i <= 5; i++)
+                                    {
+                                        if (i <= Model.PromedioValoracion)
+                                        {
+                                            <i class="bi bi-star-fill text-warning"></i>
+                                        }
+                                        else if (i - 0.5 <= Model.PromedioValoracion)
+                                        {
+                                            <i class="bi bi-star-half text-warning"></i>
+                                        }
+                                        else
+                                        {
+                                            <i class="bi bi-star text-muted"></i>
+                                        }
+                                    }
+                                </div>
+                                <div class="rating-info">
+                                    <strong>@Model.PromedioValoracion.ToString("F1")</strong> / 5
+                                    <br><small class="text-muted">(@Model.TotalReseñas reseñas)</small>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Imágenes existentes -->
+                        <div class="product-section">
+                            <h3 class="product-section-title">
+                                <i class="bi bi-images"></i>
+                                Imágenes Actuales
+                            </h3>
+
+                            <div class="existing-images">
+                                @if (Model.EditarProducto?.ImagenesExistentes?.Any() == true)
+                                {
+                                    @foreach (var imagen in Model.EditarProducto.ImagenesExistentes)
+                                    {
+                                        <div class="existing-image-item" data-image-id="@imagen.IdImagenProducto">
+                                            <img src="~/@imagen.Url" alt="Imagen del producto">
+                                            <div class="image-overlay">
+                                                <button type="button" class="btn-remove-image" data-image-id="@imagen.IdImagenProducto">
+                                                    <i class="bi bi-trash"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    }
+                                }
+                                else
+                                {
+                                    <p class="text-muted">No hay imágenes</p>
+                                }
+                            </div>
+                        </div>
+
+                        <!-- Nuevas imágenes -->
+                        <div class="product-section">
+                            <h3 class="product-section-title">
+                                <i class="bi bi-plus-circle"></i>
+                                Agregar Imágenes
+                            </h3>
+
+                            <div class="form-group">
+                                <label class="form-label">Seleccionar Nuevas Imágenes</label>
+                                <input type="file" name="imagenesNuevas" class="form-control" accept="image/*" multiple>
+                                <div class="form-text">
+                                    <i class="bi bi-info-circle"></i>
+                                    Formatos permitidos: JPG, PNG, GIF
+                                </div>
+                            </div>
+
+                            <div id="newImagePreview" class="new-image-preview"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Inputs ocultos para imágenes a eliminar -->
+                <div id="imagesToDelete"></div>
+
+                <!-- Botones de acción -->
+                <div class="product-actions">
+                    <a asp-action="Manage" class="btn btn-secondary">
+                        <i class="bi bi-arrow-left"></i>
+                        Cancelar
+                    </a>
+                    <button type="submit" class="btn btn-primary">
+                        <i class="bi bi-check-circle"></i>
+                        Actualizar Producto
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        // Array para almacenar IDs de imágenes a eliminar
+        let imagesToDelete = [];
+
+        // Manejar eliminación de imágenes existentes
+        document.querySelectorAll('.btn-remove-image').forEach(button => {
+            button.addEventListener('click', function() {
+                const imageId = this.dataset.imageId;
+                const imageItem = this.closest('.existing-image-item');
+                
+                if (confirm('¿Estás seguro de que deseas eliminar esta imagen?')) {
+                    // Agregar al array de eliminación
+                    imagesToDelete.push(imageId);
+                    
+                    // Crear input oculto
+                    const input = document.createElement('input');
+                    input.type = 'hidden';
+                    input.name = 'EditarProducto.ImagenesAEliminar';
+                    input.value = imageId;
+                    document.getElementById('imagesToDelete').appendChild(input);
+                    
+                    // Remover la imagen con animación
+                    imageItem.style.opacity = '0';
+                    setTimeout(() => {
+                        imageItem.remove();
+                    }, 300);
+                }
+            });
+        });
+
+        // Preview de nuevas imágenes
+        document.querySelector('input[name="imagenesNuevas"]').addEventListener('change', function(e) {
+            const preview = document.getElementById('newImagePreview');
+            preview.innerHTML = '';
+            
+            Array.from(e.target.files).forEach(file => {
+                if (file.type.startsWith('image/')) {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        const div = document.createElement('div');
+                        div.className = 'preview-item';
+                        div.innerHTML = `
+                            <img src="${e.target.result}" alt="Preview">
+                            <span class="preview-badge">Nueva</span>
+                        `;
+                        preview.appendChild(div);
+                    };
+                    reader.readAsDataURL(file);
+                }
+            });
+        });
+
+        // Validación del formulario
+        document.querySelector('form').addEventListener('submit', function(e) {
+            const nombre = document.querySelector('input[name="EditarProducto.Nombre"]').value.trim();
+            const precio = document.querySelector('input[name="EditarProducto.Precio"]').value;
+            const categoria = document.querySelector('select[name="EditarProducto.IdCategoria"]').value;
+            
+            if (!nombre || !precio || !categoria) {
+                e.preventDefault();
+                alert('Por favor, completa todos los campos obligatorios (Nombre, Precio y Categoría)');
+                return false;
+            }
+            
+            return true;
+        });
+    </script>
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

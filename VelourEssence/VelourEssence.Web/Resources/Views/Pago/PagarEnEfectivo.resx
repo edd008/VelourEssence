@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+	<data name="PayWithCashTitle">
+		<value>Pago en Efectivo</value>
+	</data>
+	<data name="PayWithCashSubtitle">
+		<value>Completa tu pago contra entrega</value>
+	</data>
+	<data name="OrderSummaryTitle">
+		<value>Resumen del Pedido</value>
+	</data>
+	<data name="TotalToPayLabel">
+		<value>Total a pagar:</value>
+	</data>
+	<data name="CashPaymentLabel">
+		<value>Pago en Efectivo</value>
+	</data>
+	<data name="CashInfoTitle">
+		<value>Información del Pago</value>
+	</data>
+	<data name="AmountReceivedLabel">
+		<value>Monto Recibido</value>
+	</data>
+	<data name="AmountReceivedPlaceholder">
+		<value>0.00</value>
+	</data>
+	<data name="MinimumRequiredLabel">
+		<value>Mínimo requerido: ₡{0}</value>
+	</data>
+	<data name="ChangeCalculatorTitle">
+		<value>Calculadora de Vuelto</value>
+	</data>
+	<data name="OrderTotalLabel">
+		<value>Total del pedido:</value>
+	</data>
+	<data name="ChangeToGiveLabel">
+		<value>Vuelto a entregar:</value>
+	</data>
+	<data name="SuggestedAmountsTitle">
+		<value>Montos Sugeridos:</value>
+	</data>
+	<data name="ConfirmCashPaymentBtn">
+		<value>Confirmar Pago en Efectivo</value>
+	</data>
+	<data name="ChangePaymentMethodBtn">
+		<value>Cambiar método de pago</value>
+	</data>
+	<data name="CashInfoSectionTitle">
+		<value>Información sobre el Pago en Efectivo</value>
+	</data>
+	<data name="CashInfoDelivery">
+		<value>Pago contra entrega del producto</value>
+	</data>
+	<data name="CashInfoNoFees">
+		<value>Sin comisiones adicionales</value>
+	</data>
+	<data name="CashInfoReceipt">
+		<value>Recibo inmediato al momento del pago</value>
+	</data>
+	<data name="CashInfoVerification">
+		<value>Verificación del producto antes del pago</value>
+	</data>
+</root>

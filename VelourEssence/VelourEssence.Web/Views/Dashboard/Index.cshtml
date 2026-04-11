@@ -1,0 +1,88 @@
+﻿@model VelourEssence.Application.DTOs.DashboardDto
+
+@{
+    ViewData["Title"] = "Dashboard Administrador";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/dashboard.css" />
+}
+
+<div class="dashboard-container">
+    <h2 class="dashboard-title">Dashboard Administrador</h2>
+
+    <!-- MÉTRICAS Y LISTADOS -->
+    <div class="cards-grid">
+        <div class="card card-metric">
+            <div class="card-icon">
+                <i class="fas fa-shopping-cart"></i>
+            </div>
+            <div class="card-body">
+                <h3>Total Pedidos</h3>
+                <p class="card-value">@Model.OrdersByStatus.Values.Sum()</p>
+                <span class="badge badge-success">Activo</span>
+            </div>
+        </div>
+
+        <div class="card card-list">
+            <h3>Productos Top 3</h3>
+            <ul>
+                @foreach (var prod in Model.TopProducts)
+                {
+                    <li>@prod.Nombre</li>
+                }
+            </ul>
+        </div>
+
+        <div class="card card-list">
+            <h3>Reseñas recientes</h3>
+            <ul>
+                @foreach (var r in Model.RecentReviews)
+                {
+                    <li>
+                        <strong>@r.IdUsuarioNavigation?.NombreUsuario</strong>:
+                        @r.Comentario
+                    </li>
+                }
+            </ul>
+        </div>
+    </div>
+
+    <!-- GRÁFICOS -->
+    <div class="charts-grid">
+        <div class="chart-card">
+            <h3>Ventas Últimos 30 días</h3>
+            <div id="salesByDayChart"></div>
+        </div>
+        <div class="chart-card">
+            <h3>Pedidos por Estado</h3>
+            <div id="ordersByStatusChart"></div>
+        </div>
+        <div class="chart-card">
+            <h3>Ventas Últimos 12 meses</h3>
+            <div id="salesByMonthChart"></div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
+    <script>
+        // Variables globales para los datos
+        window.salesByDayLabels = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model.SalesByDay.Select(s => s.Fecha.ToString("dd/MM"))));
+        window.salesByDayData = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model.SalesByDay.Select(s => s.TotalVentas)));
+
+        window.ordersByStatusData = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(
+        Model.OrdersByStatus.Select((kv, i) => new
+        {
+            value = kv.Value,
+            name = kv.Key,
+            itemStyle = new { color = (new[] { "#1F3A5F", "#FF8C94", "#A8E6CF", "#2C5282" })[i % 4] }
+        })
+    ));
+
+        window.salesByMonthLabels = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model.SalesByMonth.Select(s => s.Mes)));
+        window.salesByMonthData = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model.SalesByMonth.Select(s => s.TotalVentas)));
+    </script>
+    <script src="~/js/dashboard-echarts.js"></script>
+}

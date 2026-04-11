@@ -1,0 +1,123 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+	<data name="PaymentHistoryTitle">
+		<value>Payment History</value>
+	</data>
+	<data name="PaymentHistorySubtitle">
+		<value>Review all your payments and transactions</value>
+	</data>
+	<data name="TotalPaymentsStat">
+		<value>Total Payments</value>
+	</data>
+	<data name="TotalSpentStat">
+		<value>Total Spent</value>
+	</data>
+	<data name="CardPaymentsStat">
+		<value>Card Payments</value>
+	</data>
+	<data name="CashPaymentsStat">
+		<value>Cash Payments</value>
+	</data>
+	<data name="FilterPaymentsTitle">
+		<value>Filter Payments</value>
+	</data>
+	<data name="PeriodLabel">
+		<value>Period:</value>
+	</data>
+	<data name="PeriodAll">
+		<value>All periods</value>
+	</data>
+	<data name="PeriodToday">
+		<value>Today</value>
+	</data>
+	<data name="PeriodWeek">
+		<value>This week</value>
+	</data>
+	<data name="PeriodMonth">
+		<value>This month</value>
+	</data>
+	<data name="PeriodYear">
+		<value>This year</value>
+	</data>
+	<data name="PaymentMethodLabel">
+		<value>Payment Method:</value>
+	</data>
+	<data name="MethodAll">
+		<value>All methods</value>
+	</data>
+	<data name="MethodCard">
+		<value>Cards</value>
+	</data>
+	<data name="MethodCash">
+		<value>Cash</value>
+	</data>
+	<data name="SearchLabel">
+		<value>Search:</value>
+	</data>
+	<data name="SearchPlaceholder">
+		<value>Order number...</value>
+	</data>
+	<data name="OrderLabel">
+		<value>Order</value>
+	</data>
+	<data name="OrderDateLabel">
+		<value>Order Date:</value>
+	</data>
+	<data name="PaymentDateLabel">
+		<value>Payment Date:</value>
+	</data>
+	<data name="OrderStatusLabel">
+		<value>Order Status:</value>
+	</data>
+	<data name="ProductsLabel">
+		<value>Products:</value>
+	</data>
+	<data name="ItemsLabel">
+		<value>items</value>
+	</data>
+	<data name="SubtotalLabel">
+		<value>Subtotal:</value>
+	</data>
+	<data name="TaxLabel">
+		<value>Tax:</value>
+	</data>
+	<data name="ShippingAddressLabel">
+		<value>Shipping Address:</value>
+	</data>
+	<data name="CardLabel">
+		<value>Card:</value>
+	</data>
+	<data name="ChangeLabel">
+		<value>Change:</value>
+	</data>
+	<data name="DownloadReceiptBtn">
+		<value>Download Receipt</value>
+	</data>
+	<data name="ViewOrderBtn">
+		<value>View Full Order</value>
+	</data>
+	<data name="NoPaymentsTitle">
+		<value>No payments registered</value>
+	</data>
+	<data name="NoPaymentsDesc">
+		<value>You haven't made any payments yet. Start shopping now!</value>
+	</data>
+	<data name="GoToShopBtn">
+		<value>Go to Shop</value>
+	</data>
+	<data name="PaginationInfo">
+		<value>Showing {0} of {1} payments</value>
+	</data>
+	<data name="PreviousBtn">
+		<value>Previous</value>
+	</data>
+	<data name="NextBtn">
+		<value>Next</value>
+	</data>
+	<data name="BackToHomeBtn">
+		<value>Back to Home</value>
+	</data>
+	<data name="ExportExcelBtn">
+		<value>Export to Excel</value>
+	</data>
+</root>

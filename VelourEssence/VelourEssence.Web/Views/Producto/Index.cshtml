@@ -1,0 +1,484 @@
+﻿@using Microsoft.Extensions.Localization
+@inject IStringLocalizer<VelourEssence.Web.Views.Producto.Index> L
+@model IEnumerable<VelourEssence.Application.DTOs.ProductoDto>
+
+@{
+    ViewData["Title"] = L["ProductsTitle"];
+}
+
+@* Token CSRF para las llamadas AJAX *@
+<form>
+    @Html.AntiForgeryToken()
+</form>
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/products-index.css" />
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+}
+
+<div class="products-page">
+    <!-- Hero Section Premium para Productos -->
+    <div class="products-hero-section">
+        <div class="products-hero-background"></div>
+        <div class="products-hero-content">
+            <div class="products-hero-text">
+                <h1 class="products-hero-title">
+                    <span class="products-hero-brand">@L["ProductsTitle"]</span>
+                    <span class="products-hero-tagline">@L["ProductsTagline"]</span>
+                </h1>
+                <p class="products-hero-subtitle">
+                    @L["ProductsSubtitle"]
+                </p>
+                <div class="products-hero-stats">
+                    <div class="products-stat-item">
+                        <span class="products-stat-number">@(Model?.Count() ?? 0)</span>
+                        <span class="products-stat-label">@L["ProductsStatAvailable"]</span>
+                    </div>
+                    <div class="products-stat-item">
+                        <span class="products-stat-number">500+</span>
+                        <span class="products-stat-label">@L["ProductsStatClients"]</span>
+                    </div>
+                    <div class="products-stat-item">
+                        <span class="products-stat-number">24h</span>
+                        <span class="products-stat-label">@L["ProductsStatShipping"]</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="products-hero-scroll">
+            <i class="bi bi-chevron-down"></i>
+        </div>
+    </div>
+
+    <!-- Filtros y Búsqueda -->
+    <div class="products-filters-section">
+        <div class="products-container">
+            <div class="products-filters-header">
+                <h2 class="products-filters-title">@L["ProductsFiltersTitle"]</h2>
+                <div class="products-filters-controls">
+                    <div class="products-search-box">
+                        <i class="bi bi-search"></i>
+                        <input type="text" id="productsSearch" placeholder="@L["ProductsSearchPlaceholder"]" />
+                    </div>
+                    <div class="products-filter-dropdown">
+                        <select id="productsFilter">
+                            <option value="all">@L["ProductsFilterAll"]</option>
+                            <option value="men">@L["ProductsFilterMen"]</option>
+                            <option value="women">@L["ProductsFilterWomen"]</option>
+                            <option value="unisex">@L["ProductsFilterUnisex"]</option>
+                        </select>
+                    </div>
+                    <div class="products-sort-dropdown">
+                        <select id="productsSort">
+                            <option value="name">@L["ProductsSortName"]</option>
+                            <option value="price-low">@L["ProductsSortPriceLow"]</option>
+                            <option value="price-high">@L["ProductsSortPriceHigh"]</option>
+                            <option value="newest">@L["ProductsSortNewest"]</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Grid de Productos Premium -->
+    <div class="products-main-section">
+        <div class="products-container">
+            <div class="products-content-header">
+                <div class="products-results-info">
+                    <span class="products-count">@string.Format(L["ProductsCountFound"], Model?.Count() ?? 0)</span>
+                    <div class="products-view-toggle">
+                        <button class="products-view-btn active" data-view="grid">
+                            <i class="bi bi-grid-3x3-gap"></i>
+                        </button>
+                        <button class="products-view-btn" data-view="list">
+                            <i class="bi bi-list"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="products-grid" id="productsGrid">
+                @* Muestra productos si existen *@
+                @if (Model != null && Model.Any())
+                {
+                    foreach (var producto in Model)
+                    {
+                        // Obtiene las imágenes del producto
+                        var imagenes = producto.Imagenes?.ToList() ?? new List<VelourEssence.Application.DTOs.ImagenProductoDto>();
+
+                        <div class="products-card" data-aos="fade-up" data-aos-delay="100">
+                            <!-- Badge Premium -->
+                            @if (producto.TienePromocion && producto.PorcentajeDescuentoAplicado.HasValue)
+                            {
+                                <div class="products-discount-badge">
+                                    <span class="products-badge-text">-@producto.PorcentajeDescuentoAplicado?.ToString("0")%</span>
+                                    <span class="products-badge-label">@L["ProductsDiscountOff"]</span>
+                                </div>
+                            }
+
+                            <!-- Contenedor de imagen premium -->
+                            <div class="products-image-container">
+                                <div class="products-image-overlay">
+                                    <div class="products-quick-actions">
+                                        <button class="products-quick-btn" title="@L["ProductsQuickView"]">
+                                            <i class="bi bi-eye"></i>
+                                        </button>
+                                        <button class="products-quick-btn" title="@L["ProductsFavorites"]">
+                                            <i class="bi bi-heart"></i>
+                                        </button>
+                                    </div>
+                                </div>
+
+                                @* Carrusel de imágenes premium *@
+                                @if (imagenes.Any())
+                                {
+                                    <div class="products-carousel" data-product-id="@producto.IdProducto">
+                                        <div class="products-carousel-track">
+                                            @for (int i = 0; i < imagenes.Count; i++)
+                                            {
+                                                var img = imagenes[i];
+                                                <div class="products-carousel-slide @(i == 0 ? "active" : "")" data-slide="@i">
+                                                    <img src="~/@img.Url"
+                                                         alt="@producto.Nombre"
+                                                         loading="lazy"
+                                                         onerror="this.parentElement.innerHTML='<div class=&quot;products-image-error&quot;><i class=&quot;bi bi-image&quot;></i><span>@L["ProductsNoImage"]</span></div>';" />
+                                                </div>
+                                            }
+                                        </div>
+
+                                        @if (imagenes.Count > 1)
+                                        {
+                                            <button class="products-carousel-btn products-carousel-prev" onclick="changeProductSlide(@producto.IdProducto, -1)">
+                                                <i class="bi bi-chevron-left"></i>
+                                            </button>
+                                            <button class="products-carousel-btn products-carousel-next" onclick="changeProductSlide(@producto.IdProducto, 1)">
+                                                <i class="bi bi-chevron-right"></i>
+                                            </button>
+
+                                            <div class="products-carousel-dots">
+                                                @for (int i = 0; i < imagenes.Count; i++)
+                                                {
+                                                    <span class="products-carousel-dot @(i == 0 ? "active" : "")"
+                                                          onclick="goToProductSlide(@producto.IdProducto, @i)"
+                                                          data-slide="@i"></span>
+                                                }
+                                            </div>
+                                        }
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="products-no-image">
+                                        <i class="bi bi-image"></i>
+                                        <span>@L["ProductsNoImage"]</span>
+                                    </div>
+                                }
+                            </div>
+
+                            <!-- Información del producto premium -->
+                            <div class="products-card-content">
+                                <div class="products-card-header">
+                                    <h3 class="products-card-title">@producto.Nombre</h3>
+                                    <div class="products-rating">
+                                        <div class="products-stars">
+                                            <i class="bi bi-star-fill"></i>
+                                            <i class="bi bi-star-fill"></i>
+                                            <i class="bi bi-star-fill"></i>
+                                            <i class="bi bi-star-fill"></i>
+                                            <i class="bi bi-star"></i>
+                                        </div>
+                                        <span class="products-rating-text">(4.5)</span>
+                                    </div>
+                                </div>
+
+                                <p class="products-card-description">@producto.Descripcion</p>
+
+                                <!-- Precios premium -->
+                                <div class="products-price-section">
+                                    @if (producto.TienePromocion && producto.PrecioConDescuento.HasValue)
+                                    {
+                                        <div class="products-price-group">
+                                            <span class="products-price-original">
+                                                @producto.Precio?.ToString("C", new System.Globalization.CultureInfo("es-CR"))
+                                            </span>
+                                            <span class="products-price-current">
+                                                @producto.PrecioConDescuento?.ToString("C", new System.Globalization.CultureInfo("es-CR"))
+                                            </span>
+                                        </div>
+                                        <div class="products-savings">
+                                            @string.Format(L["ProductsSavings"], (producto.Precio - producto.PrecioConDescuento)?.ToString("C", new System.Globalization.CultureInfo("es-CR")))
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <span class="products-price-current">
+                                            @producto.Precio?.ToString("C", new System.Globalization.CultureInfo("es-CR"))
+                                        </span>
+                                    }
+                                </div>
+
+                                <!-- Botones de acción premium -->
+                                <div class="products-card-actions">
+                                    <a asp-controller="Producto" asp-action="Details" asp-route-id="@producto.IdProducto"
+                                       class="products-btn products-btn-primary">
+                                        <i class="bi bi-eye"></i>
+                                        <span>@L["ProductsViewDetails"]</span>
+                                    </a>
+                                    <button type="button" class="products-btn products-btn-secondary" onclick="addToProductCart(@producto.IdProducto, this)">
+                                        <i class="bi bi-cart-plus"></i>
+                                        <span>@L["ProductsAdd"]</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                }
+                else
+                {
+                    <!-- Estado vacío premium -->
+                    <div class="products-empty-state">
+                        <div class="products-empty-content">
+                            <div class="products-empty-icon">
+                                <i class="bi bi-search"></i>
+                            </div>
+                            <h3 class="products-empty-title">@L["ProductsEmptyTitle"]</h3>
+                            <p class="products-empty-description">
+                                @L["ProductsEmptyDescription"]
+                            </p>
+                            <button class="products-btn products-btn-primary" onclick="clearFilters()">
+                                <i class="bi bi-arrow-clockwise"></i>
+                                <span>@L["ProductsClearFilters"]</span>
+                            </button>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+    <!-- Cierre del contenedor .products-page -->
+    @section Scripts {
+        <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+        <script>
+            // Inicializar AOS (Animate On Scroll)
+            AOS.init({
+                duration: 800,
+                easing: 'ease-in-out',
+                once: true,
+                offset: 100
+            });
+
+            // Estado de carruseles
+            const productCarouselStates = {};
+
+            // Inicializar carrusel
+            function initProductCarousel(productId) {
+                if (!productCarouselStates[productId]) {
+                    const carousel = document.querySelector(`[data-product-id="${productId}"]`);
+                    if (!carousel) return;
+
+                    const slides = carousel.querySelectorAll('.products-carousel-slide');
+                    productCarouselStates[productId] = {
+                        currentSlide: 0,
+                        totalSlides: slides.length
+                    };
+                }
+            }
+
+            // Cambiar slide
+            function changeProductSlide(productId, direction) {
+                initProductCarousel(productId);
+
+                const carousel = document.querySelector(`[data-product-id="${productId}"]`);
+                if (!carousel) return;
+
+                const slides = carousel.querySelectorAll('.products-carousel-slide');
+                const dots = carousel.querySelectorAll('.products-carousel-dot');
+                const state = productCarouselStates[productId];
+
+                if (slides.length === 0) return;
+
+                slides[state.currentSlide].classList.remove('active');
+                if (dots.length > 0) {
+                    dots[state.currentSlide].classList.remove('active');
+                }
+
+                state.currentSlide += direction;
+
+                if (state.currentSlide >= state.totalSlides) {
+                    state.currentSlide = 0;
+                } else if (state.currentSlide < 0) {
+                    state.currentSlide = state.totalSlides - 1;
+                }
+
+                slides[state.currentSlide].classList.add('active');
+                if (dots.length > 0) {
+                    dots[state.currentSlide].classList.add('active');
+                }
+            }
+
+            // Ir a slide específico
+            function goToProductSlide(productId, slideIndex) {
+                initProductCarousel(productId);
+
+                const carousel = document.querySelector(`[data-product-id="${productId}"]`);
+                if (!carousel) return;
+
+                const slides = carousel.querySelectorAll('.products-carousel-slide');
+                const dots = carousel.querySelectorAll('.products-carousel-dot');
+                const state = productCarouselStates[productId];
+
+                if (slides.length === 0) return;
+
+                slides[state.currentSlide].classList.remove('active');
+                if (dots.length > 0) {
+                    dots[state.currentSlide].classList.remove('active');
+                }
+
+                state.currentSlide = slideIndex;
+
+                slides[state.currentSlide].classList.add('active');
+                if (dots.length > 0) {
+                    dots[state.currentSlide].classList.add('active');
+                }
+            }
+
+            // Agregar al carrito
+            function addToProductCart(productId, buttonElement) {
+                // Verificar autenticación
+                @if (User.Identity?.IsAuthenticated != true)
+                {
+                    <text>
+                    alert('Debe iniciar sesión para agregar productos al carrito.');
+                    window.location.href = '@Url.Action("Login", "Auth")';
+                    return;
+                    </text>
+                }
+
+                const button = buttonElement;
+                const originalContent = button.innerHTML;
+
+                // Deshabilitar botón y mostrar loading
+                button.innerHTML = '<i class="spinner-border spinner-border-sm" role="status"></i> Agregando...';
+                button.disabled = true;
+
+                // Hacer llamada al carrito real
+                const url = '@Url.Action("AgregarProducto", "Carrito")' + '?idProducto=' + productId + '&cantidad=1';
+                console.log('URL del carrito real:', url);
+                
+                fetch(url, {
+                    method: 'GET'
+                })
+                .then(response => {
+                    console.log('Response status:', response.status);
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    console.log('Response data:', data);
+                    if (data.success) {
+                        // Mostrar éxito
+                        button.innerHTML = '<i class="bi bi-check2"></i> ¡Agregado!';
+                        button.classList.add('success');
+
+                        // Actualizar contador del carrito en el header
+                        const cartBadge = document.querySelector('.cart-badge');
+                        if (cartBadge && data.cantidadTotal) {
+                            cartBadge.textContent = data.cantidadTotal;
+                            cartBadge.style.display = data.cantidadTotal > 0 ? 'inline' : 'none';
+                        }
+
+                        // Mostrar mensaje de éxito
+                        if (typeof Swal !== 'undefined') {
+                            Swal.fire({
+                                icon: 'success',
+                                title: '¡Producto agregado!',
+                                text: data.message,
+                                timer: 2000,
+                                showConfirmButton: false
+                            });
+                        } else {
+                            alert(data.message);
+                        }
+                    } else {
+                        // Mostrar error
+                        button.innerHTML = '<i class="bi bi-exclamation-triangle"></i> Error';
+                        if (typeof Swal !== 'undefined') {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Error',
+                                text: data.message
+                            });
+                        } else {
+                            alert(data.message);
+                        }
+                    }
+                })
+                .catch(error => {
+                    console.error('Error completo:', error);
+                    button.innerHTML = '<i class="bi bi-exclamation-triangle"></i> Error';
+                    alert('Error al agregar el producto al carrito: ' + error.message);
+                })
+                .finally(() => {
+                    // Restaurar botón después de 2.5 segundos
+                    setTimeout(() => {
+                        button.innerHTML = originalContent;
+                        button.classList.remove('success');
+                        button.disabled = false;
+                    }, 2500);
+                });
+            }
+
+            // Limpiar filtros
+            function clearFilters() {
+                document.getElementById('productsSearch').value = '';
+                document.getElementById('productsFilter').value = 'all';
+                document.getElementById('productsSort').value = 'name';
+            }
+
+            // Toggle vista
+            function toggleView(view) {
+                const grid = document.getElementById('productsGrid');
+                const buttons = document.querySelectorAll('.products-view-btn');
+
+                buttons.forEach(btn => btn.classList.remove('active'));
+                document.querySelector(`[data-view="${view}"]`).classList.add('active');
+
+                grid.className = view === 'list' ? 'products-list' : 'products-grid';
+            }
+
+            // Scroll suave al hacer clic en el indicador del hero
+            document.querySelector('.products-hero-scroll')?.addEventListener('click', function() {
+                document.querySelector('.products-filters-section').scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+
+            // Inicializar al cargar la página
+            document.addEventListener('DOMContentLoaded', function() {
+                // Inicializar carruseles
+                document.querySelectorAll('.products-carousel').forEach(carousel => {
+                    const productId = carousel.dataset.productId;
+                    initProductCarousel(parseInt(productId));
+                });
+
+                // Event listeners para los botones de vista
+                document.querySelectorAll('.products-view-btn').forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        toggleView(this.dataset.view);
+                    });
+                });
+
+                // Efectos de paralaje para el hero
+                window.addEventListener('scroll', function() {
+                    const scrolled = window.pageYOffset;
+                    const heroBackground = document.querySelector('.products-hero-background');
+                    if (heroBackground) {
+                        heroBackground.style.transform = `translateY(${scrolled * 0.5}px)`;
+                    }
+                });
+            });
+        </script>
+    }

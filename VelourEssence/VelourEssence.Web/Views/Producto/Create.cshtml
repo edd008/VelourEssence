@@ -1,0 +1,280 @@
+@using Microsoft.Extensions.Localization
+@inject IStringLocalizer<VelourEssence.Web.Views.Producto.Create> L
+@model VelourEssence.Application.DTOs.ProductoMantenimientoDto
+
+@{
+    ViewData["Title"] = L["CreateProductTitle"];
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/forms.css" />
+    <link rel="stylesheet" href="~/css/producto-create.css" />
+}
+
+<div class="create-product-container">
+    <div class="create-product-wrapper">
+        <div class="create-product-header">
+            <h1 class="create-product-title">
+                <i class="bi bi-plus-circle"></i>
+                @L["CreateProductHeader"]
+            </h1>
+            <p class="create-product-subtitle">@L["CreateProductSubtitle"]</p>
+        </div>
+
+        <div class="create-product-content">
+            <form asp-action="Create" method="post" enctype="multipart/form-data" class="create-product-form">
+                <div asp-validation-summary="ModelOnly" class="validation-summary-errors"></div>
+
+                <div class="row">
+                    <div class="col-lg-8">
+                        <!-- Información Básica -->
+                        <div class="create-form-section">
+                            <h3 class="create-section-title">
+                                <i class="bi bi-info-circle"></i>
+                                @L["CreateBasicInfo"]
+                            </h3>
+
+                            <div class="create-form-row">
+                                <div class="create-form-group">
+                                    <label asp-for="CrearProducto.Nombre" class="create-form-label">@L["CreateProductNameLabel"]</label>
+                                    <input asp-for="CrearProducto.Nombre" class="create-form-input" placeholder="@L["CreateProductNamePlaceholder"]">
+                                    <span asp-validation-for="CrearProducto.Nombre" class="create-field-validation-error"></span>
+                                </div>
+                                <div class="create-form-group">
+                                    <label asp-for="CrearProducto.Precio" class="create-form-label">@L["CreateProductPriceLabel"]</label>
+                                    <div class="input-group">
+                                        <input asp-for="CrearProducto.Precio" class="create-form-input" placeholder="0.00" step="0.01">
+                                    </div>
+                                    <span asp-validation-for="CrearProducto.Precio" class="create-field-validation-error"></span>
+                                </div>
+                            </div>
+
+                            <div class="create-form-group full-width">
+                                <label asp-for="CrearProducto.Descripcion" class="create-form-label">@L["CreateProductDescriptionLabel"]</label>
+                                <textarea asp-for="CrearProducto.Descripcion" class="create-form-textarea" placeholder="@L["CreateProductDescriptionPlaceholder"]"></textarea>
+                                <span asp-validation-for="CrearProducto.Descripcion" class="create-field-validation-error"></span>
+                            </div>
+
+                            <div class="create-form-row">
+                                <div class="create-form-group">
+                                    <label asp-for="CrearProducto.Stock" class="create-form-label">@L["CreateProductStockLabel"]</label>
+                                    <input asp-for="CrearProducto.Stock" class="create-form-input" type="number" min="0" placeholder="0">
+                                    <span asp-validation-for="CrearProducto.Stock" class="create-field-validation-error"></span>
+                                </div>
+                                <div class="create-form-group">
+                                    <label asp-for="CrearProducto.Marca" class="create-form-label">@L["CreateProductBrandLabel"]</label>
+                                    <input asp-for="CrearProducto.Marca" class="create-form-input" placeholder="@L["CreateProductBrandPlaceholder"]">
+                                    <span asp-validation-for="CrearProducto.Marca" class="create-field-validation-error"></span>
+                                </div>
+                                <div class="create-form-group">
+                                    <label asp-for="CrearProducto.Genero" class="create-form-label">@L["CreateProductGenderLabel"]</label>
+                                    <select asp-for="CrearProducto.Genero" class="create-form-select">
+                                        <option value="">@L["CreateProductGenderSelect"]</option>
+                                        <option value="Masculino">@L["CreateProductGenderMasculino"]</option>
+                                        <option value="Femenino">@L["CreateProductGenderFemenino"]</option>
+                                        <option value="Unisex">@L["CreateProductGenderUnisex"]</option>
+                                    </select>
+                                    <span asp-validation-for="CrearProducto.Genero" class="create-field-validation-error"></span>
+                                </div>
+                            </div>
+
+                            <div class="create-form-group full-width">
+                                <label asp-for="CrearProducto.Concentracion" class="create-form-label">@L["CreateProductConcentrationLabel"]</label>
+                                <input asp-for="CrearProducto.Concentracion" class="create-form-input" placeholder="@L["CreateProductConcentrationPlaceholder"]">
+                                <span asp-validation-for="CrearProducto.Concentracion" class="create-field-validation-error"></span>
+                            </div>
+                        </div>
+
+                        <!-- Clasificación -->
+                        <div class="create-form-section">
+                            <h3 class="create-section-title">
+                                <i class="bi bi-tags"></i>
+                                @L["CreateClassification"]
+                            </h3>
+
+                            <div class="create-form-row">
+                                <div class="create-form-group">
+                                    <label asp-for="CrearProducto.IdCategoria" class="create-form-label">@L["CreateProductCategoryLabel"]</label>
+                                    <select asp-for="CrearProducto.IdCategoria" class="create-form-select">
+                                        <option value="">@L["CreateProductCategorySelect"]</option>
+                                        @foreach (var categoria in Model.Categorias)
+                                        {
+                                            <option value="@categoria.IdCategoria">@categoria.Nombre</option>
+                                        }
+                                    </select>
+                                    <span asp-validation-for="CrearProducto.IdCategoria" class="create-field-validation-error"></span>
+                                </div>
+                                <div class="create-form-group">
+                                    <label class="create-form-label">@L["CreateProductTagsLabel"]</label>
+                                    <div class="checkbox-group">
+                                        @for (int i = 0; i < Model.Etiquetas.Count; i++)
+                                        {
+                                            <div class="create-checkbox-group">
+                                                <input class="create-checkbox-input" type="checkbox"
+                                                       name="CrearProducto.EtiquetasIds"
+                                                       value="@Model.Etiquetas[i].IdEtiqueta"
+                                                       id="etiqueta_@Model.Etiquetas[i].IdEtiqueta">
+                                                <label class="create-checkbox-label" for="etiqueta_@Model.Etiquetas[i].IdEtiqueta">
+                                                    @Model.Etiquetas[i].Nombre
+                                                </label>
+                                            </div>
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4">
+                        <!-- Sección de Imágenes -->
+                        <div class="create-form-section">
+                            <h3 class="create-section-title">
+                                <i class="bi bi-images"></i>
+                                @L["CreateProductImagesTitle"]
+                            </h3>
+
+                            <div class="create-image-section" id="imageDropZone">
+                                <div class="create-image-upload">
+                                    <div class="image-upload-icon">
+                                        <i class="bi bi-cloud-upload"></i>
+                                    </div>
+                                    <div class="image-upload-text">
+                                        @L["CreateProductImagesDropText"]
+                                    </div>
+                                    <div class="image-upload-hint">
+                                        @L["CreateProductImagesHint"]
+                                    </div>
+                                    <input type="file" name="imagenesArchivos" id="imageInput" class="create-file-input" accept="image/*" multiple style="display: none;">
+                                </div>
+
+                                <div class="form-text">
+                                    <i class="bi bi-info-circle"></i>
+                                    @L["CreateProductImagesInfo"]
+                                </div>
+
+                                <div id="imagePreviews" class="create-image-preview"></div>
+                            </div>
+                        </div>
+
+                        <!-- Panel de Consejos -->
+                        <div class="tips-panel">
+                            <h4 class="tips-title">
+                                <i class="bi bi-lightbulb"></i>
+                                @L["CreateTipsTitle"]
+                            </h4>
+                            <ul class="tips-list">
+                                <li>@L["CreateTipsName"]</li>
+                                <li>@L["CreateTipsDescription"]</li>
+                                <li>@L["CreateTipsTags"]</li>
+                                <li>@L["CreateTipsImages"]</li>
+                                <li>@L["CreateTipsStock"]</li>
+                                <li>@L["CreateTipsBrandConcentration"]</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="create-button-group">
+                    <a asp-action="Manage" class="create-btn create-btn-secondary">
+                        <i class="bi bi-arrow-left"></i>
+                        @L["CreateCancelBtn"]
+                    </a>
+                    <button type="submit" class="create-btn create-btn-primary">
+                        <i class="bi bi-check-circle"></i>
+                        @L["CreateSubmitBtn"]
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        // Variables globales
+        let selectedFiles = [];
+        const imageDropZone = document.getElementById('imageDropZone');
+        const imageInput = document.getElementById('imageInput');
+        const imagePreviews = document.getElementById('imagePreviews');
+        imageDropZone.addEventListener('click', () => { imageInput.click(); });
+        imageDropZone.addEventListener('dragover', (e) => { e.preventDefault(); imageDropZone.classList.add('dragover'); });
+        imageDropZone.addEventListener('dragleave', () => { imageDropZone.classList.remove('dragover'); });
+        imageDropZone.addEventListener('drop', (e) => {
+            e.preventDefault();
+            imageDropZone.classList.remove('dragover');
+            const files = Array.from(e.dataTransfer.files).filter(file => file.type.startsWith('image/'));
+            handleFiles(files);
+        });
+        imageInput.addEventListener('change', (e) => {
+            const files = Array.from(e.target.files);
+            handleFiles(files);
+        });
+        function handleFiles(files) {
+            files.forEach(file => {
+                if (file.type.startsWith('image/') && file.size <= 5 * 1024 * 1024) {
+                    if (!selectedFiles.some(f => f.name === file.name && f.size === file.size)) {
+                        selectedFiles.push(file);
+                    }
+                }
+            });
+            updateImagePreviews();
+            updateFileInput();
+        }
+        function updateImagePreviews() {
+            imagePreviews.innerHTML = '';
+            selectedFiles.forEach((file, index) => {
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    const previewDiv = document.createElement('div');
+                    previewDiv.className = 'create-image-preview-item';
+                    previewDiv.innerHTML = `
+                        <img src="${e.target.result}" alt="Preview">
+                        <div class="create-image-preview-info">
+                            <p class="create-image-preview-name">${file.name}</p>
+                        </div>
+                        <button type="button" class="create-image-remove" onclick="removeImage(${index})">
+                            <i class="bi bi-x"></i>
+                        </button>
+                    `;
+                    imagePreviews.appendChild(previewDiv);
+                };
+                reader.readAsDataURL(file);
+            });
+        }
+        function removeImage(index) {
+            selectedFiles.splice(index, 1);
+            updateImagePreviews();
+            updateFileInput();
+        }
+        function updateFileInput() {
+            const dt = new DataTransfer();
+            selectedFiles.forEach(file => dt.items.add(file));
+            imageInput.files = dt.files;
+        }
+        document.querySelector('.create-product-form').addEventListener('submit', function(e) {
+            let isValid = true;
+            const requiredFields = ['CrearProducto.Nombre', 'CrearProducto.Precio', 'CrearProducto.IdCategoria'];
+            requiredFields.forEach(fieldName => {
+                const field = document.querySelector(`[name="${fieldName}"]`);
+                if (!field.value.trim()) {
+                    isValid = false;
+                    field.classList.add('is-invalid');
+                } else {
+                    field.classList.remove('is-invalid');
+                }
+            });
+            if (!isValid) {
+                e.preventDefault();
+                alert('@L["CreateRequiredFieldsAlert"]');
+            }
+        });
+        document.querySelectorAll('.create-form-input, .create-form-select, .create-form-textarea').forEach(field => {
+            field.addEventListener('input', function() {
+                this.classList.remove('is-invalid');
+            });
+        });
+    </script>
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

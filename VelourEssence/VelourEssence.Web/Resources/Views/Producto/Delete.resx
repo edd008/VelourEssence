@@ -1,0 +1,72 @@
+﻿<root>
+	<data name="DeleteProductTitle">
+		<value>Eliminar Producto</value>
+	</data>
+	<data name="DeleteProductSubtitle">
+		<value>¿Está seguro de que desea eliminar este producto?</value>
+	</data>
+	<data name="AttentionLabel">
+		<value>¡Atención!</value>
+	</data>
+	<data name="DeleteConfirmationAlert">
+		<value>Esta acción no se puede deshacer. El producto y toda su información asociada se eliminarán permanentemente.</value>
+	</data>
+	<data name="WithPromotionBadge">
+		<value>Con Promoción</value>
+	</data>
+	<data name="WithoutPromotionBadge">
+		<value>Sin Promoción</value>
+	</data>
+	<data name="PriceLabel">
+		<value>Precio</value>
+	</data>
+	<data name="CategoryLabel">
+		<value>Categoría</value>
+	</data>
+	<data name="DescriptionLabel">
+		<value>Descripción</value>
+	</data>
+	<data name="RatingLabel">
+		<value>Valoración</value>
+	</data>
+	<data name="ReviewsLabel">
+		<value>reseñas</value>
+	</data>
+	<data name="TagsLabel">
+		<value>Etiquetas</value>
+	</data>
+	<data name="ImagesLabel">
+		<value>Imágenes</value>
+	</data>
+	<data name="ImagesCountLabel">
+		<value>imagen(es)</value>
+	</data>
+	<data name="DeleteWarningMsg">
+		<value>Esta acción no se puede deshacer. Al eliminar este producto:</value>
+	</data>
+	<data name="DeleteWarningLoseInfo">
+		<value>Se perderá toda la información del producto</value>
+	</data>
+	<data name="DeleteWarningLoseImages">
+		<value>Se eliminarán todas las imágenes asociadas</value>
+	</data>
+	<data name="DeleteWarningLoseReviews">
+		<value>Se eliminarán todas las reseñas del producto</value>
+	</data>
+	<data name="DeleteWarningNotAvailable">
+		<value>El producto ya no estará disponible en el catálogo</value>
+	</data>
+	<data name="ConfirmDeleteBtn">
+		<value>Sí, Eliminar Producto</value>
+	</data>
+	<data name="CancelBtn">
+		<value>Cancelar</value>
+	</data>
+	<data name="ViewDetailsBtn">
+		<value>Ver Detalles</value>
+	</data>
+	<data name="DeleteConfirmJs">
+		<value>¿Estás completamente seguro de que deseas eliminar este producto? Esta acción no se puede deshacer.</value>
+	</data>
+</root>
+

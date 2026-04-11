@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+	<data name="PromotionCreateTitle" xml:space="preserve">
+    <value>Crear Nueva Promoción</value>
+  </data>
+	<data name="PromotionCreateSubtitle" xml:space="preserve">
+    <value>Complete la información para registrar una nueva promoción</value>
+  </data>
+	<data name="PromotionCreateBasicInfo" xml:space="preserve">
+    <value>Información Básica</value>
+  </data>
+	<data name="PromotionCreateNameLabel" xml:space="preserve">
+    <value>Nombre de la Promoción</value>
+  </data>
+	<data name="PromotionCreateNamePlaceholder" xml:space="preserve">
+    <value>Ingrese el nombre de la promoción</value>
+  </data>
+	<data name="PromotionCreateTypeLabel" xml:space="preserve">
+    <value>Tipo de Promoción</value>
+  </data>
+	<data name="PromotionCreateTypePlaceholder" xml:space="preserve">
+    <value>Seleccione el tipo de promoción</value>
+  </data>
+	<data name="PromotionCreateProductLabel" xml:space="preserve">
+    <value>Producto</value>
+  </data>
+	<data name="PromotionCreateProductPlaceholder" xml:space="preserve">
+    <value>Seleccione un producto</value>
+  </data>
+	<data name="PromotionCreateCategoryLabel" xml:space="preserve">
+    <value>Categoría</value>
+  </data>
+	<data name="PromotionCreateCategoryPlaceholder" xml:space="preserve">
+    <value>Seleccione una categoría</value>
+  </data>
+	<data name="PromotionCreateDiscountLabel" xml:space="preserve">
+    <value>Porcentaje de Descuento</value>
+  </data>
+	<data name="PromotionCreateDiscountHelp" xml:space="preserve">
+    <value>Ingrese un valor entre 0.01% y 100%</value>
+  </data>
+	<data name="PromotionCreatePeriodTitle" xml:space="preserve">
+    <value>Período de Vigencia</value>
+  </data>
+	<data name="PromotionCreateStartDateLabel" xml:space="preserve">
+    <value>Fecha de Inicio</value>
+  </data>
+	<data name="PromotionCreateStartDateHelp" xml:space="preserve">
+    <value>No puede ser anterior a hoy</value>
+  </data>
+	<data name="PromotionCreateEndDateLabel" xml:space="preserve">
+    <value>Fecha de Fin</value>
+  </data>
+	<data name="PromotionCreateEndDateHelp" xml:space="preserve">
+    <value>Debe ser posterior a la fecha de inicio</value>
+  </data>
+	<data name="PromotionCreateBtn" xml:space="preserve">
+    <value>Crear Promoción</value>
+  </data>
+	<data name="PromotionCreateBackBtn" xml:space="preserve">
+    <value>Volver al Listado</value>
+  </data>
+</root>

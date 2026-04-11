@@ -1,0 +1,78 @@
+﻿<root>
+	<data name="EditUserTitle">
+		<value>Editar Usuario</value>
+	</data>
+	<data name="EditUserHeader">
+		<value>Editar Usuario</value>
+	</data>
+	<data name="EditUserSubtitle">
+		<value>Modifique la información del usuario #{0}</value>
+	</data>
+	<data name="PersonalInfoTitle">
+		<value>Información Personal</value>
+	</data>
+	<data name="UsernameLabel">
+		<value>Nombre de Usuario</value>
+	</data>
+	<data name="UsernamePlaceholder">
+		<value>Ingrese el nombre de usuario</value>
+	</data>
+	<data name="EmailLabel">
+		<value>Correo Electrónico</value>
+	</data>
+	<data name="EmailPlaceholder">
+		<value>usuario@ejemplo.com</value>
+	</data>
+	<data name="SecurityTitle">
+		<value>Seguridad (Opcional)</value>
+	</data>
+	<data name="PasswordOptionalInfo">
+		<value>Deje los campos de contraseña vacíos si no desea cambiarla</value>
+	</data>
+	<data name="NewPasswordLabel">
+		<value>Nueva Contraseña</value>
+	</data>
+	<data name="NewPasswordPlaceholder">
+		<value>Ingrese la nueva contraseña (opcional)</value>
+	</data>
+	<data name="PasswordRequirements">
+		<value>Si ingresa una contraseña, debe tener al menos 6 caracteres</value>
+	</data>
+	<data name="ConfirmNewPasswordLabel">
+		<value>Confirmar Nueva Contraseña</value>
+	</data>
+	<data name="ConfirmNewPasswordPlaceholder">
+		<value>Confirme la nueva contraseña</value>
+	</data>
+	<data name="PermissionsTitle">
+		<value>Permisos</value>
+	</data>
+	<data name="RoleLabel">
+		<value>Rol del Usuario</value>
+	</data>
+	<data name="SelectRoleOption">
+		<value>Seleccione un rol</value>
+	</data>
+	<data name="AdditionalInfoTitle">
+		<value>Información Adicional</value>
+	</data>
+	<data name="LastLoginLabel">
+		<value>Último Inicio de Sesión</value>
+	</data>
+	<data name="SaveChangesBtn">
+		<value>Guardar Cambios</value>
+	</data>
+	<data name="CancelBtn">
+		<value>Cancelar</value>
+	</data>
+	<data name="ViewDetailsBtn">
+		<value>Ver Detalles</value>
+	</data>
+	<data name="UsernameExistsMsg">
+		<value>Este nombre de usuario ya existe</value>
+	</data>
+	<data name="EmailExistsMsg">
+		<value>Este correo ya está registrado</value>
+	</data>
+</root>
+

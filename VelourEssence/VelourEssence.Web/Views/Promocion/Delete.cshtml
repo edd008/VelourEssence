@@ -1,0 +1,258 @@
+@using Microsoft.Extensions.Localization
+@inject IStringLocalizer<VelourEssence.Web.Views.Promocion.Delete> L
+@model VelourEssence.Application.DTOs.PromocionDto
+
+@{
+    ViewData["Title"] = L["DeletePromotionTitle"];
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/forms.css" />
+}
+
+<div class="form-container">
+    <div class="form-wrapper">
+        <div class="form-header danger">
+            <h1 class="form-title">
+                <i class="bi bi-exclamation-triangle"></i>
+                @L["DeletePromotionTitle"]
+            </h1>
+            <p class="form-subtitle">@L["DeletePromotionSubtitle"]</p>
+        </div>
+
+        <div class="delete-confirmation">
+            <div class="promocion-details-card">
+                <div class="promocion-header">
+                    <div class="promocion-icon">
+                        <i class="bi bi-tag-fill"></i>
+                    </div>
+                    <div>
+                        <h3 class="promocion-name">@Model.Nombre</h3>
+                        <span class="promocion-badge @Model.Estado.ToLower()">@Model.Estado</span>
+                    </div>
+                </div>
+
+                <div class="promocion-info">
+                    <div class="info-row">
+                        <span class="info-label">
+                            <i class="bi bi-gear"></i>
+                            @L["TypeLabel"]
+                        </span>
+                        <span class="info-value">@Model.Tipo</span>
+                    </div>
+
+                    @if (!string.IsNullOrEmpty(Model.NombreProducto))
+                    {
+                        <div class="info-row">
+                            <span class="info-label">
+                                <i class="bi bi-box"></i>
+                                @L["ProductLabel"]
+                            </span>
+                            <span class="info-value">@Model.NombreProducto</span>
+                        </div>
+                    }
+
+                    @if (Model.IdCategoria.HasValue)
+                    {
+                        <div class="info-row">
+                            <span class="info-label">
+                                <i class="bi bi-collection"></i>
+                                @L["CategoryLabel"]
+                            </span>
+                            <span class="info-value">@L["CategoryIdLabel"] @Model.IdCategoria</span>
+                        </div>
+                    }
+
+                    <div class="info-row">
+                        <span class="info-label">
+                            <i class="bi bi-percent"></i>
+                            @L["DiscountLabel"]
+                        </span>
+                        <span class="info-value descuento">@Model.PorcentajeDescuento?.ToString("0.##")@L["PercentSymbol"]</span>
+                    </div>
+
+                    <div class="info-row">
+                        <span class="info-label">
+                            <i class="bi bi-calendar-range"></i>
+                            @L["ValidityLabel"]
+                        </span>
+                        <span class="info-value">
+                            @Model.FechaInicio?.ToString("dd/MM/yyyy") - @Model.FechaFin?.ToString("dd/MM/yyyy")
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="warning-message">
+                <div class="warning-icon">
+                    <i class="bi bi-exclamation-triangle-fill"></i>
+                </div>
+                <div class="warning-content">
+                    <h4>@L["AttentionLabel"]</h4>
+                    <p>@L["DeleteWarningMsg"]</p>
+                    <ul>
+                        <li>@L["DeleteWarningLoseInfo"]</li>
+                        <li>@L["DeleteWarningSoldProducts"]</li>
+                        <li>@L["DeleteWarningNotAvailable"]</li>
+                    </ul>
+                </div>
+            </div>
+
+            <form asp-action="Delete" method="post" class="delete-form">
+                <input asp-for="IdPromocion" type="hidden" />
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-danger">
+                        <i class="bi bi-trash"></i>
+                        @L["ConfirmDeleteBtn"]
+                    </button>
+                    <a asp-action="Index" class="btn btn-secondary">
+                        <i class="bi bi-arrow-left"></i>
+                        @L["CancelBtn"]
+                    </a>
+                    <a asp-action="Details" asp-route-id="@Model.IdPromocion" class="btn btn-info">
+                        <i class="bi bi-eye"></i>
+                        @L["ViewDetailsBtn"]
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<style>
+    .form-header.danger {
+        background: linear-gradient(135deg, #dc3545, #c82333);
+        color: white;
+    }
+
+    .delete-confirmation {
+        padding: 2rem 0;
+    }
+
+    .promocion-details-card {
+        background: #fff;
+        border: 1px solid #e9ecef;
+        border-radius: 12px;
+        padding: 1.5rem;
+        margin-bottom: 2rem;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    .promocion-header {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        margin-bottom: 1rem;
+        padding-bottom: 1rem;
+        border-bottom: 1px solid #e9ecef;
+    }
+
+    .promocion-icon {
+        width: 50px;
+        height: 50px;
+        background: linear-gradient(135deg, #007bff, #0056b3);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 1.5rem;
+    }
+
+    .promocion-name {
+        margin: 0;
+        color: #2c3e50;
+        font-size: 1.25rem;
+        font-weight: 600;
+    }
+
+    .promocion-badge {
+        padding: 0.25rem 0.75rem;
+        border-radius: 20px;
+        font-size: 0.75rem;
+        font-weight: 600;
+        text-transform: uppercase;
+    }
+
+    .promocion-badge.vigente {
+        background: #d4edda;
+        color: #155724;
+    }
+
+    .promocion-badge.pendiente {
+        background: #fff3cd;
+        color: #856404;
+    }
+
+    .promocion-badge.aplicado {
+        background: #f8d7da;
+        color: #721c24;
+    }
+
+    .info-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0.75rem 0;
+        border-bottom: 1px solid #f8f9fa;
+    }
+
+    .info-row:last-child {
+        border-bottom: none;
+    }
+
+    .info-label {
+        font-weight: 600;
+        color: #6c757d;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .info-value {
+        font-weight: 500;
+        color: #2c3e50;
+    }
+
+    .info-value.descuento {
+        color: #28a745;
+        font-weight: 700;
+        font-size: 1.1rem;
+    }
+
+    .warning-message {
+        background: #fff3cd;
+        border: 1px solid #ffeaa7;
+        border-radius: 8px;
+        padding: 1.5rem;
+        margin-bottom: 2rem;
+        display: flex;
+        gap: 1rem;
+    }
+
+    .warning-icon {
+        color: #856404;
+        font-size: 2rem;
+        flex-shrink: 0;
+    }
+
+    .warning-content h4 {
+        color: #856404;
+        margin: 0 0 0.5rem 0;
+    }
+
+    .warning-content p {
+        margin: 0 0 1rem 0;
+        color: #856404;
+    }
+
+    .warning-content ul {
+        margin: 0;
+        padding-left: 1.5rem;
+        color: #856404;
+    }
+
+    .warning-content li {
+        margin-bottom: 0.25rem;
+    }
+</style>

@@ -1,0 +1,130 @@
+﻿@using Microsoft.Extensions.Localization
+@inject IStringLocalizer<VelourEssence.Web.Views.Reseña.Details> L
+@model VelourEssence.Application.DTOs.ReseñaDto
+
+@{
+    ViewData["Title"] = L["ReviewDetailTitle"];
+    int valoracion = Model.Valoracion ?? 0;
+    int maxStars = 5;
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/review-detail.css" />
+}
+
+<div class="review-detail-page animate-in">
+    <!-- Hero Section Premium -->
+    <div class="review-detail-hero-section">
+        <div class="review-detail-hero-background"></div>
+        <div class="review-detail-hero-content">
+            <h1 class="review-detail-hero-title">@L["ReviewDetailTitle"]</h1>
+            <p class="review-detail-hero-subtitle">
+                @L["ReviewDetailSubtitle"]
+            </p>
+        </div>
+    </div>
+
+    <!-- Contenedor Principal -->
+    <div class="review-detail-container">
+        <div class="review-detail-wrapper">
+            <div class="review-detail-card">
+                <div class="review-detail-content">
+
+                    <!-- Información del usuario que escribió la reseña -->
+                    <div class="review-detail-user-section">
+                        <div class="review-detail-user-avatar">
+                            <i class="bi bi-person-circle"></i>
+                        </div>
+                        <div class="review-detail-user-info">
+                            <h2>@Model.NombreUsuario</h2>
+                            <div class="review-detail-user-date">
+                                @(Model.Fecha.HasValue ? Model.Fecha.Value.ToString("dd/MM/yyyy") : L["ReviewDetailNoDate"])
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Producto sobre el cual se escribió la reseña -->
+                    <div class="review-detail-product-section">
+                        <div class="review-detail-product-badge">
+                            <i class="bi bi-box"></i>
+                            @L["ReviewDetailProductLabel"]: <span class="review-detail-product-name">@Model.NombreProducto</span>
+                        </div>
+                    </div>
+
+                    <!-- Comentario de la reseña -->
+                    <div class="review-detail-comment-section">
+                        <div class="review-detail-comment">
+                            @Model.Comentario
+                        </div>
+                    </div>
+
+                    <!-- Valoración en estrellas -->
+                    <div class="review-detail-rating-section">
+                        <div class="review-detail-rating-title">@L["ReviewDetailRatingLabel"]</div>
+                        <div class="review-detail-stars-container">
+                            <div>
+                                @for (int i = 1; i <= maxStars; i++)
+                                {
+                                    if (i <= valoracion)
+                                    {
+                                        <i class="bi bi-star-fill review-detail-star filled" style="--star-index: @(i-1)"></i>
+                                    }
+                                    else
+                                    {
+                                        <i class="bi bi-star review-detail-star empty"></i>
+                                    }
+                                }
+                            </div>
+                            <span class="review-detail-rating-text">(@valoracion @L["ReviewDetailOf"] @maxStars)</span>
+                        </div>
+                    </div>
+
+                    <!-- Botón para regresar a la lista -->
+                    <div class="review-detail-actions">
+                        <a asp-action="Index" class="review-detail-back-btn">
+                            <i class="bi bi-arrow-left"></i>
+                            @L["ReviewDetailBackBtn"]
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        window.addEventListener('scroll', function() {
+            const scrolled = window.pageYOffset;
+            const heroBackground = document.querySelector('.review-detail-hero-background');
+            if (heroBackground) {
+                heroBackground.style.transform = `translateY(${scrolled * 0.3}px)`;
+            }
+        });
+
+        const stars = document.querySelectorAll('.review-detail-star.filled');
+        stars.forEach((star, index) => {
+            setTimeout(() => {
+                star.style.animation = 'review-detail-starPulse 0.6s ease-out';
+            }, index * 150);
+        });
+
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-in');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.review-detail-user-section, .review-detail-product-section, .review-detail-comment-section, .review-detail-rating-section, .review-detail-actions').forEach(el => {
+            observer.observe(el);
+        });
+    });
+</script>

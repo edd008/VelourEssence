@@ -1,0 +1,145 @@
+@using Microsoft.Extensions.Localization
+@inject IStringLocalizer<VelourEssence.Web.Views.Pago.SeleccionarMetodo> L
+@model VelourEssence.Application.DTOs.SeleccionMetodoPagoDto
+
+@{
+    ViewData["Title"] = L["SelectPaymentMethodTitle"];
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/payment-selection.css" />
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+}
+
+<div class="payment-selection-page">
+    <!-- Hero Section para Pagos -->
+    <div class="payment-hero-section">
+        <div class="payment-hero-background"></div>
+        <div class="payment-hero-content">
+            <div class="payment-hero-text" data-aos="fade-up">
+                <h1 class="payment-hero-title">
+                    <span class="payment-hero-brand">@L["SelectPaymentMethodTitle"]</span>
+                </h1>
+                <p class="payment-hero-subtitle">
+                    @L["SelectPaymentMethodSubtitle"]
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Contenido Principal -->
+    <div class="payment-main-section">
+        <div class="page-container">
+            <div class="payment-content-wrapper">
+                <div class="payment-summary-card" data-aos="fade-right">
+                    <div class="payment-summary-header">
+                        <h3 class="payment-summary-title">
+                            <i class="bi bi-receipt"></i>
+                            @L["OrderSummaryTitle"]
+                        </h3>
+                    </div>
+                    <div class="payment-summary-body">
+                        <div class="payment-total-amount">
+                            <span class="payment-total-label">@L["TotalToPayLabel"]</span>
+                            <span class="payment-total-value">₡@Model.TotalPedido.ToString("F2")</span>
+                        </div>
+                        <div class="payment-security-info">
+                            <i class="bi bi-shield-check"></i>
+                            <span>@L["SecurePaymentInfo"]</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="payment-methods-card" data-aos="fade-left">
+                    <div class="payment-methods-header">
+                        <h3 class="payment-methods-title">
+                            <i class="bi bi-credit-card-2-front"></i>
+                            @L["PaymentMethodsTitle"]
+                        </h3>
+                    </div>
+                    <div class="payment-methods-body">
+
+                        <!-- Opción unificada para Crédito/Débito -->
+                        <div class="payment-method-option" data-aos="zoom-in" data-aos-delay="100">
+                            <a href="@Url.Action("PagarConTarjeta", new { idCarrito = Model.IdCarrito, metodo = "Tarjeta" })"
+                               class="payment-method-btn payment-method-card">
+                                <div class="payment-method-icon">
+                                    <i class="bi bi-credit-card"></i>
+                                </div>
+                                <div class="payment-method-content">
+                                    <h4>@L["CardMethodTitle"]</h4>
+                                    <p>@L["CardMethodDesc"]</p>
+                                    <div class="payment-method-features">
+                                        <span><i class="bi bi-check-circle"></i> @L["CardMethodFeatureInstant"]</span>
+                                        <span><i class="bi bi-shield-lock"></i> @L["CardMethodFeatureSSL"]</span>
+                                    </div>
+                                </div>
+                                <div class="payment-method-arrow">
+                                    <i class="bi bi-arrow-right"></i>
+                                </div>
+                            </a>
+                        </div>
+
+                        <!-- Opción de efectivo -->
+                        <div class="payment-method-option" data-aos="zoom-in" data-aos-delay="200">
+                            <a href="@Url.Action("PagarEnEfectivo", new { idCarrito = Model.IdCarrito })"
+                               class="payment-method-btn payment-method-cash">
+                                <div class="payment-method-icon">
+                                    <i class="bi bi-cash-stack"></i>
+                                </div>
+                                <div class="payment-method-content">
+                                    <h4>@L["CashMethodTitle"]</h4>
+                                    <p>@L["CashMethodDesc"]</p>
+                                    <div class="payment-method-features">
+                                        <span><i class="bi bi-check-circle"></i> @L["CashMethodFeatureNoFees"]</span>
+                                        <span><i class="bi bi-truck"></i> @L["CashMethodFeatureOnDelivery"]</span>
+                                    </div>
+                                </div>
+                                <div class="payment-method-arrow">
+                                    <i class="bi bi-arrow-right"></i>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="payment-security-section" data-aos="fade-up" data-aos-delay="400">
+                    <div class="payment-security-card">
+                        <h4><i class="bi bi-shield-check"></i> @L["SecurityInfoTitle"]</h4>
+                        <div class="payment-security-features">
+                            <div class="security-feature">
+                                <i class="bi bi-lock-fill"></i>
+                                <span>@L["SecurityFeatureSSL"]</span>
+                            </div>
+                            <div class="security-feature">
+                                <i class="bi bi-shield-lock-fill"></i>
+                                <span>@L["SecurityFeatureNoCardStorage"]</span>
+                            </div>
+                            <div class="security-feature">
+                                <i class="bi bi-check-circle-fill"></i>
+                                <span>@L["SecurityFeaturePCI"]</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="payment-actions" data-aos="fade-up" data-aos-delay="500">
+                    <a href="@Url.Action("Index", "Carrito")" class="btn-secondary-custom">
+                        <i class="bi bi-arrow-left"></i>
+                        @L["BackToCartBtn"]
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 800,
+            once: true
+        });
+    </script>
+}

@@ -1,0 +1,24 @@
+@model VelourEssence.Application.DTOs.EtiquetaDto
+@{
+    ViewData["Title"] = "Editar Etiqueta";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="etiqueta-edit-page">
+    <div class="etiqueta-edit-container">
+        <h2 class="etiqueta-title">Editar Etiqueta</h2>
+        <form asp-action="Edit" method="post">
+            @Html.AntiForgeryToken()
+            <input type="hidden" asp-for="IdEtiqueta" />
+            <div class="form-group">
+                <label for="Nombre">Nombre de la etiqueta</label>
+                <input asp-for="Nombre" class="form-control" placeholder="Ej: Electrónica, Oferta, Verano" />
+                @Html.ValidationMessageFor(m => m.Nombre, "", new { @class = "text-danger" })
+            </div>
+            <button type="submit" class="btn btn-primary">Guardar cambios</button>
+            <a asp-action="Index" class="btn btn-link etiqueta-back">Volver</a>
+        </form>
+    </div>
+</div>
+@section Styles {
+    <link rel="stylesheet" href="~/css/etiqueta-edit.css" />
+}

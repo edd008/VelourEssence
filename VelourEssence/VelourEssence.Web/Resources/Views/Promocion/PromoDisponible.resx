@@ -1,0 +1,94 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<root>
+	<data name="PromoTitle" xml:space="preserve">
+	<value>Productos en Promoción</value>
+  </data>
+	<data name="PromoHeroBrand" xml:space="preserve">
+	<value>Promociones Especiales</value>
+  </data>
+	<data name="PromoHeroTagline" xml:space="preserve">
+	<value>Ofertas Exclusivas</value>
+  </data>
+	<data name="PromoHeroSubtitle" xml:space="preserve">
+	<value>Descubre nuestras mejores ofertas en perfumes de lujo con descuentos especiales. Fragancias premium a precios únicos.</value>
+  </data>
+	<data name="PromoStatProducts" xml:space="preserve">
+	<value>Productos en Oferta</value>
+  </data>
+	<data name="PromoStatMaxDiscount" xml:space="preserve">
+	<value>Descuento Máximo</value>
+  </data>
+	<data name="PromoStatFastShipping" xml:space="preserve">
+	<value>Envío Rápido</value>
+  </data>
+	<data name="PromoFiltersTitle" xml:space="preserve">
+	<value>Ofertas Especiales Disponibles</value>
+  </data>
+	<data name="PromoSearchPlaceholder" xml:space="preserve">
+	<value>Buscar ofertas...</value>
+  </data>
+	<data name="PromoFilterAll" xml:space="preserve">
+	<value>Todas las Categorías</value>
+  </data>
+	<data name="PromoFilterMen" xml:space="preserve">
+	<value>Para Hombre</value>
+  </data>
+	<data name="PromoFilterWomen" xml:space="preserve">
+	<value>Para Mujer</value>
+  </data>
+	<data name="PromoFilterUnisex" xml:space="preserve">
+	<value>Unisex</value>
+  </data>
+	<data name="PromoSortDiscount" xml:space="preserve">
+	<value>Mayor Descuento</value>
+  </data>
+	<data name="PromoSortPriceLow" xml:space="preserve">
+	<value>Precio: Menor a Mayor</value>
+  </data>
+	<data name="PromoSortPriceHigh" xml:space="preserve">
+	<value>Precio: Mayor a Menor</value>
+  </data>
+	<data name="PromoSortName" xml:space="preserve">
+	<value>Ordenar por Nombre</value>
+  </data>
+	<data name="PromoResultsFound" xml:space="preserve">
+	<value>ofertas encontradas</value>
+  </data>
+	<data name="PromoBadgeOff" xml:space="preserve">
+	<value>OFF</value>
+  </data>
+	<data name="PromoQuickView" xml:space="preserve">
+	<value>Vista rápida</value>
+  </data>
+	<data name="PromoQuickFav" xml:space="preserve">
+	<value>Favoritos</value>
+  </data>
+	<data name="PromoImageNotAvailable" xml:space="preserve">
+	<value>Imagen no disponible</value>
+  </data>
+	<data name="PromoNoImage" xml:space="preserve">
+	<value>Sin imagen</value>
+  </data>
+	<data name="PromoSave" xml:space="preserve">
+	<value>Ahorra</value>
+  </data>
+	<data name="PromoBtnDetails" xml:space="preserve">
+	<value>Ver Detalles</value>
+  </data>
+	<data name="PromoBtnAdd" xml:space="preserve">
+	<value>Agregar</value>
+  </data>
+	<data name="PromoEmptyTitle" xml:space="preserve">
+	<value>No hay promociones disponibles</value>
+  </data>
+	<data name="PromoEmptyDescription" xml:space="preserve">
+	<value>Actualmente no tenemos productos en promoción. Revisa nuestra colección completa.</value>
+  </data>
+	<data name="PromoBtnAllProducts" xml:space="preserve">
+	<value>Ver Todos los Productos</value>
+  </data>
+	<data name="PromoAdded" xml:space="preserve">
+	<value>¡Agregado!</value>
+  </data>
+</root>
+

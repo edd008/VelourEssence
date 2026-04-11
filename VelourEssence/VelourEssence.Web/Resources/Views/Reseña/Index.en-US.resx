@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+	<data name="ReviewsTitle" xml:space="preserve">
+    <value>Reviews</value>
+  </data>
+	<data name="ReviewsHeroMain" xml:space="preserve">
+    <value>Customer Reviews</value>
+  </data>
+	<data name="ReviewsHeroSubtitle" xml:space="preserve">
+    <value>Authentic Experiences</value>
+  </data>
+	<data name="ReviewsHeroDescription" xml:space="preserve">
+    <value>Discover what our customers think about our fragrances. Each review reflects a real and valuable experience.</value>
+  </data>
+	<data name="ReviewsStatTotal" xml:space="preserve">
+    <value>Total Reviews</value>
+  </data>
+	<data name="ReviewsStatAverage" xml:space="preserve">
+    <value>Average Rating</value>
+  </data>
+	<data name="ReviewsStatSatisfaction" xml:space="preserve">
+    <value>Satisfaction</value>
+  </data>
+	<data name="ReviewsFiltersTitle" xml:space="preserve">
+    <value>Explore Reviews</value>
+  </data>
+	<data name="ReviewsSearchPlaceholder" xml:space="preserve">
+    <value>Search reviews...</value>
+  </data>
+	<data name="ReviewsFilterAll" xml:space="preserve">
+    <value>All Ratings</value>
+  </data>
+	<data name="ReviewsFilter5" xml:space="preserve">
+    <value>⭐⭐⭐⭐⭐ (5 stars)</value>
+  </data>
+	<data name="ReviewsFilter4" xml:space="preserve">
+    <value>⭐⭐⭐⭐ (4 stars)</value>
+  </data>
+	<data name="ReviewsFilter3" xml:space="preserve">
+    <value>⭐⭐⭐ (3 stars)</value>
+  </data>
+	<data name="ReviewsFilter2" xml:space="preserve">
+    <value>⭐⭐ (2 stars)</value>
+  </data>
+	<data name="ReviewsFilter1" xml:space="preserve">
+    <value>⭐ (1 star)</value>
+  </data>
+	<data name="ReviewsSortNewest" xml:space="preserve">
+    <value>Newest</value>
+  </data>
+	<data name="ReviewsSortOldest" xml:space="preserve">
+    <value>Oldest</value>
+  </data>
+	<data name="ReviewsSortHighest" xml:space="preserve">
+    <value>Highest Rating</value>
+  </data>
+	<data name="ReviewsSortLowest" xml:space="preserve">
+    <value>Lowest Rating</value>
+  </data>
+	<data name="ReviewsFound" xml:space="preserve">
+    <value>reviews found</value>
+  </data>
+	<data name="ReviewsNoDate" xml:space="preserve">
+    <value>No date</value>
+  </data>
+	<data name="ReviewsEmptyTitle" xml:space="preserve">
+    <value>No reviews available</value>
+  </data>
+	<data name="ReviewsEmptyDescription" xml:space="preserve">
+    <value>Customers can write reviews from each product page. Be the first to share your experience!</value>
+  </data>
+	<data name="ReviewsBtnProducts" xml:space="preserve">
+    <value>View Products</value>
+  </data>
+</root>

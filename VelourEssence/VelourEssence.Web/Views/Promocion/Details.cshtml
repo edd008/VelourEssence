@@ -1,0 +1,174 @@
+﻿@using Microsoft.Extensions.Localization
+@inject IStringLocalizer<VelourEssence.Web.Views.Promocion.Details> L
+@model VelourEssence.Application.DTOs.PromocionDto
+
+@{
+    ViewData["Title"] = L["PromotionDetailTitle"];
+
+    // Formatea el porcentaje de descuento
+    string descuento = Model.PorcentajeDescuento.HasValue
+        ? $"{Model.PorcentajeDescuento.Value.ToString("0.##")} %"
+        : L["PromotionDetailDiscountNA"];
+
+    // Determina el estado actual de la promoción basado en fechas
+    string GetEstado()
+    {
+        var hoy = DateOnly.FromDateTime(DateTime.Today);
+        if (Model.FechaInicio.HasValue && Model.FechaFin.HasValue)
+        {
+            if (hoy < Model.FechaInicio.Value)
+                return L["PromotionDetailStatusPending"];
+            if (hoy > Model.FechaFin.Value)
+                return L["PromotionDetailStatusFinished"];
+            return L["PromotionDetailStatusActive"];
+        }
+        return L["PromotionDetailStatusPending"];
+    }
+
+    var estadoActual = GetEstado();
+
+    // Define estilo y texto según el estado
+    var (estadoClass, estadoTexto, estadoIcon) = estadoActual switch
+    {
+        var s when s == L["PromotionDetailStatusFinished"] => ("finalizada", L["PromotionDetailStatusFinished"], "bi-x-circle"),
+        var s when s == L["PromotionDetailStatusActive"] => ("vigente", L["PromotionDetailStatusActive"], "bi-check-circle"),
+        var s when s == L["PromotionDetailStatusPending"] => ("pendiente", L["PromotionDetailStatusPending"], "bi-clock"),
+        _ => ("pendiente", estadoActual, "bi-circle")
+    };
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/promocion-details.css" />
+}
+
+<div class="promocion-detalle-page">
+    <div class="promocion-detalle-container">
+        <div class="promocion-detalle-wrapper">
+            <!-- Header Premium -->
+            <div class="promocion-header">
+                <div class="promocion-header-content">
+                    <div class="promocion-avatar">
+                        <i class="bi bi-percent"></i>
+                    </div>
+                    <div class="promocion-info">
+                        <h1 class="promocion-nombre">@Model.Nombre</h1>
+                        <span class="promocion-id-badge">#@Model.IdPromocion</span>
+                        <div class="promocion-estado-principal">
+                            <span class="estado-badge @estadoClass">
+                                <i class="bi @estadoIcon"></i>
+                                @estadoTexto
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Contenido principal -->
+            <div class="promocion-contenido">
+                <h3 class="seccion-titulo">
+                    <i class="bi bi-info-circle"></i>
+                    @L["PromotionDetailInfoTitle"]
+                </h3>
+
+                <div class="info-grid">
+                    <div class="info-item">
+                        <span class="info-label">
+                            <i class="bi bi-percent"></i>
+                            @L["PromotionDetailDiscountLabel"]
+                        </span>
+                        <span class="info-valor promocion-descuento">@descuento</span>
+                    </div>
+
+                    <div class="info-item">
+                        <span class="info-label">
+                            <i class="bi bi-box"></i>
+                            @L["PromotionDetailProductLabel"]
+                        </span>
+                        <span class="info-valor">@(!string.IsNullOrEmpty(Model.NombreProducto) ? Model.NombreProducto : L["PromotionDetailAllProducts"])</span>
+                    </div>
+
+                    <div class="info-item">
+                        <span class="info-label">
+                            <i class="bi bi-tag"></i>
+                            @L["PromotionDetailTypeLabel"]
+                        </span>
+                        <span class="info-valor">@Model.Tipo</span>
+                    </div>
+
+                    <div class="info-item">
+                        <span class="info-label">
+                            <i class="bi bi-calendar-check"></i>
+                            @L["PromotionDetailStartDateLabel"]
+                        </span>
+                        <span class="info-valor">
+                            @(Model.FechaInicio?.ToString("dd/MM/yyyy") ?? L["PromotionDetailDateUndefined"])
+                            @if (Model.FechaInicio.HasValue)
+                            {
+                                var diasParaInicio = (Model.FechaInicio.Value.ToDateTime(TimeOnly.MinValue) - DateTime.Today).Days;
+                                if (diasParaInicio > 0)
+                                {
+                                    <small class="tiempo-restante pendiente">@L["PromotionDetailStartsIn"] @diasParaInicio @L["PromotionDetailDays"]</small>
+                                }
+                                else
+                                {
+                                    <small class="tiempo-restante vigente">@L["PromotionDetailStarted"]</small>
+                                }
+                            }
+                        </span>
+                    </div>
+
+                    <div class="info-item">
+                        <span class="info-label">
+                            <i class="bi bi-calendar-x"></i>
+                            @L["PromotionDetailEndDateLabel"]
+                        </span>
+                        <span class="info-valor">
+                            @(Model.FechaFin?.ToString("dd/MM/yyyy") ?? L["PromotionDetailDateUndefined"])
+                            @if (Model.FechaFin.HasValue)
+                            {
+                                var diasParaFin = (Model.FechaFin.Value.ToDateTime(TimeOnly.MinValue) - DateTime.Today).Days;
+                                if (diasParaFin > 0)
+                                {
+                                    <small class="tiempo-restante vigente">@diasParaFin @L["PromotionDetailDaysLeft"]</small>
+                                }
+                                else
+                                {
+                                    <small class="tiempo-restante finalizada">@L["PromotionDetailFinished"]</small>
+                                }
+                            }
+                        </span>
+                    </div>
+
+                    @if (Model.FechaInicio.HasValue && Model.FechaFin.HasValue)
+                    {
+                        var duracion = Model.FechaFin.Value.DayNumber - Model.FechaInicio.Value.DayNumber + 1;
+                        <div class="info-item">
+                            <span class="info-label">
+                                <i class="bi bi-calendar-range"></i>
+                                @L["PromotionDetailDurationLabel"]
+                            </span>
+                            <span class="info-valor">
+                                @duracion @L["PromotionDetailDays"]
+                                <small class="duracion-info">@L["PromotionDetailFullPeriod"]</small>
+                            </span>
+                        </div>
+                    }
+                </div>
+            </div>
+
+            <!-- Acciones -->
+            <div class="promocion-acciones">
+                <div class="acciones-grupo">
+                    <a asp-action="Index" class="accion-btn volver">
+                        <i class="bi bi-arrow-left"></i>
+                        <span>@L["PromotionDetailBackBtn"]</span>
+                    </a>
+                    <a asp-action="Edit" asp-route-id="@Model.IdPromocion" class="accion-btn editar">
+                        <i class="bi bi-pencil"></i>
+                        <span>@L["PromotionDetailEditBtn"]</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

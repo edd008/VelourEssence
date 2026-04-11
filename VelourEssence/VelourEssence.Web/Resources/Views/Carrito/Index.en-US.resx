@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+	<data name="CartTitle" xml:space="preserve"><value>Shopping Cart - VelourEssence</value></data>
+	<data name="CartHeader" xml:space="preserve"><value>Your Shopping Cart</value></data>
+	<data name="CartSubtitleWithProducts" xml:space="preserve"><value>You have products selected with lots of love</value></data>
+	<data name="CartSubtitleEmpty" xml:space="preserve"><value>Your cart is waiting for amazing products</value></data>
+	<data name="CartStatsProducts" xml:space="preserve"><value>Products</value></data>
+	<data name="CartStatsUniqueItems" xml:space="preserve"><value>Unique items</value></data>
+	<data name="CartStatsTotal" xml:space="preserve"><value>Total</value></data>
+	<data name="CartItemsHeader" xml:space="preserve"><value>Products in your cart</value></data>
+	<data name="CartStockAvailable" xml:space="preserve"><value>{0} available</value></data>
+	<data name="CartStockEmpty" xml:space="preserve"><value>Out of stock</value></data>
+	<data name="CartDecreaseQty" xml:space="preserve"><value>Decrease quantity</value></data>
+	<data name="CartIncreaseQty" xml:space="preserve"><value>Increase quantity</value></data>
+	<data name="CartQtyTitle" xml:space="preserve"><value>Quantity: {0}</value></data>
+	<data name="CartRemoveProduct" xml:space="preserve"><value>Remove {0}</value></data>
+	<data name="CartRemovePersonalized" xml:space="preserve"><value>Remove personalized {0}</value></data>
+	<data name="CartRemoveBtn" xml:space="preserve"><value>Remove</value></data>
+	<data name="CartPersonalizedBadge" xml:space="preserve"><value>Personalized</value></data>
+	<data name="CartBaseLabel" xml:space="preserve"><value>Base:</value></data>
+	<data name="CartPersonalizationsLabel" xml:space="preserve"><value>Personalizations:</value></data>
+	<data name="CartClearBtnTitle" xml:space="preserve"><value>Clear entire cart</value></data>
+	<data name="CartClearBtn" xml:space="preserve"><value>Clear cart</value></data>
+	<data name="CartSummaryTitle" xml:space="preserve"><value>Order Summary</value></data>
+	<data name="CartSummarySubtotal" xml:space="preserve"><value>Subtotal ({0} products)</value></data>
+	<data name="CartSummaryTax" xml:space="preserve"><value>Tax (13%)</value></data>
+	<data name="CartSummaryShipping" xml:space="preserve"><value>Shipping</value></data>
+	<data name="CartSummaryShippingFree" xml:space="preserve"><value>Free</value></data>
+	<data name="CartSummaryTotalLabel" xml:space="preserve"><value>Total to pay</value></data>
+	<data name="CartCheckoutBtnTitle" xml:space="preserve"><value>Proceed to secure payment</value></data>
+	<data name="CartCheckoutBtn" xml:space="preserve"><value>Proceed to payment</value></data>
+	<data name="CartContinueShoppingBtnTitle" xml:space="preserve"><value>Continue browsing our products</value></data>
+	<data name="CartContinueShoppingBtn" xml:space="preserve"><value>Continue shopping</value></data>
+	<data name="CartInfoSecure" xml:space="preserve"><value>100% secure purchase</value></data>
+	<data name="CartInfoFreeShipping" xml:space="preserve"><value>Free shipping on purchases over ₡25,000</value></data>
+	<data name="CartInfoReturns" xml:space="preserve"><value>30 days for returns</value></data>
+	<data name="CartEmptyTitle" xml:space="preserve"><value>Your cart is empty</value></data>
+	<data name="CartEmptyMessage" xml:space="preserve"><value>Discover our exclusive beauty product collection and start filling your cart with products that will make you shine!</value></data>
+	<data name="CartExploreBtnTitle" xml:space="preserve"><value>Explore our entire collection</value></data>
+	<data name="CartExploreBtn" xml:space="preserve"><value>Explore products</value></data>
+	<data name="CartPopularCategoriesLabel" xml:space="preserve"><value>Or explore our most popular categories:</value></data>
+	<data name="CartCategoryMakeup" xml:space="preserve"><value>Makeup</value></data>
+	<data name="CartCategoryFacialCare" xml:space="preserve"><value>Facial Care</value></data>
+	<data name="CartCategoryFragrances" xml:space="preserve"><value>Fragrances</value></data>
+</root>

@@ -1,0 +1,87 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+	<data name="RegisterTitle" xml:space="preserve">
+    <value>Crear Cuenta</value>
+  </data>
+	<data name="RegisterHeader" xml:space="preserve">
+    <value>Únete a VelourEssence</value>
+  </data>
+	<data name="RegisterSubtitle" xml:space="preserve">
+    <value>Crea tu cuenta y descubre fragancias únicas</value>
+  </data>
+	<data name="RegisterUsernameLabel" xml:space="preserve">
+    <value>Nombre de Usuario</value>
+  </data>
+	<data name="RegisterUsernamePlaceholder" xml:space="preserve">
+    <value>Elige un nombre de usuario único</value>
+  </data>
+	<data name="RegisterEmailLabel" xml:space="preserve">
+    <value>Correo Electrónico</value>
+  </data>
+	<data name="RegisterEmailPlaceholder" xml:space="preserve">
+    <value>tu@correo.com</value>
+  </data>
+	<data name="RegisterPasswordLabel" xml:space="preserve">
+    <value>Contraseña</value>
+  </data>
+	<data name="RegisterPasswordPlaceholder" xml:space="preserve">
+    <value>Mínimo 6 caracteres</value>
+  </data>
+	<data name="RegisterConfirmPasswordLabel" xml:space="preserve">
+    <value>Confirmar Contraseña</value>
+  </data>
+	<data name="RegisterConfirmPasswordPlaceholder" xml:space="preserve">
+    <value>Repite tu contraseña</value>
+  </data>
+	<data name="RegisterTermsText" xml:space="preserve">
+    <value>Acepto los <a href="#" class="register-link">Términos de Servicio</a> y la <a href="#" class="register-link">Política de Privacidad</a></value>
+  </data>
+	<data name="RegisterBtn" xml:space="preserve">
+    <value>Crear Cuenta</value>
+  </data>
+	<data name="RegisterDividerText" xml:space="preserve">
+    <value>o</value>
+  </data>
+	<data name="RegisterLoginText" xml:space="preserve">
+    <value>¿Ya tienes una cuenta?</value>
+  </data>
+	<data name="RegisterLoginBtn" xml:space="preserve">
+    <value>Iniciar Sesión</value>
+  </data>
+	<data name="RegisterFooterText" xml:space="preserve">
+    <value>Al crear una cuenta, aceptas automáticamente nuestros términos y condiciones.</value>
+  </data>
+	<data name="RegisterPasswordStrength" xml:space="preserve">
+    <value>Fortaleza de contraseña</value>
+  </data>
+	<data name="RegisterPasswordStrengthWeak" xml:space="preserve">
+    <value>Contraseña débil</value>
+  </data>
+	<data name="RegisterPasswordStrengthMedium" xml:space="preserve">
+    <value>Contraseña media</value>
+  </data>
+	<data name="RegisterPasswordStrengthGood" xml:space="preserve">
+    <value>Contraseña buena</value>
+  </data>
+	<data name="RegisterPasswordStrengthStrong" xml:space="preserve">
+    <value>Contraseña fuerte</value>
+  </data>
+	<data name="RegisterUsernameAvailable" xml:space="preserve">
+    <value>✓ Nombre de usuario disponible</value>
+  </data>
+	<data name="RegisterUsernameTaken" xml:space="preserve">
+    <value>✗ Este nombre de usuario ya está en uso</value>
+  </data>
+	<data name="RegisterEmailAvailable" xml:space="preserve">
+    <value>✓ Correo electrónico disponible</value>
+  </data>
+	<data name="RegisterEmailTaken" xml:space="preserve">
+    <value>✗ Este correo ya está registrado</value>
+  </data>
+	<data name="RegisterValidationError" xml:space="preserve">
+    <value>Error al validar</value>
+  </data>
+	<data name="RegisterBtnLoading" xml:space="preserve">
+    <value>Creando cuenta...</value>
+  </data>
+</root>

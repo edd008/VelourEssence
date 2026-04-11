@@ -1,0 +1,593 @@
+/* ===================================================================
+   REVIEW DETAIL - CSS INDEPENDIENTE CON DISEÑO PREMIUM
+   Paleta: Azul petróleo, Beige claro, Verde menta, Coral, Gris claro
+   ================================================================== */
+
+/* Variables CSS específicas para el detalle de reseñas */
+.review-detail-page {
+    --review-detail-primary: #1F3A5F;        /* Azul petróleo */
+    --review-detail-primary-dark: #162c47;    
+    --review-detail-primary-light: #2d4a6b;  
+    --review-detail-secondary: #F4EDE4;      /* Beige claro */
+    --review-detail-accent: #A8E6CF;         /* Verde menta */
+    --review-detail-accent-coral: #FF8C94;   /* Coral */
+    --review-detail-light: #F9F9F9;          /* Gris muy claro */
+    --review-detail-white: #ffffff;
+    --review-detail-success: #A8E6CF;        
+    --review-detail-warning: #FF8C94;        
+    --review-detail-text: #333333;
+    --review-detail-text-muted: #666666;
+    --review-detail-text-light: #999999;
+    --review-detail-border: #e0e0e0;
+    --review-detail-shadow: 0 8px 25px rgba(31, 58, 95, 0.15);
+    --review-detail-shadow-hover: 0 15px 35px rgba(168, 230, 207, 0.25);
+    --review-detail-radius: 16px;
+    --review-detail-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Reset específico para el detalle de reseñas */
+.review-detail-page * {
+    box-sizing: border-box;
+}
+
+.review-detail-page {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: var(--review-detail-text);
+}
+
+/* ===================================================================
+   HERO SECTION PREMIUM
+   ================================================================== */
+
+.review-detail-hero-section {
+    position: relative;
+    min-height: 50vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background: linear-gradient(135deg, 
+        var(--review-detail-primary) 0%, 
+        var(--review-detail-accent) 100%);
+    color: var(--review-detail-white);
+    text-align: center;
+}
+
+.review-detail-hero-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+        radial-gradient(circle at 20% 80%, rgba(168, 230, 207, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(255, 140, 148, 0.1) 0%, transparent 50%),
+        linear-gradient(135deg, var(--review-detail-primary) 0%, var(--review-detail-accent) 100%);
+    animation: review-detail-heroFloat 20s ease-in-out infinite;
+}
+
+@keyframes review-detail-heroFloat {
+    0%, 100% { transform: translateY(0px) scale(1); }
+    50% { transform: translateY(-10px) scale(1.01); }
+}
+
+.review-detail-hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 800px;
+    padding: 2rem;
+}
+
+.review-detail-hero-title {
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    animation: review-detail-fadeInUp 1s ease-out;
+}
+
+.review-detail-hero-subtitle {
+    font-size: 1.3rem;
+    opacity: 0.9;
+    animation: review-detail-fadeInUp 1s ease-out 0.3s both;
+}
+
+@keyframes review-detail-fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ===================================================================
+   CONTENEDOR PRINCIPAL
+   ================================================================== */
+
+.review-detail-container {
+    padding: 4rem 0;
+    background: linear-gradient(to bottom, 
+        var(--review-detail-white), 
+        var(--review-detail-light));
+    min-height: 100vh;
+}
+
+.review-detail-wrapper {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+}
+
+/* ===================================================================
+   TARJETA PRINCIPAL DEL DETALLE
+   ================================================================== */
+
+.review-detail-card {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: var(--review-detail-shadow);
+    border: 1px solid rgba(168, 230, 207, 0.2);
+    position: relative;
+    animation: review-detail-slideIn 0.8s ease-out;
+}
+
+.review-detail-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, 
+        rgba(168, 230, 207, 0.05) 0%, 
+        rgba(255, 140, 148, 0.03) 50%,
+        rgba(31, 58, 95, 0.02) 100%);
+    pointer-events: none;
+    z-index: 1;
+}
+
+.review-detail-content {
+    position: relative;
+    z-index: 2;
+    padding: 3rem;
+}
+
+@keyframes review-detail-slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(50px) scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* ===================================================================
+   SECCIÓN DE USUARIO
+   ================================================================== */
+
+.review-detail-user-section {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    margin-bottom: 2.5rem;
+    padding: 1.5rem;
+    background: linear-gradient(135deg, 
+        rgba(168, 230, 207, 0.1), 
+        rgba(255, 140, 148, 0.05));
+    border-radius: var(--review-detail-radius);
+    border: 1px solid rgba(168, 230, 207, 0.2);
+    animation: review-detail-fadeInLeft 0.8s ease-out 0.2s both;
+}
+
+.review-detail-user-avatar {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, 
+        var(--review-detail-accent), 
+        var(--review-detail-primary));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 8px 25px rgba(168, 230, 207, 0.3);
+    position: relative;
+    overflow: hidden;
+}
+
+.review-detail-user-avatar::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(45deg, transparent, rgba(255,255,255,0.2), transparent);
+    animation: review-detail-shimmer 3s infinite;
+}
+
+.review-detail-user-avatar i {
+    font-size: 3rem;
+    color: var(--review-detail-white);
+    position: relative;
+    z-index: 2;
+}
+
+@keyframes review-detail-shimmer {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+}
+
+.review-detail-user-info h2 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--review-detail-primary);
+    margin: 0 0 0.5rem 0;
+}
+
+.review-detail-user-date {
+    font-size: 1rem;
+    color: var(--review-detail-text-muted);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.review-detail-user-date::before {
+    content: '📅';
+    font-size: 1.1rem;
+}
+
+@keyframes review-detail-fadeInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* ===================================================================
+   SECCIÓN DE PRODUCTO
+   ================================================================== */
+
+.review-detail-product-section {
+    margin-bottom: 2.5rem;
+    animation: review-detail-fadeInRight 0.8s ease-out 0.4s both;
+}
+
+.review-detail-product-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.8rem;
+    padding: 1rem 1.5rem;
+    background: linear-gradient(135deg, 
+        var(--review-detail-secondary), 
+        var(--review-detail-white));
+    border: 2px solid var(--review-detail-accent);
+    border-radius: 50px;
+    font-weight: 600;
+    color: var(--review-detail-primary);
+    box-shadow: 0 4px 15px rgba(168, 230, 207, 0.2);
+    transition: var(--review-detail-transition);
+}
+
+.review-detail-product-badge:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(168, 230, 207, 0.3);
+}
+
+.review-detail-product-badge i {
+    font-size: 1.2rem;
+    color: var(--review-detail-accent);
+}
+
+.review-detail-product-name {
+    font-weight: 700;
+    color: var(--review-detail-primary-dark);
+}
+
+@keyframes review-detail-fadeInRight {
+    from {
+        opacity: 0;
+        transform: translateX(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* ===================================================================
+   SECCIÓN DE COMENTARIO
+   ================================================================== */
+
+.review-detail-comment-section {
+    margin-bottom: 2.5rem;
+    animation: review-detail-fadeInUp 0.8s ease-out 0.6s both;
+}
+
+.review-detail-comment {
+    background: rgba(255, 255, 255, 0.8);
+    border: 2px solid var(--review-detail-border);
+    border-radius: var(--review-detail-radius);
+    padding: 2rem;
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: var(--review-detail-text);
+    position: relative;
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.05);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+.review-detail-comment::before {
+    content: '"';
+    position: absolute;
+    top: -0.5rem;
+    left: 1rem;
+    font-size: 4rem;
+    color: var(--review-detail-accent);
+    font-weight: 700;
+    opacity: 0.3;
+}
+
+.review-detail-comment::after {
+    content: '"';
+    position: absolute;
+    bottom: -1.5rem;
+    right: 1rem;
+    font-size: 4rem;
+    color: var(--review-detail-accent);
+    font-weight: 700;
+    opacity: 0.3;
+}
+
+/* ===================================================================
+   SECCIÓN DE VALORACIÓN
+   ================================================================== */
+
+.review-detail-rating-section {
+    margin-bottom: 2.5rem;
+    animation: review-detail-fadeInUp 0.8s ease-out 0.8s both;
+}
+
+.review-detail-rating-title {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: var(--review-detail-primary);
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.review-detail-rating-title::before {
+    content: '⭐';
+    font-size: 1.5rem;
+}
+
+.review-detail-stars-container {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    padding: 1.5rem;
+    background: linear-gradient(135deg, 
+        rgba(255, 193, 7, 0.1), 
+        rgba(255, 140, 148, 0.05));
+    border-radius: var(--review-detail-radius);
+    border: 2px solid rgba(255, 193, 7, 0.2);
+}
+
+.review-detail-star {
+    font-size: 2rem;
+    margin: 0 0.2rem;
+    transition: var(--review-detail-transition);
+}
+
+.review-detail-star.filled {
+    color: #ffc107;
+    animation: review-detail-starPulse 0.6s ease-out;
+    filter: drop-shadow(0 2px 4px rgba(255, 193, 7, 0.3));
+}
+
+.review-detail-star.empty {
+    color: #ddd;
+}
+
+@keyframes review-detail-starPulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+}
+
+.review-detail-rating-text {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--review-detail-primary);
+    background: rgba(255, 255, 255, 0.8);
+    padding: 0.5rem 1rem;
+    border-radius: 50px;
+    border: 1px solid var(--review-detail-border);
+}
+
+/* ===================================================================
+   SECCIÓN DE ACCIONES
+   ================================================================== */
+
+.review-detail-actions {
+    text-align: center;
+    animation: review-detail-fadeInUp 0.8s ease-out 1s both;
+}
+
+.review-detail-back-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.8rem;
+    padding: 1.2rem 2rem;
+    background: linear-gradient(135deg, 
+        var(--review-detail-primary), 
+        var(--review-detail-primary-light));
+    color: var(--review-detail-white);
+    text-decoration: none;
+    border-radius: 50px;
+    font-weight: 600;
+    font-size: 1.1rem;
+    box-shadow: var(--review-detail-shadow);
+    transition: var(--review-detail-transition);
+    position: relative;
+    overflow: hidden;
+}
+
+.review-detail-back-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    transition: left 0.5s;
+}
+
+.review-detail-back-btn:hover::before {
+    left: 100%;
+}
+
+.review-detail-back-btn:hover {
+    background: linear-gradient(135deg, 
+        var(--review-detail-primary-dark), 
+        var(--review-detail-primary));
+    transform: translateY(-3px);
+    box-shadow: 
+        var(--review-detail-shadow-hover),
+        0 0 0 1px rgba(255, 255, 255, 0.1);
+    color: var(--review-detail-white);
+}
+
+.review-detail-back-btn i {
+    font-size: 1.2rem;
+    transition: var(--review-detail-transition);
+}
+
+.review-detail-back-btn:hover i {
+    transform: translateX(-3px);
+}
+
+/* ===================================================================
+   RESPONSIVE DESIGN
+   ================================================================== */
+
+@media (max-width: 768px) {
+    .review-detail-hero-title {
+        font-size: 2.2rem;
+    }
+    
+    .review-detail-hero-subtitle {
+        font-size: 1.1rem;
+    }
+    
+    .review-detail-content {
+        padding: 2rem;
+    }
+    
+    .review-detail-user-section {
+        flex-direction: column;
+        text-align: center;
+        gap: 1rem;
+    }
+    
+    .review-detail-user-avatar {
+        width: 60px;
+        height: 60px;
+    }
+    
+    .review-detail-user-avatar i {
+        font-size: 2.2rem;
+    }
+    
+    .review-detail-user-info h2 {
+        font-size: 1.5rem;
+    }
+    
+    .review-detail-stars-container {
+        flex-direction: column;
+        gap: 1rem;
+        text-align: center;
+    }
+    
+    .review-detail-star {
+        font-size: 1.8rem;
+    }
+    
+    .review-detail-wrapper {
+        padding: 0 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .review-detail-hero-section {
+        min-height: 40vh;
+    }
+    
+    .review-detail-hero-title {
+        font-size: 1.8rem;
+    }
+    
+    .review-detail-content {
+        padding: 1.5rem;
+    }
+    
+    .review-detail-comment {
+        padding: 1.5rem;
+        font-size: 1rem;
+    }
+    
+    .review-detail-star {
+        font-size: 1.5rem;
+        margin: 0 0.1rem;
+    }
+    
+    .review-detail-container {
+        padding: 2rem 0;
+    }
+}
+
+/* ===================================================================
+   ANIMACIONES ADICIONALES PARA MEJOR UX
+   ================================================================== */
+
+.review-detail-page.animate-in .review-detail-card {
+    animation: review-detail-cardSlideIn 1s ease-out;
+}
+
+@keyframes review-detail-cardSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(100px) scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* Efectos de hover mejorados */
+.review-detail-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--review-detail-shadow-hover);
+}
+
+/* Animación de carga de estrellas */
+.review-detail-star.filled {
+    animation-delay: calc(var(--star-index, 0) * 0.1s);
+}

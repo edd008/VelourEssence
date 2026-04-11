@@ -1,0 +1,123 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+	<data name="PaymentHistoryTitle">
+		<value>Historial de Pagos</value>
+	</data>
+	<data name="PaymentHistorySubtitle">
+		<value>Revisa todos tus pagos y transacciones</value>
+	</data>
+	<data name="TotalPaymentsStat">
+		<value>Total de Pagos</value>
+	</data>
+	<data name="TotalSpentStat">
+		<value>Total Gastado</value>
+	</data>
+	<data name="CardPaymentsStat">
+		<value>Pagos con Tarjeta</value>
+	</data>
+	<data name="CashPaymentsStat">
+		<value>Pagos en Efectivo</value>
+	</data>
+	<data name="FilterPaymentsTitle">
+		<value>Filtrar Pagos</value>
+	</data>
+	<data name="PeriodLabel">
+		<value>Período:</value>
+	</data>
+	<data name="PeriodAll">
+		<value>Todos los períodos</value>
+	</data>
+	<data name="PeriodToday">
+		<value>Hoy</value>
+	</data>
+	<data name="PeriodWeek">
+		<value>Esta semana</value>
+	</data>
+	<data name="PeriodMonth">
+		<value>Este mes</value>
+	</data>
+	<data name="PeriodYear">
+		<value>Este año</value>
+	</data>
+	<data name="PaymentMethodLabel">
+		<value>Método de Pago:</value>
+	</data>
+	<data name="MethodAll">
+		<value>Todos los métodos</value>
+	</data>
+	<data name="MethodCard">
+		<value>Tarjetas</value>
+	</data>
+	<data name="MethodCash">
+		<value>Efectivo</value>
+	</data>
+	<data name="SearchLabel">
+		<value>Buscar:</value>
+	</data>
+	<data name="SearchPlaceholder">
+		<value>Número de pedido...</value>
+	</data>
+	<data name="OrderLabel">
+		<value>Pedido</value>
+	</data>
+	<data name="OrderDateLabel">
+		<value>Fecha del Pedido:</value>
+	</data>
+	<data name="PaymentDateLabel">
+		<value>Fecha de Pago:</value>
+	</data>
+	<data name="OrderStatusLabel">
+		<value>Estado del Pedido:</value>
+	</data>
+	<data name="ProductsLabel">
+		<value>Productos:</value>
+	</data>
+	<data name="ItemsLabel">
+		<value>items</value>
+	</data>
+	<data name="SubtotalLabel">
+		<value>Subtotal:</value>
+	</data>
+	<data name="TaxLabel">
+		<value>Impuestos:</value>
+	</data>
+	<data name="ShippingAddressLabel">
+		<value>Dirección de Envío:</value>
+	</data>
+	<data name="CardLabel">
+		<value>Tarjeta:</value>
+	</data>
+	<data name="ChangeLabel">
+		<value>Vuelto:</value>
+	</data>
+	<data name="DownloadReceiptBtn">
+		<value>Descargar Recibo</value>
+	</data>
+	<data name="ViewOrderBtn">
+		<value>Ver Pedido Completo</value>
+	</data>
+	<data name="NoPaymentsTitle">
+		<value>No hay pagos registrados</value>
+	</data>
+	<data name="NoPaymentsDesc">
+		<value>Aún no has realizado ningún pago. ¡Comienza a comprar ahora!</value>
+	</data>
+	<data name="GoToShopBtn">
+		<value>Ir a la Tienda</value>
+	</data>
+	<data name="PaginationInfo">
+		<value>Mostrando {0} de {1} pagos</value>
+	</data>
+	<data name="PreviousBtn">
+		<value>Anterior</value>
+	</data>
+	<data name="NextBtn">
+		<value>Siguiente</value>
+	</data>
+	<data name="BackToHomeBtn">
+		<value>Volver al Inicio</value>
+	</data>
+	<data name="ExportExcelBtn">
+		<value>Exportar a Excel</value>
+	</data>
+</root>

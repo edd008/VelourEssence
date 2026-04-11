@@ -1,0 +1,420 @@
+/* ===================================================================
+   PRODUCTS DELETE - CSS INDEPENDIENTE CON DISEÑO PREMIUM
+   Paleta: Azul petróleo, Beige claro, Verde menta, Coral, Gris claro
+   ================================================================== */
+
+/* Variables CSS específicas para eliminar productos */
+.products-delete-page {
+    --products-primary: #1F3A5F;        /* Azul petróleo */
+    --products-primary-dark: #162c47;    
+    --products-primary-light: #2d4a6b;  
+    --products-secondary: #F4EDE4;      /* Beige claro */
+    --products-accent: #A8E6CF;         /* Verde menta */
+    --products-accent-coral: #FF8C94;   /* Coral */
+    --products-light: #F9F9F9;          /* Gris muy claro */
+    --products-white: #ffffff;
+    --products-success: #A8E6CF;        
+    --products-warning: #FF8C94;        
+    --products-error: #e74c3c;
+    --products-text: #333333;
+    --products-text-muted: #666666;
+    --products-text-light: #999999;
+    --products-border: #e0e0e0;
+    --products-shadow: 0 8px 25px rgba(31, 58, 95, 0.15);
+    --products-shadow-hover: 0 15px 35px rgba(168, 230, 207, 0.25);
+    --products-shadow-danger: 0 8px 25px rgba(231, 76, 60, 0.15);
+    --products-radius: 16px;
+    --products-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Reset específico para eliminar productos */
+.products-delete-page * {
+    box-sizing: border-box;
+}
+
+.products-delete-page {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: var(--products-text);
+}
+
+/* ===================================================================
+   HERO SECTION PREMIUM
+   ================================================================== */
+
+.products-delete-hero-section {
+    position: relative;
+    min-height: 60vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.products-delete-hero-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, var(--products-primary) 0%, var(--products-primary-dark) 100%);
+    opacity: 0.95;
+}
+
+.products-delete-hero-background::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(45deg, transparent 30%, rgba(255, 140, 148, 0.1) 50%, transparent 70%);
+    animation: shimmer 3s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 0.7; }
+}
+
+.products-delete-hero-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    color: var(--products-white);
+    padding: 2rem;
+}
+
+.products-delete-hero-title {
+    font-size: 3rem;
+    font-weight: 300;
+    margin-bottom: 1rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.products-delete-hero-title i {
+    color: var(--products-accent-coral);
+    margin-right: 1rem;
+    font-size: 2.5rem;
+}
+
+.products-delete-hero-subtitle {
+    font-size: 1.2rem;
+    font-weight: 300;
+    opacity: 0.9;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* ===================================================================
+   MAIN CONTENT SECTION
+   ================================================================== */
+
+.products-delete-content {
+    padding: 4rem 0;
+    background: var(--products-light);
+}
+
+.products-delete-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+/* ===================================================================
+   CONFIRMATION CARD
+   ================================================================== */
+
+.products-delete-confirmation-card {
+    background: var(--products-white);
+    border-radius: var(--products-radius);
+    padding: 3rem;
+    box-shadow: var(--products-shadow);
+    margin-bottom: 2rem;
+    border: 2px solid var(--products-accent-coral);
+    position: relative;
+    overflow: hidden;
+}
+
+.products-delete-confirmation-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--products-accent-coral) 0%, var(--products-primary) 100%);
+}
+
+.products-delete-confirmation-title {
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: var(--products-text);
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+.products-delete-confirmation-title i {
+    color: var(--products-accent-coral);
+    margin-right: 0.5rem;
+}
+
+.products-delete-warning {
+    background: linear-gradient(135deg, rgba(255, 140, 148, 0.1) 0%, rgba(255, 140, 148, 0.05) 100%);
+    border: 1px solid var(--products-accent-coral);
+    border-radius: var(--products-radius);
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.products-delete-warning p {
+    color: var(--products-text);
+    font-size: 1.1rem;
+    margin: 0;
+    font-weight: 500;
+}
+
+/* ===================================================================
+   PRODUCT DETAILS SECTION
+   ================================================================== */
+
+.products-delete-details {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+.products-delete-image-container {
+    position: relative;
+    border-radius: var(--products-radius);
+    overflow: hidden;
+    box-shadow: var(--products-shadow);
+}
+
+.products-delete-image {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    transition: var(--products-transition);
+}
+
+.products-delete-image:hover {
+    transform: scale(1.05);
+}
+
+.products-delete-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.products-delete-info h3 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--products-primary);
+    margin-bottom: 1rem;
+}
+
+.products-delete-info-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid var(--products-border);
+}
+
+.products-delete-info-item:last-child {
+    border-bottom: none;
+}
+
+.products-delete-info-label {
+    font-weight: 600;
+    color: var(--products-text);
+    min-width: 120px;
+}
+
+.products-delete-info-value {
+    color: var(--products-text-muted);
+    font-weight: 500;
+}
+
+.products-delete-info-price {
+    color: var(--products-primary);
+    font-weight: 700;
+    font-size: 1.2rem;
+}
+
+.products-delete-info-stock {
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.products-delete-info-stock.disponible {
+    background: var(--products-accent);
+    color: var(--products-primary);
+}
+
+.products-delete-info-stock.agotado {
+    background: var(--products-accent-coral);
+    color: var(--products-white);
+}
+
+/* ===================================================================
+   ACTIONS SECTION
+   ================================================================== */
+
+.products-delete-actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    align-items: center;
+    margin-top: 2rem;
+}
+
+.products-delete-btn {
+    padding: 0.75rem 2rem;
+    border: none;
+    border-radius: var(--products-radius);
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--products-transition);
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    min-width: 160px;
+    justify-content: center;
+    box-shadow: var(--products-shadow);
+}
+
+.products-delete-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--products-shadow-hover);
+}
+
+.products-delete-btn-danger {
+    background: linear-gradient(135deg, var(--products-error) 0%, #c0392b 100%);
+    color: var(--products-white);
+}
+
+.products-delete-btn-danger:hover {
+    background: linear-gradient(135deg, #c0392b 0%, var(--products-error) 100%);
+    box-shadow: var(--products-shadow-danger);
+}
+
+.products-delete-btn-secondary {
+    background: linear-gradient(135deg, var(--products-secondary) 0%, #e8ddd4 100%);
+    color: var(--products-text);
+}
+
+.products-delete-btn-secondary:hover {
+    background: linear-gradient(135deg, #e8ddd4 0%, var(--products-secondary) 100%);
+}
+
+/* ===================================================================
+   RESPONSIVE DESIGN
+   ================================================================== */
+
+@media (max-width: 768px) {
+    .products-delete-hero-title {
+        font-size: 2rem;
+    }
+    
+    .products-delete-hero-subtitle {
+        font-size: 1rem;
+    }
+    
+    .products-delete-confirmation-card {
+        padding: 2rem;
+    }
+    
+    .products-delete-details {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    .products-delete-actions {
+        flex-direction: column;
+    }
+    
+    .products-delete-btn {
+        width: 100%;
+        min-width: unset;
+    }
+}
+
+@media (max-width: 480px) {
+    .products-delete-container {
+        padding: 0 1rem;
+    }
+    
+    .products-delete-confirmation-card {
+        padding: 1.5rem;
+    }
+    
+    .products-delete-hero-title {
+        font-size: 1.5rem;
+    }
+    
+    .products-delete-hero-content {
+        padding: 1rem;
+    }
+}
+
+/* ===================================================================
+   LOADING STATES
+   ================================================================== */
+
+.products-delete-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.products-delete-btn:disabled:hover {
+    transform: none;
+    box-shadow: var(--products-shadow);
+}
+
+/* ===================================================================
+   ANIMATIONS
+   ================================================================== */
+
+.products-delete-confirmation-card {
+    animation: slideInUp 0.6s ease-out;
+}
+
+@keyframes slideInUp {
+    from {
+        transform: translateY(30px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.products-delete-details {
+    animation: fadeIn 0.8s ease-out 0.2s both;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.products-delete-actions {
+    animation: fadeIn 1s ease-out 0.4s both;
+}

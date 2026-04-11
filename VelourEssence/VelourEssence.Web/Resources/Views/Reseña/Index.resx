@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+	<data name="ReviewsTitle" xml:space="preserve">
+    <value>Reseñas</value>
+  </data>
+	<data name="ReviewsHeroMain" xml:space="preserve">
+    <value>Reseñas de Clientes</value>
+  </data>
+	<data name="ReviewsHeroSubtitle" xml:space="preserve">
+    <value>Experiencias Auténticas</value>
+  </data>
+	<data name="ReviewsHeroDescription" xml:space="preserve">
+    <value>Descubre lo que nuestros clientes opinan sobre nuestras fragancias. Cada reseña refleja una experiencia real y valiosa.</value>
+  </data>
+	<data name="ReviewsStatTotal" xml:space="preserve">
+    <value>Reseñas Totales</value>
+  </data>
+	<data name="ReviewsStatAverage" xml:space="preserve">
+    <value>Puntuación Media</value>
+  </data>
+	<data name="ReviewsStatSatisfaction" xml:space="preserve">
+    <value>Satisfacción</value>
+  </data>
+	<data name="ReviewsFiltersTitle" xml:space="preserve">
+    <value>Explora las Reseñas</value>
+  </data>
+	<data name="ReviewsSearchPlaceholder" xml:space="preserve">
+    <value>Buscar en reseñas...</value>
+  </data>
+	<data name="ReviewsFilterAll" xml:space="preserve">
+    <value>Todas las Puntuaciones</value>
+  </data>
+	<data name="ReviewsFilter5" xml:space="preserve">
+    <value>⭐⭐⭐⭐⭐ (5 estrellas)</value>
+  </data>
+	<data name="ReviewsFilter4" xml:space="preserve">
+    <value>⭐⭐⭐⭐ (4 estrellas)</value>
+  </data>
+	<data name="ReviewsFilter3" xml:space="preserve">
+    <value>⭐⭐⭐ (3 estrellas)</value>
+  </data>
+	<data name="ReviewsFilter2" xml:space="preserve">
+    <value>⭐⭐ (2 estrellas)</value>
+  </data>
+	<data name="ReviewsFilter1" xml:space="preserve">
+    <value>⭐ (1 estrella)</value>
+  </data>
+	<data name="ReviewsSortNewest" xml:space="preserve">
+    <value>Más Recientes</value>
+  </data>
+	<data name="ReviewsSortOldest" xml:space="preserve">
+    <value>Más Antiguas</value>
+  </data>
+	<data name="ReviewsSortHighest" xml:space="preserve">
+    <value>Mayor Puntuación</value>
+  </data>
+	<data name="ReviewsSortLowest" xml:space="preserve">
+    <value>Menor Puntuación</value>
+  </data>
+	<data name="ReviewsFound" xml:space="preserve">
+    <value>reseñas encontradas</value>
+  </data>
+	<data name="ReviewsNoDate" xml:space="preserve">
+    <value>Sin fecha</value>
+  </data>
+	<data name="ReviewsEmptyTitle" xml:space="preserve">
+    <value>No hay reseñas disponibles</value>
+  </data>
+	<data name="ReviewsEmptyDescription" xml:space="preserve">
+    <value>Los clientes pueden escribir reseñas desde la página de cada producto. ¡Sé el primero en compartir tu experiencia!</value>
+  </data>
+	<data name="ReviewsBtnProducts" xml:space="preserve">
+    <value>Ver Productos</value>
+  </data>
+</root>

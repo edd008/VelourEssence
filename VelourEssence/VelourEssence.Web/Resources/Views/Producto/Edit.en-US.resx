@@ -1,0 +1,120 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<root>
+	<data name="EditProductTitle" xml:space="preserve">
+	<value>Edit Product</value>
+  </data>
+	<data name="EditProductHeader" xml:space="preserve">
+	<value>Edit Product</value>
+  </data>
+	<data name="EditProductSubtitle" xml:space="preserve">
+	<value>Modify the selected product information</value>
+  </data>
+	<data name="EditBasicInfo" xml:space="preserve">
+	<value>Basic Information</value>
+  </data>
+	<data name="EditProductNameLabel" xml:space="preserve">
+	<value>Product Name</value>
+  </data>
+	<data name="EditProductNamePlaceholder" xml:space="preserve">
+	<value>Enter the product name</value>
+  </data>
+	<data name="EditProductPriceLabel" xml:space="preserve">
+	<value>Price ₡</value>
+  </data>
+	<data name="EditProductDescriptionLabel" xml:space="preserve">
+	<value>Description</value>
+  </data>
+	<data name="EditProductDescriptionPlaceholder" xml:space="preserve">
+	<value>Describe the product in detail</value>
+  </data>
+	<data name="EditProductStockLabel" xml:space="preserve">
+	<value>Stock</value>
+  </data>
+	<data name="EditProductBrandLabel" xml:space="preserve">
+	<value>Brand</value>
+  </data>
+	<data name="EditProductBrandPlaceholder" xml:space="preserve">
+	<value>Product brand</value>
+  </data>
+	<data name="EditProductGenderLabel" xml:space="preserve">
+	<value>Gender</value>
+  </data>
+	<data name="EditProductGenderSelect" xml:space="preserve">
+	<value>Select gender</value>
+  </data>
+	<data name="EditProductGenderMasculino" xml:space="preserve">
+	<value>Male</value>
+  </data>
+	<data name="EditProductGenderFemenino" xml:space="preserve">
+	<value>Female</value>
+  </data>
+	<data name="EditProductGenderUnisex" xml:space="preserve">
+	<value>Unisex</value>
+  </data>
+	<data name="EditProductConcentrationLabel" xml:space="preserve">
+	<value>Concentration</value>
+  </data>
+	<data name="EditProductConcentrationPlaceholder" xml:space="preserve">
+	<value>Eg: Eau de Parfum, Eau de Toilette</value>
+  </data>
+	<data name="EditClassification" xml:space="preserve">
+	<value>Classification</value>
+  </data>
+	<data name="EditProductCategoryLabel" xml:space="preserve">
+	<value>Category</value>
+  </data>
+	<data name="EditProductCategorySelect" xml:space="preserve">
+	<value>Select category</value>
+  </data>
+	<data name="EditProductTagsLabel" xml:space="preserve">
+	<value>Tags</value>
+  </data>
+	<data name="EditProductRatingTitle" xml:space="preserve">
+	<value>Current Rating</value>
+  </data>
+	<data name="EditProductReviewsCount" xml:space="preserve">
+	<value>reviews</value>
+  </data>
+	<data name="EditProductCurrentImagesTitle" xml:space="preserve">
+	<value>Current Images</value>
+  </data>
+	<data name="EditProductImageAlt" xml:space="preserve">
+	<value>Product image</value>
+  </data>
+	<data name="EditProductImageNotAvailable" xml:space="preserve">
+	<value>Image not available</value>
+  </data>
+	<data name="EditProductImageStatusCurrent" xml:space="preserve">
+	<value>Current</value>
+  </data>
+	<data name="EditProductNoImage" xml:space="preserve">
+	<value>No image</value>
+  </data>
+	<data name="EditProductNoImageAvailable" xml:space="preserve">
+	<value>No image available</value>
+  </data>
+	<data name="EditProductImageStatusError" xml:space="preserve">
+	<value>Error</value>
+  </data>
+	<data name="EditProductAddImagesTitle" xml:space="preserve">
+	<value>Add New Images</value>
+  </data>
+	<data name="EditProductAddImagesDropText" xml:space="preserve">
+	<value>Drag images here or click to select</value>
+  </data>
+	<data name="EditProductAddImagesHint" xml:space="preserve">
+	<value>Allowed formats: JPG, PNG, GIF (max. 5MB each)</value>
+  </data>
+	<data name="EditCancelBtn" xml:space="preserve">
+	<value>Cancel</value>
+  </data>
+	<data name="EditSubmitBtn" xml:space="preserve">
+	<value>Update Product</value>
+  </data>
+	<data name="EditProductRemoveImageConfirm" xml:space="preserve">
+	<value>Are you sure you want to delete this image?</value>
+  </data>
+	<data name="EditRequiredFieldsAlert" xml:space="preserve">
+	<value>Please complete all required fields.</value>
+  </data>
+</root>

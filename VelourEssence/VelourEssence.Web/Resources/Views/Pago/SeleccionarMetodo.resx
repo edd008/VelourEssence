@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+	<data name="SelectPaymentMethodTitle">
+		<value>Método de Pago</value>
+	</data>
+	<data name="SelectPaymentMethodSubtitle">
+		<value>Selecciona tu método de pago preferido de forma segura</value>
+	</data>
+	<data name="OrderSummaryTitle">
+		<value>Resumen del Pedido</value>
+	</data>
+	<data name="TotalToPayLabel">
+		<value>Total a pagar:</value>
+	</data>
+	<data name="SecurePaymentInfo">
+		<value>Pago 100% seguro y protegido</value>
+	</data>
+	<data name="PaymentMethodsTitle">
+		<value>Métodos de Pago</value>
+	</data>
+	<data name="CardMethodTitle">
+		<value>Tarjeta (Crédito/Débito)</value>
+	</data>
+	<data name="CardMethodDesc">
+		<value>Visa, MasterCard, American Express</value>
+	</data>
+	<data name="CardMethodFeatureInstant">
+		<value>Procesamiento instantáneo</value>
+	</data>
+	<data name="CardMethodFeatureSSL">
+		<value>Encriptación SSL</value>
+	</data>
+	<data name="CashMethodTitle">
+		<value>Pago en Efectivo</value>
+	</data>
+	<data name="CashMethodDesc">
+		<value>Pago contra entrega del producto</value>
+	</data>
+	<data name="CashMethodFeatureNoFees">
+		<value>Sin comisiones adicionales</value>
+	</data>
+	<data name="CashMethodFeatureOnDelivery">
+		<value>Pago al recibir</value>
+	</data>
+	<data name="SecurityInfoTitle">
+		<value>Información de Seguridad</value>
+	</data>
+	<data name="SecurityFeatureSSL">
+		<value>Encriptación SSL de extremo a extremo</value>
+	</data>
+	<data name="SecurityFeatureNoCardStorage">
+		<value>No almacenamos información completa de tarjetas</value>
+	</data>
+	<data name="SecurityFeaturePCI">
+		<value>Procesamiento seguro certificado PCI DSS</value>
+	</data>
+	<data name="BackToCartBtn">
+		<value>Volver al carrito</value>
+	</data>
+</root>

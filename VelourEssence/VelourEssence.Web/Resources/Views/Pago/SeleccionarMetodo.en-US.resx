@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+	<data name="SelectPaymentMethodTitle">
+		<value>Payment Method</value>
+	</data>
+	<data name="SelectPaymentMethodSubtitle">
+		<value>Select your preferred payment method securely</value>
+	</data>
+	<data name="OrderSummaryTitle">
+		<value>Order Summary</value>
+	</data>
+	<data name="TotalToPayLabel">
+		<value>Total to pay:</value>
+	</data>
+	<data name="SecurePaymentInfo">
+		<value>100% secure and protected payment</value>
+	</data>
+	<data name="PaymentMethodsTitle">
+		<value>Payment Methods</value>
+	</data>
+	<data name="CardMethodTitle">
+		<value>Card (Credit/Debit)</value>
+	</data>
+	<data name="CardMethodDesc">
+		<value>Visa, MasterCard, American Express</value>
+	</data>
+	<data name="CardMethodFeatureInstant">
+		<value>Instant processing</value>
+	</data>
+	<data name="CardMethodFeatureSSL">
+		<value>SSL encryption</value>
+	</data>
+	<data name="CashMethodTitle">
+		<value>Cash Payment</value>
+	</data>
+	<data name="CashMethodDesc">
+		<value>Payment upon product delivery</value>
+	</data>
+	<data name="CashMethodFeatureNoFees">
+		<value>No additional fees</value>
+	</data>
+	<data name="CashMethodFeatureOnDelivery">
+		<value>Pay on delivery</value>
+	</data>
+	<data name="SecurityInfoTitle">
+		<value>Security Information</value>
+	</data>
+	<data name="SecurityFeatureSSL">
+		<value>End-to-end SSL encryption</value>
+	</data>
+	<data name="SecurityFeatureNoCardStorage">
+		<value>We do not store full card information</value>
+	</data>
+	<data name="SecurityFeaturePCI">
+		<value>Secure PCI DSS certified processing</value>
+	</data>
+	<data name="BackToCartBtn">
+		<value>Back to cart</value>
+	</data>
+</root>

@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+	<data name="AccessDeniedTitle" xml:space="preserve">
+    <value>Acceso Denegado</value>
+  </data>
+	<data name="AccessDeniedMessage" xml:space="preserve">
+    <value>No tienes permisos suficientes para acceder a esta página.</value>
+  </data>
+	<data name="AccessDeniedSubMessage" xml:space="preserve">
+    <value>Si crees que esto es un error, contacta al administrador del sistema.</value>
+  </data>
+	<data name="AccessDeniedBackBtn" xml:space="preserve">
+    <value>Volver</value>
+  </data>
+	<data name="AccessDeniedHomeBtn" xml:space="preserve">
+    <value>Ir al Inicio</value>
+  </data>
+</root>

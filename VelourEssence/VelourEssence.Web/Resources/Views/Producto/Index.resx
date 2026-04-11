@@ -1,0 +1,100 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+	<resheader name="resmimetype">
+		<value>text/microsoft-resx</value>
+	</resheader>
+	<resheader name="version">
+		<value>1.3</value>
+	</resheader>
+	<resheader name="reader">
+		<value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+	</resheader>
+	<resheader name="writer">
+		<value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+	</resheader>
+
+	<data name="ProductsTitle" xml:space="preserve">
+    <value>Nuestras Fragancias</value>
+  </data>
+	<data name="ProductsTagline" xml:space="preserve">
+    <value>Colección Exclusiva</value>
+  </data>
+	<data name="ProductsSubtitle" xml:space="preserve">
+    <value>Descubre aromas únicos que definen tu personalidad. Cada fragancia cuenta una historia especial.</value>
+  </data>
+	<data name="ProductsStatAvailable" xml:space="preserve">
+    <value>Fragancias Disponibles</value>
+  </data>
+	<data name="ProductsStatClients" xml:space="preserve">
+    <value>Clientes Satisfechos</value>
+  </data>
+	<data name="ProductsStatShipping" xml:space="preserve">
+    <value>Envío Rápido</value>
+  </data>
+	<data name="ProductsFiltersTitle" xml:space="preserve">
+    <value>Explora Nuestra Colección</value>
+  </data>
+	<data name="ProductsSearchPlaceholder" xml:space="preserve">
+    <value>Buscar fragancias...</value>
+  </data>
+	<data name="ProductsFilterAll" xml:space="preserve">
+    <value>Todas las Categorías</value>
+  </data>
+	<data name="ProductsFilterMen" xml:space="preserve">
+    <value>Para Hombre</value>
+  </data>
+	<data name="ProductsFilterWomen" xml:space="preserve">
+    <value>Para Mujer</value>
+  </data>
+	<data name="ProductsFilterUnisex" xml:space="preserve">
+    <value>Unisex</value>
+  </data>
+	<data name="ProductsSortName" xml:space="preserve">
+    <value>Ordenar por Nombre</value>
+  </data>
+	<data name="ProductsSortPriceLow" xml:space="preserve">
+    <value>Precio: Menor a Mayor</value>
+  </data>
+	<data name="ProductsSortPriceHigh" xml:space="preserve">
+    <value>Precio: Mayor a Menor</value>
+  </data>
+	<data name="ProductsSortNewest" xml:space="preserve">
+    <value>Más Nuevos</value>
+  </data>
+	<data name="ProductsCountFound" xml:space="preserve">
+    <value>{0} fragancias encontradas</value>
+  </data>
+	<data name="ProductsQuickView" xml:space="preserve">
+    <value>Vista rápida</value>
+  </data>
+	<data name="ProductsFavorites" xml:space="preserve">
+    <value>Favoritos</value>
+  </data>
+	<data name="ProductsNoImage" xml:space="preserve">
+    <value>Sin imagen</value>
+  </data>
+	<data name="ProductsDiscountOff" xml:space="preserve">
+    <value>OFF</value>
+  </data>
+	<data name="ProductsSavings" xml:space="preserve">
+    <value>Ahorra {0}</value>
+  </data>
+	<data name="ProductsViewDetails" xml:space="preserve">
+    <value>Ver Detalles</value>
+  </data>
+	<data name="ProductsAdd" xml:space="preserve">
+    <value>Agregar</value>
+  </data>
+	<data name="ProductsAdded" xml:space="preserve">
+    <value>¡Agregado!</value>
+  </data>
+	<data name="ProductsEmptyTitle" xml:space="preserve">
+    <value>No se encontraron productos</value>
+  </data>
+	<data name="ProductsEmptyDescription" xml:space="preserve">
+    <value>Prueba ajustando los filtros o busca con otros términos</value>
+  </data>
+	<data name="ProductsClearFilters" xml:space="preserve">
+    <value>Limpiar Filtros</value>
+  </data>
+</root>

@@ -1,0 +1,54 @@
+﻿<root>
+	<data name="DeletePromotionTitle">
+		<value>Delete Promotion</value>
+	</data>
+	<data name="DeletePromotionSubtitle">
+		<value>Are you sure you want to delete this promotion?</value>
+	</data>
+	<data name="TypeLabel">
+		<value>Type:</value>
+	</data>
+	<data name="ProductLabel">
+		<value>Product:</value>
+	</data>
+	<data name="CategoryLabel">
+		<value>Category:</value>
+	</data>
+	<data name="CategoryIdLabel">
+		<value>Category ID:</value>
+	</data>
+	<data name="DiscountLabel">
+		<value>Discount:</value>
+	</data>
+	<data name="PercentSymbol">
+		<value>%</value>
+	</data>
+	<data name="ValidityLabel">
+		<value>Validity:</value>
+	</data>
+	<data name="AttentionLabel">
+		<value>Attention!</value>
+	</data>
+	<data name="DeleteWarningMsg">
+		<value>This action cannot be undone. When deleting this promotion:</value>
+	</data>
+	<data name="DeleteWarningLoseInfo">
+		<value>All promotion information will be lost</value>
+	</data>
+	<data name="DeleteWarningSoldProducts">
+		<value>Products already sold with this promotion will keep their prices</value>
+	</data>
+	<data name="DeleteWarningNotAvailable">
+		<value>The promotion will no longer be available for future purchases</value>
+	</data>
+	<data name="ConfirmDeleteBtn">
+		<value>Yes, Delete Promotion</value>
+	</data>
+	<data name="CancelBtn">
+		<value>Cancel</value>
+	</data>
+	<data name="ViewDetailsBtn">
+		<value>View Details</value>
+	</data>
+</root>
+

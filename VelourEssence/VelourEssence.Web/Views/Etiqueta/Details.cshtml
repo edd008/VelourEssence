@@ -1,0 +1,94 @@
+﻿@model VelourEssence.Application.DTOs.EtiquetaDto
+
+@{
+    ViewData["Title"] = "Detalle de Etiqueta";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/etiqueta-details.css" />
+}
+
+<div class="etiqueta-detalle-page">
+    <div class="etiqueta-detalle-container">
+        <div class="etiqueta-detalle-wrapper">
+            <!-- Header Premium -->
+            <div class="etiqueta-header">
+                <div class="etiqueta-header-content">
+                    <div class="etiqueta-avatar">
+                        <i class="bi bi-tag-fill"></i>
+                    </div>
+                    <div class="etiqueta-info">
+                        <h1 class="etiqueta-nombre">@Model.Nombre</h1>
+                        <span class="etiqueta-id-badge">#@Model.IdEtiqueta</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Contenido principal -->
+            <div class="etiqueta-contenido">
+                <h3 class="seccion-titulo">
+                    <i class="bi bi-info-circle"></i>
+                    Información de la Etiqueta
+                </h3>
+
+                <div class="info-grid">
+                    <div class="info-item">
+                        <span class="info-label">
+                            <i class="bi bi-hash"></i>
+                            ID de Etiqueta
+                        </span>
+                        <span class="info-valor">#@Model.IdEtiqueta</span>
+                    </div>
+
+                    <div class="info-item">
+                        <span class="info-label">
+                            <i class="bi bi-tag"></i>
+                            Nombre
+                        </span>
+                        <span class="info-valor">@Model.Nombre</span>
+                    </div>
+
+                    <div class="info-item">
+                        <span class="info-label">
+                            <i class="bi bi-calendar"></i>
+                            Estado
+                        </span>
+                        <span class="info-valor">
+                            <span class="estado-badge activo">
+                                <i class="bi bi-check-circle-fill"></i>
+                                Activa
+                            </span>
+                        </span>
+                    </div>
+
+                    <div class="info-item">
+                        <span class="info-label">
+                            <i class="bi bi-graph-up"></i>
+                            Tipo
+                        </span>
+                        <span class="info-valor">
+                            <span class="tipo-badge">
+                                <i class="bi bi-bookmark-fill"></i>
+                                Clasificación
+                            </span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Acciones -->
+            <div class="etiqueta-acciones">
+                <div class="acciones-grupo">
+                    <a asp-action="Index" class="accion-btn volver">
+                        <i class="bi bi-arrow-left"></i>
+                        <span>Volver a la lista</span>
+                    </a>
+                    <a asp-action="Edit" asp-route-id="@Model.IdEtiqueta" class="accion-btn editar">
+                        <i class="bi bi-pencil"></i>
+                        <span>Editar Etiqueta</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<root>
+	<data name="AccessDeniedTitle" xml:space="preserve">
+	<value>Access Denied</value>
+  </data>
+	<data name="AccessDeniedMessage" xml:space="preserve">
+	<value>You do not have sufficient permissions to access this page.</value>
+  </data>
+	<data name="AccessDeniedSubMessage" xml:space="preserve">
+	<value>If you believe this is an error, contact the system administrator.</value>
+  </data>
+	<data name="AccessDeniedBackBtn" xml:space="preserve">
+	<value>Back</value>
+  </data>
+	<data name="AccessDeniedHomeBtn" xml:space="preserve">
+	<value>Go to Home</value>
+  </data>
+</root>

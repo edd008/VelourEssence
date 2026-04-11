@@ -1,0 +1,203 @@
+﻿@using Microsoft.Extensions.Localization
+@inject IStringLocalizer<VelourEssence.Web.Views.Pedido.Detalle> L
+@model VelourEssence.Application.DTOs.PedidoDetalleDto
+
+@{
+    ViewData["Title"] = L["OrderDetailTitle"];
+    var estado = Model.Estado?.Trim().ToLowerInvariant();
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/pedido-detalle.css" />
+}
+
+<div class="pedido-detalle-page">
+    <div class="pedido-detalle-container">
+        <div class="pedido-detalle-wrapper">
+            <div class="pedido-factura-card">
+                <!-- Encabezado con información de la empresa y pedido -->
+                <div class="pedido-factura-header">
+                    <div class="pedido-factura-header-content">
+                        <div class="pedido-empresa-info">
+                            <h1>Velour Essence</h1>
+                            <p class="pedido-factura-tipo">@L["OrderInvoiceLabel"]</p>
+                        </div>
+                        <div class="pedido-info-derecha">
+                            <div class="pedido-numero">@L["OrderLabel"] #@Model.IdPedido</div>
+                            <div class="pedido-fecha">@Model.Fecha?.ToString("dd/MM/yyyy HH:mm")</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Información del cliente y estado del pedido -->
+                <div class="pedido-factura-info">
+                    <div class="pedido-cliente-seccion">
+                        <h3>
+                            <i class="bi bi-person-circle"></i>
+                            @L["CustomerInfoTitle"]
+                        </h3>
+                        <div class="pedido-cliente-datos">
+                            <div class="pedido-cliente-item">
+                                <i class="bi bi-person"></i>
+                                <span><strong>@L["CustomerLabel"]</strong> @Model.NombreCliente</span>
+                            </div>
+                            <div class="pedido-cliente-item">
+                                <i class="bi bi-geo-alt"></i>
+                                <span><strong>@L["AddressLabel"]</strong> @Model.DireccionEnvio</span>
+                            </div>
+                            <div class="pedido-cliente-item">
+                                <i class="bi bi-calendar"></i>
+                                <span><strong>@L["DateLabel"]</strong> @Model.Fecha?.ToString("dd/MM/yyyy HH:mm")</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="pedido-estado-seccion">
+                        <h3>@L["OrderStatusTitle"]</h3>
+                        <div class="pedido-estado-info">
+                            <div class="pedido-estado-item">
+                                <span class="pedido-estado-label">@L["OrderStatusLabel"]</span>
+                                @{
+                                    var (estadoClass, estadoTexto, estadoIcon) = estado switch
+                                    {
+                                        "cancelado" => ("cancelado", L["StatusCancelled"], "bi-x-circle"),
+                                        "entregado" => ("entregado", L["StatusDelivered"], "bi-check-circle"),
+                                        "pendiente" => ("pendiente", L["StatusPending"], "bi-clock"),
+                                        "enviado" => ("enviado", L["StatusShipped"], "bi-truck"),
+                                        _ => ("pendiente", Model.Estado, "bi-circle")
+                                    };
+                                }
+                                <span class="pedido-estado-badge @estadoClass">
+                                    <i class="bi @estadoIcon"></i>
+                                    @estadoTexto
+                                </span>
+                            </div>
+                            <div class="pedido-estado-item">
+                                <span class="pedido-estado-label">@L["PaymentMethodLabel"]</span>
+                                <span class="pedido-metodo-pago">
+                                    <i class="bi bi-credit-card"></i>
+                                    @Model.MetodoPago
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Lista detallada de productos del pedido -->
+                <div class="pedido-productos-seccion">
+                    <h3>
+                        <i class="bi bi-bag"></i>
+                        @L["OrderProductsTitle"]
+                    </h3>
+                    <div class="pedido-productos-tabla">
+                        <table class="pedido-tabla-productos">
+                            <thead>
+                                <tr>
+                                    <th>@L["ProductLabel"]</th>
+                                    <th>@L["QuantityLabel"]</th>
+                                    <th>@L["UnitPriceLabel"]</th>
+                                    <th>@L["SubtotalLabel"]</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var producto in Model.Productos)
+                                {
+                                    <tr class="pedido-producto-fila">
+                                        <td class="pedido-producto-nombre">@producto.Nombre</td>
+                                        <td class="pedido-producto-cantidad">@producto.Cantidad</td>
+                                        <td class="pedido-producto-precio">₡@producto.PrecioUnitario?.ToString("N2")</td>
+                                        <td class="pedido-producto-total">₡@producto.PrecioTotal?.ToString("N2")</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Resumen financiero del pedido -->
+                <div class="pedido-totales-seccion">
+                    <div class="pedido-totales-contenido">
+                        <div class="pedido-total-item">
+                            <span class="pedido-total-label">@L["SubtotalLabel"]</span>
+                            <span class="pedido-total-valor">₡@Model.Subtotal?.ToString("N2")</span>
+                        </div>
+                        <div class="pedido-total-item">
+                            <span class="pedido-total-label">@L["TaxLabel"]</span>
+                            <span class="pedido-total-valor">₡@Model.Impuesto?.ToString("N2")</span>
+                        </div>
+                        <div class="pedido-total-item pedido-total-final">
+                            <span class="pedido-total-label">@L["TotalLabel"]</span>
+                            <span class="pedido-total-valor">₡@Model.Total?.ToString("N2")</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Acciones disponibles según el estado del pedido -->
+                <div class="pedido-acciones-seccion">
+                    @if (estado == "pendiente")
+                    {
+                        <div class="pedido-acciones-grupo">
+                            <a href="@Url.Action("Pagar", "Pedido", new { id = Model.IdPedido })" class="pedido-accion-btn pagar">
+                                <i class="bi bi-credit-card"></i>
+                                <span>@L["PayOrderBtn"]</span>
+                            </a>
+                            <a href="@Url.Action("Cancelar", "Pedido", new { id = Model.IdPedido })" class="pedido-accion-btn cancelar"
+                               onclick="return confirm('@L["CancelOrderConfirm"]');">
+                                <i class="bi bi-x-circle"></i>
+                                <span>@L["CancelOrderBtn"]</span>
+                            </a>
+                        </div>
+                    }
+                    else if (estado == "enviado")
+                    {
+                        <div class="pedido-acciones-grupo">
+                            <a href="@Url.Action("Pagar", "Pedido", new { id = Model.IdPedido })" class="pedido-accion-btn pagar">
+                                <i class="bi bi-credit-card"></i>
+                                <span>@L["CompletePaymentBtn"]</span>
+                            </a>
+                            <button class="pedido-accion-btn cancelar deshabilitado" disabled>
+                                <i class="bi bi-x-circle"></i>
+                                <span>@L["CannotCancelLabel"]</span>
+                            </button>
+                        </div>
+                    }
+                    else if (estado == "entregado")
+                    {
+                        <div class="pedido-acciones-grupo">
+                            <div class="pedido-estado-completado">
+                                <i class="bi bi-check-circle"></i>
+                                <span>@L["OrderCompletedLabel"]</span>
+                            </div>
+                            <a asp-action="Index" class="pedido-accion-btn volver">
+                                <i class="bi bi-arrow-left"></i>
+                                <span>@L["BackToOrdersBtn"]</span>
+                            </a>
+                        </div>
+                    }
+                    else if (estado == "cancelado")
+                    {
+                        <div class="pedido-acciones-grupo">
+                            <div class="pedido-estado-cancelado">
+                                <i class="bi bi-x-circle"></i>
+                                <span>@L["OrderCancelledLabel"]</span>
+                            </div>
+                            <a asp-action="Index" class="pedido-accion-btn volver">
+                                <i class="bi bi-arrow-left"></i>
+                                <span>@L["BackToOrdersBtn"]</span>
+                            </a>
+                        </div>
+                    }
+                </div>
+
+                <!-- Pie de página con información de la empresa -->
+                <div class="pedido-factura-footer">
+                    <div class="pedido-footer-logo">
+                        <img src="/img/logo.png.jpeg" alt="Velour Essence" class="pedido-logo-imagen">
+                    </div>
+                    <p class="pedido-footer-mensaje">@L["ThankYouMsg"]</p>
+                    <p class="pedido-footer-info">@L["ContactUsMsg"]</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

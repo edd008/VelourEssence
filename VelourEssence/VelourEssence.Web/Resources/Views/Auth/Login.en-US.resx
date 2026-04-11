@@ -1,0 +1,70 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+	<resheader name="resmimetype">
+		<value>text/microsoft-resx</value>
+	</resheader>
+	<resheader name="version">
+		<value>1.3</value>
+	</resheader>
+	<resheader name="reader">
+		<value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+	</resheader>
+	<resheader name="writer">
+		<value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+	</resheader>
+
+	<data name="LoginTitle" xml:space="preserve">
+    <value>Sign In</value>
+  </data>
+	<data name="LoginWelcome" xml:space="preserve">
+    <value>Welcome back</value>
+  </data>
+	<data name="LoginSubtitle" xml:space="preserve">
+    <value>Sign in to your VelourEssence account</value>
+  </data>
+	<data name="LoginEmailOrUser" xml:space="preserve">
+    <value>Email or Username</value>
+  </data>
+	<data name="LoginEmailOrUserPlaceholder" xml:space="preserve">
+    <value>Enter your email or username</value>
+  </data>
+	<data name="LoginPassword" xml:space="preserve">
+    <value>Password</value>
+  </data>
+	<data name="LoginPasswordPlaceholder" xml:space="preserve">
+    <value>Enter your password</value>
+  </data>
+	<data name="LoginRememberMe" xml:space="preserve">
+    <value>Remember me</value>
+  </data>
+	<data name="LoginForgotPassword" xml:space="preserve">
+    <value>Forgot your password?</value>
+  </data>
+	<data name="LoginBtn" xml:space="preserve">
+    <value>Sign In</value>
+  </data>
+	<data name="LoginBtnLoading" xml:space="preserve">
+    <value>Signing in...</value>
+  </data>
+	<data name="LoginOr" xml:space="preserve">
+    <value>or</value>
+  </data>
+	<data name="LoginNoAccount" xml:space="preserve">
+    <value>Don't have an account?</value>
+  </data>
+	<data name="LoginCreateAccount" xml:space="preserve">
+    <value>Create account</value>
+  </data>
+	<data name="LoginAcceptTerms" xml:space="preserve">
+    <value>By signing in, you accept our</value>
+  </data>
+	<data name="LoginTerms" xml:space="preserve">
+    <value>Terms of Service</value>
+  </data>
+	<data name="LoginAnd" xml:space="preserve">
+    <value>and</value>
+  </data>
+	<data name="LoginPrivacy" xml:space="preserve">
+    <value>Privacy Policy</value>
+  </data>
+</root>

@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+	<data name="PromotionsTitle" xml:space="preserve">
+    <value>Promociones</value>
+  </data>
+	<data name="PromotionsHeader" xml:space="preserve">
+    <value>Gestión de Promociones</value>
+  </data>
+	<data name="PromotionsSubtitle" xml:space="preserve">
+    <value>Administra las ofertas y descuentos del sistema</value>
+  </data>
+	<data name="PromotionsStatsTotal" xml:space="preserve">
+    <value>promociones</value>
+  </data>
+	<data name="PromotionsStatsActive" xml:space="preserve">
+    <value>vigentes</value>
+  </data>
+	<data name="PromotionsStatsPending" xml:space="preserve">
+    <value>pendientes</value>
+  </data>
+	<data name="PromotionsAddBtn" xml:space="preserve">
+    <value>Agregar Promoción</value>
+  </data>
+	<data name="PromotionsProductLabel" xml:space="preserve">
+    <value>Producto</value>
+  </data>
+	<data name="PromotionsCategoryLabel" xml:space="preserve">
+    <value>Categoría</value>
+  </data>
+	<data name="PromotionsTypeLabel" xml:space="preserve">
+    <value>Tipo</value>
+  </data>
+	<data name="PromotionsDiscountLabel" xml:space="preserve">
+    <value>Descuento</value>
+  </data>
+	<data name="PromotionsValidityLabel" xml:space="preserve">
+    <value>Vigencia</value>
+  </data>
+	<data name="PromotionsDetailsTitle" xml:space="preserve">
+    <value>Ver detalles</value>
+  </data>
+	<data name="PromotionsEditTitle" xml:space="preserve">
+    <value>Editar</value>
+  </data>
+	<data name="PromotionsEditDisabledTitle" xml:space="preserve">
+    <value>No se pueden editar promociones finalizadas</value>
+  </data>
+	<data name="PromotionsDeleteTitle" xml:space="preserve">
+    <value>Eliminar</value>
+  </data>
+	<data name="PromotionsDeleteConfirm" xml:space="preserve">
+    <value>¿Eliminar esta promoción?</value>
+  </data>
+	<data name="PromotionsEmptyTitle" xml:space="preserve">
+    <value>No hay promociones</value>
+  </data>
+	<data name="PromotionsEmptyText" xml:space="preserve">
+    <value>No se han registrado promociones en el sistema</value>
+  </data>
+	<data name="PromotionsCreateFirstBtn" xml:space="preserve">
+    <value>Crear primera promoción</value>
+  </data>
+	<data name="PromotionsStatusPending" xml:space="preserve">
+    <value>Pendiente</value>
+  </data>
+	<data name="PromotionsStatusActive" xml:space="preserve">
+    <value>Vigente</value>
+  </data>
+	<data name="PromotionsStatusFinished" xml:space="preserve">
+    <value>Finalizada</value>
+  </data>
+</root>

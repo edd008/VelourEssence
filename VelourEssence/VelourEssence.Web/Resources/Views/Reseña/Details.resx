@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+	<data name="ReviewDetailTitle" xml:space="preserve">
+    <value>Detalle de Reseña</value>
+  </data>
+	<data name="ReviewDetailSubtitle" xml:space="preserve">
+    <value>Explora la experiencia completa de nuestros clientes</value>
+  </data>
+	<data name="ReviewDetailNoDate" xml:space="preserve">
+    <value>Sin fecha</value>
+  </data>
+	<data name="ReviewDetailProductLabel" xml:space="preserve">
+    <value>Producto</value>
+  </data>
+	<data name="ReviewDetailRatingLabel" xml:space="preserve">
+    <value>Valoración</value>
+  </data>
+	<data name="ReviewDetailOf" xml:space="preserve">
+    <value>de</value>
+  </data>
+	<data name="ReviewDetailBackBtn" xml:space="preserve">
+    <value>Volver a la lista</value>
+  </data>
+</root>

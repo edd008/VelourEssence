@@ -1,0 +1,430 @@
+@using Microsoft.Extensions.Localization
+@inject IStringLocalizer<VelourEssence.Web.Views.Producto._FormularioReseña> L
+@model int
+
+@if (User.Identity!.IsAuthenticated)
+{
+    <!-- Formulario independiente para crear nueva reseña -->
+    <div class="review-form-container animate-in">
+        <div class="review-form-card">
+            <h3 class="review-form-title">
+                <i class="bi bi-chat-square-text"></i>
+                @L["ReviewTitle"]
+            </h3>
+            <form id="reviewForm" class="review-form">
+                @Html.AntiForgeryToken()
+                <input type="hidden" id="productId" value="@Model" />
+                <input type="hidden" id="userId" value="@User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value" />
+
+                <!-- Campo de usuario (solo lectura) -->
+                <div class="review-form-group">
+                    <label class="review-form-label">
+                        <i class="bi bi-person"></i>
+                        @L["ReviewUserLabel"]
+                    </label>
+                    <input type="text" class="review-form-input" value="@User.FindFirst(System.Security.Claims.ClaimTypes.Name)?.Value" readonly />
+                    <small class="review-form-helper">@L["ReviewUserHelper"]</small>
+                </div>
+
+                <!-- Campo de fecha (solo lectura) -->
+                <div class="review-form-group">
+                    <label class="review-form-label">
+                        <i class="bi bi-calendar"></i>
+                        @L["ReviewDateLabel"]
+                    </label>
+                    <input type="text" class="review-form-input" value="@DateTime.Now.ToString("dd/MM/yyyy")" readonly />
+                    <small class="review-form-helper">@L["ReviewDateHelper"]</small>
+                </div>
+
+                <!-- Campo de comentario -->
+                <div class="review-form-group">
+                    <label class="review-form-label" for="comentario">
+                        <i class="bi bi-chat-text"></i>
+                        @L["ReviewCommentLabel"] <span class="review-required">*</span>
+                    </label>
+                    <textarea id="comentario" name="comentario" class="review-form-textarea"
+                              placeholder="@L["ReviewCommentPlaceholder"]"
+                              minlength="10" maxlength="1000" required></textarea>
+                    <div class="review-char-counter">
+                        <span id="charCount">0</span>/1000 @L["ReviewCharCounter", ""]
+                    </div>
+                    <small class="review-form-helper">@L["ReviewCommentHelper"]</small>
+                    <div class="review-form-error" id="comentario-error"></div>
+                </div>
+
+                <!-- Campo de valoración con estrellas -->
+                <div class="review-form-group">
+                    <label class="review-form-label">
+                        <i class="bi bi-star"></i>
+                        @L["ReviewRatingLabel"] <span class="review-required">*</span>
+                    </label>
+                    <div class="review-rating-input">
+                        <div class="review-star-rating" id="starRating">
+                            <i class="bi bi-star review-star" data-rating="1" title="@L["ReviewRatingText1"]"></i>
+                            <i class="bi bi-star review-star" data-rating="2" title="@L["ReviewRatingText2"]"></i>
+                            <i class="bi bi-star review-star" data-rating="3" title="@L["ReviewRatingText3"]"></i>
+                            <i class="bi bi-star review-star" data-rating="4" title="@L["ReviewRatingText4"]"></i>
+                            <i class="bi bi-star review-star" data-rating="5" title="@L["ReviewRatingText5"]"></i>
+                        </div>
+                        <span class="review-rating-text" id="ratingText">@L["ReviewRatingRequired"]</span>
+                        <input type="hidden" id="valoracion" name="valoracion" required />
+                    </div>
+                    <small class="review-form-helper">@L["ReviewRatingHelper"]</small>
+                    <div class="review-form-error" id="valoracion-error"></div>
+                </div>
+
+                <!-- Botones del formulario -->
+                <div class="review-form-actions">
+                    <button type="submit" class="review-btn-submit" id="submitBtn">
+                        <i class="bi bi-send"></i>
+                        <span>@L["ReviewSubmitBtn"]</span>
+                    </button>
+                    <button type="button" class="review-btn-cancel" id="cancelBtn">
+                        <i class="bi bi-x-circle"></i>
+                        <span>@L["ReviewCancelBtn"]</span>
+                    </button>
+                </div>
+
+                <!-- Mensaje de éxito -->
+                <div class="review-success-message" id="successMessage">
+                    <i class="bi bi-check-circle"></i>
+                    @L["ReviewSuccessMessage"]
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Referencias a elementos
+            const commentTextarea = document.getElementById('comentario');
+            const charCount = document.getElementById('charCount');
+            const charCounter = document.querySelector('.review-char-counter');
+            const stars = document.querySelectorAll('.review-star');
+            const ratingText = document.getElementById('ratingText');
+            const valoracionInput = document.getElementById('valoracion');
+            const form = document.getElementById('reviewForm');
+            const submitBtn = document.getElementById('submitBtn');
+            const cancelBtn = document.getElementById('cancelBtn');
+            const successMessage = document.getElementById('successMessage');
+
+            let currentRating = 0;
+
+            // Contador de caracteres
+            commentTextarea.addEventListener('input', function() {
+                const count = this.value.length;
+                charCount.textContent = count;
+
+                charCounter.className = 'review-char-counter';
+                if (count > 900) {
+                    charCounter.classList.add('danger');
+                } else if (count > 700) {
+                    charCounter.classList.add('warning');
+                }
+            });
+
+            // Sistema de estrellas
+            const ratingTexts = [
+                '@L["ReviewRatingText1"]',
+                '@L["ReviewRatingText2"]',
+                '@L["ReviewRatingText3"]',
+                '@L["ReviewRatingText4"]',
+                '@L["ReviewRatingText5"]'
+            ];
+            stars.forEach((star, index) => {
+                star.addEventListener('mouseenter', function() {
+                    updateStarDisplay(index + 1, 'hovered');
+                });
+                star.addEventListener('mouseleave', function() {
+                    updateStarDisplay(currentRating, 'filled');
+                });
+                star.addEventListener('click', function() {
+                    currentRating = index + 1;
+                    valoracionInput.value = currentRating;
+                    updateStarDisplay(currentRating, 'filled');
+                    updateRatingText(currentRating);
+                    document.getElementById('valoracion-error').classList.remove('show');
+                });
+            });
+            function updateStarDisplay(rating, className) {
+                stars.forEach((star, index) => {
+                    star.classList.remove('filled', 'hovered');
+                    if (index < rating) {
+                        star.classList.add(className);
+                    }
+                });
+            }
+            function updateRatingText(rating) {
+                ratingText.textContent = ratingTexts[rating - 1] || '@L["ReviewRatingRequired"]';
+            }
+            // Validación del formulario
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                let isValid = true;
+                const comentario = commentTextarea.value.trim();
+                const comentarioError = document.getElementById('comentario-error');
+                if (comentario.length < 10) {
+                    showError(comentarioError, '@L["ReviewCommentError"]');
+                    isValid = false;
+                } else {
+                    hideError(comentarioError);
+                }
+                const valoracionError = document.getElementById('valoracion-error');
+                if (currentRating === 0) {
+                    showError(valoracionError, '@L["ReviewRatingError"]');
+                    isValid = false;
+                } else {
+                    hideError(valoracionError);
+                }
+                if (isValid) {
+                    submitReview();
+                }
+            });
+            function showError(errorElement, message) {
+                errorElement.textContent = message;
+                errorElement.classList.add('show');
+            }
+            function hideError(errorElement) {
+                errorElement.classList.remove('show');
+            }
+            function showSubmitError(message) {
+                submitBtn.classList.remove('loading');
+                submitBtn.classList.add('error');
+                submitBtn.innerHTML = '<i class="bi bi-exclamation-triangle"></i><span>@L["ReviewSubmitError"]</span>';
+                let errorDiv = document.getElementById('submit-error');
+                if (!errorDiv) {
+                    errorDiv = document.createElement('div');
+                    errorDiv.id = 'submit-error';
+                    errorDiv.className = 'review-form-error show';
+                    form.appendChild(errorDiv);
+                }
+                errorDiv.textContent = message;
+                errorDiv.classList.add('show');
+                setTimeout(() => {
+                    submitBtn.classList.remove('error');
+                    submitBtn.disabled = false;
+                    submitBtn.innerHTML = '<i class="bi bi-send"></i><span>@L["ReviewSubmitBtn"]</span>';
+                    errorDiv.classList.remove('show');
+                }, 3000);
+            }
+            function updateProductRating(newAverage) {
+                const ratingValueElement = document.querySelector('.detail-rating-value');
+                if (ratingValueElement) {
+                    ratingValueElement.textContent = `(${newAverage})`;
+                }
+                const ratingStars = document.querySelectorAll('.detail-rating-stars i');
+                if (ratingStars.length > 0) {
+                    ratingStars.forEach((star, index) => {
+                        if (index < Math.round(newAverage)) {
+                            star.className = 'bi bi-star-fill';
+                        } else {
+                            star.className = 'bi bi-star';
+                        }
+                    });
+                }
+            }
+            function addNewReviewToList(newReview) {
+                const reviewsContainer = document.getElementById('reviewsContainer');
+                const emptyState = document.getElementById('emptyState');
+                if (!reviewsContainer) return;
+                if (emptyState) {
+                    emptyState.style.display = 'none';
+                }
+                let reviewsGrid = reviewsContainer.querySelector('.detail-reviews-grid');
+                if (!reviewsGrid) {
+                    reviewsGrid = document.createElement('div');
+                    reviewsGrid.className = 'detail-reviews-grid';
+                    reviewsContainer.appendChild(reviewsGrid);
+                }
+                const reviewCard = document.createElement('div');
+                reviewCard.className = 'detail-review-card';
+                reviewCard.innerHTML = `
+                    <div class="detail-review-header">
+                        <div class="detail-review-user-info">
+                            <i class="bi bi-person-circle"></i>
+                            <div class="detail-review-user-details">
+                                <span class="detail-review-user">${newReview.usuario}</span>
+                                <span class="detail-review-date">${new Date().toLocaleDateString('es-ES')}</span>
+                            </div>
+                        </div>
+                        <div class="detail-review-rating">
+                            <div class="detail-review-stars">
+                                ${generateStarsHtml(newReview.valoracion)}
+                            </div>
+                            <span class="detail-review-score">${newReview.valoracion}/5</span>
+                        </div>
+                    </div>
+                    <p class="detail-review-text">${newReview.comentario}</p>
+                `;
+                reviewsGrid.insertBefore(reviewCard, reviewsGrid.firstChild);
+                setTimeout(() => reviewCard.classList.add('animate-in'), 100);
+            }
+            function generateStarsHtml(rating) {
+                let starsHtml = '';
+                for (let i = 1; i <= 5; i++) {
+                    if (i <= rating) {
+                        starsHtml += '<i class="bi bi-star-fill"></i>';
+                    } else {
+                        starsHtml += '<i class="bi bi-star"></i>';
+                    }
+                }
+                return starsHtml;
+            }
+            function submitReview() {
+                submitBtn.classList.add('loading');
+                submitBtn.disabled = true;
+                submitBtn.innerHTML = '<i class="bi bi-hourglass-split"></i><span>@L["ReviewSending"]</span>';
+                const token = document.querySelector('input[name="__RequestVerificationToken"]').value;
+                const formData = new FormData();
+                formData.append('IdProducto', document.getElementById('productId').value);
+                formData.append('IdUsuario', document.getElementById('userId').value);
+                formData.append('Comentario', commentTextarea.value.trim());
+                formData.append('Valoracion', currentRating.toString());
+                formData.append('__RequestVerificationToken', token);
+                fetch('/Reseña/Create', {
+                    method: 'POST',
+                    body: formData
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        form.style.display = 'none';
+                        successMessage.classList.add('show');
+                        updateProductRating(data.data.nuevoPromedio);
+                        addNewReviewToList(data.data.reseña);
+                        setTimeout(() => {
+                            resetForm();
+                        }, 3000);
+                    } else {
+                        showSubmitError(data.message);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    showSubmitError('@L["ReviewConnectionError"]');
+                });
+            }
+            function resetForm() {
+                form.reset();
+                currentRating = 0;
+                updateStarDisplay(0, 'filled');
+                updateRatingText(0);
+                charCount.textContent = '0';
+                charCounter.className = 'review-char-counter';
+                submitBtn.classList.remove('loading');
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = '<i class="bi bi-send"></i><span>@L["ReviewSubmitBtn"]</span>';
+                form.style.display = 'block';
+                successMessage.classList.remove('show');
+                document.querySelectorAll('.review-form-error').forEach(error => {
+                    error.classList.remove('show');
+                });
+            }
+            cancelBtn.addEventListener('click', function() {
+                if (confirm('@L["ReviewConfirmReset"]')) {
+                    resetForm();
+                }
+            });
+        });
+    </script>
+}
+else
+{
+    <!-- Mensaje para usuarios no autenticados -->
+    <div class="review-form-container animate-in">
+        <div class="review-form-card">
+            <div class="auth-message">
+                <h3 class="auth-message-title">
+                    <i class="bi bi-person-lock"></i>
+                    @L["ReviewAuthTitle"]
+                </h3>
+                <p class="auth-message-text">
+                    @L["ReviewAuthText"]
+                </p>
+                <div class="auth-message-actions">
+                    <a href="@Url.Action("Login", "Auth")" class="btn-auth-primary">
+                        <i class="bi bi-box-arrow-in-right"></i>
+                        @L["ReviewAuthLogin"]
+                    </a>
+                    <a href="@Url.Action("Register", "Auth")" class="btn-auth-secondary">
+                        <i class="bi bi-person-plus"></i>
+                        @L["ReviewAuthRegister"]
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<style>
+    .auth-message {
+        text-align: center;
+        padding: 3rem 2rem;
+        color: #6c757d;
+    }
+
+    .auth-message-title {
+        font-size: 1.5rem;
+        color: #495057;
+        margin-bottom: 1rem;
+        font-weight: 600;
+    }
+
+        .auth-message-title i {
+            margin-right: 0.5rem;
+            color: #d4a574;
+        }
+
+    .auth-message-text {
+        font-size: 1rem;
+        line-height: 1.6;
+        margin-bottom: 2rem;
+        max-width: 400px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .auth-message-actions {
+        display: flex;
+        gap: 1rem;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
+    .btn-auth-primary,
+    .btn-auth-secondary {
+        padding: 0.75rem 1.5rem;
+        border-radius: 8px;
+        text-decoration: none;
+        font-weight: 500;
+        transition: all 0.3s ease;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .btn-auth-primary {
+        background: linear-gradient(135deg, #d4a574, #c8956d);
+        color: white;
+    }
+
+        .btn-auth-primary:hover {
+            background: linear-gradient(135deg, #c8956d, #b8856d);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(212, 165, 116, 0.3);
+            color: white;
+        }
+
+    .btn-auth-secondary {
+        background: transparent;
+        color: #6c757d;
+        border: 2px solid #e9ecef;
+    }
+
+        .btn-auth-secondary:hover {
+            background: #f8f9fa;
+            border-color: #d4a574;
+            color: #495057;
+            transform: translateY(-2px);
+        }
+</style>

@@ -1,0 +1,204 @@
+@using Microsoft.Extensions.Localization
+@inject IStringLocalizer<VelourEssence.Web.Views.Pago.PagarConTarjeta> L
+@model VelourEssence.Application.DTOs.PagoTarjetaDto
+
+@{
+    ViewData["Title"] = L["PayWithCardTitle"];
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/payment-card.css" />
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+}
+
+<div class="payment-card-page">
+    <!-- Hero Section -->
+    <div class="payment-hero-section">
+        <div class="payment-hero-background"></div>
+        <div class="payment-hero-content">
+            <div class="payment-hero-text" data-aos="fade-up">
+                <h1 class="payment-hero-title">
+                    <span class="payment-hero-brand">@L["PayWithCardTitle"]</span>
+                </h1>
+                <p class="payment-hero-subtitle">
+                    @L["PayWithCardSubtitle"]
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Contenido Principal -->
+    <div class="payment-main-section">
+        <div class="page-container">
+            <div class="payment-content-wrapper">
+                <!-- Resumen del pedido -->
+                <div class="payment-summary-card" data-aos="fade-right">
+                    <div class="payment-summary-header">
+                        <h3 class="payment-summary-title">
+                            <i class="bi bi-receipt"></i>
+                            @L["OrderSummaryTitle"]
+                        </h3>
+                    </div>
+                    <div class="payment-summary-body">
+                        <div class="payment-total-amount">
+                            <span class="payment-total-label">@L["TotalToPayLabel"]</span>
+                            <span class="payment-total-value">₡@Model.TotalPedido.ToString("N0")</span>
+                        </div>
+                        <div class="payment-method-selected">
+                            <i class="bi bi-credit-card"></i>
+                            <span>@ViewBag.MetodoPago</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Formulario de tarjeta -->
+                <div class="payment-form-card" data-aos="fade-left">
+                    <div class="payment-form-header">
+                        <h3 class="payment-form-title">
+                            <i class="bi bi-credit-card-2-front"></i>
+                            @L["CardInfoTitle"]
+                        </h3>
+                    </div>
+                    <div class="payment-form-body">
+                        <form asp-action="ProcesarPagoTarjeta" method="post" id="paymentForm" class="payment-form">
+                            @Html.AntiForgeryToken()
+                            <input type="hidden" asp-for="IdCarrito" />
+                            <input type="hidden" asp-for="TotalPedido" />
+                            <input type="hidden" asp-for="MetodoPago" />
+
+                            <!-- Tarjeta Visual -->
+                            <div class="credit-card-container" data-aos="flip-left">
+                                <div class="credit-card" id="creditCard">
+                                    <div class="credit-card-front">
+                                        <div class="card-chip"></div>
+                                        <div class="card-number" id="cardNumberDisplay">**** **** **** ****</div>
+                                        <div class="card-info">
+                                            <div class="card-holder">
+                                                <span class="card-label">@L["CardHolderLabel"]</span>
+                                                <span class="card-value" id="cardHolderDisplay">@L["CardHolderPlaceholder"]</span>
+                                            </div>
+                                            <div class="card-expiry">
+                                                <span class="card-label">@L["CardExpiryLabel"]</span>
+                                                <span class="card-value" id="cardExpiryDisplay">MM/YY</span>
+                                            </div>
+                                        </div>
+                                        <div class="card-brand" id="cardBrand">
+                                            <i class="bi bi-credit-card"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Campos del formulario -->
+                            <div class="form-group" data-aos="fade-up" data-aos-delay="100">
+                                <label asp-for="NumeroTarjeta" class="form-label">
+                                    <i class="bi bi-credit-card"></i>
+                                    @L["CardNumberLabel"]
+                                </label>
+                                <input asp-for="NumeroTarjeta" class="form-control card-input"
+                                       placeholder="@L["CardNumberPlaceholder"]" maxlength="19" autocomplete="cc-number" id="numeroTarjeta" />
+                                <span asp-validation-for="NumeroTarjeta" class="text-danger"></span>
+                                <div class="card-validation-feedback" id="cardValidation"></div>
+                                <div id="tipoTarjeta" class="card-type-indicator"></div>
+                            </div>
+
+                            <div class="form-group" data-aos="fade-up" data-aos-delay="200">
+                                <label asp-for="NombreTitular" class="form-label">
+                                    <i class="bi bi-person"></i>
+                                    @L["CardHolderLabel"]
+                                </label>
+                                <input asp-for="NombreTitular" class="form-control"
+                                       placeholder="@L["CardHolderInputPlaceholder"]" autocomplete="cc-name" />
+                                <span asp-validation-for="NombreTitular" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group" data-aos="fade-up" data-aos-delay="300">
+                                    <label asp-for="FechaExpiracion" class="form-label">
+                                        <i class="bi bi-calendar"></i>
+                                        @L["CardExpiryLabel"]
+                                    </label>
+                                    <input asp-for="FechaExpiracion" class="form-control"
+                                           placeholder="MM/YY" maxlength="5" autocomplete="cc-exp" id="fechaExpiracion" />
+                                    <span asp-validation-for="FechaExpiracion" class="text-danger"></span>
+                                </div>
+
+                                <div class="form-group" data-aos="fade-up" data-aos-delay="400">
+                                    <label asp-for="CodigoCVV" class="form-label">
+                                        <i class="bi bi-shield-lock"></i>
+                                        @L["CVVLabel"]
+                                        <span class="cvv-help" title="@L["CVVHelp"]">
+                                            <i class="bi bi-question-circle"></i>
+                                        </span>
+                                    </label>
+                                    <input asp-for="CodigoCVV" class="form-control"
+                                           placeholder="123" maxlength="4" autocomplete="cc-csc" id="codigoCVV" />
+                                    <span asp-validation-for="CodigoCVV" class="text-danger"></span>
+                                </div>
+                            </div>
+
+                            <!-- Indicador de validación -->
+                            <div id="validacionTarjeta" class="validation-indicator d-none" data-aos="fade-up" data-aos-delay="500">
+                                <div class="validation-content">
+                                    <i class="validation-icon"></i>
+                                    <span class="validation-message"></span>
+                                </div>
+                            </div>
+
+                            <!-- Botones de acción -->
+                            <div class="payment-actions" data-aos="fade-up" data-aos-delay="600">
+                                <button type="submit" class="btn-primary-custom btn-pay" disabled id="payButton">
+                                    <div class="btn-content">
+                                        <i class="bi bi-lock-fill"></i>
+                                        <span>@L["PayBtn", Model.TotalPedido.ToString("F2")]</span>
+                                    </div>
+                                    <div class="btn-loader">
+                                        <div class="spinner"></div>
+                                    </div>
+                                </button>
+
+                                <a href="@Url.Action("SeleccionarMetodo", new { id = Model.IdCarrito })"
+                                   class="btn-secondary-custom">
+                                    <i class="bi bi-arrow-left"></i>
+                                    @L["ChangePaymentMethodBtn"]
+                                </a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Información de seguridad -->
+                <div class="payment-security-section" data-aos="fade-up" data-aos-delay="700">
+                    <div class="payment-security-card">
+                        <h4><i class="bi bi-shield-check"></i> @L["PaymentProtectedTitle"]</h4>
+                        <div class="payment-security-features">
+                            <div class="security-feature">
+                                <i class="bi bi-lock-fill"></i>
+                                <span>@L["SSLLabel"]</span>
+                            </div>
+                            <div class="security-feature">
+                                <i class="bi bi-shield-lock-fill"></i>
+                                <span>@L["LuhnLabel"]</span>
+                            </div>
+                            <div class="security-feature">
+                                <i class="bi bi-eye-slash-fill"></i>
+                                <span>@L["CVVNotStoredLabel"]</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="~/js/payment-card.js"></script>
+    <script>
+        AOS.init({
+            duration: 800,
+            once: true
+        });
+    </script>
+}

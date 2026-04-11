@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+	<data name="PayWithCashTitle">
+		<value>Cash Payment</value>
+	</data>
+	<data name="PayWithCashSubtitle">
+		<value>Complete your payment upon delivery</value>
+	</data>
+	<data name="OrderSummaryTitle">
+		<value>Order Summary</value>
+	</data>
+	<data name="TotalToPayLabel">
+		<value>Total to pay:</value>
+	</data>
+	<data name="CashPaymentLabel">
+		<value>Cash Payment</value>
+	</data>
+	<data name="CashInfoTitle">
+		<value>Payment Information</value>
+	</data>
+	<data name="AmountReceivedLabel">
+		<value>Amount Received</value>
+	</data>
+	<data name="AmountReceivedPlaceholder">
+		<value>0.00</value>
+	</data>
+	<data name="MinimumRequiredLabel">
+		<value>Minimum required: ₡{0}</value>
+	</data>
+	<data name="ChangeCalculatorTitle">
+		<value>Change Calculator</value>
+	</data>
+	<data name="OrderTotalLabel">
+		<value>Order total:</value>
+	</data>
+	<data name="ChangeToGiveLabel">
+		<value>Change to give:</value>
+	</data>
+	<data name="SuggestedAmountsTitle">
+		<value>Suggested Amounts:</value>
+	</data>
+	<data name="ConfirmCashPaymentBtn">
+		<value>Confirm Cash Payment</value>
+	</data>
+	<data name="ChangePaymentMethodBtn">
+		<value>Change payment method</value>
+	</data>
+	<data name="CashInfoSectionTitle">
+		<value>Information about Cash Payment</value>
+	</data>
+	<data name="CashInfoDelivery">
+		<value>Payment upon product delivery</value>
+	</data>
+	<data name="CashInfoNoFees">
+		<value>No additional fees</value>
+	</data>
+	<data name="CashInfoReceipt">
+		<value>Immediate receipt at payment</value>
+	</data>
+	<data name="CashInfoVerification">
+		<value>Product verification before payment</value>
+	</data>
+</root>

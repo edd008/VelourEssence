@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+	<data name="PayWithCardTitle">
+		<value>Pagar con Tarjeta</value>
+	</data>
+	<data name="PayWithCardSubtitle">
+		<value>Completa tu pago de forma segura y protegida</value>
+	</data>
+	<data name="OrderSummaryTitle">
+		<value>Resumen del Pedido</value>
+	</data>
+	<data name="TotalToPayLabel">
+		<value>Total a pagar:</value>
+	</data>
+	<data name="CardInfoTitle">
+		<value>Información de la Tarjeta</value>
+	</data>
+	<data name="CardHolderLabel">
+		<value>Titular</value>
+	</data>
+	<data name="CardHolderPlaceholder">
+		<value>NOMBRE APELLIDO</value>
+	</data>
+	<data name="CardExpiryLabel">
+		<value>Vence</value>
+	</data>
+	<data name="CardNumberLabel">
+		<value>Número de Tarjeta</value>
+	</data>
+	<data name="CardNumberPlaceholder">
+		<value>1234 5678 9012 3456</value>
+	</data>
+	<data name="CardHolderInputPlaceholder">
+		<value>Como aparece en la tarjeta</value>
+	</data>
+	<data name="CVVLabel">
+		<value>CVV</value>
+	</data>
+	<data name="CVVHelp">
+		<value>Código de 3 dígitos en la parte posterior de la tarjeta</value>
+	</data>
+	<data name="PayBtn">
+		<value>Pagar ${0}</value>
+	</data>
+	<data name="ChangePaymentMethodBtn">
+		<value>Cambiar método de pago</value>
+	</data>
+	<data name="PaymentProtectedTitle">
+		<value>Tu pago está protegido</value>
+	</data>
+	<data name="SSLLabel">
+		<value>Encriptación SSL 256-bit</value>
+	</data>
+	<data name="LuhnLabel">
+		<value>Validación con algoritmo Luhn</value>
+	</data>
+	<data name="CVVNotStoredLabel">
+		<value>CVV no almacenado</value>
+	</data>
+</root>

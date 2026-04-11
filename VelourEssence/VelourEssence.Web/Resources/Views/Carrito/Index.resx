@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+	<data name="CartTitle" xml:space="preserve"><value>Carrito de Compras - VelourEssence</value></data>
+	<data name="CartHeader" xml:space="preserve"><value>Tu Carrito de Compras</value></data>
+	<data name="CartSubtitleWithProducts" xml:space="preserve"><value>Tienes productos seleccionados con mucho amor</value></data>
+	<data name="CartSubtitleEmpty" xml:space="preserve"><value>Tu carrito está esperando por productos increíbles</value></data>
+	<data name="CartStatsProducts" xml:space="preserve"><value>Productos</value></data>
+	<data name="CartStatsUniqueItems" xml:space="preserve"><value>Artículos únicos</value></data>
+	<data name="CartStatsTotal" xml:space="preserve"><value>Total</value></data>
+	<data name="CartItemsHeader" xml:space="preserve"><value>Productos en tu carrito</value></data>
+	<data name="CartStockAvailable" xml:space="preserve"><value>{0} disponibles</value></data>
+	<data name="CartStockEmpty" xml:space="preserve"><value>Sin stock</value></data>
+	<data name="CartDecreaseQty" xml:space="preserve"><value>Disminuir cantidad</value></data>
+	<data name="CartIncreaseQty" xml:space="preserve"><value>Aumentar cantidad</value></data>
+	<data name="CartQtyTitle" xml:space="preserve"><value>Cantidad: {0}</value></data>
+	<data name="CartRemoveProduct" xml:space="preserve"><value>Eliminar {0}</value></data>
+	<data name="CartRemovePersonalized" xml:space="preserve"><value>Eliminar {0} personalizado</value></data>
+	<data name="CartRemoveBtn" xml:space="preserve"><value>Eliminar</value></data>
+	<data name="CartPersonalizedBadge" xml:space="preserve"><value>Personalizado</value></data>
+	<data name="CartBaseLabel" xml:space="preserve"><value>Base:</value></data>
+	<data name="CartPersonalizationsLabel" xml:space="preserve"><value>Personalizaciones:</value></data>
+	<data name="CartClearBtnTitle" xml:space="preserve"><value>Vaciar todo el carrito</value></data>
+	<data name="CartClearBtn" xml:space="preserve"><value>Vaciar carrito completo</value></data>
+	<data name="CartSummaryTitle" xml:space="preserve"><value>Resumen del pedido</value></data>
+	<data name="CartSummarySubtotal" xml:space="preserve"><value>Subtotal ({0} productos)</value></data>
+	<data name="CartSummaryTax" xml:space="preserve"><value>Impuestos (13%)</value></data>
+	<data name="CartSummaryShipping" xml:space="preserve"><value>Envío</value></data>
+	<data name="CartSummaryShippingFree" xml:space="preserve"><value>Gratis</value></data>
+	<data name="CartSummaryTotalLabel" xml:space="preserve"><value>Total a pagar</value></data>
+	<data name="CartCheckoutBtnTitle" xml:space="preserve"><value>Proceder al pago seguro</value></data>
+	<data name="CartCheckoutBtn" xml:space="preserve"><value>Proceder al pago</value></data>
+	<data name="CartContinueShoppingBtnTitle" xml:space="preserve"><value>Continuar navegando por nuestros productos</value></data>
+	<data name="CartContinueShoppingBtn" xml:space="preserve"><value>Continuar comprando</value></data>
+	<data name="CartInfoSecure" xml:space="preserve"><value>Compra 100% segura</value></data>
+	<data name="CartInfoFreeShipping" xml:space="preserve"><value>Envío gratis en compras mayores a ₡25,000</value></data>
+	<data name="CartInfoReturns" xml:space="preserve"><value>30 días para devoluciones</value></data>
+	<data name="CartEmptyTitle" xml:space="preserve"><value>Tu carrito está vacío</value></data>
+	<data name="CartEmptyMessage" xml:space="preserve"><value>¡Descubre nuestra exclusiva colección de productos de belleza y comienza a llenar tu carrito con productos que te harán brillar!</value></data>
+	<data name="CartExploreBtnTitle" xml:space="preserve"><value>Explorar toda nuestra colección</value></data>
+	<data name="CartExploreBtn" xml:space="preserve"><value>Explorar productos</value></data>
+	<data name="CartPopularCategoriesLabel" xml:space="preserve"><value>O explora nuestras categorías más populares:</value></data>
+	<data name="CartCategoryMakeup" xml:space="preserve"><value>Maquillaje</value></data>
+	<data name="CartCategoryFacialCare" xml:space="preserve"><value>Cuidado Facial</value></data>
+	<data name="CartCategoryFragrances" xml:space="preserve"><value>Fragancias</value></data>
+</root>

@@ -1,0 +1,219 @@
+@using Microsoft.Extensions.Localization
+@inject IStringLocalizer<VelourEssence.Web.Views.Producto.Manage> L
+@model IEnumerable<VelourEssence.Application.DTOs.ProductoDto>
+
+@{
+    ViewData["Title"] = L["ManageTitle"];
+    var colones = new System.Globalization.CultureInfo("es-CR");
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/productos.css" />
+}
+
+<div class="products-manage-page">
+    <div class="products-manage-container">
+        <div class="products-manage-wrapper">
+            <!-- Header Premium -->
+            <div class="products-manage-header">
+                <div class="products-manage-header-content">
+                    <h1 class="products-manage-title">
+                        <i class="bi bi-box-seam"></i>
+                        @L["ManageHeader"]
+                    </h1>
+                    <p class="products-manage-subtitle">@L["ManageSubtitle"]</p>
+                    <div class="products-manage-action-bar">
+                        <a asp-action="Create" class="products-manage-add-btn">
+                            <i class="bi bi-plus-circle"></i>
+                            @L["ManageAddBtn"]
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Contenido principal -->
+            <div class="products-manage-content">
+                <!-- Mensajes de notificación -->
+                @if (TempData["SuccessMessage"] != null)
+                {
+                    <div class="products-manage-alert success">
+                        <i class="bi bi-check-circle"></i>
+                        @TempData["SuccessMessage"]
+                        <button type="button" class="products-manage-alert-close" onclick="this.parentElement.style.display='none'">
+                            <i class="bi bi-x"></i>
+                        </button>
+                    </div>
+                }
+
+                @if (TempData["ErrorMessage"] != null)
+                {
+                    <div class="products-manage-alert error">
+                        <i class="bi bi-exclamation-triangle"></i>
+                        @TempData["ErrorMessage"]
+                        <button type="button" class="products-manage-alert-close" onclick="this.parentElement.style.display='none'">
+                            <i class="bi bi-x"></i>
+                        </button>
+                    </div>
+                }
+
+                <!-- Barra de estadísticas -->
+                @if (Model != null && Model.Any())
+                {
+                    <div class="products-stats-bar">
+                        <div class="products-stats">
+                            <div class="products-stat-item">
+                                <i class="bi bi-collection"></i>
+                                <strong>@Model.Count()</strong> @L["ManageStatsProducts", Model.Count()]
+                            </div>
+                            <div class="products-stat-item promotion">
+                                <i class="bi bi-tag"></i>
+                                <strong>@Model.Count(p => p.TienePromocion)</strong> @L["ManageStatsPromotion", Model.Count(p => p.TienePromocion)]
+                            </div>
+                            <div class="products-stat-item images">
+                                <i class="bi bi-image"></i>
+                                <strong>@Model.Count(p => p.Imagenes?.Any() == true)</strong> @L["ManageStatsImages", Model.Count(p => p.Imagenes?.Any() == true)]
+                            </div>
+                        </div>
+                    </div>
+                }
+
+                <!-- Grid de productos -->
+                @if (Model != null && Model.Any())
+                {
+                    <div class="products-grid">
+                        @foreach (var producto in Model)
+                        {
+                            <div class="product-card">
+                                <div class="product-card-header">
+                                    <div class="product-image-container">
+                                        @if (producto.Imagenes?.Any() == true)
+                                        {
+                                            var imagenUrl = producto.Imagenes.First().Url;
+                                            <img src="~/@imagenUrl"
+                                                 alt="@producto.Nombre"
+                                                 class="product-image"
+                                                 onerror="this.src='~/img/no-image.png'; this.onerror=null;">
+                                        }
+                                        else
+                                        {
+                                            <div class="no-image">
+                                                <i class="bi bi-image"></i>
+                                                <p>@L["ManageNoImage"]</p>
+                                            </div>
+                                        }
+                                    </div>
+                                    @if (producto.TienePromocion)
+                                    {
+                                        <div class="product-promo-badge">
+                                            <i class="bi bi-tag-fill"></i>
+                                            @L["ManagePromoBadge", producto.PorcentajeDescuentoAplicado?.ToString("F0")]
+                                        </div>
+                                    }
+                                </div>
+
+                                <div class="product-card-body">
+                                    <h3 class="product-name">@producto.Nombre</h3>
+
+                                    <div class="product-info-grid">
+                                        <div class="product-info-item">
+                                            <span class="product-info-label">
+                                                <i class="bi bi-cash-coin"></i>
+                                                @L["ManagePriceLabel"]
+                                            </span>
+                                            <span class="product-info-valor">
+                                                @if (producto.TienePromocion)
+                                                {
+                                                    <span class="price-original">
+                                                        @producto.Precio?.ToString("C", colones)
+                                                    </span>
+                                                    <span class="price-discount">
+                                                        @producto.PrecioConDescuento?.ToString("C", colones)
+                                                    </span>
+                                                }
+                                                else
+                                                {
+                                                    <span class="price-current">
+                                                        @producto.Precio?.ToString("C", colones)
+                                                    </span>
+                                                }
+                                            </span>
+                                        </div>
+
+                                        @if (!string.IsNullOrEmpty(producto.Marca))
+                                        {
+                                            <div class="product-info-item">
+                                                <span class="product-info-label">
+                                                    <i class="bi bi-tag"></i>
+                                                    @L["ManageBrandLabel"]
+                                                </span>
+                                                <span class="product-info-valor">@producto.Marca</span>
+                                            </div>
+                                        }
+
+                                        @if (!string.IsNullOrEmpty(producto.Genero))
+                                        {
+                                            <div class="product-info-item">
+                                                <span class="product-info-label">
+                                                    <i class="bi bi-person"></i>
+                                                    @L["ManageGenderLabel"]
+                                                </span>
+                                                <span class="product-info-valor">@producto.Genero</span>
+                                            </div>
+                                        }
+                                    </div>
+                                </div>
+
+                                <div class="product-card-actions">
+                                    <a asp-action="Details" asp-route-id="@producto.IdProducto"
+                                       class="product-action-btn product-action-details" title="@L["ManageDetailsBtn"]">
+                                        <i class="bi bi-eye"></i>
+                                        <span>@L["ManageDetailsBtn"]</span>
+                                    </a>
+                                    <a asp-action="Edit" asp-route-id="@producto.IdProducto"
+                                       class="product-action-btn product-action-edit" title="@L["ManageEditBtn"]">
+                                        <i class="bi bi-pencil"></i>
+                                        <span>@L["ManageEditBtn"]</span>
+                                    </a>
+                                    <a asp-action="Delete" asp-route-id="@producto.IdProducto"
+                                       class="product-action-btn product-action-delete" title="@L["ManageDeleteBtn"]">
+                                        <i class="bi bi-trash"></i>
+                                        <span>@L["ManageDeleteBtn"]</span>
+                                    </a>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                }
+                else
+                {
+                    <!-- Estado vacío -->
+                    <div class="products-empty">
+                        <div class="empty-content">
+                            <div class="empty-icon">
+                                <i class="bi bi-box-seam"></i>
+                            </div>
+                            <h3 class="empty-title">@L["ManageEmptyTitle"]</h3>
+                            <p class="empty-text">@L["ManageEmptyText"]</p>
+                            <a asp-action="Create" class="products-manage-add-btn">
+                                <i class="bi bi-plus-circle"></i>
+                                @L["ManageEmptyAddBtn"]
+                            </a>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        // Auto-ocultar alertas después de 5 segundos
+        setTimeout(function() {
+            const alerts = document.querySelectorAll('.products-manage-alert');
+            alerts.forEach(alert => {
+                alert.style.display = 'none';
+            });
+        }, 5000);
+    </script>
+}

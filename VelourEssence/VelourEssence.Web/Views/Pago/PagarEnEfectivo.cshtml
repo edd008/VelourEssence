@@ -1,0 +1,209 @@
+@using Microsoft.Extensions.Localization
+@inject IStringLocalizer<VelourEssence.Web.Views.Pago.PagarEnEfectivo> L
+@model VelourEssence.Application.DTOs.PagoEfectivoDto
+
+@{
+    ViewData["Title"] = L["PayWithCashTitle"];
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/payment-cash.css" />
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+}
+
+<div class="payment-cash-page">
+    <!-- Hero Section -->
+    <div class="payment-hero-section">
+        <div class="payment-hero-background"></div>
+        <div class="payment-hero-content">
+            <div class="payment-hero-text" data-aos="fade-up">
+                <h1 class="payment-hero-title">
+                    <span class="payment-hero-brand">@L["PayWithCashTitle"]</span>
+                </h1>
+                <p class="payment-hero-subtitle">
+                    @L["PayWithCashSubtitle"]
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Contenido Principal -->
+    <div class="payment-main-section">
+        <div class="page-container">
+            <div class="payment-content-wrapper">
+                <!-- Resumen del pedido -->
+                <div class="payment-summary-card" data-aos="fade-right">
+                    <div class="payment-summary-header">
+                        <h3 class="payment-summary-title">
+                            <i class="bi bi-receipt"></i>
+                            @L["OrderSummaryTitle"]
+                        </h3>
+                    </div>
+                    <div class="payment-summary-body">
+                        <div class="payment-total-amount">
+                            <span class="payment-total-label">@L["TotalToPayLabel"]</span>
+                            <span class="payment-total-value">₡@Model.TotalPedido.ToString("N0")</span>
+                        </div>
+                        <div class="payment-method-selected">
+                            <i class="bi bi-cash-stack"></i>
+                            <span>@L["CashPaymentLabel"]</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Formulario de efectivo -->
+                <div class="payment-form-card" data-aos="fade-left">
+                    <div class="payment-form-header">
+                        <h3 class="payment-form-title">
+                            <i class="bi bi-cash-stack"></i>
+                            @L["CashInfoTitle"]
+                        </h3>
+                    </div>
+                    <div class="payment-form-body">
+                        <form asp-action="ProcesarPagoEfectivo" method="post" id="cashPaymentForm" class="payment-form">
+                            @Html.AntiForgeryToken()
+                            <input type="hidden" asp-for="IdCarrito" />
+                            <input type="hidden" asp-for="TotalPedido" />
+
+                            <!-- Ilustración de billetes -->
+                            <div class="cash-illustration" data-aos="zoom-in">
+                                <div class="cash-container">
+                                    <div class="cash-bills">
+                                        <div class="cash-bill bill-1"></div>
+                                        <div class="cash-bill bill-2"></div>
+                                        <div class="cash-bill bill-3"></div>
+                                    </div>
+                                    <div class="cash-amount-display">
+                                        <span class="cash-currency">₡</span>
+                                        <span class="cash-value" id="displayAmount">@Model.TotalPedido.ToString("F2")</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Campo de monto recibido -->
+                            <div class="form-group" data-aos="fade-up" data-aos-delay="100">
+                                <label asp-for="MontoPagado" class="form-label">
+                                    <i class="bi bi-cash-coin"></i>
+                                    @L["AmountReceivedLabel"]
+                                </label>
+                                <div class="cash-input-container">
+                                    <span class="cash-currency-symbol">₡</span>
+                                    <input asp-for="MontoPagado" class="form-control cash-input"
+                                           placeholder="@L["AmountReceivedPlaceholder"]" step="0.01" type="number" min="@Model.TotalPedido" />
+                                </div>
+                                <span asp-validation-for="MontoPagado" class="text-danger"></span>
+                                <div class="cash-input-help">
+                                    @L["MinimumRequiredLabel", Model.TotalPedido.ToString("F2")]
+                                </div>
+                            </div>
+
+                            <!-- Calculadora de vuelto -->
+                            <div class="change-calculator" data-aos="fade-up" data-aos-delay="200">
+                                <div class="change-header">
+                                    <h4>
+                                        <i class="bi bi-calculator"></i>
+                                        @L["ChangeCalculatorTitle"]
+                                    </h4>
+                                </div>
+                                <div class="change-calculation">
+                                    <div class="calculation-row">
+                                        <span class="calculation-label">@L["AmountReceivedLabel"]</span>
+                                        <span class="calculation-value" id="receivedAmount">₡0.00</span>
+                                    </div>
+                                    <div class="calculation-row">
+                                        <span class="calculation-label">@L["OrderTotalLabel"]</span>
+                                        <span class="calculation-value">₡@Model.TotalPedido.ToString("F2")</span>
+                                    </div>
+                                    <div class="calculation-divider"></div>
+                                    <div class="calculation-row change-row">
+                                        <span class="calculation-label">@L["ChangeToGiveLabel"]</span>
+                                        <span class="calculation-value change-amount" id="changeAmount">$0.00</span>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <!-- Botones de acción -->
+                            <div class="payment-actions" data-aos="fade-up" data-aos-delay="400">
+                                <button type="submit" class="btn-primary-custom btn-pay" id="payButton">
+                                    <div class="btn-content">
+                                        <i class="bi bi-check-circle-fill"></i>
+                                        <span>@L["ConfirmCashPaymentBtn"]</span>
+                                    </div>
+                                    <div class="btn-loader">
+                                        <div class="spinner"></div>
+                                    </div>
+                                </button>
+
+                                <a href="@Url.Action("SeleccionarMetodo", new { id = Model.IdCarrito })"
+                                   class="btn-secondary-custom">
+                                    <i class="bi bi-arrow-left"></i>
+                                    @L["ChangePaymentMethodBtn"]
+                                </a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Información sobre pago en efectivo -->
+                <div class="cash-info-section" data-aos="fade-up" data-aos-delay="500">
+                    <div class="cash-info-card">
+                        <h4><i class="bi bi-info-circle"></i> @L["CashInfoSectionTitle"]</h4>
+                        <div class="cash-info-features">
+                            <div class="info-feature">
+                                <i class="bi bi-truck"></i>
+                                <span>@L["CashInfoDelivery"]</span>
+                            </div>
+                            <div class="info-feature">
+                                <i class="bi bi-cash-stack"></i>
+                                <span>@L["CashInfoNoFees"]</span>
+                            </div>
+                            <div class="info-feature">
+                                <i class="bi bi-receipt"></i>
+                                <span>@L["CashInfoReceipt"]</span>
+                            </div>
+                            <div class="info-feature">
+                                <i class="bi bi-shield-check"></i>
+                                <span>@L["CashInfoVerification"]</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="~/js/payment-cash.js"></script>
+    <script>
+        AOS.init({
+            duration: 800,
+            once: true
+        });
+
+        // ===== SCRIPT DE EMERGENCIA PARA PAGO EN EFECTIVO =====
+        document.addEventListener('DOMContentLoaded', function() {
+            const montoInput = document.querySelector('input[name="MontoPagado"]');
+            const payButton = document.getElementById('payButton');
+            const receivedAmount = document.getElementById('receivedAmount');
+            const changeAmount = document.getElementById('changeAmount');
+            const totalPedido = @Model.TotalPedido.ToString(System.Globalization.CultureInfo.InvariantCulture);
+
+            function updatePayment() {
+                const montoPagado = parseFloat(montoInput.value) || 0;
+                const vuelto = Math.max(0, montoPagado - totalPedido);
+
+                if (receivedAmount) receivedAmount.textContent = '₡' + montoPagado.toFixed(2);
+                if (changeAmount) changeAmount.textContent = '₡' + vuelto.toFixed(2);
+
+                const isValid = montoPagado >= totalPedido && montoPagado > 0;
+                payButton.disabled = !isValid;
+            }
+
+            montoInput.addEventListener('input', updatePayment);
+            updatePayment();
+        });
+    </script>
+}

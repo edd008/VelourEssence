@@ -1,0 +1,152 @@
+/* ===== ACCESS DENIED CSS - DISEÑO PREMIUM CONSISTENTE ===== */
+
+/* Variables específicas para access denied */
+:root {
+    --access-denied-primary: #1F3A5F;
+    --access-denied-accent: #A8E6CF;
+    --access-denied-error: #dc3545;
+    --access-denied-bg: #F9F9F9;
+    --access-denied-card-bg: rgba(255, 255, 255, 0.95);
+    --access-denied-text: #333333;
+    --access-denied-text-light: #666666;
+    --access-denied-shadow: 0 8px 25px rgba(31, 58, 95, 0.15);
+    --access-denied-radius: 20px;
+}
+
+.access-denied-page {
+    min-height: 100vh;
+    background: linear-gradient(135deg, 
+        rgba(31, 58, 95, 0.05) 0%, 
+        rgba(168, 230, 207, 0.08) 50%,
+        var(--access-denied-bg) 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem 1rem;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+.access-denied-container {
+    width: 100%;
+    max-width: 500px;
+}
+
+.access-denied-wrapper {
+    background: var(--access-denied-card-bg);
+    border-radius: var(--access-denied-radius);
+    box-shadow: var(--access-denied-shadow);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(31, 58, 95, 0.15);
+    padding: 3rem 2rem;
+    text-align: center;
+    animation: fadeInUp 0.6s ease-out;
+}
+
+.access-denied-icon {
+    width: 100px;
+    height: 100px;
+    background: linear-gradient(135deg, var(--access-denied-error) 0%, #c82333 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 2rem;
+    font-size: 3rem;
+    color: white;
+    box-shadow: 0 8px 20px rgba(220, 53, 69, 0.3);
+}
+
+.access-denied-content {
+    margin-bottom: 2.5rem;
+}
+
+.access-denied-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--access-denied-primary);
+    margin: 0 0 1rem 0;
+}
+
+.access-denied-message {
+    font-size: 1.2rem;
+    color: var(--access-denied-text);
+    margin: 0 0 1rem 0;
+    font-weight: 500;
+}
+
+.access-denied-submessage {
+    font-size: 1rem;
+    color: var(--access-denied-text-light);
+    margin: 0;
+}
+
+.access-denied-actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.access-denied-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 1rem 1.5rem;
+    border-radius: 12px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    min-width: 120px;
+    justify-content: center;
+}
+
+.access-denied-btn.back {
+    background: rgba(31, 58, 95, 0.1);
+    color: var(--access-denied-primary);
+    border: 2px solid rgba(31, 58, 95, 0.2);
+}
+
+.access-denied-btn.back:hover {
+    background: rgba(31, 58, 95, 0.2);
+    transform: translateY(-2px);
+}
+
+.access-denied-btn.home {
+    background: linear-gradient(135deg, var(--access-denied-primary) 0%, #2C5F7F 100%);
+    color: white;
+    box-shadow: 0 4px 15px rgba(31, 58, 95, 0.3);
+}
+
+.access-denied-btn.home:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(31, 58, 95, 0.4);
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (max-width: 768px) {
+    .access-denied-wrapper {
+        padding: 2rem 1.5rem;
+    }
+    
+    .access-denied-title {
+        font-size: 2rem;
+    }
+    
+    .access-denied-actions {
+        flex-direction: column;
+    }
+    
+    .access-denied-btn {
+        width: 100%;
+    }
+}

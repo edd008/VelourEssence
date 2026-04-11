@@ -1,0 +1,107 @@
+/* Variables globales - Nueva Paleta Profesional y Fresca */
+:root {
+    --primary: #1F3A5F;              /* Azul petróleo principal */
+    --accent: #A8E6CF;               /* Verde menta suave */
+    --accent-coral: #FF8C94;         /* Coral energético */
+    --dark: #1F3A5F;                 /* Azul petróleo para elementos oscuros */
+    --secondary-dark: #2d4a73;       /* Azul petróleo más claro */
+    --light: #F9F9F9;               /* Gris muy claro para fondos */
+    --secondary: #F4EDE4;            /* Beige claro */
+    --danger: #FF8C94;               /* Coral para errores */
+    --warning: #FFB74D;              /* Naranja suave para advertencias */
+    --info: #A8E6CF;                /* Verde menta para información */
+    --border: #E0E0E0;               /* Bordes suaves */
+    --text: #2C3E50;                 /* Texto oscuro legible */
+    --text-muted: #7F8C8D;           /* Texto secundario */
+    --black-soft: #1F3A5F;           /* Azul petróleo en lugar de negro */
+    --primary-light: #E8F4FD;        /* Azul muy claro */
+    --primary-dark: #16304E;         /* Azul petróleo oscuro */
+}
+
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+/* Tema oscuro por defecto */
+body {
+  background: linear-gradient(135deg, var(--black-soft) 0%, var(--dark) 100%);
+  color: var(--text);
+  margin-bottom: 60px;
+  min-height: 100vh;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+  box-shadow: 0 0 0 0.1rem var(--primary), 0 0 0 0.25rem rgba(255, 215, 0, 0.3);
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+/* Estilos generales para enlaces */
+a {
+  color: var(--primary);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+a:hover {
+  color: var(--accent);
+  text-decoration: underline;
+}
+
+/* Botones primarios con gradiente azul petróleo y menta */
+.btn-primary {
+  background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+  border: 2px solid var(--primary);
+  color: var(--dark);
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+  background: linear-gradient(135deg, var(--accent) 0%, var(--primary-dark) 100%);
+  border-color: var(--accent);
+  color: var(--dark);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 15px rgba(255, 215, 0, 0.4);
+}
+
+/* Cards y contenedores */
+.card {
+  background: var(--secondary-dark);
+  border: 1px solid var(--border);
+  color: var(--text);
+}
+
+.card-header {
+  background: var(--dark);
+  border-bottom: 1px solid var(--border);
+  color: var(--primary);
+}
+
+/* Formularios */
+.form-control {
+  background: var(--secondary-dark);
+  border: 1px solid var(--border);
+  color: var(--text);
+}
+
+.form-control:focus {
+  background: var(--secondary-dark);
+  border-color: var(--primary);
+  color: var(--text);
+  box-shadow: 0 0 0 0.2rem rgba(255, 215, 0, 0.25);
+}
+
+.form-control::placeholder {
+  color: var(--text-muted);
+}

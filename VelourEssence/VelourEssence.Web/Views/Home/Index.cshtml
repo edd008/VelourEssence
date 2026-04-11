@@ -1,0 +1,373 @@
+﻿@using Microsoft.Extensions.Localization
+@inject IStringLocalizer<VelourEssence.Web.Views.Home.Index> L
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/home.css" />
+}
+
+<!-- Hero Section Premium -->
+<div class="home-hero-section">
+    <div class="home-hero-background"></div>
+    <div class="home-hero-content">
+        <div class="home-hero-text">
+            <h1 class="home-hero-title">
+                <span class="home-hero-brand">@L["HeroTitleBrand"]</span>
+                <span class="home-hero-tagline">@L["HeroTitleTagline"]</span>
+            </h1>
+            <p class="home-hero-subtitle">
+                @L["HeroSubtitle"]
+            </p>
+            <div class="home-hero-buttons">
+                <a class="home-hero-btn primary" href="#destacados">
+                    <i class="bi bi-stars"></i>
+                    @L["HeroBtnExplore"]
+                </a>
+                <a class="home-hero-btn secondary" href="/Producto">
+                    <i class="bi bi-arrow-right"></i>
+                    @L["HeroBtnViewAll"]
+                </a>
+            </div>
+        </div>
+        <div class="home-hero-stats">
+            <div class="home-stat-item">
+                <span class="home-stat-number">500+</span>
+                <span class="home-stat-label">@L["StatFragrances"]</span>
+            </div>
+            <div class="home-stat-item">
+                <span class="home-stat-number">10K+</span>
+                <span class="home-stat-label">@L["StatClients"]</span>
+            </div>
+            <div class="home-stat-item">
+                <span class="home-stat-number">99%</span>
+                <span class="home-stat-label">@L["StatSatisfaction"]</span>
+            </div>
+        </div>
+    </div>
+    <div class="home-hero-scroll">
+        <i class="bi bi-chevron-down"></i>
+    </div>
+</div>
+
+<!-- Carrusel Premium -->
+<div id="destacados" class="home-carousel-section">
+    <div class="home-section-header">
+        <h2 class="home-section-title">@L["CarouselTitle"]</h2>
+        <p class="home-section-subtitle">@L["CarouselSubtitle"]</p>
+    </div>
+
+    <div class="home-custom-carousel">
+        <div class="home-carousel-container">
+            <div class="home-carousel-slide active">
+                <div class="home-slide-image">
+                    <img src="https://wallpaperaccess.com/full/10726268.jpg" alt="Perfume 1">
+                </div>
+                <div class="home-carousel-overlay">
+                    <div class="home-overlay-content">
+                        <span class="home-slide-category">@L["CarouselCategory1"]</span>
+                        <h3 class="home-slide-title">@L["CarouselTitle1"]</h3>
+                        <p class="home-slide-description">@L["CarouselDesc1"]</p>
+                        <a href="/Producto" class="home-slide-btn">@L["CarouselBtn1"] <i class="bi bi-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="home-carousel-slide">
+                <div class="home-slide-image">
+                    <img src="https://th.bing.com/th/id/R.097d555244ae0c12b846f683dee247ea?rik=8CJNmEtyLGXpbg&pid=ImgRaw&r=0" alt="Perfume 2">
+                </div>
+                <div class="home-carousel-overlay">
+                    <div class="home-overlay-content">
+                        <span class="home-slide-category">@L["CarouselCategory2"]</span>
+                        <h3 class="home-slide-title">@L["CarouselTitle2"]</h3>
+                        <p class="home-slide-description">@L["CarouselDesc2"]</p>
+                        <a href="/Producto" class="home-slide-btn">@L["CarouselBtn2"] <i class="bi bi-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="home-carousel-slide">
+                <div class="home-slide-image">
+                    <img src="https://sp-ao.shortpixel.ai/client/to_webp,q_glossy,ret_img,w_1980,h_1080/https://www.perfumestars.com/wp-content/uploads/2024/11/versace-eros-najim-a-radiant-and-enigmatic-new-fragrance-for-men-2024.jpg" alt="Perfume 3">
+                </div>
+                <div class="home-carousel-overlay">
+                    <div class="home-overlay-content">
+                        <span class="home-slide-category">@L["CarouselCategory3"]</span>
+                        <h3 class="home-slide-title">@L["CarouselTitle3"]</h3>
+                        <p class="home-slide-description">@L["CarouselDesc3"]</p>
+                        <a href="/Producto" class="home-slide-btn">@L["CarouselBtn3"] <i class="bi bi-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <button class="home-carousel-control prev" onclick="previousSlide()">
+            <i class="bi bi-chevron-left"></i>
+        </button>
+        <button class="home-carousel-control next" onclick="nextSlide()">
+            <i class="bi bi-chevron-right"></i>
+        </button>
+
+        <div class="home-carousel-indicators">
+            <span class="home-carousel-dot active" onclick="currentSlide(1)"></span>
+            <span class="home-carousel-dot" onclick="currentSlide(2)"></span>
+            <span class="home-carousel-dot" onclick="currentSlide(3)"></span>
+        </div>
+    </div>
+</div>
+
+<!-- Productos Destacados Premium -->
+<div class="home-products-section">
+    <div class="home-section-header">
+        <h2 class="home-section-title">@L["ProductsTitle"]</h2>
+        <p class="home-section-subtitle">@L["ProductsSubtitle"]</p>
+    </div>
+
+    <div class="home-products-grid">
+        <div class="home-product-card">
+            <div class="home-product-badge new">@L["ProductBadgeNew"]</div>
+            <div class="home-product-image">
+                <img src="https://www.versace.com/on/demandware.static/-/Library-Sites-ver-library/default/dw26a2ffdd/images/banners/SEO/VERSACE_EROS_FRAGRANCES_STILL_NOLOGO_1920x1080_4.jpg" alt="Versace Eros">
+                <div class="home-product-overlay">
+                    <a href="#" class="home-product-quick-view">
+                        <i class="bi bi-eye"></i>
+                        @L["ProductQuickView"]
+                    </a>
+                </div>
+            </div>
+            <div class="home-product-info">
+                <h3 class="home-product-title">Versace Eros</h3>
+                <p class="home-product-description">Inspirada en el dios del amor, combina menta fresca, manzana verde y vainilla.</p>
+                <div class="home-product-rating">
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star-half"></i>
+                    <span>(4.8)</span>
+                </div>
+                <div class="home-product-price">
+                    <span class="price">₡66,000</span>
+                    <span class="original-price">₡78,000</span>
+                </div>
+                <a href="#" class="home-product-btn">
+                    <i class="bi bi-cart-plus"></i>
+                    @L["ProductBtnAddToCart"]
+                </a>
+            </div>
+        </div>
+
+        <div class="home-product-card">
+            <div class="home-product-badge trending">@L["ProductBadgeTrending"]</div>
+            <div class="home-product-image">
+                <img src="https://wallpapercave.com/wp/wp13895069.jpg" alt="Valentino Uomo">
+                <div class="home-product-overlay">
+                    <a href="#" class="home-product-quick-view">
+                        <i class="bi bi-eye"></i>
+                        @L["ProductQuickView"]
+                    </a>
+                </div>
+            </div>
+            <div class="home-product-info">
+                <h3 class="home-product-title">Valentino Uomo</h3>
+                <p class="home-product-description">Elegancia sofisticada con bergamota, café tostado y cuero para el hombre moderno.</p>
+                <div class="home-product-rating">
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star-fill"></i>
+                    <span>(5.0)</span>
+                </div>
+                <div class="home-product-price">
+                    <span class="price">₡75,000</span>
+                </div>
+                <a href="#" class="home-product-btn">
+                    <i class="bi bi-cart-plus"></i>
+                    @L["ProductBtnAddToCart"]
+                </a>
+            </div>
+        </div>
+
+        <div class="home-product-card">
+            <div class="home-product-badge bestseller">@L["ProductBadgeBestSeller"]</div>
+            <div class="home-product-image">
+                <img src="https://fimgs.net/images/secundar/o.54358.jpg" alt="Bleu de Chanel">
+                <div class="home-product-overlay">
+                    <a href="#" class="home-product-quick-view">
+                        <i class="bi bi-eye"></i>
+                        @L["ProductQuickView"]
+                    </a>
+                </div>
+            </div>
+            <div class="home-product-info">
+                <h3 class="home-product-title">Bleu de Chanel</h3>
+                <p class="home-product-description">Aroma amaderado-aromático con pomelo, incienso y sándalo. Símbolo de elegancia.</p>
+                <div class="home-product-rating">
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star"></i>
+                    <span>(4.6)</span>
+                </div>
+                <div class="home-product-price">
+                    <span class="price">₡81,000</span>
+                </div>
+                <a href="#" class="home-product-btn">
+                    <i class="bi bi-cart-plus"></i>
+                    @L["ProductBtnAddToCart"]
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="home-products-cta">
+        <a href="/Producto" class="home-view-all-btn">
+            @L["ProductsCtaBtn"]
+            <i class="bi bi-arrow-right"></i>
+        </a>
+    </div>
+</div>
+
+<!-- Sección de Popularidad y Contacto -->
+<div class="home-features-section">
+    <div class="home-features-grid">
+        <!-- Lista de perfumes populares mejorada -->
+        <div class="home-popular-section">
+            <div class="home-popular-header">
+                <h3 class="home-popular-title">
+                    <i class="bi bi-fire"></i>
+                    @L["PopularTitle"]
+                </h3>
+                <p class="home-popular-subtitle">@L["PopularSubtitle"]</p>
+            </div>
+            <div class="home-popular-list">
+                <div class="home-popular-item trending">
+                    <div class="home-popular-rank">#1</div>
+                    <div class="home-popular-info">
+                        <span class="home-popular-name">Dior Sauvage Eau de Parfum</span>
+                        <span class="home-popular-trend">↗ +15%</span>
+                    </div>
+                </div>
+                <div class="home-popular-item">
+                    <div class="home-popular-rank">#2</div>
+                    <div class="home-popular-info">
+                        <span class="home-popular-name">Chanel Bleu de Chanel</span>
+                        <span class="home-popular-trend">↗ +8%</span>
+                    </div>
+                </div>
+                <div class="home-popular-item">
+                    <div class="home-popular-rank">#3</div>
+                    <div class="home-popular-info">
+                        <span class="home-popular-name">Versace Eros</span>
+                        <span class="home-popular-trend">→ 0%</span>
+                    </div>
+                </div>
+                <div class="home-popular-item">
+                    <div class="home-popular-rank">#4</div>
+                    <div class="home-popular-info">
+                        <span class="home-popular-name">Paco Rabanne Invictus</span>
+                        <span class="home-popular-trend">↗ +5%</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tarjeta de contacto mejorada -->
+        <div class="home-contact-section">
+            <div class="home-contact-card">
+                <div class="home-contact-icon">
+                    <i class="bi bi-headset"></i>
+                </div>
+                <h3 class="home-contact-title">@L["ContactTitle"]</h3>
+                <p class="home-contact-text">
+                    @L["ContactText"]
+                </p>
+                <div class="home-contact-features">
+                    <div class="home-contact-feature">
+                        <i class="bi bi-clock"></i>
+                        <span>@L["ContactFeature1"]</span>
+                    </div>
+                    <div class="home-contact-feature">
+                        <i class="bi bi-shield-check"></i>
+                        <span>@L["ContactFeature2"]</span>
+                    </div>
+                    <div class="home-contact-feature">
+                        <i class="bi bi-truck"></i>
+                        <span>@L["ContactFeature3"]</span>
+                    </div>
+                </div>
+                <a href="/contacto" class="home-contact-btn">
+                    <i class="bi bi-chat-dots"></i>
+                    @L["ContactBtn"]
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    let currentSlideIndex = 0;
+    const slides = document.querySelectorAll('.home-carousel-slide');
+    const dots = document.querySelectorAll('.home-carousel-dot');
+
+    function showSlide(index) {
+        slides.forEach(slide => slide.classList.remove('active'));
+        dots.forEach(dot => dot.classList.remove('active'));
+
+        slides[index].classList.add('active');
+        dots[index].classList.add('active');
+    }
+
+    function nextSlide() {
+        currentSlideIndex = (currentSlideIndex + 1) % slides.length;
+        showSlide(currentSlideIndex);
+    }
+
+    function previousSlide() {
+        currentSlideIndex = (currentSlideIndex - 1 + slides.length) % slides.length;
+        showSlide(currentSlideIndex);
+    }
+
+    function currentSlide(index) {
+        currentSlideIndex = index - 1;
+        showSlide(currentSlideIndex);
+    }
+
+    // Auto-slide cada 7 segundos (más tiempo para leer)
+    setInterval(nextSlide, 7000);
+
+    // Smooth scroll para el botón del hero
+    document.addEventListener('DOMContentLoaded', function() {
+        const heroScrollBtn = document.querySelector('.home-hero-scroll');
+        if (heroScrollBtn) {
+            heroScrollBtn.addEventListener('click', function() {
+                document.querySelector('#destacados').scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        }
+
+        // Animaciones en scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-in');
+                }
+            });
+        }, observerOptions);
+
+        // Observar elementos para animación
+        document.querySelectorAll('.home-product-card, .home-section-header, .home-popular-section, .home-contact-card').forEach(el => {
+            observer.observe(el);
+        });
+    });
+</script>

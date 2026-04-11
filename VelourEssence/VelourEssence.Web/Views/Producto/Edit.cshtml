@@ -1,0 +1,434 @@
+@using Microsoft.Extensions.Localization
+@inject IStringLocalizer<VelourEssence.Web.Views.Producto.Edit> L
+@model VelourEssence.Application.DTOs.ProductoMantenimientoDto
+
+@{
+    ViewData["Title"] = L["EditProductTitle"];
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/forms.css" />
+    <link rel="stylesheet" href="~/css/producto-edit.css" />
+}
+
+<div class="edit-product-container">
+    <div class="edit-product-wrapper">
+        <div class="edit-product-header">
+            <h1 class="edit-product-title">
+                <i class="bi bi-pencil-square"></i>
+                @L["EditProductHeader"]
+            </h1>
+            <p class="edit-product-subtitle">@L["EditProductSubtitle"]</p>
+        </div>
+
+        <div class="edit-product-content">
+            <form asp-action="Edit" method="post" enctype="multipart/form-data" class="edit-product-form">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input asp-for="EditarProducto.IdProducto" type="hidden" />
+
+                <div class="row">
+                    <!-- Columna principal -->
+                    <div class="col-md-8">
+                        <!-- Información básica -->
+                        <div class="edit-form-section">
+                            <h3 class="edit-section-title">
+                                <i class="bi bi-info-circle"></i>
+                                @L["EditBasicInfo"]
+                            </h3>
+
+                            <div class="edit-form-row">
+                                <div class="edit-form-group">
+                                    <label asp-for="EditarProducto.Nombre" class="edit-form-label">@L["EditProductNameLabel"]</label>
+                                    <input asp-for="EditarProducto.Nombre" class="edit-form-input" placeholder="@L["EditProductNamePlaceholder"]">
+                                    <span asp-validation-for="EditarProducto.Nombre" class="edit-field-validation-error"></span>
+                                </div>
+                                <div class="edit-form-group">
+                                    <label asp-for="EditarProducto.Precio" class="edit-form-label">@L["EditProductPriceLabel"]</label>
+                                    <div class="input-group">
+                                        <input asp-for="EditarProducto.Precio"
+                                               class="edit-form-input"
+                                               id="precioInput"
+                                               placeholder="0"
+                                               step="any"
+                                               type="text"
+                                               inputmode="numeric"
+                                               pattern="[0-9.]*" />
+                                    </div>
+                                    <span asp-validation-for="EditarProducto.Precio" class="edit-field-validation-error"></span>
+                                </div>
+                            </div>
+
+                            <div class="edit-form-group full-width">
+                                <label asp-for="EditarProducto.Descripcion" class="edit-form-label">@L["EditProductDescriptionLabel"]</label>
+                                <textarea asp-for="EditarProducto.Descripcion" class="edit-form-textarea" placeholder="@L["EditProductDescriptionPlaceholder"]"></textarea>
+                                <span asp-validation-for="EditarProducto.Descripcion" class="edit-field-validation-error"></span>
+                            </div>
+
+                            <div class="edit-form-row">
+                                <div class="edit-form-group">
+                                    <label asp-for="EditarProducto.Stock" class="edit-form-label">@L["EditProductStockLabel"]</label>
+                                    <input asp-for="EditarProducto.Stock" class="edit-form-input" type="number" min="0" placeholder="0">
+                                    <span asp-validation-for="EditarProducto.Stock" class="edit-field-validation-error"></span>
+                                </div>
+                                <div class="edit-form-group">
+                                    <label asp-for="EditarProducto.Marca" class="edit-form-label">@L["EditProductBrandLabel"]</label>
+                                    <input asp-for="EditarProducto.Marca" class="edit-form-input" placeholder="@L["EditProductBrandPlaceholder"]">
+                                    <span asp-validation-for="EditarProducto.Marca" class="edit-field-validation-error"></span>
+                                </div>
+                                <div class="edit-form-group">
+                                    <label asp-for="EditarProducto.Genero" class="edit-form-label">@L["EditProductGenderLabel"]</label>
+                                    <select asp-for="EditarProducto.Genero" class="edit-form-select">
+                                        <option value="">@L["EditProductGenderSelect"]</option>
+                                        <option value="Masculino">@L["EditProductGenderMasculino"]</option>
+                                        <option value="Femenino">@L["EditProductGenderFemenino"]</option>
+                                        <option value="Unisex">@L["EditProductGenderUnisex"]</option>
+                                    </select>
+                                    <span asp-validation-for="EditarProducto.Genero" class="edit-field-validation-error"></span>
+                                </div>
+                            </div>
+
+                            <div class="edit-form-group full-width">
+                                <label asp-for="EditarProducto.Concentracion" class="edit-form-label">@L["EditProductConcentrationLabel"]</label>
+                                <input asp-for="EditarProducto.Concentracion" class="edit-form-input" placeholder="@L["EditProductConcentrationPlaceholder"]">
+                                <span asp-validation-for="EditarProducto.Concentracion" class="edit-field-validation-error"></span>
+                            </div>
+                        </div>
+
+                        <!-- Clasificación -->
+                        <div class="edit-form-section">
+                            <h3 class="edit-section-title">
+                                <i class="bi bi-tags"></i>
+                                @L["EditClassification"]
+                            </h3>
+
+                            <div class="edit-form-row">
+                                <div class="edit-form-group">
+                                    <label asp-for="EditarProducto.IdCategoria" class="edit-form-label">@L["EditProductCategoryLabel"]</label>
+                                    <select asp-for="EditarProducto.IdCategoria" class="edit-form-select">
+                                        <option value="">@L["EditProductCategorySelect"]</option>
+                                        @foreach (var categoria in Model.Categorias)
+                                        {
+                                            <option value="@categoria.IdCategoria">@categoria.Nombre</option>
+                                        }
+                                    </select>
+                                    <span asp-validation-for="EditarProducto.IdCategoria" class="edit-field-validation-error"></span>
+                                </div>
+                            </div>
+
+                            <div class="edit-form-group full-width">
+                                <label class="edit-form-label">@L["EditProductTagsLabel"]</label>
+                                <div class="checkbox-group">
+                                    @for (int i = 0; i < Model.Etiquetas.Count; i++)
+                                    {
+                                        <div class="edit-checkbox-group">
+                                            <input class="edit-checkbox-input" type="checkbox"
+                                                   name="EditarProducto.EtiquetasIds"
+                                                   value="@Model.Etiquetas[i].IdEtiqueta"
+                                                   id="etiqueta_@Model.Etiquetas[i].IdEtiqueta"
+                                            @(Model.EditarProducto?.EtiquetasIds?.Contains(Model.Etiquetas[i].IdEtiqueta) == true ? "checked" : "")>
+                                            <label class="edit-checkbox-label" for="etiqueta_@Model.Etiquetas[i].IdEtiqueta">
+                                                @Model.Etiquetas[i].Nombre
+                                            </label>
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Columna lateral -->
+                    <div class="col-md-4">
+                        <!-- Valoración -->
+                        <div class="edit-form-section">
+                            <h3 class="edit-section-title">
+                                <i class="bi bi-star"></i>
+                                @L["EditProductRatingTitle"]
+                            </h3>
+                            <div class="rating-display">
+                                <div class="rating-stars">
+                                    @for (int i = 1; i <= 5; i++)
+                                    {
+                                        if (i <= Model.PromedioValoracion)
+                                        {
+                                            <i class="bi bi-star-fill text-warning"></i>
+                                        }
+                                        else if (i - 0.5 <= Model.PromedioValoracion)
+                                        {
+                                            <i class="bi bi-star-half text-warning"></i>
+                                        }
+                                        else
+                                        {
+                                            <i class="bi bi-star text-warning"></i>
+                                        }
+                                    }
+                                </div>
+                                <span class="rating-value">@Model.PromedioValoracion.ToString("F1")</span>
+                                <span class="rating-count">(@Model.TotalReseñas @L["EditProductReviewsCount"])</span>
+                            </div>
+                        </div>
+
+                        <!-- Imágenes existentes -->
+                        @if (Model.EditarProducto?.ImagenesExistentes?.Any() == true)
+                        {
+                            <div class="edit-form-section">
+                                <h3 class="edit-section-title">
+                                    <i class="bi bi-images"></i>
+                                    @L["EditProductCurrentImagesTitle"]
+                                </h3>
+                                <div class="edit-existing-images">
+                                    <div class="edit-existing-images-grid">
+                                        @foreach (var imagen in Model.EditarProducto.ImagenesExistentes)
+                                        {
+                                            <div class="edit-existing-image-item" data-id="@imagen.IdImagenProducto">
+                                                @{
+                                                    var imagenSrc = "";
+                                                    if (!string.IsNullOrEmpty(imagen.Url))
+                                                    {
+                                                        if (imagen.Url.StartsWith("data:"))
+                                                        {
+                                                            imagenSrc = imagen.Url;
+                                                        }
+                                                        else if (imagen.Url.StartsWith("http"))
+                                                        {
+                                                            imagenSrc = imagen.Url;
+                                                        }
+                                                        else if (imagen.Url.StartsWith("/"))
+                                                        {
+                                                            imagenSrc = imagen.Url;
+                                                        }
+                                                        else if (imagen.Url.StartsWith("img/"))
+                                                        {
+                                                            imagenSrc = $"/{imagen.Url}";
+                                                        }
+                                                        else if (imagen.Url.Contains("/"))
+                                                        {
+                                                            imagenSrc = $"/{imagen.Url}";
+                                                        }
+                                                        else
+                                                        {
+                                                            imagenSrc = $"/img/productos/{imagen.Url}";
+                                                        }
+                                                    }
+                                                }
+                                                @if (!string.IsNullOrEmpty(imagenSrc))
+                                                {
+                                                    <div class="edit-existing-image-wrapper">
+                                                        <img src="@imagenSrc"
+                                                             alt="@(!string.IsNullOrEmpty(imagen.AltText) ? imagen.AltText : L["EditProductImageAlt"])"
+                                                             class="edit-existing-image"
+                                                             onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" />
+                                                        <div class="edit-image-error" style="display:none; padding: 20px; text-align: center; background: #f8f9fa; border: 2px dashed #dee2e6; border-radius: 8px;">
+                                                            <i class="bi bi-image" style="font-size: 2rem; color: #6c757d;"></i>
+                                                            <div style="margin-top: 10px; font-size: 0.875rem; color: #6c757d;">
+                                                                @L["EditProductImageNotAvailable"]
+                                                            </div>
+                                                            <small style="color: #6c757d; font-size: 0.75rem;">Ruta: @imagenSrc</small>
+                                                        </div>
+                                                        <div class="edit-existing-image-overlay">
+                                                            <div class="edit-existing-image-actions">
+                                                                <button type="button" class="edit-existing-image-view" onclick="viewImage('@imagenSrc')">
+                                                                    <i class="bi bi-eye"></i>
+                                                                </button>
+                                                                <button type="button" onclick="removeExistingImage(@(imagen.IdImagenProducto));">
+                                                                    <i class="bi bi-trash"></i>
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="edit-existing-image-info">
+                                                        <small class="edit-existing-image-name">@(!string.IsNullOrEmpty(imagen.AltText) ? imagen.AltText : L["EditProductImageAlt"])</small>
+                                                        <div class="edit-existing-image-status">
+                                                            <span class="edit-existing-image-status-text">@L["EditProductImageStatusCurrent"]</span>
+                                                        </div>
+                                                    </div>
+                                                }
+                                                else
+                                                {
+                                                    <div class="edit-existing-image-wrapper">
+                                                        <div class="edit-no-image-placeholder">
+                                                            <i class="bi bi-image"></i>
+                                                            <span>@L["EditProductNoImage"]</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="edit-existing-image-info">
+                                                        <small class="edit-existing-image-name">@L["EditProductNoImageAvailable"]</small>
+                                                        <div class="edit-existing-image-status">
+                                                            <span class="edit-existing-image-status-text">@L["EditProductImageStatusError"]</span>
+                                                        </div>
+                                                    </div>
+                                                }
+                                            </div>
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                        }
+
+                        <!-- Nuevas imágenes -->
+                        <div class="edit-form-section">
+                            <h3 class="edit-section-title">
+                                <i class="bi bi-cloud-upload"></i>
+                                @L["EditProductAddImagesTitle"]
+                            </h3>
+                            <div class="edit-image-section" id="imageDropZone" style="position: relative; cursor: pointer;">
+                                <div class="edit-image-upload">
+                                    <div class="image-upload-icon">
+                                        <i class="bi bi-cloud-upload"></i>
+                                    </div>
+                                    <div class="image-upload-text">
+                                        @L["EditProductAddImagesDropText"]
+                                    </div>
+                                    <div class="image-upload-hint">
+                                        @L["EditProductAddImagesHint"]
+                                    </div>
+                                    <input type="file" name="imagenesNuevas" id="imageInput" class="edit-file-input" accept="image/*" multiple style="opacity: 0; position: absolute; z-index: -1;">
+                                </div>
+                                <div id="imagePreviews" class="edit-image-preview"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Campos ocultos para imágenes a eliminar -->
+                <input type="hidden" name="imagenesAEliminar" id="imagenesAEliminar" />
+
+                <div class="edit-button-group">
+                    <a asp-action="Manage" class="edit-btn edit-btn-secondary">
+                        <i class="bi bi-arrow-left"></i>
+                        @L["EditCancelBtn"]
+                    </a>
+                    <button type="submit" class="edit-btn edit-btn-primary">
+                        <i class="bi bi-check-circle"></i>
+                        @L["EditSubmitBtn"]
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        function viewImage(url) {
+            window.open(url, "_blank");
+        }
+        document.addEventListener('DOMContentLoaded', function () {
+            let selectedFiles = [];
+            const imageDropZone = document.getElementById('imageDropZone');
+            const imageInput = document.getElementById('imageInput');
+            const imagePreviews = document.getElementById('imagePreviews');
+            window.removeExistingImage = function (imageId) {
+                if (confirm('@L["EditProductRemoveImageConfirm"]')) {
+                    const elemento = document.querySelector(`[data-id="${imageId}"]`);
+                    if (elemento) {
+                        elemento.remove();
+                    }
+                }
+            };
+            const precioInput = document.getElementById('precioInput');
+            function limpiarNumero(valor) {
+                return valor.replace(/\./g, '').replace(',', '.');
+            }
+            precioInput.addEventListener('blur', function () {
+                let raw = precioInput.value.replace(/\./g, '').replace(',', '.');
+                let parsed = parseFloat(raw);
+                if (!isNaN(parsed)) {
+                    precioInput.value = Math.floor(parsed);
+                }
+            });
+            precioInput.addEventListener('focus', function () {
+                this.select();
+            });
+            document.querySelector('form').addEventListener('submit', function () {
+                if (precioInput && precioInput.value) {
+                    precioInput.value = limpiarNumero(precioInput.value);
+                }
+            });
+            imageDropZone.addEventListener('click', () => {
+                imageInput.click();
+            });
+            imageDropZone.addEventListener('dragover', (e) => {
+                e.preventDefault();
+                imageDropZone.classList.add('dragover');
+            });
+            imageDropZone.addEventListener('dragleave', () => {
+                imageDropZone.classList.remove('dragover');
+            });
+            imageDropZone.addEventListener('drop', (e) => {
+                e.preventDefault();
+                imageDropZone.classList.remove('dragover');
+                const files = Array.from(e.dataTransfer.files).filter(file => file.type.startsWith('image/'));
+                handleFiles(files);
+            });
+            imageInput.addEventListener('change', (e) => {
+                const files = Array.from(e.target.files);
+                handleFiles(files);
+            });
+            function handleFiles(files) {
+                files.forEach(file => {
+                    if (file.type.startsWith('image/') && file.size <= 5 * 1024 * 1024) {
+                        if (!selectedFiles.some(f => f.name === file.name && f.size === file.size)) {
+                            selectedFiles.push(file);
+                        }
+                    }
+                });
+                updateImagePreviews();
+                updateFileInput();
+            }
+            function updateImagePreviews() {
+                imagePreviews.innerHTML = '';
+                selectedFiles.forEach((file, index) => {
+                    const reader = new FileReader();
+                    reader.onload = (e) => {
+                        const previewDiv = document.createElement('div');
+                        previewDiv.className = 'edit-image-preview-item';
+                        previewDiv.innerHTML = `
+                            <img src="${e.target.result}" alt="Preview">
+                            <button type="button" class="edit-image-remove" onclick="removeNewImage(${index})">
+                                <i class="bi bi-x"></i>
+                            </button>
+                        `;
+                        imagePreviews.appendChild(previewDiv);
+                    };
+                    reader.readAsDataURL(file);
+                });
+            }
+            window.removeNewImage = function (index) {
+                selectedFiles.splice(index, 1);
+                updateImagePreviews();
+                updateFileInput();
+            };
+            function updateFileInput() {
+                const dt = new DataTransfer();
+                selectedFiles.forEach(file => dt.items.add(file));
+                imageInput.files = dt.files;
+            }
+            document.querySelector('.edit-product-form').addEventListener('submit', function (e) {
+                let isValid = true;
+                const requiredFields = ['EditarProducto.Nombre', 'EditarProducto.Precio', 'EditarProducto.IdCategoria'];
+                requiredFields.forEach(fieldName => {
+                    const field = document.querySelector(`[name="${fieldName}"]`);
+                    if (!field.value.trim()) {
+                        isValid = false;
+                        field.classList.add('is-invalid');
+                    } else {
+                        field.classList.remove('is-invalid');
+                    }
+                });
+                if (!isValid) {
+                    e.preventDefault();
+                    alert('@L["EditRequiredFieldsAlert"]');
+                }
+            });
+            document.querySelectorAll('.edit-form-input, .edit-form-select, .edit-form-textarea').forEach(field => {
+                field.addEventListener('input', function () {
+                    this.classList.remove('is-invalid');
+                });
+            });
+        });
+    </script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

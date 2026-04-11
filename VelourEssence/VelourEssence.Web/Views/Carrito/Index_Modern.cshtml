@@ -1,0 +1,347 @@
+@using Microsoft.Extensions.Localization
+@inject IStringLocalizer<VelourEssence.Web.Views.Carrito.Index_Modern> L
+@model VelourEssence.Application.DTOs.CarritoDto
+
+@{
+    ViewData["Title"] = L["CartTitle"];
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/cart-modern.css" asp-append-version="true" />
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
+}
+
+<form style="display: none;">
+    @Html.AntiForgeryToken()
+</form>
+
+<div class="cart-page">
+    <div class="cart-container">
+        <div class="cart-hero" data-aos="fade-down" data-aos-duration="800">
+            <h1 class="cart-hero-title">
+                <i class="bi bi-bag-heart"></i>
+                @L["CartHeader"]
+            </h1>
+            <p class="cart-hero-subtitle">
+                @if (Model.CantidadTotal > 0)
+                {
+                    <span>@L["CartSubtitleWithProducts"]</span>
+                }
+                else
+                {
+                    <span>@L["CartSubtitleEmpty"]</span>
+                }
+            </p>
+            @if (Model.CantidadTotal > 0)
+            {
+                <div class="cart-stats">
+                    <div class="cart-stat" data-aos="zoom-in" data-aos-delay="200">
+                        <span class="cart-stat-number">@Model.CantidadTotal</span>
+                        <span class="cart-stat-label">@L["CartStatsProducts"]</span>
+                    </div>
+                    <div class="cart-stat" data-aos="zoom-in" data-aos-delay="300">
+                        <span class="cart-stat-number">@((Model.Productos?.Count() ?? 0) + (Model.ProductosPersonalizados?.Count() ?? 0))</span>
+                        <span class="cart-stat-label">@L["CartStatsUniqueItems"]</span>
+                    </div>
+                    <div class="cart-stat" data-aos="zoom-in" data-aos-delay="400">
+                        <span class="cart-stat-number">₡@Model.TotalConImpuestos.ToString("N0")</span>
+                        <span class="cart-stat-label">@L["CartStatsTotal"]</span>
+                    </div>
+                </div>
+            }
+        </div>
+
+        @if (Model?.Productos?.Any() == true || Model?.ProductosPersonalizados?.Any() == true)
+        {
+            <div class="cart-content">
+                <div class="cart-items" data-aos="fade-right" data-aos-duration="800">
+                    <div class="cart-items-header">
+                        <i class="bi bi-list-ul"></i>
+                        @L["CartItemsHeader"]
+                    </div>
+                    @{
+                        int itemIndex = 0;
+                    }
+                    @if (Model.Productos != null)
+                    {
+                        @foreach (var producto in Model.Productos)
+                        {
+                            <div class="cart-item" data-producto-id="@producto.IdProducto" data-tipo="normal"
+                                 data-aos="fade-up" data-aos-delay="@((itemIndex++) * 100)">
+                                <div class="cart-item-content">
+                                    <div class="cart-item-image">
+                                        @if (!string.IsNullOrEmpty(producto.ImagenUrl) && producto.ImagenUrl != "/images/no-image.jpg")
+                                        {
+                                            <img src="@(producto.ImagenUrl.StartsWith("/") ? producto.ImagenUrl : "~/" + producto.ImagenUrl)"
+                                                 alt="@producto.NombreProducto" />
+                                        }
+                                        else
+                                        {
+                                            <i class="bi bi-image text-muted"></i>
+                                        }
+                                    </div>
+                                    <div class="cart-item-details">
+                                        <h5>
+                                            <i class="bi bi-gem text-primary"></i>
+                                            @producto.NombreProducto
+                                        </h5>
+                                        <div class="cart-item-price">
+                                            ₡@producto.PrecioUnitario.ToString("N0")
+                                        </div>
+                                        @if (producto.Stock > 0)
+                                        {
+                                            <div class="cart-item-stock">
+                                                <i class="bi bi-check-circle-fill"></i>
+                                                @L["CartStockAvailable", producto.Stock]
+                                            </div>
+                                        }
+                                        else
+                                        {
+                                            <div class="text-danger">
+                                                <i class="bi bi-exclamation-triangle-fill"></i>
+                                                @L["CartStockEmpty"]
+                                            </div>
+                                        }
+                                    </div>
+                                    <div class="cart-quantity-controls">
+                                        <button type="button" class="quantity-btn"
+                                                onclick="actualizarCantidad(@producto.IdProducto, @(producto.Cantidad - 1), false)"
+                                        @(producto.Cantidad <= 1 ? "disabled" : "")
+                                                title="@L["CartDecreaseQty"]">
+                                            <i class="bi bi-dash"></i>
+                                        </button>
+                                        <input type="number" class="quantity-input"
+                                               value="@producto.Cantidad"
+                                               min="1"
+                                               max="@producto.Stock"
+                                               onchange="actualizarCantidad(@producto.IdProducto, this.value, false)"
+                                               title="@L["CartQtyTitle", producto.Cantidad]" />
+                                        <button type="button" class="quantity-btn"
+                                                onclick="actualizarCantidad(@producto.IdProducto, @(producto.Cantidad + 1), false)"
+                                        @(producto.Cantidad >= producto.Stock ? "disabled" : "")
+                                                title="@L["CartIncreaseQty"]">
+                                            <i class="bi bi-plus"></i>
+                                        </button>
+                                    </div>
+                                    <div class="cart-item-actions">
+                                        <div class="cart-item-subtotal">
+                                            <div class="subtotal-amount">
+                                                ₡@producto.Subtotal.ToString("N0")
+                                            </div>
+                                        </div>
+                                        <button type="button" class="remove-btn"
+                                                onclick="eliminarProducto(@producto.IdProducto, false)"
+                                                title="@L["CartRemoveProduct", producto.NombreProducto]">
+                                            <i class="bi bi-trash3"></i>
+                                            @L["CartRemoveBtn"]
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    }
+                    @if (Model.ProductosPersonalizados != null)
+                    {
+                        @foreach (var producto in Model.ProductosPersonalizados)
+                        {
+                            <div class="cart-item personalized-item" data-producto-id="@producto.IdProductoBase" data-tipo="personalizado"
+                                 data-aos="fade-up" data-aos-delay="@((itemIndex++) * 100)">
+                                <div class="cart-item-content">
+                                    <div class="cart-item-image">
+                                        @if (!string.IsNullOrEmpty(producto.ImagenUrl))
+                                        {
+                                            <img src="@(producto.ImagenUrl.StartsWith("/") ? producto.ImagenUrl : "~/" + producto.ImagenUrl)"
+                                                 alt="@producto.NombreProductoBase" />
+                                        }
+                                        else
+                                        {
+                                            <i class="bi bi-magic text-primary"></i>
+                                        }
+                                    </div>
+                                    <div class="cart-item-details">
+                                        <h5>
+                                            <i class="bi bi-star-fill text-warning"></i>
+                                            @producto.NombreProductoBase
+                                            <span class="badge bg-primary ms-2">@L["CartPersonalizedBadge"]</span>
+                                        </h5>
+                                        <div class="cart-item-price">
+                                            @L["CartBaseLabel"] ₡@producto.PrecioBase.ToString("N0")
+                                            @if (producto.TotalPersonalizacion > 0)
+                                            {
+                                                <span class="text-info">+ ₡@producto.TotalPersonalizacion.ToString("N0")</span>
+                                            }
+                                        </div>
+                                        @if (producto.Personalizaciones.Any())
+                                        {
+                                            <div class="personalization-details">
+                                                <strong><i class="bi bi-gear-fill"></i> @L["CartPersonalizationsLabel"]</strong>
+                                                @foreach (var personalizacion in producto.Personalizaciones)
+                                                {
+                                                    <div class="personalization-option">
+                                                        <span>
+                                                            <i class="bi bi-arrow-right"></i>
+                                                            @personalizacion.NombreCriterio: @personalizacion.NombreOpcion
+                                                        </span>
+                                                        <span class="text-success">₡@personalizacion.Costo.ToString("N0")</span>
+                                                    </div>
+                                                }
+                                            </div>
+                                        }
+                                    </div>
+                                    <div class="cart-quantity-controls">
+                                        <button type="button" class="quantity-btn"
+                                                onclick="actualizarCantidad(@producto.IdProductoBase, @(producto.Cantidad - 1), true)"
+                                        @(producto.Cantidad <= 1 ? "disabled" : "")
+                                                title="@L["CartDecreaseQty"]">
+                                            <i class="bi bi-dash"></i>
+                                        </button>
+                                        <input type="number" class="quantity-input"
+                                               value="@producto.Cantidad"
+                                               min="1"
+                                               onchange="actualizarCantidad(@producto.IdProductoBase, this.value, true)"
+                                               title="@L["CartQtyTitle", producto.Cantidad]" />
+                                        <button type="button" class="quantity-btn"
+                                                onclick="actualizarCantidad(@producto.IdProductoBase, @(producto.Cantidad + 1), true)"
+                                                title="@L["CartIncreaseQty"]">
+                                            <i class="bi bi-plus"></i>
+                                        </button>
+                                    </div>
+                                    <div class="cart-item-actions">
+                                        <div class="cart-item-subtotal">
+                                            <div class="subtotal-amount">
+                                                ₡@producto.Subtotal.ToString("N0")
+                                            </div>
+                                        </div>
+                                        <button type="button" class="remove-btn"
+                                                onclick="eliminarProducto(@producto.IdProductoBase, true)"
+                                                title="@L["CartRemovePersonalized", producto.NombreProductoBase]">
+                                            <i class="bi bi-trash3"></i>
+                                            @L["CartRemoveBtn"]
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    }
+                    <div class="clear-cart-section" data-aos="fade-up" data-aos-delay="@((itemIndex) * 100)">
+                        <button type="button" class="clear-cart-btn" onclick="limpiarCarrito()"
+                                title="@L["CartClearBtnTitle"]">
+                            <i class="bi bi-trash3-fill"></i>
+                            @L["CartClearBtn"]
+                        </button>
+                    </div>
+                </div>
+                <div class="cart-summary" data-aos="fade-left" data-aos-duration="800">
+                    <div class="summary-header">
+                        <h3 class="summary-title">
+                            <i class="bi bi-calculator"></i>
+                            @L["CartSummaryTitle"]
+                        </h3>
+                    </div>
+                    <div class="summary-line">
+                        <span class="summary-label">
+                            <i class="bi bi-basket3"></i>
+                            @L["CartSummarySubtotal", Model.CantidadTotal]
+                        </span>
+                        <span class="summary-value" id="subtotal-amount">₡@Model.Total.ToString("N0")</span>
+                    </div>
+                    <div class="summary-line">
+                        <span class="summary-label">
+                            <i class="bi bi-percent"></i>
+                            @L["CartSummaryTax"]
+                        </span>
+                        <span class="summary-value" id="tax-amount">₡@Model.Impuestos.ToString("N0")</span>
+                    </div>
+                    <div class="summary-line">
+                        <span class="summary-label">
+                            <i class="bi bi-truck"></i>
+                            @L["CartSummaryShipping"]
+                        </span>
+                        <span class="summary-value text-success">
+                            <i class="bi bi-gift"></i>
+                            @L["CartSummaryShippingFree"]
+                        </span>
+                    </div>
+                    <div class="summary-line total-line">
+                        <span class="summary-label">
+                            <i class="bi bi-currency-dollar"></i>
+                            @L["CartSummaryTotalLabel"]
+                        </span>
+                        <span class="summary-value" id="total-amount">₡@Model.TotalConImpuestos.ToString("N0")</span>
+                    </div>
+                    <button type="button" class="checkout-btn" onclick="procederCheckout()"
+                            title="@L["CartCheckoutBtnTitle"]">
+                        <i class="bi bi-credit-card-2-front"></i>
+                        @L["CartCheckoutBtn"]
+                    </button>
+                    <a href="@Url.Action("Index", "Producto")" class="continue-shopping-btn"
+                       title="@L["CartContinueShoppingBtnTitle"]">
+                        <i class="bi bi-arrow-left"></i>
+                        @L["CartContinueShoppingBtn"]
+                    </a>
+                    <div class="cart-info">
+                        <div class="text-muted">
+                            <i class="bi bi-shield-check"></i>
+                            @L["CartInfoSecure"]
+                        </div>
+                        <div class="text-muted">
+                            <i class="bi bi-truck"></i>
+                            @L["CartInfoFreeShipping"]
+                        </div>
+                        <div class="text-muted">
+                            <i class="bi bi-arrow-clockwise"></i>
+                            @L["CartInfoReturns"]
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+        else
+        {
+            <div class="cart-empty" data-aos="zoom-in" data-aos-duration="800">
+                <div class="empty-icon">
+                    <i class="bi bi-bag-x"></i>
+                </div>
+                <h2 class="empty-title">@L["CartEmptyTitle"]</h2>
+                <p class="empty-message">
+                    @L["CartEmptyMessage"]
+                </p>
+                <a href="@Url.Action("Index", "Producto")" class="checkout-btn"
+                   style="display: inline-block; text-decoration: none; width: auto; max-width: 300px;"
+                   title="@L["CartExploreBtnTitle"]">
+                    <i class="bi bi-bag-plus"></i>
+                    @L["CartExploreBtn"]
+                </a>
+                <div class="mt-4">
+                    <p class="text-muted mb-3">@L["CartPopularCategoriesLabel"]</p>
+                    <div class="d-flex gap-2 justify-content-center flex-wrap">
+                        <a href="@Url.Action("Index", "Producto", new { categoria = "Maquillaje" })"
+                           class="btn btn-outline-primary btn-sm">
+                            <i class="bi bi-palette"></i> @L["CartCategoryMakeup"]
+                        </a>
+                        <a href="@Url.Action("Index", "Producto", new { categoria = "Cuidado-Facial" })"
+                           class="btn btn-outline-primary btn-sm">
+                            <i class="bi bi-droplet"></i> @L["CartCategoryFacialCare"]
+                        </a>
+                        <a href="@Url.Action("Index", "Producto", new { categoria = "Fragancias" })"
+                           class="btn btn-outline-primary btn-sm">
+                            <i class="bi bi-flower1"></i> @L["CartCategoryFragrances"]
+                        </a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+<div class="loading-overlay" id="loadingOverlay">
+    <div class="spinner"></div>
+</div>
+
+@section Scripts {
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="~/js/cart-modern.js" asp-append-version="true"></script>
+    <!-- El resto del script permanece igual -->
+}

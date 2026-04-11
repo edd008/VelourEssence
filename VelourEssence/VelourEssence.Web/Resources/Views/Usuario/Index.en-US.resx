@@ -1,0 +1,78 @@
+﻿<root>
+	<data name="UsersTitle">
+		<value>Users</value>
+	</data>
+	<data name="UsersManagementHeader">
+		<value>User Management</value>
+	</data>
+	<data name="UsersManagementSubtitle">
+		<value>Manage all system users efficiently</value>
+	</data>
+	<data name="RegisteredUsersStat">
+		<value>Registered Users</value>
+	</data>
+	<data name="RecentActiveStat">
+		<value>Recently Active</value>
+	</data>
+	<data name="DifferentRolesStat">
+		<value>Different Roles</value>
+	</data>
+	<data name="UsersPanelHeader">
+		<value>User Panel</value>
+	</data>
+	<data name="UsersPanelSubtitle">
+		<value>Manage system users securely and efficiently</value>
+	</data>
+	<data name="RegisteredUsersCount">
+		<value>users registered in the system</value>
+	</data>
+	<data name="NewUserBtn">
+		<value>New User</value>
+	</data>
+	<data name="IdColumn">
+		<value>ID</value>
+	</data>
+	<data name="UserColumn">
+		<value>User</value>
+	</data>
+	<data name="EmailColumn">
+		<value>Email</value>
+	</data>
+	<data name="LastAccessColumn">
+		<value>Last Access</value>
+	</data>
+	<data name="RoleColumn">
+		<value>Role</value>
+	</data>
+	<data name="ActionsColumn">
+		<value>Actions</value>
+	</data>
+	<data name="NeverLabel">
+		<value>Never</value>
+	</data>
+	<data name="ViewDetailsBtn">
+		<value>View details</value>
+	</data>
+	<data name="EditUserBtn">
+		<value>Edit user</value>
+	</data>
+	<data name="DeleteUserBtn">
+		<value>Delete user</value>
+	</data>
+	<data name="DeleteUserConfirmJs">
+		<value>Are you sure you want to delete this user? This action cannot be undone.</value>
+	</data>
+	<data name="DeleteUserConfirmJsFull">
+		<value>Are you sure you want to delete user "{0}"?\n\nThis action cannot be undone and will permanently delete:\n- All user data\n- Their activity history\n- Their reviews and comments</value>
+	</data>
+	<data name="NoUsersTitle">
+		<value>No users registered</value>
+	</data>
+	<data name="NoUsersText">
+		<value>Start by adding the first user to the system to begin managing access.</value>
+	</data>
+	<data name="CreateFirstUserBtn">
+		<value>Create First User</value>
+	</data>
+</root>
+

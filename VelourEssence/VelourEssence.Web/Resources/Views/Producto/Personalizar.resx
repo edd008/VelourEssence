@@ -1,0 +1,69 @@
+﻿<root>
+	<data name="CustomizeTitle">
+		<value>Personalizar {0}</value>
+	</data>
+	<data name="CustomizeProductHeader">
+		<value>Personalizar Producto</value>
+	</data>
+	<data name="CustomizeProductSubtitle">
+		<value>Crea tu versión personalizada de este perfume exclusivo</value>
+	</data>
+	<data name="BaseProductTitle">
+		<value>Producto Base</value>
+	</data>
+	<data name="BasePriceLabel">
+		<value>Precio base:</value>
+	</data>
+	<data name="CustomizableProductLabel">
+		<value>Producto personalizable</value>
+	</data>
+	<data name="PreviewTitle">
+		<value>Vista Previa</value>
+	</data>
+	<data name="SelectConcentrationLabel">
+		<value>Selecciona concentración</value>
+	</data>
+	<data name="ChooseConcentrationDesc">
+		<value>Elige el tipo de concentración para tu perfume</value>
+	</data>
+	<data name="ConfigurationTitle">
+		<value>Configuración</value>
+	</data>
+	<data name="PriceSummaryTitle">
+		<value>Resumen de Precio</value>
+	</data>
+	<data name="CustomizationsLabel">
+		<value>Personalizaciones</value>
+	</data>
+	<data name="TotalPriceLabel">
+		<value>Precio Total</value>
+	</data>
+	<data name="BackBtn">
+		<value>Volver</value>
+	</data>
+	<data name="AddToCartBtn">
+		<value>Agregar al Carrito</value>
+	</data>
+	<!-- JS texts -->
+	<data name="ConcentrationJs">
+		<value>Concentración</value>
+	</data>
+	<data name="SizeJs">
+		<value>Tamaño</value>
+	</data>
+	<data name="ValidationRequiredJs">
+		<value>Por favor complete todas las selecciones</value>
+	</data>
+	<data name="CalculatingPriceJs">
+		<value>Calculando precio...</value>
+	</data>
+	<data name="ErrorCalculatingJs">
+		<value>Error al calcular el precio</value>
+	</data>
+	<data name="SelectionsCompleteJs">
+		<value>Selecciones completas</value>
+	</data>
+	<data name="AddingToCartJs">
+		<value>Agregando al carrito...</value>
+	</data>
+</root>

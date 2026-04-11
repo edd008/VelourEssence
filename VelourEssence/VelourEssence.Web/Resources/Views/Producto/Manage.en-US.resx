@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+	<data name="ManageTitle" xml:space="preserve">
+    <value>Product Management</value>
+  </data>
+	<data name="ManageHeader" xml:space="preserve">
+    <value>Product Management</value>
+  </data>
+	<data name="ManageSubtitle" xml:space="preserve">
+    <value>Manage the complete VelourEssence product catalog</value>
+  </data>
+	<data name="ManageAddBtn" xml:space="preserve">
+    <value>New Product</value>
+  </data>
+	<data name="ManageSuccessAlert" xml:space="preserve">
+    <value>Operation successful</value>
+  </data>
+	<data name="ManageErrorAlert" xml:space="preserve">
+    <value>An error occurred</value>
+  </data>
+	<data name="ManageStatsProducts" xml:space="preserve">
+    <value>{0} products</value>
+  </data>
+	<data name="ManageStatsPromotion" xml:space="preserve">
+    <value>{0} with promotion</value>
+  </data>
+	<data name="ManageStatsImages" xml:space="preserve">
+    <value>{0} with images</value>
+  </data>
+	<data name="ManageNoImage" xml:space="preserve">
+    <value>No images</value>
+  </data>
+	<data name="ManagePromoBadge" xml:space="preserve">
+    <value>{0}%</value>
+  </data>
+	<data name="ManagePriceLabel" xml:space="preserve">
+    <value>Price</value>
+  </data>
+	<data name="ManageBrandLabel" xml:space="preserve">
+    <value>Brand</value>
+  </data>
+	<data name="ManageGenderLabel" xml:space="preserve">
+    <value>Gender</value>
+  </data>
+	<data name="ManageDetailsBtn" xml:space="preserve">
+    <value>View details</value>
+  </data>
+	<data name="ManageEditBtn" xml:space="preserve">
+    <value>Edit</value>
+  </data>
+	<data name="ManageDeleteBtn" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+	<data name="ManageEmptyTitle" xml:space="preserve">
+    <value>No products registered</value>
+  </data>
+	<data name="ManageEmptyText" xml:space="preserve">
+    <value>Start by adding products to your catalog</value>
+  </data>
+	<data name="ManageEmptyAddBtn" xml:space="preserve">
+    <value>Create First Product</value>
+  </data>
+</root>

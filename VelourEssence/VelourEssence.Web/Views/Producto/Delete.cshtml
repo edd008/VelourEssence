@@ -1,0 +1,221 @@
+@using Microsoft.Extensions.Localization
+@inject IStringLocalizer<VelourEssence.Web.Views.Producto.Delete> L
+@model VelourEssence.Application.DTOs.ProductoDetalleDto
+
+@{
+    ViewData["Title"] = L["DeleteProductTitle"];
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/forms.css" />
+    <link rel="stylesheet" href="~/css/producto-delete.css" />
+}
+
+<div class="delete-product-container">
+    <div class="delete-product-wrapper">
+        <div class="delete-product-header">
+            <h1 class="delete-product-title">
+                <i class="bi bi-exclamation-triangle"></i>
+                @L["DeleteProductTitle"]
+            </h1>
+            <p class="delete-product-subtitle">@L["DeleteProductSubtitle"]</p>
+        </div>
+
+        <div class="delete-product-content">
+            <div class="delete-confirmation-alert">
+                <strong>@L["AttentionLabel"]</strong> @L["DeleteConfirmationAlert"]
+            </div>
+
+            <div class="delete-product-info">
+                <div class="delete-product-info-header">
+                    <div class="delete-product-image">
+                        @if (Model.Imagenes?.Any() == true)
+                        {
+                            var imagenUrl = Model.Imagenes.First().Url;
+                            var imagenSrc = "";
+
+                            if (!string.IsNullOrEmpty(imagenUrl))
+                            {
+                                if (imagenUrl.StartsWith("img/") || imagenUrl.StartsWith("images/"))
+                                {
+                                    imagenSrc = $"/{imagenUrl}";
+                                }
+                                else if (imagenUrl.StartsWith("~/"))
+                                {
+                                    imagenSrc = imagenUrl;
+                                }
+                                else if (imagenUrl.StartsWith("data:"))
+                                {
+                                    imagenSrc = imagenUrl;
+                                }
+                                else if (imagenUrl.StartsWith("http"))
+                                {
+                                    imagenSrc = imagenUrl;
+                                }
+                                else
+                                {
+                                    imagenSrc = $"data:image/png;base64,{imagenUrl}";
+                                }
+                            }
+
+                            if (!string.IsNullOrEmpty(imagenSrc))
+                            {
+                                <img src="@imagenSrc" alt="@Model.Nombre" class="delete-product-img">
+                            }
+                            else
+                            {
+                                <i class="bi bi-image"></i>
+                            }
+                        }
+                        else
+                        {
+                            <i class="bi bi-image"></i>
+                        }
+                    </div>
+                    <div>
+                        <h3 class="delete-product-name">@Model.Nombre</h3>
+                        @if (Model.TienePromocion)
+                        {
+                            <span class="delete-product-badge promocion">@L["WithPromotionBadge"]</span>
+                        }
+                        else
+                        {
+                            <span class="delete-product-badge normal">@L["WithoutPromotionBadge"]</span>
+                        }
+                    </div>
+                </div>
+
+                <div class="delete-product-details">
+                    <div class="delete-detail-item">
+                        <div class="delete-detail-label">
+                            <i class="bi bi-currency-dollar"></i>
+                            @L["PriceLabel"]
+                        </div>
+                        <div class="delete-detail-value price">
+                            @if (Model.TienePromocion)
+                            {
+                                <span class="price-original">@Model.Precio?.ToString("C")</span>
+                                <span class="price-discount">@Model.PrecioConDescuento?.ToString("C")</span>
+                            }
+                            else
+                            {
+                                <span class="price-current">@Model.Precio?.ToString("C")</span>
+                            }
+                        </div>
+                    </div>
+
+                    <div class="delete-detail-item">
+                        <div class="delete-detail-label">
+                            <i class="bi bi-tag"></i>
+                            @L["CategoryLabel"]
+                        </div>
+                        <div class="delete-detail-value">@Model.Categoria</div>
+                    </div>
+
+                    @if (!string.IsNullOrEmpty(Model.Descripcion))
+                    {
+                        <div class="delete-detail-item">
+                            <div class="delete-detail-label">
+                                <i class="bi bi-file-text"></i>
+                                @L["DescriptionLabel"]
+                            </div>
+                            <div class="delete-detail-value description">
+                                @(Model.Descripcion.Length > 50 ? Model.Descripcion.Substring(0, 50) + "..." : Model.Descripcion)
+                            </div>
+                        </div>
+                    }
+
+                    <div class="delete-detail-item">
+                        <div class="delete-detail-label">
+                            <i class="bi bi-star"></i>
+                            @L["RatingLabel"]
+                        </div>
+                        <div class="delete-detail-value">
+                            @Model.PromedioValoracion.ToString("F1") ⭐ (@Model.Resenas.Count @L["ReviewsLabel"])
+                        </div>
+                    </div>
+
+                    @if (Model.Etiquetas.Any())
+                    {
+                        <div class="delete-detail-item">
+                            <div class="delete-detail-label">
+                                <i class="bi bi-tags"></i>
+                                @L["TagsLabel"]
+                            </div>
+                            <div class="delete-detail-value">
+                                @string.Join(", ", Model.Etiquetas)
+                            </div>
+                        </div>
+                    }
+
+                    @if (Model.Imagenes?.Any() == true)
+                    {
+                        <div class="delete-detail-item">
+                            <div class="delete-detail-label">
+                                <i class="bi bi-images"></i>
+                                @L["ImagesLabel"]
+                            </div>
+                            <div class="delete-detail-value">@Model.Imagenes.Count @L["ImagesCountLabel"]</div>
+                        </div>
+                    }
+                </div>
+
+                @if (!string.IsNullOrEmpty(Model.Descripcion))
+                {
+                    <div class="product-description">
+                        <h4>
+                            <i class="bi bi-file-text"></i>
+                            @L["DescriptionLabel"]
+                        </h4>
+                        <p>@Model.Descripcion</p>
+                    </div>
+                }
+            </div>
+
+            <div class="delete-warning-message">
+                <div class="delete-warning-icon">
+                    <i class="bi bi-exclamation-triangle-fill"></i>
+                </div>
+                <div class="delete-warning-content">
+                    <h4>@L["AttentionLabel"]</h4>
+                    <p>@L["DeleteWarningMsg"]</p>
+                    <ul>
+                        <li>@L["DeleteWarningLoseInfo"]</li>
+                        <li>@L["DeleteWarningLoseImages"]</li>
+                        <li>@L["DeleteWarningLoseReviews"]</li>
+                        <li>@L["DeleteWarningNotAvailable"]</li>
+                    </ul>
+                </div>
+            </div>
+
+            <form asp-action="Delete" method="post" class="delete-form">
+                <input name="id" type="hidden" value="@Model.IdProducto" />
+                <div class="delete-button-group">
+                    <button type="submit" class="delete-btn delete-btn-danger">
+                        <i class="bi bi-trash"></i>
+                        @L["ConfirmDeleteBtn"]
+                    </button>
+                    <a asp-action="Manage" class="delete-btn delete-btn-secondary">
+                        <i class="bi bi-arrow-left"></i>
+                        @L["CancelBtn"]
+                    </a>
+                    <a asp-action="Details" asp-route-id="@Model.IdProducto" class="delete-btn delete-btn-secondary">
+                        <i class="bi bi-eye"></i>
+                        @L["ViewDetailsBtn"]
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        document.querySelector('.delete-form').addEventListener('submit', function(e) {
+            if (!confirm('@L["DeleteConfirmJs"]')) {
+                e.preventDefault();
+            }
+        });
+    </script>
+}
+

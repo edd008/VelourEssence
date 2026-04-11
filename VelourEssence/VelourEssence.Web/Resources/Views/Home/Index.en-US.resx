@@ -1,0 +1,130 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+	<resheader name="resmimetype">
+		<value>text/microsoft-resx</value>
+	</resheader>
+	<resheader name="version">
+		<value>1.3</value>
+	</resheader>
+	<resheader name="reader">
+		<value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+	</resheader>
+	<resheader name="writer">
+		<value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+	</resheader>
+
+	<data name="HeroTitleBrand" xml:space="preserve">
+    <value>Velour Essence</value>
+  </data>
+	<data name="HeroTitleTagline" xml:space="preserve">
+    <value>Your Perfect Essence</value>
+  </data>
+	<data name="HeroSubtitle" xml:space="preserve">
+    <value>Discover exclusive fragrances that define your personality. Every scent tells a unique story.</value>
+  </data>
+	<data name="HeroBtnExplore" xml:space="preserve">
+    <value>Explore Collection</value>
+  </data>
+	<data name="HeroBtnViewAll" xml:space="preserve">
+    <value>View All</value>
+  </data>
+	<data name="StatFragrances" xml:space="preserve">
+    <value>Fragrances</value>
+  </data>
+	<data name="StatClients" xml:space="preserve">
+    <value>Clients</value>
+  </data>
+	<data name="StatSatisfaction" xml:space="preserve">
+    <value>Satisfaction</value>
+  </data>
+	<data name="CarouselTitle" xml:space="preserve">
+    <value>Featured Fragrances</value>
+  </data>
+	<data name="CarouselSubtitle" xml:space="preserve">
+    <value>The most chosen by our clients</value>
+  </data>
+	<data name="CarouselCategory1" xml:space="preserve">
+    <value>Premium Collection</value>
+  </data>
+	<data name="CarouselTitle1" xml:space="preserve">
+    <value>Exclusive Fragrances</value>
+  </data>
+	<data name="CarouselDesc1" xml:space="preserve">
+    <value>Discover our premium collection with unique aromas</value>
+  </data>
+	<data name="CarouselBtn1" xml:space="preserve">
+    <value>Explore</value>
+  </data>
+	<data name="CarouselCategory2" xml:space="preserve">
+    <value>Luxury Line</value>
+  </data>
+	<data name="CarouselTitle2" xml:space="preserve">
+    <value>Elegance and Sophistication</value>
+  </data>
+	<data name="CarouselDesc2" xml:space="preserve">
+    <value>For special occasions that require distinction</value>
+  </data>
+	<data name="CarouselBtn2" xml:space="preserve">
+    <value>Explore</value>
+  </data>
+	<data name="CarouselCategory3" xml:space="preserve">
+    <value>Best Seller</value>
+  </data>
+	<data name="CarouselTitle3" xml:space="preserve">
+    <value>Versace Eros</value>
+  </data>
+	<data name="CarouselDesc3" xml:space="preserve">
+    <value>The most desired fragrance of the year</value>
+  </data>
+	<data name="CarouselBtn3" xml:space="preserve">
+    <value>View Details</value>
+  </data>
+	<data name="ProductsTitle" xml:space="preserve">
+    <value>Featured Products</value>
+  </data>
+	<data name="ProductsSubtitle" xml:space="preserve">
+    <value>The best of our collection</value>
+  </data>
+	<data name="ProductBadgeNew" xml:space="preserve">
+    <value>New</value>
+  </data>
+	<data name="ProductBadgeTrending" xml:space="preserve">
+    <value>Trending</value>
+  </data>
+	<data name="ProductBadgeBestSeller" xml:space="preserve">
+    <value>Best Seller</value>
+  </data>
+	<data name="ProductQuickView" xml:space="preserve">
+    <value>Quick View</value>
+  </data>
+	<data name="ProductBtnAddToCart" xml:space="preserve">
+    <value>Add to Cart</value>
+  </data>
+	<data name="ProductsCtaBtn" xml:space="preserve">
+    <value>View Full Collection</value>
+  </data>
+	<data name="PopularTitle" xml:space="preserve">
+    <value>Most Popular</value>
+  </data>
+	<data name="PopularSubtitle" xml:space="preserve">
+    <value>Our clients' favorites</value>
+  </data>
+	<data name="ContactTitle" xml:space="preserve">
+    <value>Need help?</value>
+  </data>
+	<data name="ContactText" xml:space="preserve">
+    <value>Our fragrance experts are here to help you find your perfect scent.</value>
+  </data>
+	<data name="ContactFeature1" xml:space="preserve">
+    <value>24/7 Support</value>
+  </data>
+	<data name="ContactFeature2" xml:space="preserve">
+    <value>Quality Guarantee</value>
+  </data>
+	<data name="ContactFeature3" xml:space="preserve">
+    <value>Free Shipping</value>
+  </data>
+	<data name="ContactBtn" xml:space="preserve">
+    <value>Contact Us Now</value>
+  </data>
+</root>

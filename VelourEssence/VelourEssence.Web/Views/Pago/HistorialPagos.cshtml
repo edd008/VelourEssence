@@ -1,0 +1,280 @@
+@using Microsoft.Extensions.Localization
+@inject IStringLocalizer<VelourEssence.Web.Views.Pago.HistorialPagos> L
+@model IEnumerable<VelourEssence.Application.DTOs.PagoInfoDto>
+
+@{
+    ViewData["Title"] = L["PaymentHistoryTitle"];
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/payment-history.css" />
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+}
+
+<div class="payment-history-page">
+    <!-- Hero Section -->
+    <div class="payment-hero-section">
+        <div class="payment-hero-background"></div>
+        <div class="payment-hero-content">
+            <div class="payment-hero-text" data-aos="fade-up">
+                <h1 class="payment-hero-title">
+                    <span class="payment-hero-brand">@L["PaymentHistoryTitle"]</span>
+                </h1>
+                <p class="payment-hero-subtitle">
+                    @L["PaymentHistorySubtitle"]
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Contenido Principal -->
+    <div class="payment-main-section">
+        <div class="page-container">
+            <div class="payment-content-wrapper">
+                <!-- Estadísticas resumidas -->
+                <div class="payment-stats-section" data-aos="fade-up">
+                    <div class="stats-cards">
+                        <div class="stat-card" data-aos="zoom-in" data-aos-delay="100">
+                            <div class="stat-icon">
+                                <i class="bi bi-receipt"></i>
+                            </div>
+                            <div class="stat-content">
+                                <h3>@Model.Count()</h3>
+                                <p>@L["TotalPaymentsStat"]</p>
+                            </div>
+                        </div>
+                        <div class="stat-card" data-aos="zoom-in" data-aos-delay="200">
+                            <div class="stat-icon">
+                                <i class="bi bi-cash-stack"></i>
+                            </div>
+                            <div class="stat-content">
+                                <h3>₡@Model.Sum(p => p.MontoTotal).ToString("N0")</h3>
+                                <p>@L["TotalSpentStat"]</p>
+                            </div>
+                        </div>
+                        <div class="stat-card" data-aos="zoom-in" data-aos-delay="300">
+                            <div class="stat-icon">
+                                <i class="bi bi-credit-card"></i>
+                            </div>
+                            <div class="stat-content">
+                                <h3>@Model.Count(p => p.TipoPago.Contains("tarjeta"))</h3>
+                                <p>@L["CardPaymentsStat"]</p>
+                            </div>
+                        </div>
+                        <div class="stat-card" data-aos="zoom-in" data-aos-delay="400">
+                            <div class="stat-icon">
+                                <i class="bi bi-cash-coin"></i>
+                            </div>
+                            <div class="stat-content">
+                                <h3>@Model.Count(p => p.TipoPago == "efectivo")</h3>
+                                <p>@L["CashPaymentsStat"]</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Filtros -->
+                <div class="payment-filters-section" data-aos="fade-up" data-aos-delay="500">
+                    <div class="filters-card">
+                        <div class="filters-header">
+                            <h3><i class="bi bi-funnel"></i> @L["FilterPaymentsTitle"]</h3>
+                        </div>
+                        <div class="filters-body">
+                            <div class="filter-group">
+                                <label for="dateFilter">@L["PeriodLabel"]</label>
+                                <select id="dateFilter" class="form-control">
+                                    <option value="all">@L["PeriodAll"]</option>
+                                    <option value="today">@L["PeriodToday"]</option>
+                                    <option value="week">@L["PeriodWeek"]</option>
+                                    <option value="month">@L["PeriodMonth"]</option>
+                                    <option value="year">@L["PeriodYear"]</option>
+                                </select>
+                            </div>
+                            <div class="filter-group">
+                                <label for="methodFilter">@L["PaymentMethodLabel"]</label>
+                                <select id="methodFilter" class="form-control">
+                                    <option value="all">@L["MethodAll"]</option>
+                                    <option value="tarjeta">@L["MethodCard"]</option>
+                                    <option value="efectivo">@L["MethodCash"]</option>
+                                </select>
+                            </div>
+                            <div class="filter-group">
+                                <label for="searchFilter">@L["SearchLabel"]</label>
+                                <input type="text" id="searchFilter" class="form-control" placeholder="@L["SearchPlaceholder"]">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Lista de pagos -->
+                <div class="payment-list-section" data-aos="fade-up" data-aos-delay="600">
+                    @if (Model.Any())
+                    {
+                        <div class="payment-list">
+                            @foreach (var pago in Model.OrderByDescending(p => p.FechaPago))
+                            {
+                                <div class="payment-item" data-aos="fade-up" data-aos-delay="@(Model.ToList().IndexOf(pago) * 100 + 700)">
+                                    <div class="payment-item-header">
+                                        <div class="payment-basic-info">
+                                            <div class="payment-method-icon">
+                                                @if (pago.TipoPago.Contains("tarjeta"))
+                                                {
+                                                    <i class="bi bi-credit-card"></i>
+                                                }
+                                                else
+                                                {
+                                                    <i class="bi bi-cash-stack"></i>
+                                                }
+                                            </div>
+                                            <div class="payment-main-details">
+                                                <h4 class="payment-order-number">@L["OrderLabel"] #@pago.IdPedido</h4>
+                                                <p class="payment-method">@pago.TipoPago</p>
+                                            </div>
+                                        </div>
+                                        <div class="payment-amount-info">
+                                            <span class="payment-amount">₡@pago.MontoTotal.ToString("N0")</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="payment-item-details">
+                                        <div class="payment-detail-grid">
+                                            <div class="detail-item">
+                                                <span class="detail-label">@L["OrderDateLabel"]</span>
+                                                <span class="detail-value">@pago.FechaPedido.ToString("dd/MM/yyyy HH:mm")</span>
+                                            </div>
+                                            <div class="detail-item">
+                                                <span class="detail-label">@L["PaymentDateLabel"]</span>
+                                                <span class="detail-value">@pago.FechaPago.ToString("dd/MM/yyyy HH:mm")</span>
+                                            </div>
+                                            <div class="detail-item">
+                                                <span class="detail-label">@L["OrderStatusLabel"]</span>
+                                                <span class="detail-value status-badge status-completed">
+                                                    <i class="bi bi-check-circle-fill"></i>
+                                                    @pago.EstadoPedido
+                                                </span>
+                                            </div>
+                                            <div class="detail-item">
+                                                <span class="detail-label">@L["ProductsLabel"]</span>
+                                                <span class="detail-value">@pago.CantidadProductos @L["ItemsLabel"]</span>
+                                            </div>
+                                            <div class="detail-item">
+                                                <span class="detail-label">@L["SubtotalLabel"]</span>
+                                                <span class="detail-value">₡@pago.Subtotal.ToString("N0")</span>
+                                            </div>
+                                            <div class="detail-item">
+                                                <span class="detail-label">@L["TaxLabel"]</span>
+                                                <span class="detail-value">₡@pago.Impuesto.ToString("N0")</span>
+                                            </div>
+                                            @if (!string.IsNullOrEmpty(pago.DireccionEnvio))
+                                            {
+                                                <div class="detail-item">
+                                                    <span class="detail-label">@L["ShippingAddressLabel"]</span>
+                                                    <span class="detail-value">@pago.DireccionEnvio</span>
+                                                </div>
+                                            }
+                                            @if (!string.IsNullOrEmpty(pago.NumeroTarjetaEnmascarado))
+                                            {
+                                                <div class="detail-item">
+                                                    <span class="detail-label">@L["CardLabel"]</span>
+                                                    <span class="detail-value">**** **** **** @pago.NumeroTarjetaEnmascarado.Substring(pago.NumeroTarjetaEnmascarado.Length - 4)</span>
+                                                </div>
+                                            }
+                                            @if (pago.MontoRecibido.HasValue && pago.MontoRecibido > pago.MontoTotal)
+                                            {
+                                                <div class="detail-item">
+                                                    <span class="detail-label">@L["ChangeLabel"]</span>
+                                                    <span class="detail-value">₡@((pago.MontoRecibido - pago.MontoTotal).Value.ToString("N0"))</span>
+                                                </div>
+                                            }
+                                        </div>
+
+                                        <div class="payment-actions">
+                                            <button class="action-btn" onclick="downloadReceipt(@pago.IdPago)">
+                                                <i class="bi bi-download"></i>
+                                                @L["DownloadReceiptBtn"]
+                                            </button>
+                                            <a href="@Url.Action("Detalle", "Pedido", new { id = pago.IdPedido })" class="action-btn">
+                                                <i class="bi bi-eye"></i>
+                                                @L["ViewOrderBtn"]
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="empty-state" data-aos="zoom-in">
+                            <div class="empty-state-icon">
+                                <i class="bi bi-receipt"></i>
+                            </div>
+                            <h3>@L["NoPaymentsTitle"]</h3>
+                            <p>@L["NoPaymentsDesc"]</p>
+                            <a href="@Url.Action("Index", "Producto")" class="btn-primary-custom">
+                                <i class="bi bi-shop"></i>
+                                @L["GoToShopBtn"]
+                            </a>
+                        </div>
+                    }
+                </div>
+
+                <!-- Paginación (si es necesaria) -->
+                @if (Model.Count() > 10)
+                {
+                    <div class="pagination-section" data-aos="fade-up">
+                        <div class="pagination-info">
+                            @L["PaginationInfo", Math.Min(10, Model.Count()), Model.Count()]
+                        </div>
+                        <div class="pagination-controls">
+                            <button class="pagination-btn" disabled>
+                                <i class="bi bi-chevron-left"></i>
+                                @L["PreviousBtn"]
+                            </button>
+                            <span class="pagination-current">1</span>
+                            <button class="pagination-btn">
+                                @L["NextBtn"]
+                                <i class="bi bi-chevron-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                }
+
+                <!-- Acciones adicionales -->
+                <div class="additional-actions" data-aos="fade-up">
+                    <a href="@Url.Action("Index", "Home")" class="btn-secondary-custom">
+                        <i class="bi bi-house"></i>
+                        @L["BackToHomeBtn"]
+                    </a>
+                    <button class="btn-primary-custom" onclick="exportPayments()">
+                        <i class="bi bi-file-earmark-spreadsheet"></i>
+                        @L["ExportExcelBtn"]
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="~/js/payment-history.js"></script>
+    <script>
+        AOS.init({
+            duration: 800,
+            once: true
+        });
+
+        function downloadReceipt(pagoId) {
+            window.open(`/Pago/DescargarRecibo/${pagoId}`, '_blank');
+        }
+
+        function viewDetails(pagoId) {
+            window.location.href = `/Pago/Detalles/${pagoId}`;
+        }
+
+        function exportPayments() {
+            window.open('/Pago/ExportarHistorial', '_blank');
+        }
+    </script>
+}

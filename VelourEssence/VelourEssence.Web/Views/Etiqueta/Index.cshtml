@@ -1,0 +1,196 @@
+﻿@model IEnumerable<VelourEssence.Application.DTOs.EtiquetaDto>
+
+@{
+    ViewData["Title"] = "Etiquetas";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/etiqueta-index.css" />
+}
+
+<div class="etiqueta-index-page">
+    <div class="etiqueta-index-container">
+        <div class="etiqueta-index-wrapper">
+            <!-- Header Premium -->
+            <div class="etiqueta-index-header">
+                <div class="etiqueta-index-header-content">
+                    <h1 class="etiqueta-index-title">
+                        <i class="bi bi-tags"></i>
+                        Gestión de Etiquetas
+                    </h1>
+                    <p class="etiqueta-index-subtitle">Administra las etiquetas del sistema</p>
+                </div>
+            </div>
+
+            <!-- Contenido principal -->
+            <div class="etiqueta-index-content">
+                <!-- Barra de acciones -->
+                <div class="etiqueta-actions-bar">
+                    <div class="etiqueta-stats">
+                        <span class="stats-item">
+                            <i class="bi bi-collection"></i>
+                            <strong>@(Model?.Count() ?? 0)</strong> etiquetas
+
+                            
+                        </span>
+                    </div>
+                    <a asp-controller="Etiqueta" asp-action="Create" class="etiqueta-btn etiqueta-btn-primary">
+                        <i class="bi bi-plus-circle"></i>
+                        Agregar Etiqueta
+                    </a>
+                </div>
+
+                <!-- Grid de etiquetas -->
+                @if (Model != null && Model.Any())
+                {
+                    <div class="etiquetas-grid">
+                        @foreach (var etiqueta in Model)
+                        {
+                            <div class="etiqueta-card">
+                                <div class="etiqueta-card-header">
+                                    <div class="etiqueta-icon">
+                                        <i class="bi bi-tag-fill"></i>
+                                    </div>
+                                    <div class="etiqueta-id">#@etiqueta.IdEtiqueta</div>
+                                </div>
+                                
+                                <div class="etiqueta-card-body">
+                                    <h3 class="etiqueta-nombre">@etiqueta.Nombre</h3>
+                                </div>
+                                
+                                <div class="etiqueta-card-actions">
+                                    <a asp-controller="Etiqueta" asp-action="Details" asp-route-id="@etiqueta.IdEtiqueta" 
+                                       class="etiqueta-action-btn etiqueta-action-details" title="Ver detalles">
+                                        <i class="bi bi-eye"></i>
+                                    </a>
+                                    <a asp-controller="Etiqueta" asp-action="Edit" asp-route-id="@etiqueta.IdEtiqueta" 
+                                       class="etiqueta-action-btn etiqueta-action-edit" title="Editar">
+                                        <i class="bi bi-pencil-square"></i>
+                                    </a>
+                                    <button type="button" class="etiqueta-action-btn etiqueta-action-delete" title="Eliminar" onclick="confirmDeleteEtiqueta(@etiqueta.IdEtiqueta, '@etiqueta.Nombre')">
+                                        <i class="bi bi-trash"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                }
+                else
+                {
+                    <!-- Estado vacío -->
+                    <div class="etiquetas-empty">
+                        <div class="empty-content">
+                            <div class="empty-icon">
+                                <i class="bi bi-tags"></i>
+                            </div>
+                            <h3 class="empty-title">No hay etiquetas</h3>
+                            <p class="empty-text">No se han registrado etiquetas en el sistema</p>
+                            <a asp-controller="Etiqueta" asp-action="Create" class="etiqueta-btn etiqueta-btn-primary">
+                                <i class="bi bi-plus-circle"></i>
+                                Crear primera etiqueta
+                            </a>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        function confirmDeleteEtiqueta(id, nombre) {
+            if (confirm(`¿Seguro que deseas eliminar la etiqueta "${nombre}"? Esta acción no se puede deshacer.`)) {
+                $.ajax({
+                    url: '/Etiqueta/Delete',
+                    type: 'POST',
+                    data: { id: id },
+                    headers: { 'X-Requested-With': 'XMLHttpRequest' },
+                    success: function (response) {
+                        if (response.success) {
+                            showToast('success', response.message);
+                            setTimeout(function () { location.reload(); }, 1200);
+                        } else {
+                            showToast('error', response.error);
+                        }
+                    },
+                    error: function () {
+                        showToast('error', 'Error al eliminar la etiqueta.');
+                    }
+                });
+            }
+        }
+
+        function showToast(type, message) {
+            let toast = document.createElement('div');
+            toast.className = 'etiqueta-toast ' + (type === 'success' ? 'toast-success' : 'toast-error');
+            toast.innerText = message;
+            document.body.appendChild(toast);
+            setTimeout(function () { toast.remove(); }, 2500);
+        }
+    </script>
+}
+
+<style>
+    .etiqueta-toast {
+        position: fixed;
+        top: 30px;
+        right: 30px;
+        z-index: 9999;
+        padding: 16px 32px;
+        border-radius: 8px;
+        font-size: 1.1rem;
+        font-weight: 600;
+        box-shadow: 0 2px 12px rgba(0,0,0,0.12);
+        color: #fff;
+        opacity: 0.95;
+        transition: opacity 0.3s;
+    }
+    .toast-success { background: linear-gradient(90deg,#43e97b 0%,#38f9d7 100%); }
+    .toast-error { background: linear-gradient(90deg,#fa709a 0%,#fee140 100%); color: #222; }
+</style>
+
+<style>
+    .etiqueta-toast {
+        position: fixed;
+        top: 30px;
+        right: 30px;
+        z-index: 9999;
+        padding: 16px 32px;
+        border-radius: 8px;
+        font-size: 1.1rem;
+        font-weight: 600;
+        box-shadow: 0 2px 12px rgba(0,0,0,0.12);
+        color: #fff;
+        opacity: 0.95;
+        transition: opacity 0.3s;
+    }
+    .toast-success { background: linear-gradient(90deg,#43e97b 0%,#38f9d7 100%); }
+    .toast-error { background: linear-gradient(90deg,#fa709a 0%,#fee140 100%); color: #222; }
+</style>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                }
+                else
+                {
+                    <!-- Estado vacío -->
+                    <div class="etiquetas-empty">
+                        <div class="empty-content">
+                            <div class="empty-icon">
+                                <i class="bi bi-tags"></i>
+                            </div>
+                            <h3 class="empty-title">No hay etiquetas</h3>
+                            <p class="empty-text">No se han registrado etiquetas en el sistema</p>
+                            <a asp-controller="Etiqueta" asp-action="Create" class="etiqueta-btn etiqueta-btn-primary">
+                                <i class="bi bi-plus-circle"></i>
+                                Crear primera etiqueta
+                            </a>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>

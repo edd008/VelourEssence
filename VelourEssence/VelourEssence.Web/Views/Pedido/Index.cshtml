@@ -1,0 +1,127 @@
+﻿@using Microsoft.Extensions.Localization
+@inject IStringLocalizer<VelourEssence.Web.Views.Pedido.Index> L
+@model List<VelourEssence.Application.DTOs.PedidoResumenDto>
+
+@{
+    ViewData["Title"] = L["OrdersTitle"];
+    string GetEstadoColor(string estado) => estado?.ToLowerInvariant() ?? "pendiente";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/pedido-index.css" />
+}
+
+<div class="pedido-index-page">
+    <div class="pedido-index-container">
+        <div class="pedido-index-wrapper">
+            <!-- Header Premium -->
+            <div class="pedido-index-header">
+                <div class="pedido-index-header-content">
+                    <h1 class="pedido-index-title">
+                        <i class="bi bi-bag-check"></i>
+                        @L["OrdersHeader"]
+                    </h1>
+                    <p class="pedido-index-subtitle">@L["OrdersSubtitle"]</p>
+                </div>
+            </div>
+
+            <!-- Contenido principal -->
+            <div class="pedido-index-content">
+                <!-- Barra de estadísticas -->
+                @if (Model != null && Model.Any())
+                {
+                    <div class="pedido-stats-bar">
+                        <div class="pedido-stats">
+                            <div class="pedido-stat-item">
+                                <i class="bi bi-collection"></i>
+                                <strong>@Model.Count()</strong> @L["OrdersStat"]
+                            </div>
+                            <div class="pedido-stat-item pendiente">
+                                <i class="bi bi-clock"></i>
+                                <strong>@Model.Count(p => p.NombreEstado?.ToLower() == "pendiente")</strong> @L["PendingStat"]
+                            </div>
+                            <div class="pedido-stat-item ventas">
+                                <i class="bi bi-cash-coin"></i>
+                                <strong>₡@Model.Sum(p => p.Total).ToString("N0")</strong> @L["TotalSalesStat"]
+                            </div>
+                        </div>
+                    </div>
+                }
+
+                <!-- Grid de pedidos -->
+                @if (Model != null && Model.Any())
+                {
+                    <div class="pedidos-grid">
+                        @foreach (var pedido in Model)
+                        {
+                            <div class="pedido-card">
+                                <div class="pedido-card-header">
+                                    <div class="pedido-icon">
+                                        <i class="bi bi-receipt"></i>
+                                    </div>
+                                    <div class="pedido-estado-badge @GetEstadoColor(pedido.NombreEstado)">
+                                        @pedido.NombreEstado
+                                    </div>
+                                </div>
+
+                                <div class="pedido-card-body">
+                                    <h3 class="pedido-numero">@L["OrderLabel"] #@pedido.IdPedido</h3>
+
+                                    <div class="pedido-info-grid">
+                                        <div class="pedido-info-item">
+                                            <span class="pedido-info-label">
+                                                <i class="bi bi-person-circle"></i>
+                                                @L["CustomerLabel"]
+                                            </span>
+                                            <span class="pedido-info-valor">@pedido.NombreUsuario</span>
+                                        </div>
+
+                                        <div class="pedido-info-item">
+                                            <span class="pedido-info-label">
+                                                <i class="bi bi-calendar-event"></i>
+                                                @L["DateLabel"]
+                                            </span>
+                                            <span class="pedido-info-valor">@pedido.FechaPedido.ToString("dd/MM/yyyy")</span>
+                                        </div>
+
+                                        <div class="pedido-info-item full-width">
+                                            <span class="pedido-info-label">
+                                                <i class="bi bi-cash-coin"></i>
+                                                @L["TotalLabel"]
+                                            </span>
+                                            <span class="pedido-info-valor pedido-total">
+                                                ₡@pedido.Total.ToString("N2")
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="pedido-card-actions">
+                                    <a asp-action="Detalle" asp-route-id="@pedido.IdPedido"
+                                       class="pedido-action-btn pedido-action-details" title="@L["ViewDetailBtn"]">
+                                        <i class="bi bi-eye"></i>
+                                        <span>@L["ViewDetailBtn"]</span>
+                                    </a>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                }
+                else
+                {
+                    <!-- Estado vacío -->
+                    <div class="pedidos-empty">
+                        <div class="empty-content">
+                            <div class="empty-icon">
+                                <i class="bi bi-bag-x"></i>
+                            </div>
+                            <h3 class="empty-title">@L["NoOrdersTitle"]</h3>
+                            <p class="empty-text">@L["NoOrdersText"]</p>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+

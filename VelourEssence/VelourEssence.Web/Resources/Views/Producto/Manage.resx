@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+	<data name="ManageTitle" xml:space="preserve">
+    <value>Gestión de Productos</value>
+  </data>
+	<data name="ManageHeader" xml:space="preserve">
+    <value>Gestión de Productos</value>
+  </data>
+	<data name="ManageSubtitle" xml:space="preserve">
+    <value>Administra el catálogo completo de productos de VelourEssence</value>
+  </data>
+	<data name="ManageAddBtn" xml:space="preserve">
+    <value>Nuevo Producto</value>
+  </data>
+	<data name="ManageSuccessAlert" xml:space="preserve">
+    <value>Operación exitosa</value>
+  </data>
+	<data name="ManageErrorAlert" xml:space="preserve">
+    <value>Ocurrió un error</value>
+  </data>
+	<data name="ManageStatsProducts" xml:space="preserve">
+    <value>{0} productos</value>
+  </data>
+	<data name="ManageStatsPromotion" xml:space="preserve">
+    <value>{0} con promoción</value>
+  </data>
+	<data name="ManageStatsImages" xml:space="preserve">
+    <value>{0} con imágenes</value>
+  </data>
+	<data name="ManageNoImage" xml:space="preserve">
+    <value>Sin imágenes</value>
+  </data>
+	<data name="ManagePromoBadge" xml:space="preserve">
+    <value>{0}%</value>
+  </data>
+	<data name="ManagePriceLabel" xml:space="preserve">
+    <value>Precio</value>
+  </data>
+	<data name="ManageBrandLabel" xml:space="preserve">
+    <value>Marca</value>
+  </data>
+	<data name="ManageGenderLabel" xml:space="preserve">
+    <value>Género</value>
+  </data>
+	<data name="ManageDetailsBtn" xml:space="preserve">
+    <value>Ver detalles</value>
+  </data>
+	<data name="ManageEditBtn" xml:space="preserve">
+    <value>Editar</value>
+  </data>
+	<data name="ManageDeleteBtn" xml:space="preserve">
+    <value>Eliminar</value>
+  </data>
+	<data name="ManageEmptyTitle" xml:space="preserve">
+    <value>No hay productos registrados</value>
+  </data>
+	<data name="ManageEmptyText" xml:space="preserve">
+    <value>Comienza agregando productos a tu catálogo</value>
+  </data>
+	<data name="ManageEmptyAddBtn" xml:space="preserve">
+    <value>Crear Primer Producto</value>
+  </data>
+</root>

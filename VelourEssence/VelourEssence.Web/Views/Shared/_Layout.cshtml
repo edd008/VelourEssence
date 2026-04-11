@@ -1,0 +1,278 @@
+﻿@using Microsoft.Extensions.Localization
+@inject IStringLocalizer<VelourEssence.Web.Shared.Layout> L
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - VelourEssence</title>
+
+    <!-- CSS Base Global - Solo elementos comunes -->
+    <link rel="stylesheet" href="~/css/base-layout.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/navbar-premium.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/navigation.css" asp-append-version="true" />
+
+    <!-- CSS específicos por vista se cargan mediante section Styles en cada vista -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+    @await RenderSectionAsync("Styles", required: false)
+</head>
+<body>
+    <header>
+        <nav class="navbar-premium loaded">
+            <div class="navbar-container">
+                <a class="navbar-brand" asp-controller="Home" asp-action="Index">
+                    <img src="~/img/logo.png.jpeg" alt="Logo" class="nav-logo">
+                    <span class="fw-bold">VelourEssence</span>
+                </a>
+
+                <button class="navbar-toggler" type="button" onclick="toggleNavbar()">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <ul class="navbar-nav" id="navbarNav">
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="Home" asp-action="Index">
+                            <i class="bi bi-house-door"></i>
+                            <span>@L["Home"]</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="Producto" asp-action="Index">
+                            <i class="bi bi-grid"></i>
+                            <span>@L["Products"]</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="Promocion" asp-action="PromoDisponible">
+                            <i class="bi bi-gift"></i>
+                            <span>@L["Promotions"]</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="Reseña" asp-action="Index">
+                            <i class="bi bi-star"></i>
+                            <span>@L["Reviews"]</span>
+                        </a>
+                    </li>
+
+                    @if (User.IsInRole("Administrador"))
+                    {
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="mantenimientosDropdown">
+                                <i class="bi bi-gear"></i>
+                                <span>@L["Maintenances"]</span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a class="dropdown-item" asp-controller="Usuario" asp-action="Index">
+                                        <i class="bi bi-person"></i>
+                                        <span>@L["Users"]</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" asp-controller="Producto" asp-action="Manage">
+                                        <i class="bi bi-box-seam"></i>
+                                        <span>@L["ProductsDropdown"]</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" asp-controller="Etiqueta" asp-action="Index">
+                                        <i class="bi bi-tag"></i>
+                                        <span>@L["TagsDropdown"]</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" asp-controller="Promocion" asp-action="Index">
+                                        <i class="bi bi-percent"></i>
+                                        <span>@L["PromotionsDropdown"]</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" asp-controller="Pedido" asp-action="Index">
+                                        <i class="bi bi-bag"></i>
+                                        <span>@L["OrdersDropdown"]</span>
+                                    </a>
+                                </li>
+
+                                <!-- NUEVO: Dashboard -->
+                                <li>
+                                    <a class="dropdown-item" asp-controller="Dashboard" asp-action="Index">
+                                        <i class="bi bi-speedometer2"></i>
+                                        <span>@L["AdminDashboard"]</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    }
+                </ul>
+
+                <div class="navbar-controls">
+                    <form class="search-form">
+                        <input class="search-input" type="search" placeholder="@L["SearchPlaceholder"]" />
+                        <button class="search-btn" type="submit">
+                            <i class="bi bi-search"></i>
+                        </button>
+                    </form>
+                    <a href="@Url.Action("Index", "Carrito")" class="cart-button" title="@L["CartTitle"]">
+                        <i class="bi bi-cart-fill"></i>
+                        <span class="cart-badge" id="cart-count" style="display: none;">0</span>
+                    </a>
+
+                    <div class="auth-controls">
+                        @if (User.Identity?.IsAuthenticated == true)
+                        {
+                            <div class="nav-item dropdown user-dropdown">
+                                <a class="nav-link dropdown-toggle user-profile" href="#" id="userDropdown">
+                                    <i class="bi bi-person-circle"></i>
+                                    <span>@User.Identity.Name</span>
+                                </a>
+                                <ul class="dropdown-menu user-menu">
+                                    <li class="user-info">
+                                        <div class="user-details">
+                                            <strong>@User.Identity.Name</strong>
+                                            <small>@User.FindFirst(System.Security.Claims.ClaimTypes.Role)?.Value</small>
+                                        </div>
+                                    </li>
+                                    <li><hr class="dropdown-divider"></li>
+                                    <li>
+                                        <a class="dropdown-item" asp-controller="Usuario" asp-action="Details" asp-route-id="@User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value">
+                                            <i class="bi bi-person"></i>
+                                            <span>@L["Profile"]</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" asp-controller="Pedido" asp-action="Index">
+                                            <i class="bi bi-bag"></i>
+                                            <span>@L["MyOrders"]</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" asp-controller="Pago" asp-action="HistorialPagos">
+                                            <i class="bi bi-credit-card-2-front"></i>
+                                            <span>@L["PaymentHistory"]</span>
+                                        </a>
+                                    </li>
+                                    @if (User.IsInRole("Administrador"))
+                                    {
+                                        <li><hr class="dropdown-divider"></li>
+                                        <li>
+                                            <a class="dropdown-item" asp-controller="Usuario" asp-action="Index">
+                                                <i class="bi bi-gear"></i>
+                                                <span>@L["AdminPanel"]</span>
+                                            </a>
+                                        </li>
+                                    }
+                                    <li><hr class="dropdown-divider"></li>
+                                    <li>
+                                        <form asp-controller="Auth" asp-action="Logout" method="post" class="logout-form">
+                                            @Html.AntiForgeryToken()
+                                            <button type="submit" class="dropdown-item logout-btn">
+                                                <i class="bi bi-box-arrow-right"></i>
+                                                <span>@L["Logout"]</span>
+                                            </button>
+                                        </form>
+                                    </li>
+                                </ul>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="auth-buttons">
+                                <a asp-controller="Auth" asp-action="Login" class="auth-btn login-btn">
+                                    <i class="bi bi-box-arrow-in-right"></i>
+                                    <span>@L["Login"]</span>
+                                </a>
+                                <a asp-controller="Auth" asp-action="Register" class="auth-btn register-btn">
+                                    <i class="bi bi-person-plus"></i>
+                                    <span>@L["Register"]</span>
+                                </a>
+                            </div>
+                        }
+                    </div>
+
+                    <div class="language-selector dropdown">
+                        <button type="button" class="language-toggle dropdown-toggle nav-link" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="bi bi-globe2"></i>
+                            <span class="language-text">
+                                @if (System.Globalization.CultureInfo.CurrentCulture.Name == "es")
+                                {
+                                    <span>ES</span>
+                                }
+                                else
+                                {
+                                    <span>EN</span>
+                                }
+                            </span>
+                        </button>
+                        <ul class="dropdown-menu language-menu">
+                            <li>
+                                <form method="post" asp-controller="Home" asp-action="SetLanguage" class="language-form">
+                                    <input type="hidden" name="culture" value="es" />
+                                    <button type="submit" class="dropdown-item language-option @(System.Globalization.CultureInfo.CurrentCulture.Name == "es" ? "active" : "")">
+                                        <i class="bi bi-flag"></i>
+                                        <span>Español</span>
+                                        @if (System.Globalization.CultureInfo.CurrentCulture.Name == "es")
+                                        {
+                                            <i class="bi bi-check-lg ms-auto"></i>
+                                        }
+                                    </button>
+                                </form>
+                            </li>
+                            <li>
+                                <form method="post" asp-controller="Home" asp-action="SetLanguage" class="language-form">
+                                    <input type="hidden" name="culture" value="en-US" />
+                                    <button type="submit" class="dropdown-item language-option @(System.Globalization.CultureInfo.CurrentCulture.Name == "en-US" ? "active" : "")">
+                                        <i class="bi bi-flag-usa"></i>
+                                        <span>English</span>
+                                        @if (System.Globalization.CultureInfo.CurrentCulture.Name == "en-US")
+                                        {
+                                            <i class="bi bi-check-lg ms-auto"></i>
+                                        }
+                                    </button>
+                                </form>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="page-container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="custom-footer py-4">
+        <div class="page-container">
+            <div class="page-row flex-center">
+                <div class="page-col-4">
+                    <img src="~/img/logo.png.jpeg" alt="Logo" class="nav-logo mb-3">
+                    <p class="mb-0">@L["ExclusiveFragrances"]</p>
+                </div>
+                <div class="page-col-4 text-center">
+                    <h5 class="mb-3">@L["FollowUs"]</h5>
+                    <div class="social-links">
+                        <a href="#" class="mx-2"><i class="bi bi-facebook fs-4"></i></a>
+                        <a href="#" class="mx-2"><i class="bi bi-instagram fs-4"></i></a>
+                        <a href="#" class="mx-2"><i class="bi bi-twitter fs-4"></i></a>
+                    </div>
+                </div>
+                <div class="page-col-4 text-center">
+                    <p class="mb-0">© 2025 Velour Essence</p>
+                    <small>@L["Copyright"]</small>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

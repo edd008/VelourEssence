@@ -1,0 +1,28 @@
+﻿<root>
+  <data name="EditUserTitle"><value>Edit User</value></data>
+  <data name="EditUserHeader"><value>Edit User</value></data>
+  <data name="EditUserSubtitle"><value>Edit user information #{0}</value></data>
+  <data name="PersonalInfoTitle"><value>Personal Information</value></data>
+  <data name="UsernameLabel"><value>Username</value></data>
+  <data name="UsernamePlaceholder"><value>Enter username</value></data>
+  <data name="EmailLabel"><value>Email</value></data>
+  <data name="EmailPlaceholder"><value>user@example.com</value></data>
+  <data name="SecurityTitle"><value>Security (Optional)</value></data>
+  <data name="PasswordOptionalInfo"><value>Leave password fields empty if you do not want to change it</value></data>
+  <data name="NewPasswordLabel"><value>New Password</value></data>
+  <data name="NewPasswordPlaceholder"><value>Enter new password (optional)</value></data>
+  <data name="PasswordRequirements"><value>If you enter a password, it must be at least 6 characters</value></data>
+  <data name="ConfirmNewPasswordLabel"><value>Confirm New Password</value></data>
+  <data name="ConfirmNewPasswordPlaceholder"><value>Confirm new password</value></data>
+  <data name="PermissionsTitle"><value>Permissions</value></data>
+  <data name="RoleLabel"><value>User Role</value></data>
+  <data name="SelectRoleOption"><value>Select a role</value></data>
+  <data name="AdditionalInfoTitle"><value>Additional Information</value></data>
+  <data name="LastLoginLabel"><value>Last Login</value></data>
+  <data name="SaveChangesBtn"><value>Save Changes</value></data>
+  <data name="CancelBtn"><value>Cancel</value></data>
+  <data name="ViewDetailsBtn"><value>View Details</value></data>
+  <data name="UsernameExistsMsg"><value>This username already exists</value></data>
+  <data name="EmailExistsMsg"><value>This email is already registered</value></data>
+</root>
+

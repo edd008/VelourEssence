@@ -1,0 +1,60 @@
+﻿<root>
+	<data name="UserDetailTitle">
+		<value>User Detail</value>
+	</data>
+	<data name="AdminRole">
+		<value>Administrator</value>
+	</data>
+	<data name="ActiveLabel">
+		<value>Active</value>
+	</data>
+	<data name="InactiveLabel">
+		<value>Inactive</value>
+	</data>
+	<data name="UserInfoTitle">
+		<value>User Information</value>
+	</data>
+	<data name="UserIdLabel">
+		<value>User ID</value>
+	</data>
+	<data name="EmailLabel">
+		<value>Email</value>
+	</data>
+	<data name="AccountTypeLabel">
+		<value>Account Type</value>
+	</data>
+	<data name="LastAccessLabel">
+		<value>Last Access</value>
+	</data>
+	<data name="DaysAgoLabel">
+		<value>{0} days ago</value>
+	</data>
+	<data name="NeverLoggedInLabel">
+		<value>Never logged in</value>
+	</data>
+	<data name="ActivityLevelLabel">
+		<value>Activity Level</value>
+	</data>
+	<data name="ActivityHighLabel">
+		<value>High</value>
+	</data>
+	<data name="ActivityMediumLabel">
+		<value>Medium</value>
+	</data>
+	<data name="ActivityLowLabel">
+		<value>Low</value>
+	</data>
+	<data name="SecurityStatusLabel">
+		<value>Security Status</value>
+	</data>
+	<data name="VerifiedLabel">
+		<value>Verified</value>
+	</data>
+	<data name="BackToListBtn">
+		<value>Back to list</value>
+	</data>
+	<data name="EditUserBtn">
+		<value>Edit User</value>
+	</data>
+</root>
+

@@ -1,0 +1,66 @@
+﻿<root>
+	<data name="CreateUserTitle">
+		<value>Crear Usuario</value>
+	</data>
+	<data name="CreateUserHeader">
+		<value>Crear Nuevo Usuario</value>
+	</data>
+	<data name="CreateUserSubtitle">
+		<value>Complete la información para crear un nuevo usuario</value>
+	</data>
+	<data name="PersonalInfoTitle">
+		<value>Información Personal</value>
+	</data>
+	<data name="UsernameLabel">
+		<value>Nombre de Usuario</value>
+	</data>
+	<data name="UsernamePlaceholder">
+		<value>Ingrese el nombre de usuario</value>
+	</data>
+	<data name="EmailLabel">
+		<value>Correo Electrónico</value>
+	</data>
+	<data name="EmailPlaceholder">
+		<value>usuario@ejemplo.com</value>
+	</data>
+	<data name="SecurityTitle">
+		<value>Seguridad</value>
+	</data>
+	<data name="PasswordLabel">
+		<value>Contraseña</value>
+	</data>
+	<data name="PasswordPlaceholder">
+		<value>Ingrese la contraseña</value>
+	</data>
+	<data name="PasswordRequirements">
+		<value>La contraseña debe tener al menos 6 caracteres</value>
+	</data>
+	<data name="ConfirmPasswordLabel">
+		<value>Confirmar Contraseña</value>
+	</data>
+	<data name="ConfirmPasswordPlaceholder">
+		<value>Confirme la contraseña</value>
+	</data>
+	<data name="PermissionsTitle">
+		<value>Permisos</value>
+	</data>
+	<data name="RoleLabel">
+		<value>Rol del Usuario</value>
+	</data>
+	<data name="SelectRoleOption">
+		<value>Seleccione un rol</value>
+	</data>
+	<data name="CreateUserBtn">
+		<value>Crear Usuario</value>
+	</data>
+	<data name="CancelBtn">
+		<value>Cancelar</value>
+	</data>
+	<data name="UsernameExistsMsg">
+		<value>Este nombre de usuario ya existe</value>
+	</data>
+	<data name="EmailExistsMsg">
+		<value>Este correo ya está registrado</value>
+	</data>
+</root>
+

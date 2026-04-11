@@ -1,0 +1,423 @@
+/* ===================================================================
+   PRODUCTO CREATE CSS - ESTILOS ESPECÍFICOS PARA CREAR PRODUCTO
+   ================================================================== */
+
+/* Container principal para crear producto */
+.create-product-container {
+    min-height: 100vh;
+    background: #f8f9fa;
+    padding: 2rem;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+.create-product-wrapper {
+    max-width: 1200px;
+    margin: 0 auto;
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+/* Header específico para crear producto */
+.create-product-header {
+    padding: 2rem;
+    text-align: center;
+    background: linear-gradient(135deg, #28a745, #20c997);
+    color: white;
+}
+
+.create-product-title {
+    font-size: 2rem;
+    font-weight: 700;
+    margin: 0 0 0.5rem 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.create-product-subtitle {
+    font-size: 1rem;
+    opacity: 0.9;
+    margin: 0;
+}
+
+/* Contenido del formulario */
+.create-product-content {
+    padding: 2.5rem;
+}
+
+.create-form-section {
+    margin-bottom: 2.5rem;
+}
+
+.create-form-section:last-child {
+    margin-bottom: 0;
+}
+
+.create-section-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    color: #333;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid #28a745;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+/* Campos del formulario */
+.create-form-row {
+    display: flex;
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.create-form-group {
+    flex: 1;
+}
+
+.create-form-group.full-width {
+    flex: 1 1 100%;
+}
+
+.create-form-label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    color: #333;
+    font-size: 0.95rem;
+}
+
+.create-form-input {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #ced4da;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+}
+
+.create-form-input:focus {
+    outline: none;
+    border-color: #28a745;
+    box-shadow: 0 0 0 3px rgba(40, 167, 69, 0.1);
+}
+
+.create-form-textarea {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #ced4da;
+    border-radius: 8px;
+    font-size: 1rem;
+    resize: vertical;
+    min-height: 120px;
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+}
+
+.create-form-textarea:focus {
+    outline: none;
+    border-color: #28a745;
+    box-shadow: 0 0 0 3px rgba(40, 167, 69, 0.1);
+}
+
+.create-form-select {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #ced4da;
+    border-radius: 8px;
+    font-size: 1rem;
+    background: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+}
+
+.create-form-select:focus {
+    outline: none;
+    border-color: #28a745;
+    box-shadow: 0 0 0 3px rgba(40, 167, 69, 0.1);
+}
+
+/* Checkbox personalizado */
+.create-checkbox-group {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.create-checkbox-input {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+}
+
+.create-checkbox-label {
+    font-weight: 500;
+    color: #333;
+    cursor: pointer;
+}
+
+/* Sección de imágenes */
+.create-image-section {
+    background: #f8f9fa;
+    padding: 2rem;
+    border-radius: 12px;
+    border: 2px dashed #28a745;
+    margin-bottom: 2rem;
+}
+
+.create-image-upload {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.create-file-input {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #ced4da;
+    border-radius: 8px;
+    font-size: 1rem;
+    background: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.create-file-input:focus {
+    outline: none;
+    border-color: #28a745;
+    box-shadow: 0 0 0 3px rgba(40, 167, 69, 0.1);
+}
+
+.create-image-preview {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.create-image-preview-item {
+    position: relative;
+    width: 150px;
+    height: 150px;
+    border: 2px solid #dee2e6;
+    border-radius: 8px;
+    overflow: hidden;
+    background: white;
+}
+
+.create-image-preview-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.create-image-remove {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background: #dc3545;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 25px;
+    height: 25px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8rem;
+    transition: all 0.3s ease;
+}
+
+.create-image-remove:hover {
+    background: #c82333;
+    transform: scale(1.1);
+}
+
+/* Estilos para el panel de consejos */
+.tips-panel {
+    background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+    padding: 1.5rem;
+    border-radius: 12px;
+    border: 1px solid #dee2e6;
+    margin-top: 2rem;
+}
+
+.tips-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #28a745;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.tips-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.tips-list li {
+    padding: 0.5rem 0;
+    border-bottom: 1px solid #e9ecef;
+    color: #495057;
+    position: relative;
+    padding-left: 1.5rem;
+}
+
+.tips-list li:last-child {
+    border-bottom: none;
+}
+
+.tips-list li:before {
+    content: "✓";
+    color: #28a745;
+    font-weight: bold;
+    position: absolute;
+    left: 0;
+    top: 0.5rem;
+}
+
+/* Estilos para el drag and drop */
+.create-image-section.dragover {
+    border-color: #28a745;
+    background-color: rgba(40, 167, 69, 0.1);
+}
+
+.create-image-section .image-upload-icon {
+    font-size: 3rem;
+    color: #28a745;
+    margin-bottom: 1rem;
+}
+
+.create-image-section .image-upload-text {
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: #333;
+    margin-bottom: 0.5rem;
+}
+
+.create-image-section .image-upload-hint {
+    font-size: 0.9rem;
+    color: #6c757d;
+    margin-bottom: 1rem;
+}
+
+/* Botones */
+.create-button-group {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin-top: 2rem;
+    padding-top: 2rem;
+    border-top: 1px solid #e9ecef;
+}
+
+.create-btn {
+    padding: 0.75rem 2rem;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.create-btn-primary {
+    background: #28a745;
+    color: white;
+}
+
+.create-btn-primary:hover {
+    background: #218838;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(40, 167, 69, 0.3);
+}
+
+.create-btn-secondary {
+    background: #6c757d;
+    color: white;
+}
+
+.create-btn-secondary:hover {
+    background: #5a6268;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(108, 117, 125, 0.3);
+}
+
+/* Validación */
+.create-field-validation-error {
+    color: #dc3545;
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
+    display: block;
+}
+
+.create-form-input.input-validation-error,
+.create-form-textarea.input-validation-error,
+.create-form-select.input-validation-error {
+    border-color: #dc3545;
+}
+
+.create-form-input.input-validation-error:focus,
+.create-form-textarea.input-validation-error:focus,
+.create-form-select.input-validation-error:focus {
+    box-shadow: 0 0 0 3px rgba(220, 53, 69, 0.1);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .create-product-container {
+        padding: 1rem;
+    }
+    
+    .create-product-content {
+        padding: 1.5rem;
+    }
+    
+    .create-form-row {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    .create-button-group {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .create-btn {
+        justify-content: center;
+    }
+    
+    .create-image-preview-item {
+        width: 120px;
+        height: 120px;
+    }
+}
+
+@media (max-width: 480px) {
+    .create-product-title {
+        font-size: 1.5rem;
+    }
+    
+    .create-section-title {
+        font-size: 1.1rem;
+    }
+    
+    .create-image-preview-item {
+        width: 100px;
+        height: 100px;
+    }
+}
